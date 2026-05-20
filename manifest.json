@@ -9,10 +9,10 @@
     "https://leetcode.com/*"
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "src/popup/popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "src/background/background.js"
   },
   "content_scripts": [
     {
@@ -20,7 +20,7 @@
         "https://codeforces.com/*",
         "https://leetcode.com/*"
       ],
-      "js": ["content.js"]
+      "js": ["src/content/content.js"]
     }
   ]
 }
