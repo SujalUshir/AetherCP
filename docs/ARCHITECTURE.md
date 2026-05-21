@@ -66,6 +66,18 @@ Never put these in popup:
 - Complex storage mutation.
 - Platform-specific selectors.
 
+### Codeforces profile analytics
+
+Use `src/platform/codeforces/` for Codeforces profile page enhancements:
+
+- `graphTemplates.js` owns injected graph HTML and canvas placeholders.
+- `profileInjector.js` mounts AetherCP analytics into `#pageContent`.
+- `profileAnalytics.js` prepares profile analytics from background snapshots.
+- `profileSections.js` fills overview cards and history rows.
+- `profileCharts.js` initializes real Chart.js charts on injected canvases.
+
+This is the main visual analytics surface. It should enhance the user's actual Codeforces profile page, not open a separate dashboard.
+
 ## Communication Flow
 
 1. `content.js` sends `PROBLEM_DETECTED`.
@@ -73,6 +85,15 @@ Never put these in popup:
 3. `background.js` starts or stops sessions based on active tab.
 4. `popup.js` sends `GET_TIMER_SNAPSHOT`.
 5. `background.js` returns calculated live totals.
+
+## Codeforces Profile Flow
+
+1. User opens `https://codeforces.com/profile/<handle>`.
+2. Manifest loads the Codeforces profile-only scripts.
+3. `profileInjector.js` appends the graph template into the page.
+4. `profileInjector.js` requests `GET_TIMER_SNAPSHOT`.
+5. `profileSections.js` renders cards/history.
+6. `profileCharts.js` renders doughnut, pie, and bar charts with Chart.js.
 
 ## Anti-Spaghetti Rules
 

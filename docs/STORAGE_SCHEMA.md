@@ -16,6 +16,11 @@ aethercp
     problemKey: "leetcode:two-sum",
     startedAt: 1779300000000
   },
+  idleState: {
+    tabId: 123,
+    problemKey: "leetcode:two-sum",
+    idleStartedAt: 1779300060000
+  },
   tabProblems: {
     "123": {
       problemName: "Two Sum",
@@ -56,6 +61,21 @@ aethercp
 - Persisted object ids use stable strings like `platform:problem-name`.
 - Durations are stored as seconds.
 - Timestamps are stored as Unix milliseconds from `Date.now()`.
+
+## Idle State
+
+`idleState` is set when the active content script reports 60 seconds of inactivity.
+
+When idle starts:
+
+- the active session is finalized up to `idleStartedAt`
+- `activeSession` becomes `null`
+- `idleState` remembers which problem is paused
+
+When activity returns:
+
+- `idleState` becomes `null`
+- a new `activeSession` starts from the resume time
 
 ## Future Migration Rule
 

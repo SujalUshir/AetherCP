@@ -10,6 +10,14 @@ All notable changes to AetherCP should be recorded here.
 - Documentation system.
 - AI collaboration workspace.
 - Source files moved under `src/`.
+- Problem history in popup.
+- Idle detection for timer pause/resume.
+- Daily analytics in popup.
+- Shared constants and lightweight feature modules.
+- Timer logic refactored into session, idle, and snapshot modules.
+- Codeforces profile page analytics injection.
+- Local Chart.js-powered charts embedded into Codeforces profiles.
+- Graph-template based Codeforces profile injection with visible canvas charts and custom legends.
 
 ### Changed
 

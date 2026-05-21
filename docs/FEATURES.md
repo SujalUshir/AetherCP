@@ -12,15 +12,35 @@ Status: active
 
 Detects problem name and platform from supported websites.
 
+## Problem History
+
+Status: active
+
+Shows recently worked problems in the popup, sorted by latest activity.
+
+## Idle Detection
+
+Status: active
+
+Pauses timer accumulation after 60 seconds without mouse, keyboard, or scroll activity.
+
 ## Analytics
 
-Status: planned
+Status: active
+
+Current views:
+
+- Daily coding time.
+- Number of problems worked today.
+- Most worked problem today.
+- Codeforces profile page injection.
+- Platform distribution doughnut chart.
+- Most worked problems pie chart.
+- Last 7 days bar chart.
 
 Future views:
 
-- Daily coding time.
 - Platform split.
-- Problem count.
 - Streaks.
 - Time per difficulty.
 

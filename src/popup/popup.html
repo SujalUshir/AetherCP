@@ -15,6 +15,29 @@
     Today's Time: 0 min
   </div>
 
+  <section class="popupSection" aria-labelledby="todayStatsTitle">
+    <h2 id="todayStatsTitle">Today's Stats</h2>
+    <div class="statRow">
+      <span>Time</span>
+      <strong id="analyticsTime">00:00:00</strong>
+    </div>
+    <div class="statRow">
+      <span>Problems</span>
+      <strong id="analyticsProblems">0</strong>
+    </div>
+    <div class="statRow">
+      <span>Most Worked</span>
+      <strong id="analyticsMostWorked">None</strong>
+    </div>
+  </section>
+
+  <section class="popupSection" aria-labelledby="recentProblemsTitle">
+    <h2 id="recentProblemsTitle">Recent Problems</h2>
+    <div id="recentProblemsList" class="problemList"></div>
+  </section>
+
+  <script src="../shared/constants.js"></script>
+  <script src="../utils/time.js"></script>
   <script src="popup.js"></script>
 
 </body>

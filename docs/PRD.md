@@ -27,7 +27,7 @@ Students and competitive programmers who solve problems on platforms like Codefo
 
 ## Future Scope
 
-- Analytics dashboard.
+- Codeforces profile analytics injection.
 - Problem recommendation system.
 - Hint system.
 - Cloud sync.

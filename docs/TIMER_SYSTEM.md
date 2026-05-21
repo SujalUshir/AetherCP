@@ -16,6 +16,14 @@ It stores:
 - Saved total seconds per problem.
 - Saved total seconds per day.
 
+Timer behavior is split into focused modules:
+
+- `src/modules/timer/sessionManager.js` starts, stops, switches, and finalizes sessions.
+- `src/modules/timer/idleManager.js` pauses and resumes sessions around idle state.
+- `src/modules/timer/timerSnapshot.js` builds popup and Codeforces profile analytics snapshots.
+
+`src/background/background.js` only routes messages, listens for tab events, reads/writes storage, and calls these modules.
+
 ## Why No Background Interval?
 
 Manifest V3 service workers can sleep. A permanent timer loop is unreliable.
@@ -30,7 +38,8 @@ Instead, AetherCP stores `startedAt` and calculates elapsed time when needed.
 4. Background starts a session if the tab is active.
 5. When tab changes, background stops the old session and starts the new one.
 6. Popup requests a snapshot every second.
-7. Background returns calculated totals.
+7. Codeforces profile analytics requests the same snapshot when rendering charts.
+8. Background returns calculated totals and derived analytics data.
 
 ## Problem Switching Rule
 
@@ -46,3 +55,20 @@ When the user switches to a different active problem:
 ## Refresh Rule
 
 Refreshing the same problem should not reset total time. The content script redetects the same problem, and background continues using the existing problem record.
+
+## Idle Rule
+
+The content script listens for mouse movement, keyboard input, and scrolling.
+
+If no activity happens for 60 seconds:
+
+- content sends `USER_IDLE`
+- background finalizes the session up to the idle threshold
+- timer accumulation pauses
+
+When activity returns:
+
+- content sends `USER_ACTIVE`
+- background starts a new session for the paused problem
+
+The popup does not control idle state. It only displays the snapshot returned by background.

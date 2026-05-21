@@ -42,7 +42,7 @@ Responsibilities:
 
 - summarize local storage
 - calculate daily/weekly/monthly stats
-- prepare popup/dashboard display data
+- prepare popup and profile-page display data
 
 ## Hint System
 

@@ -1,0 +1,182 @@
+.aethercp-profile-root{
+  margin-top:1em;
+  padding:1.25em;
+}
+
+.aethercp-header{
+  display:flex;
+  justify-content:space-between;
+  gap:1em;
+  align-items:flex-start;
+  margin-bottom:1em;
+}
+
+.aethercp-header h3{
+  margin:0;
+  font-size:1.25em;
+}
+
+.aethercp-eyebrow{
+  margin:0 0 0.25em;
+  color:#777;
+  font-size:0.8em;
+  font-weight:bold;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+
+.aethercp-status{
+  border:1px solid #d4d4d4;
+  border-radius:999px;
+  padding:0.35em 0.7em;
+  background:#f8f8f8;
+  color:#444;
+  font-size:0.85em;
+  font-weight:bold;
+}
+
+.aethercp-overview-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:0.75em;
+  margin-bottom:1em;
+}
+
+.aethercp-stat-card,
+.aethercp-panel{
+  border:1px solid #dedede;
+  border-radius:6px;
+  background:#fff;
+}
+
+.aethercp-stat-card{
+  padding:0.85em;
+}
+
+.aethercp-stat-card span{
+  display:block;
+  margin-bottom:0.45em;
+  color:#777;
+  font-size:0.85em;
+}
+
+.aethercp-stat-card strong{
+  display:block;
+  overflow:hidden;
+  color:#222;
+  font-size:1.15em;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.aethercp-panel{
+  padding:1em;
+}
+
+.aethercp-panel h4{
+  margin:0 0 0.75em;
+  font-size:1em;
+}
+
+.aethercp-panel-wide{
+  margin-top:0.85em;
+}
+
+.aethercp-graph-row{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:0.85em;
+  margin-bottom:0.85em;
+}
+
+.aethercp-chart-layout{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) 190px;
+  gap:0.8em;
+  align-items:center;
+}
+
+.aethercp-chart-box{
+  position:relative;
+  height:260px;
+  min-width:0;
+}
+
+.aethercp-chart-box canvas{
+  display:block;
+  width:100% !important;
+  height:100% !important;
+}
+
+.aethercp-chart-box-wide{
+  height:250px;
+}
+
+.aethercp-chart-legend{
+  max-height:250px;
+  margin:0;
+  padding:0;
+  overflow:auto;
+  list-style:none;
+  font-size:0.85em;
+}
+
+.aethercp-chart-legend li{
+  display:flex;
+  gap:0.45em;
+  align-items:flex-start;
+  margin-bottom:0.5em;
+  line-height:1.35;
+}
+
+.aethercp-legend-swatch{
+  width:12px;
+  height:12px;
+  border:1px solid #999;
+  flex:0 0 auto;
+  margin-top:0.15em;
+}
+
+.aethercp-history-panel{
+  margin-top:0.85em;
+}
+
+.aethercp-table-wrap{
+  overflow:auto;
+}
+
+.aethercp-history-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.aethercp-history-table th,
+.aethercp-history-table td{
+  border-bottom:1px solid #eee;
+  padding:0.65em 0.5em;
+  text-align:left;
+  white-space:nowrap;
+}
+
+.aethercp-history-table th{
+  color:#777;
+  font-size:0.78em;
+  text-transform:uppercase;
+}
+
+.aethercp-empty{
+  color:#777;
+  text-align:center;
+}
+
+@media (max-width:800px){
+  .aethercp-overview-grid,
+  .aethercp-graph-row,
+  .aethercp-chart-layout{
+    grid-template-columns:1fr;
+  }
+
+  .aethercp-header{
+    flex-direction:column;
+  }
+}

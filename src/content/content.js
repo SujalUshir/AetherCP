@@ -1,14 +1,21 @@
 let lastProblemKey = "";
+let idleTimerId = null;
+let lastActivityAt = Date.now();
+let isIdle = false;
+
+const MESSAGE_TYPES = AETHERCP_CONSTANTS.MESSAGE_TYPES;
+const PLATFORMS = AETHERCP_CONSTANTS.PLATFORMS;
+const IDLE_TIMEOUT_MS = AETHERCP_CONSTANTS.IDLE_TIMEOUT_MS;
 
 function getPlatform() {
   const hostname = window.location.hostname;
 
   if (hostname.includes("codeforces.com")) {
-    return "Codeforces";
+    return PLATFORMS.CODEFORCES;
   }
 
   if (hostname.includes("leetcode.com")) {
-    return "LeetCode";
+    return PLATFORMS.LEETCODE;
   }
 
   return "";
@@ -69,10 +76,59 @@ function sendProblemInfo() {
 
   lastProblemKey = problemKey;
 
+  chrome.runtime.sendMessage(
+    {
+      type: MESSAGE_TYPES.PROBLEM_DETECTED,
+      problem
+    },
+    () => {
+      if (chrome.runtime.lastError) return;
+
+      if (isIdle) {
+        sendIdleMessage();
+      }
+    }
+  );
+}
+
+function sendIdleMessage() {
+  isIdle = true;
+
   chrome.runtime.sendMessage({
-    type: "PROBLEM_DETECTED",
-    problem
+    type: MESSAGE_TYPES.USER_IDLE,
+    idleStartedAt: lastActivityAt + IDLE_TIMEOUT_MS
+  }, () => chrome.runtime.lastError);
+}
+
+function resetIdleTimer() {
+  clearTimeout(idleTimerId);
+  idleTimerId = setTimeout(sendIdleMessage, IDLE_TIMEOUT_MS);
+}
+
+function handleUserActivity() {
+  lastActivityAt = Date.now();
+
+  if (isIdle) {
+    isIdle = false;
+
+    chrome.runtime.sendMessage({
+      type: MESSAGE_TYPES.USER_ACTIVE
+    }, () => chrome.runtime.lastError);
+  }
+
+  resetIdleTimer();
+}
+
+function watchForUserActivity() {
+  const activityEvents = ["mousemove", "keydown", "scroll"];
+
+  activityEvents.forEach((eventName) => {
+    window.addEventListener(eventName, handleUserActivity, {
+      passive: true
+    });
   });
+
+  resetIdleTimer();
 }
 
 function watchForProblemTitle() {
@@ -92,7 +148,11 @@ function watchForProblemTitle() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", watchForProblemTitle);
+  document.addEventListener("DOMContentLoaded", () => {
+    watchForProblemTitle();
+    watchForUserActivity();
+  });
 } else {
   watchForProblemTitle();
+  watchForUserActivity();
 }

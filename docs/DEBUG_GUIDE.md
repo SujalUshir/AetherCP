@@ -14,6 +14,7 @@
 - Timer wrong: check `src/background/`.
 - Popup display wrong: check `src/popup/`.
 - Stored data wrong: check `docs/STORAGE_SCHEMA.md` and storage writes.
+- Codeforces profile charts missing: open the page console and filter for `[AetherCP:profile]` or `[AetherCP:profile-injector]`.
 
 ## Console Logging Strategy
 
@@ -23,6 +24,8 @@ Use clear prefixes:
 console.log("[AetherCP:content]", "problem detected", problem);
 console.log("[AetherCP:background]", "session started", session);
 console.log("[AetherCP:popup]", "snapshot rendered", snapshot);
+console.log("[AetherCP:profile-injector]", "appended graph template");
+console.log("[AetherCP:profile]", "created chart", chartData);
 ```
 
 Avoid random logs without prefixes.

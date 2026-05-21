@@ -20,7 +20,28 @@
         "https://codeforces.com/*",
         "https://leetcode.com/*"
       ],
-      "js": ["src/content/content.js"]
+      "js": [
+        "src/shared/constants.js",
+        "src/content/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://codeforces.com/profile/*"
+      ],
+      "js": [
+        "src/vendor/chart.umd.min.js",
+        "src/shared/constants.js",
+        "src/utils/time.js",
+        "src/platform/codeforces/graphTemplates.js",
+        "src/platform/codeforces/profileAnalytics.js",
+        "src/platform/codeforces/profileSections.js",
+        "src/platform/codeforces/profileCharts.js",
+        "src/platform/codeforces/profileInjector.js"
+      ],
+      "css": [
+        "src/platform/codeforces/profileAnalytics.css"
+      ]
     }
   ]
 }

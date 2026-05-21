@@ -12,13 +12,11 @@ Use this file as the current working board.
 ## Next
 
 - [ ] Move platform selectors into `src/platform/`.
-- [ ] Move timer helpers into `src/modules/timer/`.
 - [ ] Add debug logger and wire it into background.
-- [ ] Add simple analytics summary in popup.
 
 ## Later
 
-- [ ] Analytics dashboard.
+- [ ] Expand Codeforces profile analytics.
 - [ ] Hint system.
 - [ ] Problem recommendation system.
 - [ ] Cloud sync.
@@ -30,3 +28,9 @@ Use this file as the current working board.
 - [x] Add documentation structure.
 - [x] Add AI collaboration folders.
 - [x] Document timer and storage architecture.
+- [x] Add problem history to popup.
+- [x] Add idle detection.
+- [x] Add daily analytics.
+- [x] Refactor timer logic into timer modules.
+- [x] Add Codeforces profile page analytics injection.
+- [x] Add embedded Codeforces profile charts.
