@@ -26,6 +26,8 @@ console.log("[AetherCP:background]", "session started", session);
 console.log("[AetherCP:popup]", "snapshot rendered", snapshot);
 console.log("[AetherCP:profile-injector]", "appended graph template");
 console.log("[AetherCP:profile]", "created chart", chartData);
+console.log("[AetherCP API]", "fetched data successfully", results);
+console.log("[AetherCP SOLVED]", "submissions processing", counts);
 ```
 
 Avoid random logs without prefixes.

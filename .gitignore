@@ -1,0 +1,45 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# IDE and editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+
+# Node.js (if ever used in tooling)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+
+# Build outputs
+dist/
+build/
+
+# Stale zip artifacts (testing-files.zip is generated on demand)
+testing-files.zip
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
