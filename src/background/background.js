@@ -110,21 +110,6 @@ async function handleProblemDetected(tabId, problem) {
   const state = await getState();
   checkAndApplyIdle(state);
 
-  // If Codeforces, try to resolve rating via API if not present in DOM
-  if (
-    problem.platform === AETHERCP_CONSTANTS.PLATFORMS.CODEFORCES &&
-    (problem.rating === null || problem.rating === undefined)
-  ) {
-    try {
-      const resolvedRating = await resolveCodeforcesRating(problem.contestId, problem.index);
-      if (resolvedRating !== null) {
-        problem.rating = resolvedRating;
-      }
-    } catch (err) {
-      console.error("[AetherCP Background] Error resolving rating fallback:", err);
-    }
-  }
-
   const problemWithUrl = {
     ...problem,
     url: problem.url || ""
@@ -142,6 +127,32 @@ async function handleProblemDetected(tabId, problem) {
   }
 
   await saveState(state);
+
+  // Resolve rating asynchronously in the background so we don't block session activation/saving
+  if (
+    problem.platform === AETHERCP_CONSTANTS.PLATFORMS.CODEFORCES &&
+    (problem.rating === null || problem.rating === undefined)
+  ) {
+    (async () => {
+      try {
+        const resolvedRating = await resolveCodeforcesRating(problem.contestId, problem.index);
+        if (resolvedRating !== null) {
+          const freshState = await getState();
+          if (freshState.tabProblems[String(tabId)]) {
+            freshState.tabProblems[String(tabId)].rating = resolvedRating;
+          }
+          const problemKey = getProblemKey(problem);
+          if (freshState.problems[problemKey]) {
+            freshState.problems[problemKey].rating = resolvedRating;
+            await saveState(freshState);
+            console.log("[AetherCP Background] Asynchronously updated problem rating to", resolvedRating);
+          }
+        }
+      } catch (err) {
+        console.error("[AetherCP Background] Error resolving rating asynchronously:", err);
+      }
+    })();
+  }
 }
 
 async function handleActiveTabChanged(tabId) {

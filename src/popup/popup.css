@@ -66,3 +66,53 @@ h2{
 .emptyText{
     font-size:13px;
 }
+
+/* ── CPH / VS Code section ─────────────────────────────── */
+
+.cphButton{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:7px 0;
+    background:#1a73e8;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:background 0.15s ease;
+}
+
+.cphButton:hover:not(:disabled){
+    background:#1558b0;
+}
+
+.cphButton:disabled{
+    background:#bdc1c6;
+    cursor:not-allowed;
+}
+
+.cphButton.cphSending{
+    background:#f29900;
+}
+
+/* Status badge colours */
+
+.cphStatus{
+    font-size:12px;
+    font-weight:600;
+}
+
+.cphStatusChecking{
+    color:#5f6368;
+}
+
+.cphStatusConnected{
+    color:#188038;
+}
+
+.cphStatusDisconnected{
+    color:#c5221f;
+}
+
