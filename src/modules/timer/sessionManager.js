@@ -5,8 +5,12 @@ function ensureProblemRecord(state, problem) {
     state.problems[problemKey] = {
       problemKey,
       problemName: problem.problemName,
+      name: problem.problemName,
       platform: problem.platform,
       url: normalizeUrl(problem.url),
+      rating: problem.rating !== undefined ? problem.rating : null,
+      contestId: problem.contestId !== undefined ? problem.contestId : null,
+      index: problem.index !== undefined ? problem.index : null,
       totalSeconds: 0,
       firstSeenAt: Date.now(),
       lastSeenAt: Date.now(),
@@ -15,9 +19,20 @@ function ensureProblemRecord(state, problem) {
   }
 
   state.problems[problemKey].problemName = problem.problemName;
+  state.problems[problemKey].name = problem.problemName;
   state.problems[problemKey].platform = problem.platform;
   state.problems[problemKey].url = normalizeUrl(problem.url);
   state.problems[problemKey].lastSeenAt = Date.now();
+
+  if (problem.rating !== undefined) {
+    state.problems[problemKey].rating = problem.rating;
+  }
+  if (problem.contestId !== undefined) {
+    state.problems[problemKey].contestId = problem.contestId;
+  }
+  if (problem.index !== undefined) {
+    state.problems[problemKey].index = problem.index;
+  }
 
   return state.problems[problemKey];
 }
