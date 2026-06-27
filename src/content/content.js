@@ -288,14 +288,11 @@ function getCodeforcesTests() {
   try {
     const sampleDiv = document.querySelector(".sample-test");
     if (!sampleDiv) {
-      console.log("[AetherCP CC Debug] getCodeforcesTests: no .sample-test found");
       return [];
     }
 
     const inputPres  = sampleDiv.querySelectorAll(".input pre");
     const outputPres = sampleDiv.querySelectorAll(".output pre");
-
-    console.log("[AetherCP CC Debug] getCodeforcesTests inputPres count:", inputPres.length, "outputPres count:", outputPres.length);
 
     const tests = [];
     const count  = Math.min(inputPres.length, outputPres.length);
@@ -310,7 +307,6 @@ function getCodeforcesTests() {
       tests.push({ input, output });
     }
 
-    console.log("[AetherCP CC Debug] getCodeforcesTests parsed tests:", JSON.stringify(tests, null, 2));
     logContent("Codeforces sample extraction (CC compatible)", { count: tests.length });
     return tests;
   } catch (err) {
@@ -526,21 +522,15 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     memoryLimit
   });
 
-  tests.forEach((t, i) => {
-    console.log(`[AetherCP CPH] Input ${i + 1}:`, JSON.stringify(t.input));
-    console.log(`[AetherCP CPH] Output ${i + 1}:`, JSON.stringify(t.output));
-  });
-
   if (tests.length === 0) {
     const sampleDiv = document.querySelector(".sample-test");
-    logContent("[AetherCP CPH] Sample extraction failed — reason", {
+    logContent("[AetherCP CPH] Sample extraction: no tests found", {
       sampleDivFound: !!sampleDiv,
       inputPres:  sampleDiv ? sampleDiv.querySelectorAll(".input pre").length  : 0,
       outputPres: sampleDiv ? sampleDiv.querySelectorAll(".output pre").length : 0
     });
   }
 
-  console.log("[AetherCP CC Debug] Content script sending response:", JSON.stringify({ tests, timeLimit, memoryLimit }, null, 2));
   sendResponse({ tests, timeLimit, memoryLimit });
   return true;
 });

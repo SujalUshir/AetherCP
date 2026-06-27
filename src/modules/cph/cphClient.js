@@ -33,7 +33,6 @@ async function sendToCph(payload) {
 
   try {
     const body = JSON.stringify(payload);
-    console.log("[AetherCP CC Debug] HTTP body sent to CPH:", body);
 
     const response = await fetch(CPH_ENDPOINT, {
       method:  "POST",

@@ -12,11 +12,11 @@ Integrates AetherCP with the **Competitive Companion** browser extension protoco
 
 ## Core Logic Files
 
-- [cphPayloadBuilder.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphPayloadBuilder.js)
+- [`src/modules/cph/cphPayloadBuilder.js`](../../src/modules/cph/cphPayloadBuilder.js)
   Constructs the payload matching the Competitive Companion schema. Includes helper functions to parse URLs into platform-specific group names (e.g., Codeforces contests, LeetCode) and to generate Java-friendly task class names.
-- [cphClient.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphClient.js)
+- [`src/modules/cph/cphClient.js`](../../src/modules/cph/cphClient.js)
   Handles the HTTP POST request to the CPH receiver. Implements abort signals for timeouts and structured error handling.
-- [cphStatus.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphStatus.js)
+- [`src/modules/cph/cphStatus.js`](../../src/modules/cph/cphStatus.js)
   Checks if the local receiver is alive by pinging the endpoint with a minimal payload.
 
 ---

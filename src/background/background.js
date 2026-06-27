@@ -322,7 +322,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           });
 
           if (testResponse && Array.isArray(testResponse.tests)) {
-            console.log("[AetherCP CC Debug] Background received tests from content script:", JSON.stringify(testResponse.tests, null, 2));
             freshTests  = testResponse.tests;
             timeLimit   = testResponse.timeLimit   || timeLimit;
             memoryLimit = testResponse.memoryLimit || memoryLimit;
@@ -355,14 +354,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       };
 
       const payload = buildCphPayload(problemWithFreshTests);
-
-      console.log(payload.tests);
-      console.log(JSON.stringify(payload.tests, null, 2));
-      console.log("[AetherCP CC Debug] Final payload:", JSON.stringify(payload, null, 2));
-
-      // ── Full payload log (diagnostic) ─────────────────────────────────
-      console.log("[AetherCP CPH] Payload before send:\n" +
-        JSON.stringify(payload, null, 2));
 
       const result = await sendToCph(payload);
 
@@ -472,12 +463,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     };
 
     const payload = buildCphPayload(problemWithFreshTests);
-
-    console.log(payload.tests);
-    console.log(JSON.stringify(payload.tests, null, 2));
-
-    console.log("[AetherCP CPH] Context menu payload before send:\n" +
-      JSON.stringify(payload, null, 2));
 
     const result = await sendToCph(payload);
 

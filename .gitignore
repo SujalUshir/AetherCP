@@ -28,6 +28,11 @@ __pycache__/
 *.py[cod]
 *.pyo
 .env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.staging
 .venv/
 
 # Build outputs

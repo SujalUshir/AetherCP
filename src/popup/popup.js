@@ -99,14 +99,6 @@ function renderSnapshot(snapshot) {
   renderAnalytics(snapshot?.dailyAnalytics);
   renderRecentProblems(snapshot?.recentProblems);
 
-  // ── Diagnostic log (temporary) ──────────────────────────────────────
-  console.log("[AetherCP CPH] Snapshot rendered", {
-    "Connected":         _cphReachable,
-    "Has Active Problem": _hasActiveProblem,
-    "Button Disabled":   !_hasActiveProblem || !_cphReachable,
-    "Snapshot":          snapshot?.activeProblem?.problemName || "(none)"
-  });
-
   // Re-evaluate button state on every snapshot tick.
   // Without this call, the button is only evaluated once (inside
   // checkCphStatus), at which point _hasActiveProblem is still false
