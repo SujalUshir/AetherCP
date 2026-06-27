@@ -38,7 +38,7 @@ Excluded events: `mousemove`, `scroll` (too noisy, cause false "active" signals)
 
 Status: active
 
-Full-year GitHub/Codeforces contribution-style heatmap injected into the Productivity Analytics section
+Full-year GitHub/Codeforces contribution-style heatmap injected before the Practice Analytics section
 on the user's own Codeforces profile page.
 
 - **Full-year view** — renders all 52+ weeks of the selected year (Jan 1 → Dec 31), Sunday-aligned
@@ -62,7 +62,7 @@ All date key generation, daily resets, streak logic, and heatmap dates use IST
 
 Prevents off-by-one-day bugs for users whose machine clock is set to UTC or another timezone.
 
-## Productivity Analytics
+## Practice Analytics
 
 Status: active
 
@@ -73,21 +73,9 @@ Current views:
 - Number of problems worked today.
 - Most worked problem today.
 - Codeforces profile page injection (own profile only).
-- Platform distribution doughnut chart.
-- Most worked problems pie chart.
 - Last 7 days bar chart.
 - Full-year coding activity heatmap with year selector.
-- Recent problem history table.
-
-## Analytics Visibility Toggles
-
-Status: active
-
-Two lightweight toggle checkboxes in the Productivity Analytics header:
-- **Heatmap** — show/hide the heatmap section
-- **Productivity** — show/hide the productivity charts section
-
-Toggle state is persisted in `localStorage` and survives page reloads.
+- Recent problem history table showing the last 5 tracked problems.
 
 ## Codeforces Competitive Analytics
 
@@ -97,15 +85,18 @@ Sourced from the Codeforces public API (`user.status`). Visible on EVERY Codefor
 Shows analytics for whoever's profile is being viewed.
 
 **Layout order (final):**
-1. Rating Distribution bar chart (full width) — FIRST
-2. Topic / Tag Distribution doughnut chart — SECOND
-3. Solved Stats Cards (below graphs) — LAST
+1. Native Codeforces profile
+2. Competitive Analytics
+   - Problem Rating Distribution bar chart
+   - Problem Topics Distribution pie chart
+3. Codeforces Solved Heatmap
+4. Practice Analytics
+5. Recent Problem History
 
 Current views:
 - Problem Rating Distribution bar chart (colored by Codeforces rating tier).
-- Topic / Tag Distribution doughnut chart with legend.
+- Problem Topics Distribution pie chart (built from Codeforces problem tags).
 - Solved problem count badge in header.
-- Solved stats cards: Total, Contest, Practice, Virtual, Gym, Rated.
 - Loading and error states for API fetch.
 
 Solve counting:
@@ -139,3 +130,29 @@ Status: planned
 ## AI Integration
 
 Status: planned
+
+## CPH Integration — Competitive Programming Helper
+
+Status: active (v1.2)
+
+Send the currently open problem directly to the CPH extension in VS Code.
+
+**Trigger methods:**
+- Popup button: **Open in VS Code**
+- Right-click context menu: **Open Problem in VS Code (AetherCP)**
+
+**Protocol:** Implements the official Competitive Companion protocol —
+`POST http://localhost:27121` with a Competitive Companion–compatible JSON payload.
+
+**Sample extraction:**
+- **Codeforces:** DOM-based, reliable. Reads `.sample-test .input/output pre` elements.
+  Also extracts time limit (`.time-limit`) and memory limit (`.memory-limit`).
+- **LeetCode:** Best-effort text parsing from the description container.
+
+**Connection status:** Displayed in the popup VS Code section with a 10-second cache.
+Does not spam localhost on every 1-second popup refresh.
+
+**Error handling:** Covers offline receiver, timeout (3s), connection refused, no active problem.
+Never crashes the extension.
+
+See `docs/features/CPH_INTEGRATION.md` for full details.

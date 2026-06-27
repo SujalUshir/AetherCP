@@ -40,7 +40,8 @@ function createAetherProfileRoot(analytics) {
 }
 
 function updateAetherProfileRoot(root, analytics) {
-  root.querySelector("[data-aether-status]").textContent = analytics.status;
+  const status = root.querySelector("[data-aether-status]");
+  if (status) status.textContent = analytics.status;
   renderAetherOverview(root, analytics);
 
   // Re-render heatmap for whichever year is currently selected
@@ -63,8 +64,7 @@ function renderAetherOverview(root, analytics) {
     ["Today's coding time", formatDurationShort(analytics.todaySeconds)],
     ["Total problems worked", String(analytics.totalProblemsWorked)],
     ["Current streak", `${analytics.currentStreak} day${analytics.currentStreak === 1 ? "" : "s"}`],
-    ["Most worked problem", formatAetherProblemName(analytics.mostWorkedProblem)],
-    ["Most used platform", analytics.mostUsedPlatform?.label || "None"]
+    ["Most worked problem", formatAetherProblemName(analytics.mostWorkedProblem)]
   ];
 
   cards.forEach(([label, value]) => {
@@ -86,10 +86,12 @@ function renderAetherHistory(root, problems) {
   const tbody = root.querySelector("[data-aether-history-body]");
   tbody.innerHTML = "";
 
-  if (!problems.length) {
+  const recentProblems = (problems || []).slice(0, 5);
+
+  if (!recentProblems.length) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
-    cell.colSpan = 5;
+    cell.colSpan = 4;
     cell.className = "aethercp-empty";
     cell.textContent = "No tracked problem history yet.";
     row.appendChild(cell);
@@ -97,17 +99,21 @@ function renderAetherHistory(root, problems) {
     return;
   }
 
-  problems.forEach((problem) => {
+  recentProblems.forEach((problem) => {
     const row = document.createElement("tr");
 
     appendAetherCell(row, problem.problemName);
-    appendAetherCell(row, problem.platform);
+    appendAetherCell(row, formatAetherRating(problem));
     appendAetherCell(row, formatDurationShort(problem.totalSeconds));
-    appendAetherCell(row, formatAetherDate(problem.lastSeenAt));
-    appendAetherCell(row, String(problem.sessionCount));
+    appendAetherCell(row, formatAetherDate(problem.solvedAt || problem.lastSeenAt));
 
     tbody.appendChild(row);
   });
+}
+
+function formatAetherRating(problem) {
+  const rating = problem?.rating || problem?.problemRating;
+  return rating ? String(rating) : "-";
 }
 
 function appendAetherCell(row, value) {
@@ -122,8 +128,7 @@ function formatAetherDate(timestamp) {
   return new Date(timestamp).toLocaleString([], {
     month: "short",
     day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
+    year: "numeric"
   });
 }
 

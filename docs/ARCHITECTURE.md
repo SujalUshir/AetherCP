@@ -98,7 +98,7 @@ Use popup for:
 
 AetherCP injects TWO architecturally separate analytics systems into Codeforces profile pages.
 
-**Injection order:** CF Competitive Analytics (above) → Productivity Analytics (below, own profile only).
+**Injection order:** CF Competitive Analytics (above) → Practice Analytics (below, own profile only).
 
 ### System 1: Codeforces Competitive Analytics (CF API)
 
@@ -108,13 +108,13 @@ Injected on: every profile page visited, regardless of login state.
 
 Files:
 - `cfApi.js` — fetch and validate Codeforces API responses.
-- `solvedProblemAnalytics.js` — deduplicate, build rating/tag distributions.
+- `solvedProblemAnalytics.js` — deduplicate and build rating/topic distributions.
 - `profileIdentity.js` — detect viewed handle (URL) and logged-in handle (DOM).
 - `graphTemplates.js` — `getCFAnalyticsTemplate()`.
-- `profileCharts.js` — `renderCFRatingChart()` and `renderCFTagChart()`.
+- `profileCharts.js` — `renderCFRatingChart()` and `renderCFTopicChart()`.
 - `profileInjector.js` — `injectCFAnalytics()`.
 
-### System 2: Productivity Analytics (Timer State)
+### System 2: Practice Analytics (Timer State)
 
 Source: local extension background state.
 
@@ -122,10 +122,9 @@ Injected on: **own profile only** — when `loggedInHandle === viewedProfileHand
 
 Contains:
 - Stat cards (total time, today, streak, most worked problem).
-- Platform doughnut, problems pie, last 7 days bar chart.
+- Last 7 days bar chart.
 - **Coding activity heatmap** — full-year (52+ weeks), Sunday-aligned CSS grid with dynamic column count, year dropdown + nav buttons, sequential blue level colors, HTML/CSS tooltips, future-day placeholders.
 - Recent problem history table.
-- **Visibility toggles** — checkbox toggles for heatmap and productivity sections, state persisted in `localStorage`.
 
 Files:
 - `profileAnalytics.js` — extract analytics from snapshot (includes `dailyTotals`).
@@ -162,6 +161,50 @@ Logs: `[AetherCP TIME]` for IST day key, `[AetherCP HEATMAP]` for cell generatio
 3. `background.js` starts or stops sessions based on active tab.
 4. `popup.js` sends `GET_TIMER_SNAPSHOT`.
 5. `background.js` returns calculated live totals.
+
+## CPH Integration — Competitive Programming Helper (v1.2)
+
+`src/modules/cph/` — three isolated modules loaded via `importScripts` in `background.js`.
+
+### cphClient.js
+Sends a Competitive Companion–compatible JSON payload via `POST http://localhost:27121`.
+Uses `AbortController` for a 3-second timeout. All errors returned as structured objects —
+never throws.
+
+### cphPayloadBuilder.js
+Builds the Competitive Companion JSON payload from a problem record.
+Handles platform-specific `group` strings and Java `taskClass` generation.
+
+### cphStatus.js
+10-second TTL health check. Sends a minimal POST to port 27121 to detect whether the
+CPH receiver is listening. Any HTTP response = reachable. Connection refused or timeout = offline.
+
+### CPH Message Flow
+
+```
+popup.js
+  → GET_CPH_STATUS  → background → checkCphReceiver()  → { reachable }
+  → SEND_TO_CPH     → background → buildCphPayload()
+                               → sendToCph()
+                               → POST localhost:27121   → CPH Receiver (VS Code)
+```
+
+### Context Menu Flow
+
+```
+User right-clicks CF/LC problem page
+  → chrome.contextMenus.onClicked (background.js)
+  → getState() → tabProblems[tabId]
+  → buildCphPayload() → sendToCph()
+```
+
+### Anti-Spaghetti Rules — CPH Edition
+
+- CPH HTTP calls happen **only** in `cphClient.js` and `cphStatus.js`.
+- Background is the coordinator; it never makes fetch calls directly.
+- Popup never makes HTTP calls — it only sends Chrome messages.
+- Content script extraction is read-only DOM access, wrapped in try/catch.
+- Timer, idle, and analytics code have zero CPH knowledge.
 
 ## Anti-Spaghetti Rules
 

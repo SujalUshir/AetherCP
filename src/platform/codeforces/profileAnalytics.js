@@ -28,15 +28,12 @@ function getAetherProfileAnalytics(snapshot) {
       analytics.todaySeconds || 0
     ),
     mostWorkedProblem: analytics.mostWorkedProblem,
-    mostUsedPlatform: getMostUsedPlatform(charts.platformDistribution || []),
     currentActiveProblem: analytics.currentActiveProblem,
     status: analytics.status || "Stopped",
     allRecentProblems: analytics.allRecentProblems || [],
     // dailyTotals exposed for heatmap rendering (keyed by YYYY-MM-DD IST)
     dailyTotals: state.dailyTotals || {},
     charts: {
-      platformDistribution: charts.platformDistribution || [],
-      problemTimeDistribution: charts.problemTimeDistribution || [],
       lastSevenDays: charts.lastSevenDays || []
     }
   };
@@ -44,18 +41,6 @@ function getAetherProfileAnalytics(snapshot) {
   console.log("[AetherCP:profile]", "analytics generated", profileAnalytics);
 
   return profileAnalytics;
-}
-
-function getMostUsedPlatform(platformDistribution) {
-  if (!platformDistribution.length) return null;
-
-  return platformDistribution.reduce((best, current) => {
-    if (!best || current.seconds > best.seconds) {
-      return current;
-    }
-
-    return best;
-  }, null);
 }
 
 function getCurrentStreak(dailyTotals, todaySeconds) {
@@ -79,8 +64,7 @@ function getCurrentStreak(dailyTotals, todaySeconds) {
 function formatAetherProblemName(problem) {
   if (!problem) return "None";
 
-  const prefix = problem.platformShortName || problem.platform || "";
-  return `${prefix} ${problem.problemName}`.trim();
+  return problem.problemName || "None";
 }
 
 // Expose functions to global scope
@@ -90,4 +74,3 @@ window.formatAetherProblemName = formatAetherProblemName;
 
 console.log("[AetherCP LOAD] profileAnalytics.js loaded");
 })();
-

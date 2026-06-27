@@ -1,6 +1,6 @@
 # AetherCP
 
-> A privacy-first Chrome extension for competitive programmers that tracks your Codeforces and LeetCode sessions, visualises your productivity, and integrates with VS Code — all without a backend.
+> A privacy-first Chrome extension for competitive programmers that tracks Codeforces practice, visualizes productivity, and integrates seamlessly with VS Code.
 
 [![Manifest V3](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-blue)](https://developer.chrome.com/docs/extensions/mv3/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
@@ -9,176 +9,286 @@
 
 ## What is AetherCP?
 
-AetherCP is a Chrome / Edge browser extension that helps competitive programmers track their coding sessions, analyse their practice habits, and solve problems more effectively.
+AetherCP is a Chrome / Microsoft Edge browser extension built for competitive programmers. It automatically tracks your coding sessions, augments Codeforces with powerful analytics, and streamlines your workflow by integrating directly with VS Code through the Competitive Companion protocol.
 
-Everything runs locally — no accounts, no servers, no data leaving your browser.
+Unlike traditional coding trackers, **AetherCP is completely local-first**—there are no accounts, cloud servers, analytics, or telemetry. Your practice history never leaves your browser.
+
+---
+
+# Competitive Analytics
+
+Analyze any Codeforces profile with rich visual insights.
+
+<p align="center">
+  <img src="docs/images/competitive.png" width="900">
+</p>
+
+Features:
+
+* 📊 Problem Rating Distribution
+* 🏷️ Problem Topics Distribution
+* 📈 Solved problem statistics
+* 👤 Available on every Codeforces profile
+
+---
+
+# Practice Analytics
+
+Track your own competitive programming journey over time.
+
+<p align="center">
+  <img src="docs/images/practice.png" width="900">
+</p>
+
+Features:
+
+* 🔥 Full-year coding heatmap
+* ⏱️ Daily coding time analytics
+* 📅 Recent Problem History
+* 📈 Coding streaks
+* 📊 Personal productivity dashboard
+
+---
+
+# VS Code Integration
+
+Open problems directly in VS Code with one click using Competitive Companion.
+
+<p align="center">
+  <img src="docs/images/vscode.png" width="900">
+</p>
+
+Features:
+
+* 🚀 One-click "Open in VS Code"
+* 📥 Automatically imports sample test cases
+* 💻 Works with the Competitive Programming Helper (CPH) extension
+* ⚡ Faster solve-test-submit workflow
 
 ---
 
 ## Features
 
-| Feature | Description |
-|---|---|
-| **Session Timer** | Automatically starts/stops timing when you visit a problem page. Idle-aware — pauses after 15 minutes of inactivity |
-| **Problem History** | Tracks every problem you've worked on, including time spent and rating |
-| **Today's Analytics** | Shows today's total coding time, problems worked on, and most-worked problem |
-| **Heatmap** | GitHub-style activity heatmap injected into your Codeforces profile |
-| **Competitive Analytics** | Rating distribution, tag distribution, and problem-solving stats on any Codeforces profile |
-| **Productivity Analytics** | Detailed personal analytics — daily trends, session breakdowns — on your own profile |
-| **VS Code Integration** | Send the current problem's sample test cases to VS Code via the CPH extension (optional) |
-| **Right-click to Open** | Context menu "Open in VS Code" on supported problem pages |
+| Feature                     | Description                                                                                                           |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Automatic Session Timer** | Starts and stops automatically when visiting supported problem pages. Idle-aware with a 15-minute inactivity timeout. |
+| **Recent Problem History**  | Stores recent problems, ratings, timestamps, and time spent solving them.                                             |
+| **Today's Analytics**       | Displays coding time, problems worked on, and current streak.                                                         |
+| **Competitive Analytics**   | Rating distribution, topic distribution, and solved statistics for every Codeforces profile.                          |
+| **Practice Analytics**      | Personal productivity dashboard with heatmap, daily graphs, and recent history.                                       |
+| **VS Code Integration**     | Sends problems and sample test cases directly to VS Code through Competitive Companion.                               |
+| **Context Menu Support**    | Right-click any supported problem page and open it directly in VS Code.                                               |
 
-**Supported Platforms:** Codeforces, LeetCode
+**Supported Platforms**
+
+* ✅ Codeforces
+* ✅ LeetCode (practice tracking)
+* 🚧 AtCoder (planned)
+* 🚧 CodeChef (planned)
 
 ---
 
 ## Installation
 
-### From Source (Developer Mode)
+### From Source
 
-1. Clone or download this repository
-2. Open `chrome://extensions` (or `edge://extensions`)
-3. Enable **Developer mode** (top-right toggle)
-4. Click **Load unpacked**
-5. Select the repository root folder
+1. Clone this repository.
 
-The extension icon will appear in your toolbar.
+```bash
+git clone https://github.com/SujalUshir/AetherCP.git
+```
 
-### From the Chrome Web Store / Edge Add-ons
+2. Open:
 
-> Store listing coming soon.
+```
+chrome://extensions
+```
+
+or
+
+```
+edge://extensions
+```
+
+3. Enable **Developer Mode**.
+
+4. Click **Load unpacked**.
+
+5. Select the repository root.
+
+The extension is now ready to use.
 
 ---
 
-## Screenshots
+### Chrome Web Store
 
-| Popup | Codeforces Profile |
-|---|---|
-| *(coming soon)* | *(coming soon)* |
+Coming soon.
+
+---
+
+### Microsoft Edge Add-ons
+
+Coming soon.
 
 ---
 
 ## Architecture
 
-AetherCP is a pure Manifest V3 extension — no build step, no bundler, no backend.
+AetherCP follows a clean Manifest V3 architecture with no build step and no backend.
 
 ```
-manifest.json          — Extension configuration
+Browser
+      │
+      ▼
+Content Script
+      │
+      ▼
+Background Service Worker
+      │
+      ▼
+chrome.storage.local
+      │
+      ├──────── Popup UI
+      │
+      ├──────── Competitive Analytics
+      │
+      ├──────── Practice Analytics
+      │
+      └──────── VS Code (CPH)
+```
+
+### Core Components
+
+```
+manifest.json
+
 src/
-  background/          — Service worker (timer logic, message routing)
-  content/             — Content script (problem detection, test extraction)
-  popup/               — Extension popup (HTML + CSS + JS)
-  shared/              — Shared constants
-  modules/
-    timer/             — Session management, idle detection, snapshots
-    analytics/         — Daily analytics computation
-    cph/               — CPH/VS Code integration (optional)
-    problem-tracking/  — Problem key generation
-  platform/
-    codeforces/        — Profile page injection, API client, chart rendering
-    leetcode/          — (Planned)
-  utils/               — Time formatting, timezone utilities
-  vendor/              — Bundled Chart.js v4 (MIT)
-docs/                  — Architecture, feature, and debugging documentation
-testing/               — Offline DOM snapshots for development testing
+├── background/
+├── content/
+├── popup/
+├── shared/
+├── modules/
+│   ├── analytics/
+│   ├── timer/
+│   ├── cph/
+│   └── problem-tracking/
+├── platform/
+│   ├── codeforces/
+│   └── leetcode/
+├── utils/
+└── vendor/
 ```
 
 ---
 
 ## Tech Stack
 
-| Component | Technology |
-|---|---|
-| Extension platform | Chrome / Edge (Manifest V3) |
-| Language | Vanilla JavaScript (ES2020) |
-| Styling | Vanilla CSS |
-| Charts | [Chart.js v4.4.7](https://www.chartjs.org/) — bundled locally (MIT) |
-| Storage | `chrome.storage.local` |
-| Backend | None |
-| CDN | None |
+| Component          | Technology                    |
+| ------------------ | ----------------------------- |
+| Extension Platform | Chrome / Edge Manifest V3     |
+| Language           | Vanilla JavaScript (ES2020)   |
+| Styling            | Vanilla CSS                   |
+| Charts             | Chart.js v4 (bundled locally) |
+| Storage            | chrome.storage.local          |
+| Backend            | None                          |
+| Build Tool         | None                          |
 
 ---
 
 ## Privacy
 
-AetherCP is **local-first** and **privacy-first**:
+AetherCP is designed around a **local-first, privacy-first philosophy**.
 
-- All data is stored in `chrome.storage.local` — it never leaves your browser
-- No accounts or sign-up required
-- No analytics or telemetry
-- No third-party SDKs
-- Only two external network endpoints are used:
-  - `https://codeforces.com/api/` — the **public** Codeforces API (same data your browser loads anyway)
-  - `http://localhost:27121` — the CPH VS Code receiver, **local only, user-initiated, optional**
+* ✅ No accounts
+* ✅ No sign-up
+* ✅ No telemetry
+* ✅ No tracking
+* ✅ No analytics SDKs
+* ✅ No cloud backend
+* ✅ No cookies
 
-See [SECURITY.md](SECURITY.md) for the full privacy and security documentation.
+Only two external endpoints are ever contacted:
+
+* **Codeforces Public API** — for profile statistics.
+* **localhost:27121** — optional Competitive Companion receiver for VS Code.
+
+All coding history remains on your own machine.
+
+For the complete security model, see **[SECURITY.md](SECURITY.md)**.
 
 ---
 
 ## Data Stored
 
-All data is stored **locally** in `chrome.storage.local`:
+Everything is stored locally using `chrome.storage.local`.
 
-- Problem sessions (name, platform, URL, timestamps, time spent)
-- Daily coding totals
-- Cached Codeforces problem ratings (24-hour TTL)
+Stored data includes:
 
-Nothing is uploaded, synced, or shared.
+* Coding sessions
+* Problem history
+* Time spent
+* Daily totals
+* Heatmap activity
+* Cached Codeforces metadata
+
+No information is uploaded or synchronized.
 
 ---
 
 ## Documentation
 
-| Document | Description |
-|---|---|
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Architecture principles and file responsibilities |
-| [STORAGE_SCHEMA.md](docs/STORAGE_SCHEMA.md) | Storage schema and naming rules |
-| [TIMER_SYSTEM.md](docs/TIMER_SYSTEM.md) | Timer design and idle detection rationale |
-| [DEBUG_GUIDE.md](docs/DEBUG_GUIDE.md) | Debugging checklist and log prefix conventions |
-| [FEATURES.md](docs/FEATURES.md) | Feature descriptions |
-| [ROADMAP.md](docs/ROADMAP.md) | Planned features |
-| [CHANGELOG.md](docs/CHANGELOG.md) | Version history |
-| [CPH_INTEGRATION.md](docs/features/CPH_INTEGRATION.md) | VS Code / CPH integration guide |
-| [SECURITY.md](SECURITY.md) | Security and privacy documentation |
+| Document                                                  | Description                     |
+| --------------------------------------------------------- | ------------------------------- |
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md)                   | Project architecture            |
+| [CURRENT_PROJECT_STATE.md](docs/CURRENT_PROJECT_STATE.md) | Current implementation overview |
+| [FEATURES.md](docs/FEATURES.md)                           | Feature documentation           |
+| [STORAGE_SCHEMA.md](docs/STORAGE_SCHEMA.md)               | Storage structure               |
+| [TIMER_SYSTEM.md](docs/TIMER_SYSTEM.md)                   | Timer & idle detection          |
+| [DEBUG_GUIDE.md](docs/DEBUG_GUIDE.md)                     | Debugging guide                 |
+| [ROADMAP.md](docs/ROADMAP.md)                             | Planned features                |
+| [CHANGELOG.md](docs/CHANGELOG.md)                         | Version history                 |
+| [CPH_INTEGRATION.md](docs/features/CPH_INTEGRATION.md)    | VS Code integration             |
+| [SECURITY.md](SECURITY.md)                                | Security & privacy              |
 
 ---
 
-## VS Code Integration (Optional)
+## VS Code Integration
 
-AetherCP integrates with [Competitive Programming Helper (CPH)](https://github.com/agrawal-d/cph) via the Competitive Companion protocol.
+AetherCP integrates with the **Competitive Programming Helper (CPH)** extension for Visual Studio Code.
 
-**Setup:**
+Workflow:
 
-1. Install the [CPH extension](https://marketplace.visualstudio.com/items?itemName=DivyanshuAgrawal.competitive-programming-helper) in VS Code
-2. Open a `.cpp` or `.py` file in VS Code so CPH activates
-3. Navigate to a Codeforces or LeetCode problem in your browser
-4. Click **Open in VS Code** in the AetherCP popup, or right-click and select **Open Problem in VS Code (AetherCP)**
+1. Open a supported problem.
+2. Click **Open in VS Code**.
+3. Sample test cases are transferred automatically.
+4. Start coding immediately.
 
-CPH must be running locally. The extension works fully without it.
+CPH is **optional**. The extension works perfectly without it.
 
 ---
 
 ## Roadmap
 
-- [ ] AtCoder support
-- [ ] CodeChef support
-- [ ] Auto-send problems to VS Code on detection
-- [ ] Options page (custom idle timeout, port configuration)
-- [ ] Light / dark theme toggle
-- [ ] Export session history as CSV
+* [ ] AtCoder support
+* [ ] CodeChef support
+* [ ] Contest analytics dashboard
+* [ ] Automatic problem transfer to VS Code
+* [ ] Custom idle timeout
+* [ ] Theme customization
+* [ ] Export practice history
 
 ---
 
 ## Contributing
 
-Contributions are welcome. Please:
+Contributions are welcome.
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Open a pull request with a clear description
+1. Fork the repository.
+2. Create a feature branch.
+3. Implement your changes.
+4. Submit a pull request.
 
-For security vulnerabilities, see [SECURITY.md](SECURITY.md).
+Please read **SECURITY.md** before reporting security-related issues.
 
 ---
 

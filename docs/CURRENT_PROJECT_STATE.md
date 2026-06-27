@@ -1,7 +1,7 @@
 # AetherCP — Current Project State
 
-> Last updated: 2026-06-10
-> Version: 1.0 (Manifest V3)
+> Last updated: 2026-06-25
+> Version: 1.2.0 (Manifest V3)
 > This document reflects ONLY the current implementation. No planned features. No future architecture.
 
 ---
@@ -34,13 +34,13 @@ src/
 ├── background/
 │   └── background.js          — Service worker entrypoint
 ├── content/
-│   └── content.js             — Problem detection + idle tracking
+│   └── content.js             — Problem detection + idle tracking + CPH data extraction
 ├── popup/
-│   ├── popup.html             — Popup UI
-│   ├── popup.css              — Popup styles
-│   └── popup.js               — Popup renderer
+│   ├── popup.html             — Popup UI (includes VS Code section)
+│   ├── popup.css              — Popup styles (includes CPH button/status styles)
+│   └── popup.js               — Popup renderer + CPH status/send logic
 ├── shared/
-│   └── constants.js           — Shared constants (loaded by all contexts)
+│   └── constants.js           — Shared constants (SEND_TO_CPH, GET_CPH_STATUS, CPH_PORT added)
 ├── utils/
 │   ├── timezone.js            — IST date helpers (loaded before time.js)
 │   └── time.js                — Date/overlap helpers (delegates to timezone.js)
@@ -49,10 +49,14 @@ src/
 │   │   └── problemKeys.js     — getProblemKey(), normalizeUrl(), getPlatformShortName()
 │   ├── analytics/
 │   │   └── dailyAnalytics.js  — getDailyAnalytics()
-│   └── timer/
-│       ├── sessionManager.js  — startSession(), stopSession(), switchSession()
-│       ├── idleManager.js     — pauseForIdle(), resumeFromIdle(), checkAndApplyIdle()
-│       └── timerSnapshot.js   — buildTimerSnapshot()
+│   ├── timer/
+│   │   ├── sessionManager.js  — startSession(), stopSession(), switchSession()
+│   │   ├── idleManager.js     — pauseForIdle(), resumeFromIdle(), checkAndApplyIdle()
+│   │   └── timerSnapshot.js   — buildTimerSnapshot()
+│   └── cph/                   — [NEW v1.2] Competitive Programming Helper integration
+│       ├── cphClient.js       — sendToCph() — HTTP POST to localhost:27121
+│       ├── cphPayloadBuilder.js — buildCphPayload() — Competitive Companion JSON
+│       └── cphStatus.js       — checkCphReceiver() — 10s cached health check
 ├── platform/
 │   ├── codeforces/
 │   │   ├── profileIdentity.js       — getViewedProfileHandle(), getLoggedInHandle(), isOwnProfile()
@@ -153,18 +157,29 @@ src/popup/popup.js
 - Today's total coding time
 - Today's stats: time, problems worked count, most-worked problem
 - Recent problems list (last 5 worked, sorted by recency)
+- **VS Code section** — CPH receiver status + Open in VS Code button (v1.2)
+
+### CPH Integration — Competitive Programming Helper (v1.2)
+- **Protocol:** Official Competitive Companion protocol — POST http://localhost:27121
+- **Trigger 1:** Popup button "Open in VS Code"
+- **Trigger 2:** Right-click context menu "Open Problem in VS Code (AetherCP)"
+- **Sample extraction — Codeforces:** DOM-based from `.sample-test .input/output pre`
+- **Sample extraction — LeetCode:** Best-effort text parsing from description container
+- **Limits — Codeforces:** Time from `.time-limit`, memory from `.memory-limit`
+- **Connection status:** Shown in popup; 10-second cached health check prevents localhost spam
+- **Error handling:** Covers timeout (3s), refused, no problem, network failures
+- **Context menu:** Created on `onInstalled`; only shown on CF/LC problem URLs
 
 ### Codeforces Competitive Analytics (CF API)
 - Injected on **every** Codeforces profile page (own and others)
 - Fetches `codeforces.com/api/user.status` — full submission history (paginated, up to 200,000)
-- Renders: Rating Distribution bar chart, Topic/Tag doughnut chart, solved stats cards
+- Renders: Problem Rating Distribution bar chart, Problem Topics Distribution pie chart, and solved count badge
 - Solved count: only `verdict === "OK"` submissions, deduplicated by problem key
-- Stats cards: Total, Contest, Practice, Virtual, Gym, Rated problems
 
-### Productivity Analytics (Timer State)
+### Practice Analytics (Timer State)
 - Injected on **own profile only** (`loggedInHandle === viewedHandle`)
 - Source: local extension storage (background state)
-- Renders: stat cards, platform distribution, problems time distribution, last 7 days bar chart
+- Renders: stat cards, last 7 days bar chart, heatmap, and recent problem history
 - Refreshes every 10 seconds via `setInterval`
 
 ### Coding Activity Heatmap
@@ -175,10 +190,6 @@ src/popup/popup.js
 - CSS tooltip on hover showing duration and date
 - Data from `dailyTotals` in extension storage (IST-keyed)
 - Dynamic month label alignment
-
-### Visibility Toggles
-- Three checkboxes: Heatmap, Productivity, CF Analytics
-- Toggle state persisted in `localStorage` (survives page reload)
 
 ### Profile Identity
 - `getViewedProfileHandle()` — from URL pathname
@@ -258,13 +269,12 @@ profileInjector.js loaded on codeforces.com/profile/*
   → getViewedProfileHandle() + isOwnProfile()
 
 Step 1 (always): injectCFAnalytics(handle)
-  → inject toggle bar DOM after native .roundbox
-  → inject CF analytics section DOM after toggle bar
+  → inject CF analytics section DOM after native .roundbox
   → setCFLoading()
   → fetchUserStatus(handle) — paginated CF API calls
   → processCFSubmissions(submissions) — dedup + distributions
-  → setCFReady() → updateSolvedStatsCards()
-  → renderCFRatingChart() + renderCFTagChart()
+  → setCFReady()
+  → renderCFRatingChart() + renderCFTopicChart()
 
 Step 2 (own profile only): injectAetherProfileAnalytics()
   → safeRuntimeMessage(GET_TIMER_SNAPSHOT)
@@ -373,7 +383,7 @@ Only `verdict === "OK"` submissions are counted. No filtering on rating, contest
 4. `exactName` only (last resort — no normalization)
 5. Random hash (truly anonymous problem — never deduplicated)
 
-### Participant type classification (for stats cards)
+### Participant type classification (diagnostics)
 - `CONTESTANT` / `OUT_OF_COMPETITION` → contest solves
 - `PRACTICE` → practice solves
 - `VIRTUAL` → virtual solves

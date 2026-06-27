@@ -14,21 +14,15 @@ window.__AETHERCP_PROFILE_INJECTOR__ = true;
 //
 // 1. CF COMPETITIVE ANALYTICS (always injected, for every profile)
 //    - Fetches Codeforces API for the viewed profile's handle
-//    - Renders rating distribution bar chart  (FIRST)
-//    - Renders topic/tag doughnut chart       (SECOND)
-//    - Renders solved stats cards             (BELOW graphs)
-//    - Injected ABOVE productivity analytics
+//    - Renders rating distribution bar chart
+//    - Renders problem topics distribution pie chart
+//    - Injected ABOVE practice analytics
 //
-// 2. PRODUCTIVITY ANALYTICS (own profile only)
+// 2. PRACTICE ANALYTICS (own profile only)
 //    - Requests timer snapshot from background via safeRuntimeMessage()
 //    - Renders heatmap (with year selector)
-//    - Renders coding time, history, platform charts
+//    - Renders coding time and recent history
 //    - Only shown when loggedInHandle === viewedHandle
-//
-// 3. VISIBILITY TOGGLES
-//    - Heatmap toggle
-//    - Productivity charts toggle
-//    - CF Competitive Analytics toggle (from outside)
 //
 // RUNTIME STABILITY
 // --------------------------------------------------
@@ -231,30 +225,6 @@ function setCFReady(analyticsResult) {
   if (chartsEl)  chartsEl.style.display  = "";
   if (badgeEl)   badgeEl.textContent     = `${analyticsResult.solvedCount} solved`;
 
-  // Update solved stats cards (below the graphs)
-  updateSolvedStatsCards(analyticsResult);
-}
-
-/**
- * Update the solved stats cards below the graphs with the full breakdown.
- * @param {Object} result — from processCFSubmissions()
- */
-function updateSolvedStatsCards(result) {
-  const fields = {
-    aetherCFStatTotal:    result.solvedCount,
-    aetherCFStatContest:  result.contestSolves,
-    aetherCFStatPractice: result.practiceSolves,
-    aetherCFStatVirtual:  result.virtualSolves,
-    aetherCFStatGym:      result.gymSolves || 0,
-    aetherCFStatRated:    result.ratedCount
-  };
-
-  for (const [id, value] of Object.entries(fields)) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = String(value !== undefined ? value : "—");
-  }
-
-  logAetherInjector("Solved stats cards updated", fields);
 }
 
 // ──────────────────────────────────────────────────────
@@ -280,10 +250,9 @@ function getNativeProfileCard() {
 // ──────────────────────────────────────────────────────
 // CF COMPETITIVE ANALYTICS INJECTION
 //
-// DOM insertion order (FINAL):
-//   1. toggleBar   → inserted afterend of native .roundbox
-//   2. cfRoot      → inserted afterend of toggleBar
-//   (productivity  → inserted afterend of cfRoot, separately)
+// DOM insertion order:
+//   1. cfRoot       -> inserted afterend of native .roundbox
+//   2. practice     -> inserted afterend of cfRoot, separately
 // ──────────────────────────────────────────────────────
 
 async function injectCFAnalytics(handle) {
@@ -300,25 +269,6 @@ async function injectCFAnalytics(handle) {
   console.log("[AetherCP DOM]", "mountPoint:", mountPoint ? (mountPoint.id || mountPoint.className) : "NOT FOUND");
   console.log("[AetherCP DOM]", "nativeCard anchor:", nativeCard ? "ok" : "missing — will use mountPoint");
 
-  // ── Step A: Inject standalone toggle bar AFTER native profile card ──
-  if (!document.getElementById(AETHER_TOGGLE_BAR_ID)) {
-    const tbWrapper = document.createElement("div");
-    tbWrapper.innerHTML = getAetherToggleBarTemplate().trim();
-    const toggleBarEl = tbWrapper.firstElementChild;
-
-    if (nativeCard) {
-      nativeCard.insertAdjacentElement("afterend", toggleBarEl);
-      console.log("[AetherCP DOM]", "Toggle bar → inserted afterend of native .roundbox");
-    } else {
-      mountPoint.appendChild(toggleBarEl);
-      console.log("[AetherCP DOM]", "Toggle bar → appended to mountPoint (fallback)");
-    }
-
-    // Wire all 3 toggles now — toggle bar is in the DOM
-    initAetherToggles();
-  }
-
-  // ── Step B: Inject CF analytics section AFTER the toggle bar ──
   if (document.getElementById(AETHER_CF_ROOT_ID)) {
     logAetherInjector("CF analytics root already exists, skipping injection");
     return;
@@ -328,16 +278,12 @@ async function injectCFAnalytics(handle) {
   templateWrapper.innerHTML = getCFAnalyticsTemplate(handle).trim();
   const cfRoot = templateWrapper.firstElementChild;
 
-  const toggleBarInDom = document.getElementById(AETHER_TOGGLE_BAR_ID);
-  if (toggleBarInDom) {
-    toggleBarInDom.insertAdjacentElement("afterend", cfRoot);
-    console.log("[AetherCP DOM]", "CF analytics → inserted afterend of toggle bar");
-  } else if (nativeCard) {
+  if (nativeCard) {
     nativeCard.insertAdjacentElement("afterend", cfRoot);
-    console.log("[AetherCP DOM]", "CF analytics → inserted afterend of native card (toggle bar missing)");
+    console.log("[AetherCP DOM]", "CF analytics -> inserted afterend of native card");
   } else {
     mountPoint.appendChild(cfRoot);
-    console.log("[AetherCP DOM]", "CF analytics → appended to mountPoint (fallback)");
+    console.log("[AetherCP DOM]", "CF analytics -> appended to mountPoint (fallback)");
   }
 
   logAetherInjector("CF analytics section injected into DOM");
@@ -353,7 +299,7 @@ async function injectCFAnalytics(handle) {
     logAetherInjector("Analytics processed", {
       solvedCount: analyticsResult.solvedCount,
       ratingBuckets: analyticsResult.ratingDist.length,
-      tagBuckets: analyticsResult.tagDist.length
+      topicBuckets: analyticsResult.topicDist.length
     });
 
     // Solve comparison debugging
@@ -393,7 +339,7 @@ async function injectCFAnalytics(handle) {
 
     logAetherInjector("Rendering CF charts");
     renderCFRatingChart(analyticsResult.ratingDist);
-    renderCFTagChart(analyticsResult.tagDist);
+    renderCFTopicChart(analyticsResult.topicDist);
 
     logAetherInjector("CF analytics fully rendered for", handle);
   } catch (err) {
@@ -461,15 +407,12 @@ function injectAetherProfileAnalytics() {
         logAetherInjector("Existing productivity analytics root found, reusing");
       }
 
-      // toggles were already wired by injectCFAnalytics; only init year nav here
       initAetherYearNav(analytics);
     } else {
       updateAetherProfileRoot(aetherProfileRoot, analytics);
     }
 
     logAetherInjector("Canvas mount check", {
-      platform: Boolean(document.getElementById("aetherPlatformChart")),
-      problems: Boolean(document.getElementById("aetherProblemChart")),
       daily:    Boolean(document.getElementById("aetherDailyChart"))
     });
 
@@ -479,73 +422,7 @@ function injectAetherProfileAnalytics() {
 
 
 // ──────────────────────────────────────────────────────
-// VISIBILITY TOGGLE INITIALIZATION
-// Wires toggle checkboxes to show/hide sections.
-// State is persisted in localStorage.
 // ──────────────────────────────────────────────────────
-
-function initAetherToggles() {
-  const heatmapCheckbox      = document.getElementById("aetherToggleHeatmap");
-  const productivityCheckbox = document.getElementById("aetherToggleProductivity");
-  const cfAnalyticsCheckbox  = document.getElementById("aetherToggleCFAnalytics");
-
-  if (!heatmapCheckbox || !productivityCheckbox) {
-    logAetherInjector("Toggle checkboxes not found, skipping toggle init");
-    return;
-  }
-
-  // Restore persisted state
-  // Sections may not exist yet (e.g. viewing another user's profile) — null-safe
-  const heatmapHidden      = localStorage.getItem("aethercp-toggle-heatmap")      === "hidden";
-  const productivityHidden = localStorage.getItem("aethercp-toggle-productivity") === "hidden";
-  const cfAnalyticsHidden  = localStorage.getItem("aethercp-toggle-cf-analytics") === "hidden";
-
-  if (heatmapHidden) {
-    heatmapCheckbox.checked = false;
-    const s = document.getElementById("aetherHeatmapSection");
-    if (s) s.style.display = "none";
-  }
-  if (productivityHidden) {
-    productivityCheckbox.checked = false;
-    const s = document.getElementById("aetherProductivitySection");
-    if (s) s.style.display = "none";
-  }
-  if (cfAnalyticsHidden && cfAnalyticsCheckbox) {
-    cfAnalyticsCheckbox.checked = false;
-    const s = document.getElementById(AETHER_CF_ROOT_ID);
-    if (s) s.style.display = "none";
-  }
-
-  // Event listeners do fresh lookups — sections may be injected AFTER toggles are wired
-  heatmapCheckbox.addEventListener("change", () => {
-    const visible = heatmapCheckbox.checked;
-    const s = document.getElementById("aetherHeatmapSection");
-    if (s) s.style.display = visible ? "" : "none";
-    localStorage.setItem("aethercp-toggle-heatmap", visible ? "visible" : "hidden");
-    logAetherInjector("Heatmap toggle", { visible });
-  });
-
-  productivityCheckbox.addEventListener("change", () => {
-    const visible = productivityCheckbox.checked;
-    const s = document.getElementById("aetherProductivitySection");
-    if (s) s.style.display = visible ? "" : "none";
-    localStorage.setItem("aethercp-toggle-productivity", visible ? "visible" : "hidden");
-    logAetherInjector("Productivity toggle", { visible });
-  });
-
-  if (cfAnalyticsCheckbox) {
-    cfAnalyticsCheckbox.addEventListener("change", () => {
-      const visible = cfAnalyticsCheckbox.checked;
-      const s = document.getElementById(AETHER_CF_ROOT_ID);
-      if (s) s.style.display = visible ? "" : "none";
-      localStorage.setItem("aethercp-toggle-cf-analytics", visible ? "visible" : "hidden");
-      logAetherInjector("CF Analytics toggle", { visible });
-    });
-  }
-
-  logAetherInjector("Toggles initialized");
-}
-
 
 // ──────────────────────────────────────────────────────
 // YEAR NAVIGATION

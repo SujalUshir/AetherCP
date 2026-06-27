@@ -1,6 +1,6 @@
 # Codeforces Competitive Analytics
 
-AetherCP injects a competitive analytics panel into every Codeforces profile page it visits. This panel is independent of the productivity analytics — it runs on any profile, not just the logged-in user's own.
+AetherCP injects a competitive analytics panel into every Codeforces profile page it visits. This panel is independent of practice analytics - it runs on any profile, not just the logged-in user's own.
 
 ---
 
@@ -8,15 +8,15 @@ AetherCP injects a competitive analytics panel into every Codeforces profile pag
 
 AetherCP dynamically injects into the Codeforces profile DOM in this order:
 
-1. **Toggle bar** — inserted `afterend` of the native `.roundbox` (profile card)
-2. **CF Competitive Analytics section** — inserted `afterend` of the toggle bar
-3. **Productivity Analytics section** (own profile only) — inserted `afterend` of the CF section
+1. **Native Codeforces profile** (unchanged)
+2. **CF Competitive Analytics section** — inserted `afterend` of the native `.roundbox` (profile card)
+3. **Practice Analytics section** (own profile only) — inserted `afterend` of the CF section
 
 Layout within the CF analytics section (top to bottom):
 
-1. Rating Distribution bar chart (full width)
-2. Topic / Tag Distribution doughnut chart
-3. Solved Stats Cards (Total, Contest, Practice, Virtual, Gym, Rated)
+1. Problem Rating Distribution bar chart
+2. Problem Topics Distribution pie chart
+3. Solved count badge
 
 ---
 
@@ -66,18 +66,12 @@ Each accepted submission is deduplicated to one unique problem using this key pr
 
 ---
 
-## 4. Stats Cards
+## 4. Competitive Charts
 
-After chart rendering, the solved stats cards are updated with:
+After API processing, AetherCP renders:
 
-| Card | Value |
-|---|---|
-| Total | Unique deduplicated solved count |
-| Contest | CONTESTANT + OUT_OF_COMPETITION solves (before dedup) |
-| Practice | PRACTICE solves (before dedup) |
-| Virtual | VIRTUAL solves (before dedup) |
-| Gym | Solves where contestId >= 100000 (before dedup) |
-| Rated | Unique solved problems that have a `rating` field |
+- Problem Rating Distribution: unique accepted Codeforces problems grouped by official problem rating. Problems without a rating still count toward the solved badge, but they are excluded from this chart.
+- Problem Topics Distribution: unique accepted Codeforces problems grouped by public Codeforces problem tags.
 
 ---
 

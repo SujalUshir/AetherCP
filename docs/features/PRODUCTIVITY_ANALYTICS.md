@@ -1,6 +1,6 @@
-# Productivity Analytics
+# Practice Analytics
 
-The AetherCP Productivity Analytics suite shows the logged-in user's own coding session history, daily stats, and activity heatmap directly on their Codeforces profile page.
+The AetherCP Practice Analytics suite shows the logged-in user's own coding session history, daily stats, and activity heatmap directly on their Codeforces profile page.
 
 This system is **only visible on the user's own profile** (`loggedInHandle === viewedHandle`). Visiting another user's profile shows no productivity data.
 
@@ -69,31 +69,28 @@ Displayed at the top of the productivity section:
 | Today's Time | `dailyTotals[today].totalSeconds` + live overlap if active |
 | Current Streak | Consecutive IST days with any coding time |
 | Most Worked Problem | Problem with highest `totalSeconds` (all time) |
-| Current Platform | Platform with highest total coding time |
 | Status | `Tracking` / `Idle` / `Stopped` |
 
 ---
 
 ## 5. Charts
 
-Three Chart.js charts are rendered in the productivity section:
+One Chart.js chart is rendered in the productivity section:
 
 | Chart | Type | Data |
 |---|---|---|
-| Platform Distribution | Doughnut | Seconds per platform (CF vs LC) |
-| Most Worked Problems | Bar (horizontal) | Top 6 problems by total seconds |
 | Last 7 Days | Bar | `dailyTotals` for past 7 IST days |
 
-Live session seconds are blended into all charts in real-time (refreshed every 10 seconds).
+Live session seconds are blended into the chart in real-time (refreshed every 10 seconds).
 
 ---
 
 ## 6. Recent Problem History
 
-A table below the charts showing the most recently visited problems:
+A table below the productivity section showing the last 5 tracked problems:
 
 - Sorted by `lastSeenAt` descending
-- Columns: Platform, Problem Name, Total Time
+- Columns: Problem Name, Rating, Time Spent, Date Solved
 - Reflects all problems ever tracked (not just today)
 
 ---
@@ -105,20 +102,6 @@ On the user's own profile, the productivity analytics section refreshes every **
 1. Sends `GET_TIMER_SNAPSHOT` to background via `safeRuntimeMessage()`
 2. Extracts analytics from the snapshot
 3. Updates all stat card values in-place
-4. Re-renders all three Chart.js charts
+4. Re-renders the daily Chart.js chart
 
 If the extension context is invalidated (e.g. after a reload), `safeRuntimeMessage()` catches the error and clears the interval immediately to stop the zombie loop.
-
----
-
-## 8. Visibility Toggles
-
-Three checkbox toggles control section visibility in the profile page header:
-
-| Toggle | Controls | Persisted in |
-|---|---|---|
-| Heatmap | `#aetherHeatmapSection` | `localStorage["aethercp-toggle-heatmap"]` |
-| Productivity | `#aetherProductivitySection` | `localStorage["aethercp-toggle-productivity"]` |
-| CF Analytics | CF analytics root element | `localStorage["aethercp-toggle-cf-analytics"]` |
-
-Toggle state survives page reloads. Sections are null-safe — toggles wire up even if sections haven't injected yet.

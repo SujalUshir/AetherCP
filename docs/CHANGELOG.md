@@ -2,6 +2,15 @@
 
 All notable changes to AetherCP should be recorded here.
 
+## [Unreleased]
+
+### Changed
+
+- Refined Codeforces profile injection order to show the native profile, competitive analytics, heatmap, practice analytics, and recent history in that order.
+- Polished the Codeforces rating and topics distribution charts with consistent cards, cleaner spacing, improved tooltips, and Codeforces-inspired colors.
+- Simplified profile practice UI to remove platform/problem pie and doughnut charts, platform counters, solved stat cards, and visibility toggles while retaining the Codeforces topics pie chart.
+- Reduced Recent Problem History on the Codeforces profile to the last 5 tracked rows with problem name, rating, time spent, and date solved columns.
+
 ## [1.1.0] - 2026-06-10
 
 ### Added
