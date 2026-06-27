@@ -36,6 +36,15 @@
     <div id="recentProblemsList" class="problemList"></div>
   </section>
 
+  <section class="popupSection" id="cphSection" aria-labelledby="cphSectionTitle">
+    <h2 id="cphSectionTitle">VS Code</h2>
+    <div class="statRow">
+      <span>CPH Receiver</span>
+      <strong id="cphStatusText" class="cphStatus cphStatusChecking">Checking...</strong>
+    </div>
+    <button id="cphSendBtn" class="cphButton" disabled>Open in VS Code</button>
+  </section>
+
   <script src="../shared/constants.js"></script>
   <script src="../utils/time.js"></script>
   <script src="popup.js"></script>

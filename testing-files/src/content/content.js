@@ -1,4 +1,4 @@
-// ============================================================
+  // ============================================================
 // content.js
 // AetherCP – Content Script
 //
@@ -32,6 +32,7 @@
 // ============================================================
 
 let lastProblemKey       = "";
+let lastProblemRating    = null;
 let idleTimerId          = null;
 let lastActivityAt       = Date.now();
 let isIdle               = false;
@@ -134,6 +135,56 @@ function isCodeforcesProblemPage() {
 }
 
 /**
+ * Extracts contestId and index from the URL path.
+ */
+function getCodeforcesProblemParams() {
+  const path = window.location.pathname;
+  let match = path.match(/^\/problemset\/problem\/(\d+)\/([A-Za-z0-9]+)/);
+  if (match) {
+    return {
+      contestId: parseInt(match[1], 10),
+      index: match[2].toUpperCase()
+    };
+  }
+  match = path.match(/^\/contest\/(\d+)\/problem\/([A-Za-z0-9]+)/);
+  if (match) {
+    return {
+      contestId: parseInt(match[1], 10),
+      index: match[2].toUpperCase()
+    };
+  }
+  match = path.match(/^\/gym\/(\d+)\/problem\/([A-Za-z0-9]+)/);
+  if (match) {
+    return {
+      contestId: parseInt(match[1], 10),
+      index: match[2].toUpperCase()
+    };
+  }
+  return null;
+}
+
+/**
+ * Attempts to extract the Codeforces difficulty rating from the page DOM.
+ */
+function getCodeforcesRatingFromDOM() {
+  try {
+    const ratingElement = Array.from(document.querySelectorAll(".tag-box"))
+      .find(el => el.title && el.title.includes("Difficulty"));
+    if (ratingElement) {
+      const text = ratingElement.innerText.trim();
+      const ratingVal = parseInt(text.replace("*", "").trim(), 10);
+      if (!isNaN(ratingVal)) {
+        return ratingVal;
+      }
+    }
+  } catch (err) {
+    console.error("[AetherCP CONTENT] Failed to parse rating from DOM", err);
+  }
+  return null;
+}
+
+
+/**
  * Returns true if the current URL is a LeetCode problem page.
  *
  * Supported patterns:
@@ -190,13 +241,216 @@ function getProblemName(platform) {
   return "";
 }
 
+// ──────────────────────────────────────────────
+// Sample test case extraction — Codeforces
+//
+// Codeforces problem pages have a fixed structure:
+//   .sample-test
+//     .input  pre  — one per test case
+//     .output pre  — one per test case
+//
+// The first line of a <pre> is often a whitespace/markup
+// artifact; we normalise trailing newlines.
+// ──────────────────────────────────────────────
+
+function decodeHtml(html) {
+  return html.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+}
+
+function correctData(data, normalizeWhitespace) {
+  if (!data) return "";
+  data = data.replace('<div class="open_grepper_editor" title="Edit & Save To Grepper"></div>', '');
+
+  if (normalizeWhitespace) {
+    data = data
+      .replace(/<br>/g, '\n')
+      .replace(/&nbsp;/g, '')
+      .split('\n')
+      .map(line => line.trimEnd())
+      .join('\n')
+      .trimEnd();
+  }
+
+  return data.endsWith('\n') || data.length === 0 ? data : data + '\n';
+}
+
+function parseMainTestBlock(block) {
+  const lines = Array.from(block.querySelectorAll('.test-example-line'));
+
+  if (lines.length === 0) {
+    return decodeHtml(block.innerHTML);
+  }
+
+  return lines.map(el => (el.querySelector('br') === null ? decodeHtml(el.innerHTML) : '')).join('\n');
+}
+
+function getCodeforcesTests() {
+  try {
+    const sampleDiv = document.querySelector(".sample-test");
+    if (!sampleDiv) {
+      return [];
+    }
+
+    const inputPres  = sampleDiv.querySelectorAll(".input pre");
+    const outputPres = sampleDiv.querySelectorAll(".output pre");
+
+    const tests = [];
+    const count  = Math.min(inputPres.length, outputPres.length);
+
+    for (let index = 0; index < count; index++) {
+      const rawInput = parseMainTestBlock(inputPres[index]);
+      const rawOutput = parseMainTestBlock(outputPres[index]);
+
+      const input = correctData(rawInput, true);
+      const output = correctData(rawOutput, true);
+
+      tests.push({ input, output });
+    }
+
+    logContent("Codeforces sample extraction (CC compatible)", { count: tests.length });
+    return tests;
+  } catch (err) {
+    logContent("Codeforces sample extraction failed", { error: err.message });
+    return [];
+  }
+}
+
+// ──────────────────────────────────────────────
+// Time / memory limit extraction — Codeforces
+//
+// .time-limit   innerText: "time limit per test\n2 seconds"
+// .memory-limit innerText: "memory limit per test\n256 megabytes"
+// ──────────────────────────────────────────────
+
+function getCodeforcesTimeLimit() {
+  try {
+    const el = document.querySelector(".time-limit");
+    if (!el) return 2000;
+
+    const text = el.innerText || el.textContent || "";
+    const match = text.match(/(\d+(?:\.\d+)?)\s*second/i);
+    if (!match) return 2000;
+
+    return Math.round(parseFloat(match[1]) * 1000); // convert to ms
+  } catch (_) {
+    return 2000;
+  }
+}
+
+function getCodeforcesMemoryLimit() {
+  try {
+    const el = document.querySelector(".memory-limit");
+    if (!el) return 256;
+
+    const text = el.innerText || el.textContent || "";
+    const match = text.match(/(\d+)\s*megabyte/i);
+    if (!match) return 256;
+
+    return parseInt(match[1], 10);
+  } catch (_) {
+    return 256;
+  }
+}
+
+// ──────────────────────────────────────────────
+// Sample test case extraction — LeetCode
+//
+// LeetCode embeds examples in the problem statement as plain
+// text inside the description container. The structure looks like:
+//
+//   Example 1:
+//   Input: nums = [2,7,11,15], target = 9
+//   Output: [0,1]
+//
+// We parse all "Input: ... Output: ..." blocks from the
+// description text. This is a best-effort extraction — LeetCode's
+// DOM varies across problem types (interactive, design, etc.).
+// Falls back to [] if extraction is unreliable.
+// ──────────────────────────────────────────────
+
+function getLeetCodeTests() {
+  try {
+    // Try to find the problem description container
+    const descContainer =
+      document.querySelector('[data-track-load="description_content"]') ||
+      document.querySelector(".question-content__JfgR")                 ||
+      document.querySelector('[class*="description"]');
+
+    if (!descContainer) return [];
+
+    const text = descContainer.innerText || descContainer.textContent || "";
+    const tests = [];
+
+    // Match blocks: Input: ... Output: ... (up to next Example or end)
+    // This regex is intentionally greedy between Input and Output
+    const exampleRegex = /Input:\s*([\s\S]*?)\n\s*Output:\s*([\s\S]*?)(?=\n\s*(?:Example|\*\*Example|Input:|Constraints:|$))/gi;
+
+    let match;
+    while ((match = exampleRegex.exec(text)) !== null) {
+      const input  = match[1].trim() + "\n";
+      const output = match[2].trim() + "\n";
+
+      if (input.length > 1 && output.length > 1) {
+        tests.push({ input, output });
+      }
+    }
+
+    logContent("LeetCode sample extraction", { count: tests.length });
+    return tests;
+  } catch (err) {
+    logContent("LeetCode sample extraction failed", { error: err.message });
+    return [];
+  }
+}
+
+// ──────────────────────────────────────────────
+// Unified problem info — now includes CPH fields
+// ──────────────────────────────────────────────
+
 function getProblemInfo() {
   const platform    = getPlatform();
   const problemName = getProblemName(platform);
 
   if (!platform || !problemName) return null;
 
-  return { problemName, platform, url: window.location.href };
+  // ── CPH fields — extracted for Competitive Companion compatibility ──
+  let tests       = [];
+  let timeLimit   = 0;
+  let memoryLimit = 256;
+  let rating      = null;
+  let contestId   = null;
+  let index       = null;
+
+  if (platform === PLATFORMS.CODEFORCES) {
+    tests       = getCodeforcesTests();
+    timeLimit   = getCodeforcesTimeLimit();
+    memoryLimit = getCodeforcesMemoryLimit();
+
+    const params = getCodeforcesProblemParams();
+    if (params) {
+      contestId = params.contestId;
+      index     = params.index;
+    }
+    rating = getCodeforcesRatingFromDOM();
+  } else if (platform === PLATFORMS.LEETCODE) {
+    tests = getLeetCodeTests();
+    // LeetCode does not reliably expose time/memory limits in DOM
+    timeLimit   = 0;
+    memoryLimit = 256;
+  }
+
+  return {
+    problemName,
+    platform,
+    url: window.location.href,
+    rating,
+    contestId,
+    index,
+    // CPH-specific fields (used by cphPayloadBuilder, ignored by timer)
+    tests,
+    timeLimit,
+    memoryLimit
+  };
 }
 
 function getProblemKey(problem) {
@@ -212,10 +466,13 @@ function sendProblemInfo() {
   if (!problem) return;
 
   const problemKey = getProblemKey(problem);
-  if (problemKey === lastProblemKey) return;
+  const ratingChanged = (problem.rating !== lastProblemRating);
+
+  if (problemKey === lastProblemKey && !ratingChanged) return;
 
   lastProblemKey = problemKey;
-  logTracking("Problem detected", { problemKey, platform: problem.platform });
+  lastProblemRating = problem.rating;
+  logTracking("Problem detected", { problemKey, platform: problem.platform, rating: problem.rating });
 
   safeSendMessage(
     { type: MESSAGE_TYPES.PROBLEM_DETECTED, problem },
@@ -225,6 +482,60 @@ function sendProblemInfo() {
     }
   );
 }
+
+// ──────────────────────────────────────────────
+// CPH — on-demand test extraction (GET_CPH_TESTS)
+//
+// Background calls this when the user triggers SEND_TO_CPH.
+// Extracting at send time (not at PROBLEM_DETECTED time) guarantees:
+//   1. The .sample-test DOM is fully rendered (Codeforces renders async)
+//   2. Tests reflect the current page state
+//   3. The deduplication guard in sendProblemInfo() can't suppress re-extraction
+// ──────────────────────────────────────────────
+
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (message.type !== MESSAGE_TYPES.GET_CPH_TESTS) return false;
+
+  const platform = getPlatform();
+
+  let tests       = [];
+  let timeLimit   = 0;
+  let memoryLimit = 256;
+
+  try {
+    if (platform === PLATFORMS.CODEFORCES) {
+      tests       = getCodeforcesTests();
+      timeLimit   = getCodeforcesTimeLimit();
+      memoryLimit = getCodeforcesMemoryLimit();
+    } else if (platform === PLATFORMS.LEETCODE) {
+      tests = getLeetCodeTests();
+    }
+  } catch (err) {
+    logContent("[AetherCP CPH] Sample extraction failed", { error: err.message });
+  }
+
+  // ── Diagnostic log ───────────────────────────────────────────────────
+  console.log("[AetherCP CPH] Sample extraction result", {
+    platform,
+    "Samples found": tests.length,
+    timeLimit,
+    memoryLimit
+  });
+
+  if (tests.length === 0) {
+    const sampleDiv = document.querySelector(".sample-test");
+    logContent("[AetherCP CPH] Sample extraction: no tests found", {
+      sampleDivFound: !!sampleDiv,
+      inputPres:  sampleDiv ? sampleDiv.querySelectorAll(".input pre").length  : 0,
+      outputPres: sampleDiv ? sampleDiv.querySelectorAll(".output pre").length : 0
+    });
+  }
+
+  sendResponse({ tests, timeLimit, memoryLimit });
+  return true;
+});
+
+
 
 function watchForProblemTitle() {
   sendProblemInfo();

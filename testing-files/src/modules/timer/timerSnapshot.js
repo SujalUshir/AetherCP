@@ -34,45 +34,14 @@ function getRecentProblemRows(state, activeSession) {
         problemName: problem.problemName,
         platform: problem.platform,
         platformShortName: getPlatformShortName(problem.platform),
+        rating: problem.rating || problem.problemRating || null,
         totalSeconds: problem.totalSeconds + liveSeconds,
         lastSeenAt: problem.lastSeenAt || problem.firstSeenAt || 0,
+        solvedAt: problem.solvedAt || problem.completedAt || null,
         sessionCount: (problem.sessions || []).length
       };
     })
     .sort((first, second) => second.lastSeenAt - first.lastSeenAt);
-}
-
-function getPlatformDistribution(state, activeSession) {
-  const totals = {};
-  const now = Date.now();
-
-  Object.values(state.problems || {}).forEach((problem) => {
-    const liveSeconds =
-      activeSession?.problemKey === problem.problemKey
-        ? Math.floor((now - activeSession.startedAt) / 1000)
-        : 0;
-
-    totals[problem.platform] =
-      (totals[problem.platform] || 0) + problem.totalSeconds + liveSeconds;
-  });
-
-  return Object.entries(totals)
-    .filter(([, seconds]) => seconds > 0)
-    .map(([label, seconds]) => ({
-      label,
-      seconds
-    }));
-}
-
-function getProblemTimeDistribution(state, activeSession, limit = 6) {
-  return getRecentProblemRows(state, activeSession)
-    .filter((problem) => problem.totalSeconds > 0)
-    .sort((first, second) => second.totalSeconds - first.totalSeconds)
-    .slice(0, limit)
-    .map((problem) => ({
-      label: `${problem.platformShortName} ${problem.problemName}`,
-      seconds: problem.totalSeconds
-    }));
 }
 
 function getLastSevenDays(state, activeSession) {
@@ -163,8 +132,6 @@ function buildTimerSnapshot(state) {
       status: state.idleState ? "Idle" : activeSession ? "Tracking" : "Stopped",
       allRecentProblems,
       charts: {
-        platformDistribution: getPlatformDistribution(state, activeSession),
-        problemTimeDistribution: getProblemTimeDistribution(state, activeSession),
         lastSevenDays: getLastSevenDays(state, activeSession)
       }
     },

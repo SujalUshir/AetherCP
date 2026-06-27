@@ -1,43 +1,17 @@
 /* ============================================================
    profileAnalytics.css
-   AetherCP – Styles for injected profile analytics sections
-
-   Contains:
-     1. CF COMPETITIVE ANALYTICS styles (.aethercp-cf-*)
-     2. PRODUCTIVITY ANALYTICS styles (.aethercp-* existing)
-     3. HEATMAP styles — GitHub/Codeforces contribution style
-     4. TOGGLE styles
-     5. YEAR NAVIGATION styles
+   AetherCP profile UI for Codeforces-first analytics
    ============================================================ */
-
-/* ──────────────────────────────────────────────
-   SHARED BASE
-   ────────────────────────────────────────────── */
 
 .aethercp-profile-root{
   margin-top:1em;
-  padding:1.25em;
+  padding:1.1em;
+  color:#222;
+  font-family:Verdana, Arial, sans-serif;
 }
 
-/* ── Standalone toggle bar (between native profile and CF analytics) ── */
-.aethercp-standalone-toggle-bar{
-  display:flex;
-  align-items:center;
-  gap:0.75em;
-  margin-top:0.85em;
-  padding:0.55em 1em;
-  background:#f8f9fa;
-  border:1px solid #e0e0e0;
-  border-radius:6px;
-}
-
-.aethercp-toggle-bar-label{
-  font-size:0.78em;
-  font-weight:bold;
-  color:#888;
-  text-transform:uppercase;
-  letter-spacing:0.03em;
-  white-space:nowrap;
+.aethercp-profile-root + .aethercp-profile-root{
+  margin-top:1.4em;
 }
 
 .aethercp-header{
@@ -45,25 +19,21 @@
   justify-content:space-between;
   gap:1em;
   align-items:flex-start;
-  margin-bottom:1em;
+  margin-bottom:0.9em;
 }
 
-.aethercp-header h3{
+.aethercp-header h3,
+.aethercp-heatmap-header h3{
   margin:0;
-  font-size:1.25em;
-}
-
-.aethercp-header-right{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:0.5em;
+  color:#222;
+  font-size:1.15em;
+  line-height:1.3;
 }
 
 .aethercp-eyebrow{
   margin:0 0 0.25em;
   color:#777;
-  font-size:0.8em;
+  font-size:0.76em;
   font-weight:bold;
   letter-spacing:0;
   text-transform:uppercase;
@@ -72,16 +42,17 @@
 .aethercp-status{
   border:1px solid #d4d4d4;
   border-radius:999px;
-  padding:0.35em 0.7em;
+  padding:0.32em 0.7em;
   background:#f8f8f8;
   color:#444;
-  font-size:0.85em;
+  font-size:0.82em;
   font-weight:bold;
   white-space:nowrap;
 }
 
+.aethercp-panel,
 .aethercp-stat-card,
-.aethercp-panel{
+.aethercp-rating-panel{
   border:1px solid #dedede;
   border-radius:6px;
   background:#fff;
@@ -91,20 +62,16 @@
   padding:1em;
 }
 
-.aethercp-panel h4{
+.aethercp-panel h4,
+.aethercp-rating-panel h4,
+.aethercp-history-panel h4{
   margin:0 0 0.75em;
+  color:#222;
   font-size:1em;
 }
 
 .aethercp-panel-wide{
   margin-top:0.85em;
-}
-
-.aethercp-chart-layout{
-  display:grid;
-  grid-template-columns:minmax(0, 1fr) 190px;
-  gap:0.8em;
-  align-items:center;
 }
 
 .aethercp-chart-box{
@@ -120,78 +87,40 @@
 }
 
 .aethercp-chart-box-wide{
-  height:250px;
+  height:240px;
 }
 
-.aethercp-chart-legend{
-  max-height:250px;
-  margin:0;
-  padding:0;
-  overflow:auto;
-  list-style:none;
-  font-size:0.85em;
+/* Codeforces competitive analytics */
+
+.aethercp-cf-root{
+  padding:1.05em;
 }
 
-.aethercp-chart-legend::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+.aethercp-cf-header{
+  margin-bottom:0.75em;
 }
-
-.aethercp-chart-legend::-webkit-scrollbar-thumb {
-  background: #cccccc;
-  border-radius: 4px;
-}
-
-.aethercp-chart-legend li{
-  display:flex;
-  gap:0.45em;
-  align-items:center;
-  margin-bottom:0.5em;
-  line-height:1.35;
-}
-
-.aethercp-legend-swatch{
-  width:12px;
-  height:12px;
-  border:1px solid #999;
-  flex:0 0 auto;
-}
-
-.aethercp-legend-text {
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 140px;
-  vertical-align: middle;
-  transition: max-width 0.2s ease;
-}
-
-.aethercp-legend-text:hover {
-  white-space: normal;
-  overflow: visible;
-  word-break: break-all;
-  max-width: none;
-}
-
-/* ──────────────────────────────────────────────
-   CF COMPETITIVE ANALYTICS
-   ────────────────────────────────────────────── */
 
 .aethercp-cf-handle{
+  display:inline-flex;
+  align-items:center;
+  border:1px solid #c8d7e8;
+  border-radius:999px;
+  padding:0.25em 0.65em;
+  background:#f4f8fd;
   color:#0062ad;
+  font-size:0.82em;
   font-weight:bold;
+  white-space:nowrap;
 }
 
 .aethercp-cf-solved-badge{
   background:#eef6ff;
-  border-color:#b3d4f5;
+  border-color:#b7d4f1;
   color:#0062ad;
 }
 
-/* Loading / error states */
 .aethercp-cf-loading{
-  padding:1.5em;
+  padding:1.4em;
   text-align:center;
   color:#777;
   font-size:0.95em;
@@ -206,77 +135,146 @@
   font-size:0.9em;
 }
 
-/* Charts wrap — column flow: graphs then stats */
 .aethercp-cf-charts-wrap{
+  display:block;
+}
+
+.aethercp-rating-panel{
+  padding:1.2em 1.35em 1.1em;
+  box-shadow:0 1px 0 rgba(0,0,0,0.03);
+}
+
+.aethercp-cf-charts-wrap .aethercp-rating-panel + .aethercp-rating-panel{
+  margin-top:1.5em;
+}
+
+.aethercp-rating-title-row{
   display:flex;
-  flex-direction:column;
-  gap:0.85em;
+  justify-content:space-between;
+  gap:1em;
+  align-items:flex-start;
+  margin-bottom:0.9em;
 }
 
-/* Rating bar chart — full width */
-#aethercp-cf-analytics .aethercp-panel-wide{
-  margin-top:0;
+.aethercp-rating-title-row h4{
+  margin-bottom:0.25em;
 }
 
-/* Bottom row: tag doughnut */
-.aethercp-cf-bottom-row{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:0.85em;
+.aethercp-rating-title-row p{
+  margin:0;
+  color:#666;
+  font-size:0.84em;
+  line-height:1.45;
 }
 
-.aethercp-cf-tag-panel .aethercp-chart-box{
+.aethercp-rating-chart-box{
+  height:360px;
+}
+
+.aethercp-topic-panel{
+  min-width:0;
+}
+
+.aethercp-topic-layout{
+  display:block;
+  text-align:center;
+}
+
+.aethercp-topic-chart-box{
   height:280px;
+  max-width:360px;
+  margin:0 auto;
 }
 
-/* Solved stats cards row — BELOW graphs */
-.aethercp-cf-stats-row{
+.aethercp-topic-legend{
+  max-width:620px;
+  max-height:220px;
+  margin:1em auto 0;
+  padding:0;
+  overflow:auto;
+  list-style:none;
+  font-size:0.82em;
+  text-align:left;
+}
+
+.aethercp-topic-legend li{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
-  gap:0.65em;
-  margin-top:0.25em;
+  grid-template-columns:12px minmax(0, 1fr) auto;
+  gap:0.45em;
+  align-items:center;
+  padding:0.3em 0;
+  border-bottom:1px solid #f0f0f0;
 }
 
-/* ──────────────────────────────────────────────
-   PRODUCTIVITY ANALYTICS (existing)
-   ────────────────────────────────────────────── */
+.aethercp-topic-legend li:last-child{
+  border-bottom:0;
+}
+
+.aethercp-topic-swatch{
+  width:12px;
+  height:12px;
+  border:1px solid rgba(0,0,0,0.12);
+  border-radius:3px;
+}
+
+.aethercp-topic-label{
+  overflow:hidden;
+  color:#333;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.aethercp-topic-legend strong{
+  color:#555;
+  font-size:0.9em;
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+.aethercp-topic-empty{
+  display:block !important;
+  color:#777;
+  text-align:center;
+}
+
+/* Practice analytics */
+
+.aethercp-productivity-block{
+  margin-top:1em;
+}
 
 .aethercp-overview-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
   gap:0.75em;
-  margin-bottom:1em;
+  margin-bottom:0.9em;
 }
 
 .aethercp-stat-card{
-  padding:0.85em;
+  padding:0.8em;
 }
 
 .aethercp-stat-card span{
   display:block;
-  margin-bottom:0.45em;
+  margin-bottom:0.42em;
   color:#777;
-  font-size:0.85em;
+  font-size:0.82em;
 }
 
 .aethercp-stat-card strong{
   display:block;
   overflow:hidden;
   color:#222;
-  font-size:1.15em;
+  font-size:1.08em;
+  line-height:1.3;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
 
-.aethercp-graph-row{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-  gap:0.85em;
-  margin-bottom:0.85em;
-}
+/* Recent history */
 
 .aethercp-history-panel{
-  margin-top:0.85em;
+  margin-top:0.95em;
 }
 
 .aethercp-table-wrap{
@@ -286,20 +284,33 @@
 .aethercp-history-table{
   width:100%;
   border-collapse:collapse;
+  font-size:0.9em;
 }
 
 .aethercp-history-table th,
 .aethercp-history-table td{
-  border-bottom:1px solid #eee;
-  padding:0.65em 0.5em;
+  border-bottom:1px solid #ececec;
+  padding:0.65em 0.55em;
   text-align:left;
+  vertical-align:middle;
   white-space:nowrap;
+}
+
+.aethercp-history-table th:first-child,
+.aethercp-history-table td:first-child{
+  white-space:normal;
+  min-width:220px;
 }
 
 .aethercp-history-table th{
   color:#777;
-  font-size:0.78em;
+  font-size:0.76em;
+  font-weight:bold;
   text-transform:uppercase;
+}
+
+.aethercp-history-table tbody tr:hover{
+  background:#f7fbff;
 }
 
 .aethercp-empty{
@@ -307,64 +318,19 @@
   text-align:center;
 }
 
-/* ──────────────────────────────────────────────
-   ANALYTICS VISIBILITY TOGGLES
-   ────────────────────────────────────────────── */
-
-.aethercp-toggle-bar{
-  display:flex;
-  gap:0.75em;
-  align-items:center;
-  flex-wrap:wrap;
-}
-
-.aethercp-toggle-label{
-  display:flex;
-  align-items:center;
-  gap:0.3em;
-  font-size:0.8em;
-  color:#555;
-  cursor:pointer;
-  user-select:none;
-  border:1px solid #d4d4d4;
-  border-radius:999px;
-  padding:0.25em 0.6em;
-  background:#f8f8f8;
-  transition:background 0.15s, border-color 0.15s;
-}
-
-.aethercp-toggle-label:hover{
-  background:#eef6ff;
-  border-color:#b3d4f5;
-}
-
-.aethercp-toggle-label input[type="checkbox"]{
-  margin:0;
-  cursor:pointer;
-  accent-color:#0062ad;
-}
-
-/* ──────────────────────────────────────────────
-   ACTIVITY HEATMAP — GitHub / Codeforces Style
-   ────────────────────────────────────────────── */
+/* Activity heatmap */
 
 .aethercp-heatmap-panel{
-  margin-top:0.85em;
+  margin-top:0;
   overflow:hidden;
 }
 
-/* Heatmap header: title + year controls side by side */
 .aethercp-heatmap-header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  margin-bottom:0.75em;
+  align-items:flex-start;
+  margin-bottom:0.85em;
   gap:1em;
-}
-
-.aethercp-heatmap-header h4{
-  margin:0;
-  font-size:1em;
 }
 
 .aethercp-heatmap-controls{
@@ -373,17 +339,16 @@
   gap:0.35em;
 }
 
-/* Year navigation buttons */
 .aethercp-year-nav{
-  background:none;
+  background:#fff;
   border:1px solid #d4d4d4;
   border-radius:4px;
-  padding:0.2em 0.5em;
+  padding:0.22em 0.5em;
   cursor:pointer;
   font-size:0.9em;
   color:#444;
-  line-height:1.4;
-  transition:background 0.12s, border-color 0.12s;
+  line-height:1.35;
+  transition:background 0.12s, border-color 0.12s, color 0.12s;
 }
 
 .aethercp-year-nav:hover:not(:disabled){
@@ -397,7 +362,6 @@
   cursor:default;
 }
 
-/* Year selector dropdown */
 .aethercp-year-select{
   border:1px solid #d4d4d4;
   border-radius:4px;
@@ -419,81 +383,65 @@
   gap:0.4em;
   align-items:flex-start;
   overflow-x:auto;
+  padding-bottom:0.15em;
 }
 
-/* Months container — matches grid columns dynamically via inline style */
 .aethercp-heatmap-months{
   display:grid;
-  /* grid-template-columns set dynamically in JS */
   gap:3px;
   width:100%;
-  font-size:9px;
-  color:#777;
   height:14px;
+  color:#777;
+  font-size:9px;
   line-height:14px;
 }
 
 .aethercp-heatmap-months-label{
   grid-row:1;
-  text-align:left;
-  font-weight:600;
-  font-size:9px;
   color:#555;
+  font-size:9px;
+  font-weight:600;
+  text-align:left;
   white-space:nowrap;
 }
 
-/* Heatmap main grid — columns set dynamically in JS */
 .aethercp-heatmap-grid{
   display:grid;
-  /* grid-template-columns and grid-template-rows set dynamically in JS */
   grid-auto-flow:column;
   gap:3px;
 }
 
-/* Weekday label styles */
 .aethercp-heatmap-label{
-  font-size:9px;
-  color:#777;
   align-self:center;
-  text-align:left;
-  line-height:12px;
-  font-weight:600;
   padding-right:4px;
+  color:#777;
+  font-size:9px;
+  font-weight:600;
+  line-height:12px;
+  text-align:left;
   white-space:nowrap;
 }
 
-/* Heatmap day cell — 12px for GitHub-accurate sizing */
 .aethercp-heatmap-cell{
   display:block;
   width:12px;
   height:12px;
   border-radius:2px;
   cursor:pointer;
-  transition:opacity 0.1s;
+  transition:opacity 0.1s, transform 0.1s;
 }
 
 .aethercp-heatmap-cell:hover{
-  opacity:0.75;
+  opacity:0.78;
+  transform:translateY(-1px);
 }
 
-/* Color levels — GitHub blue palette */
-.level-0{
-  background:#ebedf0;
-}
-.level-1{
-  background:#c6dbef;
-}
-.level-2{
-  background:#9ecae1;
-}
-.level-3{
-  background:#4292c6;
-}
-.level-4{
-  background:#084594;
-}
+.level-0{ background:#ebedf0; }
+.level-1{ background:#c6dbef; }
+.level-2{ background:#9ecae1; }
+.level-3{ background:#4292c6; }
+.level-4{ background:#084594; }
 
-/* Future/disabled days */
 .aethercp-heatmap-cell.aethercp-heatmap-future{
   background:#ebedf0;
   opacity:0.35;
@@ -501,14 +449,12 @@
   pointer-events:none;
 }
 
-/* Highlight today's cell with an outline ring */
 .aethercp-heatmap-cell.aethercp-heatmap-today{
   outline:1.5px solid #0062ad;
   outline-offset:1px;
   z-index:2;
 }
 
-/* CSS Tooltips */
 .aethercp-heatmap-cell[data-tooltip]{
   position:relative;
 }
@@ -518,18 +464,18 @@
   position:absolute;
   bottom:150%;
   left:50%;
-  transform:translateX(-50%) scale(0.85);
-  background:rgba(33,37,41,0.95);
-  color:#fff;
+  z-index:100;
   padding:5px 8px;
   border-radius:4px;
+  background:rgba(33,37,41,0.95);
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  color:#fff;
   font-size:10px;
-  white-space:nowrap;
-  z-index:100;
   pointer-events:none;
+  white-space:nowrap;
   opacity:0;
   visibility:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  transform:translateX(-50%) scale(0.9);
   transition:opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
 }
 
@@ -538,14 +484,14 @@
   position:absolute;
   bottom:125%;
   left:50%;
-  transform:translateX(-50%) scale(0.85);
+  z-index:100;
   border-width:4px;
   border-style:solid;
   border-color:rgba(33,37,41,0.95) transparent transparent transparent;
-  z-index:100;
   pointer-events:none;
   opacity:0;
   visibility:hidden;
+  transform:translateX(-50%) scale(0.9);
   transition:opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
 }
 
@@ -556,14 +502,13 @@
   transform:translateX(-50%) scale(1);
 }
 
-/* Legend row */
 .aethercp-heatmap-legend{
   display:flex;
   align-items:center;
   gap:4px;
-  font-size:0.78em;
-  color:#777;
   margin-top:0.4em;
+  color:#777;
+  font-size:0.78em;
 }
 
 .aethercp-heatmap-legend-label{
@@ -574,39 +519,37 @@
   display:inline-block;
   width:12px;
   height:12px;
-  border-radius:2px;
   border:1px solid rgba(0,0,0,0.08);
+  border-radius:2px;
 }
 
-/* ──────────────────────────────────────────────
-   RESPONSIVE
-   ────────────────────────────────────────────── */
-
 @media (max-width:800px){
-  .aethercp-overview-grid,
-  .aethercp-graph-row,
-  .aethercp-chart-layout{
-    grid-template-columns:1fr;
-  }
-
-  .aethercp-header{
-    flex-direction:column;
-  }
-
-  .aethercp-header-right{
-    align-items:flex-start;
-  }
-
-  .aethercp-cf-bottom-row{
-    grid-template-columns:1fr;
-  }
-
-  .aethercp-cf-stats-row{
-    grid-template-columns:repeat(2, 1fr);
-  }
-
-  .aethercp-heatmap-header{
+  .aethercp-header,
+  .aethercp-heatmap-header,
+  .aethercp-rating-title-row{
     flex-direction:column;
     align-items:flex-start;
+  }
+
+  .aethercp-overview-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  .aethercp-rating-chart-box{
+    height:330px;
+  }
+
+  .aethercp-topic-chart-box{
+    height:240px;
+  }
+}
+
+@media (max-width:520px){
+  .aethercp-profile-root{
+    padding:0.9em;
+  }
+
+  .aethercp-overview-grid{
+    grid-template-columns:1fr;
   }
 }

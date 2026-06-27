@@ -6,7 +6,7 @@
 // Responsibilities:
 //   - Deduplicate solved submissions by the most stable available key
 //   - Build rating distribution: { rating -> count }
-//   - Build tag distribution: { tag -> count }
+//   - Build topic distribution from Codeforces problem tags
 //   - Return clean, sorted arrays ready for chart rendering
 //   - Include full solve-type breakdown: contest, practice, gym, virtual
 //
@@ -284,24 +284,24 @@ function buildRatingDistribution(solvedMap) {
   return distribution;
 }
 
-// ──────────────────────────────────────────────────────
-// TAG DISTRIBUTION
-// ──────────────────────────────────────────────────────
-
-function buildTagDistribution(solvedMap) {
+function buildTopicDistribution(solvedMap) {
   const tagCounts = new Map();
 
   for (const [, problem] of solvedMap) {
-    const tags = problem.tags || [];
+    const tags = Array.isArray(problem.tags) ? problem.tags : [];
+
     for (const tag of tags) {
       if (!tag) continue;
       tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
     }
   }
 
-  return Array.from(tagCounts.entries())
+  const distribution = Array.from(tagCounts.entries())
     .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => b.count - a.count);
+    .sort((first, second) => second.count - first.count || first.tag.localeCompare(second.tag));
+
+  logCFAnalytics("Topic distribution buckets:", distribution.length);
+  return distribution;
 }
 
 // ──────────────────────────────────────────────────────
@@ -320,18 +320,18 @@ function processCFSubmissions(submissions) {
   } = buildSolvedSet(submissions);
 
   const ratingDist = buildRatingDistribution(solvedMap);
-  const tagDist    = buildTagDistribution(solvedMap);
+  const topicDist = buildTopicDistribution(solvedMap);
 
   logCFAnalytics("Final result", {
     solvedCount:   solvedMap.size,
     ratingBuckets: ratingDist.length,
-    tagBuckets:    tagDist.length
+    topicBuckets: topicDist.length
   });
 
   return {
     solvedCount: solvedMap.size,
     ratingDist,
-    tagDist,
+    topicDist,
     contestSolves,
     practiceSolves,
     gymSolves,
