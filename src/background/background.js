@@ -55,10 +55,21 @@ async function saveState(state) {
 function isProblemUrl(url) {
   if (!url) return false;
 
-  return (
+  // Codeforces — all three official problem URL formats:
+  //   /problemset/problem/<contestId>/<index>
+  //   /contest/<contestId>/problem/<index>
+  //   /gym/<gymId>/problem/<index>
+  if (
     url.includes("codeforces.com/problemset/problem") ||
-    url.includes("leetcode.com/problems/")
-  );
+    url.includes("codeforces.com/contest/")           ||
+    url.includes("codeforces.com/gym/")
+  ) {
+    // Confirm it is a problem sub-page, not just the contest/gym lobby
+    return /codeforces\.com\/(problemset\/problem|contest\/\d+\/problem|gym\/\d+\/problem)\//.test(url);
+  }
+
+  // LeetCode
+  return url.includes("leetcode.com/problems/");
 }
 
 async function resolveCodeforcesRating(contestId, index) {
