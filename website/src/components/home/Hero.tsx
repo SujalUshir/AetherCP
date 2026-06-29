@@ -68,7 +68,7 @@ export function Hero() {
           className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-center"
         >
           {/* Left Column: Content */}
-          <div className="lg:col-span-7 flex flex-col gap-6 text-left order-2 lg:order-1">
+          <div className="lg:col-span-7 flex flex-col gap-6 text-left order-1 lg:order-1">
             {/* Tagline Badge */}
             <motion.div variants={slideInBottom}>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-primary">
@@ -132,7 +132,7 @@ export function Hero() {
           {/* Right Column: Large Interactive Image */}
           <motion.div
             variants={slideInRight}
-            className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2"
+            className="lg:col-span-5 flex justify-center lg:justify-end order-2 lg:order-2"
           >
             <div className="w-full max-w-[480px] lg:max-w-full">
               <BrowserFrame url="codeforces.com/contest/2239/problem/A" size="sm" className="w-full">
