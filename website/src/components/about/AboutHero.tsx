@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -132,6 +132,24 @@ export function AboutHero() {
                   Contact Me
                 </a>
               </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                asChild
+                className="rounded-full px-5 border-white/20 text-white hover:bg-white/10"
+              >
+                <a
+                  href="https://codeforces.com/profile/blundermon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M4.5 7.5A1.5 1.5 0 0 1 6 6h2a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 8 18H6a1.5 1.5 0 0 1-1.5-1.5v-9zm7-4A1.5 1.5 0 0 1 13 2h2a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 15 18h-2a1.5 1.5 0 0 1-1.5-1.5v-13zm7 6A1.5 1.5 0 0 1 20 8h2a1.5 1.5 0 0 1 1.5 1.5v7A1.5 1.5 0 0 1 22 18h-2a1.5 1.5 0 0 1-1.5-1.5v-7z" />
+                  </svg>
+                  Codeforces
+                </a>
+              </Button>
             </motion.div>
 
             {/* Tech Stack Chips */}
@@ -197,6 +215,19 @@ export function AboutHero() {
               >
                 <Linkedin className="h-4 w-4 btn-icon-social" />
                 Contact Me
+              </a>
+            </Button>
+            <Button size="sm" variant="outline" asChild className="rounded-full px-5">
+              <a
+                href="https://codeforces.com/profile/blundermon"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M4.5 7.5A1.5 1.5 0 0 1 6 6h2a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 8 18H6a1.5 1.5 0 0 1-1.5-1.5v-9zm7-4A1.5 1.5 0 0 1 13 2h2a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 15 18h-2a1.5 1.5 0 0 1-1.5-1.5v-13zm7 6A1.5 1.5 0 0 1 20 8h2a1.5 1.5 0 0 1 1.5 1.5v7A1.5 1.5 0 0 1 22 18h-2a1.5 1.5 0 0 1-1.5-1.5v-7z" />
+                </svg>
+                Codeforces
               </a>
             </Button>
           </div>

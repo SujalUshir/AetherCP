@@ -48,7 +48,7 @@ const CONTACT_CARDS = [
     ),
     icon: Mail,
     buttonText: "Send Email",
-    href: "mailto:support@aethercp.dev",
+    href: "mailto:ushirthbsujal@gmail.com",
     accent: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
   },
 ];
