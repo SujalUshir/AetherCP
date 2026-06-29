@@ -48,3 +48,7 @@ testing-files.zip
 # Temporary files
 *.tmp
 *.temp
+
+# Extension release packaging outputs
+extension-release/
+AetherCP-*.zip

@@ -1,0 +1,252 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Accessibility: Reduced Motion --------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* --- Google Fonts --------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* --- CSS Design Tokens ----------------------------------- */
+@layer base {
+  :root {
+    /* Foundation Colors */
+    --background:         0 0% 24%; /* #3D3D3D (Primary Base) */
+    --foreground:         48 42% 89%; /* #F0EBD8 (Primary Warm Accent) */
+
+    /* Layered Backgrounds */
+    --bg-darker:          0 0% 18%; /* #2E2E2E */
+    --bg-dark:            0 0% 21%; /* #353535 */
+    --bg-light:           0 0% 27%; /* #444444 */
+    --bg-lighter:         0 0% 31%; /* #505050 */
+
+    /* Surfaces & Cards */
+    --card:               0 0% 21%; /* #353535 */
+    --card-foreground:    48 42% 89%;
+    --popover:            0 0% 18%;
+    --popover-foreground: 48 42% 89%;
+
+    /* Warm Surfaces */
+    --surface-warm-100:   48 42% 89%; /* #F0EBD8 */
+    --surface-warm-200:   43 38% 85%; /* #E8DFC7 */
+    --surface-warm-300:   45 30% 80%; /* #DDD3BA */
+
+    /* Core Action Colors */
+    --primary:            48 42% 89%; /* #F0EBD8 */
+    --primary-foreground: 0 0% 18%; /* #2E2E2E */
+    
+    --secondary:          0 0% 27%; /* #444444 */
+    --secondary-foreground: 48 42% 89%;
+
+    --muted:              0 0% 20%;
+    --muted-foreground:   48 12% 70%; /* #BDB9AC */
+
+    /* Accent Palette (Refined & Muted) */
+    --accent-blue:        207 44% 60%; /* Muted Blue */
+    --accent-amber:       38 65% 58%;  /* Warm Gold / Amber */
+    --accent-emerald:     125 18% 55%; /* Deep Emerald */
+    --accent-purple:      275 22% 64%; /* Dusty Purple */
+    --accent-orange:      14 55% 58%;  /* Soft Orange */
+    --accent-slate:       200 18% 54%; /* Slate Blue */
+
+    --border:             0 0% 32%; /* #525252 */
+    --border-muted:       0 0% 28%;
+    --input:              0 0% 28%;
+    --ring:               48 42% 89%;
+
+    --radius: 0.625rem; /* modern slight rounded corner scale */
+  }
+}
+
+/* --- Base Styles ----------------------------------------- */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased overflow-x-hidden w-full;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.15);
+    color: hsl(var(--primary));
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--bg-darker));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+    border: 2px solid hsl(var(--bg-darker));
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.4);
+  }
+}
+
+/* --- Premium Utility Design System ----------------------- */
+@layer utilities {
+  /* Elegant Gold / Cream Metallic Gradient */
+  .gradient-text {
+    @apply bg-gradient-to-r from-[#F0EBD8] via-[#DDD3BA] to-[#C0B79E] bg-clip-text text-transparent;
+  }
+
+  /* Grid Backgrounds */
+  .grid-bg-subtle {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(240, 235, 216, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(240, 235, 216, 0.03) 1px, transparent 1px);
+  }
+
+  /* Noise Overlay */
+  .noise-overlay {
+    position: relative;
+  }
+
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+    z-index: 10;
+  }
+
+  /* Tangible Premium Card Styles */
+  .card-premium {
+    background: linear-gradient(135deg, hsl(var(--bg-light) / 0.6) 0%, hsl(var(--bg-dark) / 0.8) 100%);
+    border: 1px solid rgba(240, 235, 216, 0.07);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 0 rgba(250, 248, 240, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-premium:hover {
+    border-color: rgba(240, 235, 216, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 12px 20px -8px rgba(0, 0, 0, 0.25),
+      0 4px 12px -2px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 0 rgba(250, 248, 240, 0.08);
+  }
+
+  /* Glowing Radial Lighting */
+  .radial-glow {
+    background: radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.08) 0%, transparent 60%);
+  }
+
+  .radial-glow-accent {
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--primary) / 0.1) 0%, transparent 50%);
+  }
+
+  /* Custom Interactive Divider lines */
+  .divider-glow {
+    background: linear-gradient(to right, transparent, hsl(var(--primary) / 0.15) 50%, transparent);
+  }
+}
+
+/* --- Premium Button Interactions -------------------------- */
+
+/* Shimmer sweep on primary buttons */
+.btn-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  transition: background-position 0.5s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.btn-shimmer:hover::before {
+  background-position: -100% 0;
+}
+
+/* Icon motion helpers — apply to icons inside buttons */
+
+/* External link: slide to upper-right on parent hover */
+.btn-icon-external {
+  transition: transform 0.2s ease-out;
+}
+a:hover .btn-icon-external,
+button:hover .btn-icon-external {
+  transform: translate(2px, -2px);
+}
+
+/* Arrow: slide right on parent hover */
+.btn-icon-arrow {
+  transition: transform 0.2s ease-out;
+}
+a:hover .btn-icon-arrow,
+button:hover .btn-icon-arrow {
+  transform: translateX(3px);
+}
+
+/* Download: small bounce */
+@keyframes btn-bounce {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(2px); }
+  70%  { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+a:hover .btn-icon-download,
+button:hover .btn-icon-download {
+  animation: btn-bounce 0.4s ease-out;
+}
+
+/* GitHub: gentle rotation */
+.btn-icon-github {
+  transition: transform 0.25s ease-out;
+}
+a:hover .btn-icon-github,
+button:hover .btn-icon-github {
+  transform: rotate(6deg);
+}
+
+/* Social (LinkedIn, Codeforces, Trophy): scale + brightens */
+.btn-icon-social {
+  transition: transform 0.2s ease-out, filter 0.2s ease-out;
+}
+a:hover .btn-icon-social,
+button:hover .btn-icon-social {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
