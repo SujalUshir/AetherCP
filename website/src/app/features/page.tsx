@@ -1,9 +1,14 @@
 "use client";
 
 
+import Image from "next/image";
 import { BrowserFrame } from "@/components/shared/BrowserFrame";
 import { Container } from "@/components/shared/Container";
 import { Button } from "@/components/ui/button";
+import popupScreenshot from "../../../public/screenshots/popup.png";
+import analyticScreenshot from "../../../public/screenshots/analytic.png";
+import competitiveScreenshot from "../../../public/screenshots/competitive.png";
+import vscodeScreenshot from "../../../public/screenshots/vscode.png";
 import {
   Timer,
   Zap,
@@ -158,8 +163,8 @@ export default function FeaturesPage() {
             <SlideRight className="lg:col-span-6 flex justify-center">
               <BrowserFrame url="localhost:27121/cph" size="lg" className="w-full">
                 <div className="flex justify-center w-full py-4 px-2 bg-[#2a2a2a]">
-                  <img
-                    src="/screenshots/vscode.png"
+                  <Image
+                    src={vscodeScreenshot}
                     alt="VS Code Integration Workspace"
                     className="w-full h-auto object-contain rounded-lg border border-white/5 select-none pointer-events-none shadow-2xl"
                   />
@@ -178,8 +183,8 @@ export default function FeaturesPage() {
             <SlideLeft className="lg:col-span-6 flex justify-center order-2 lg:order-1">
               <BrowserFrame url="codeforces.com/profile/tourist" size="lg" className="w-full">
                 <div className="flex justify-center w-full py-4 px-2">
-                  <img
-                    src="/screenshots/competitive.png"
+                  <Image
+                    src={competitiveScreenshot}
                     alt="Codeforces Profile Injected Analytics"
                     className="w-full h-auto object-contain rounded-lg border border-white/5 select-none pointer-events-none shadow-2xl"
                   />
@@ -430,8 +435,8 @@ export default function FeaturesPage() {
               <span className="text-xs font-semibold text-accent-blue">Dashboard View</span>
               <BrowserFrame url="codeforces.com/problemset" size="lg" className="w-full shadow-2xl">
                 <div className="flex justify-center w-full py-4 px-2">
-                  <img
-                    src="/screenshots/analytic.png"
+                  <Image
+                    src={analyticScreenshot}
                     alt="Analytics Dashboard"
                     className="w-full max-w-[500px] h-auto object-contain rounded-lg border border-white/5"
                   />
@@ -444,8 +449,8 @@ export default function FeaturesPage() {
               <span className="text-xs font-semibold text-accent-purple">Popup Widget</span>
               <BrowserFrame url="leetcode.com/problems/two-sum" size="lg" className="w-full shadow-2xl">
                 <div className="flex justify-center w-full py-4 px-2">
-                  <img
-                    src="/screenshots/popup.png"
+                  <Image
+                    src={popupScreenshot}
                     alt="Extension Popup View"
                     className="w-full max-w-[280px] h-auto object-contain rounded-lg border border-white/5"
                   />

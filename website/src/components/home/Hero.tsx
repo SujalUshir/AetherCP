@@ -1,6 +1,7 @@
 "use client";
 
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Download, Github, ArrowRight, ShieldCheck, HardDrive, Code2, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,7 @@ import { BrowserFrame } from "@/components/shared/BrowserFrame";
 import { Container } from "@/components/shared/Container";
 import { GITHUB_URL, DOWNLOAD_URL } from "@/data/navigation";
 import { cn } from "@/lib/utils";
+import popupScreenshot from "../../../public/screenshots/popup.png";
 
 const heroContainer = {
   hidden: { opacity: 0 },
@@ -135,10 +137,11 @@ export function Hero() {
             <div className="w-full max-w-[480px] lg:max-w-full">
               <BrowserFrame url="codeforces.com/contest/2239/problem/A" size="sm" className="w-full">
                 <div className="flex justify-center w-full py-4 bg-bg-darker/25">
-                  <img
-                    src="/screenshots/popup.png"
+                  <Image
+                    src={popupScreenshot}
                     alt="AetherCP Extension Popup Preview"
-                    className="max-w-[280px] sm:max-w-[300px] w-full rounded-xl border border-white/10 shadow-2xl transition-transform duration-500 hover:scale-[1.01] select-none pointer-events-none"
+                    className="max-w-[280px] sm:max-w-[300px] w-full h-auto rounded-xl border border-white/10 shadow-2xl transition-transform duration-500 hover:scale-[1.01] select-none pointer-events-none"
+                    priority
                   />
                 </div>
               </BrowserFrame>

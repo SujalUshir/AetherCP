@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Trophy, CheckCircle2 } from "lucide-react";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Container } from "@/components/shared/Container";
 import { BrowserFrame } from "@/components/shared/BrowserFrame";
+import competitiveScreenshot from "../../../public/screenshots/competitive.png";
 
 const BULLETS = [
   <><span className="text-accent-amber font-semibold">Rating progression</span> graph across all contests</>,
@@ -46,8 +48,8 @@ export function CFAnalytics() {
             />
             
             <BrowserFrame url="codeforces.com/profile/tourist" size="lg" className="w-full">
-              <img
-                src="/screenshots/competitive.png"
+              <Image
+                src={competitiveScreenshot}
                 alt="Codeforces Profile Analytics Screenshot"
                 className="w-full h-auto select-none pointer-events-none rounded-lg"
               />

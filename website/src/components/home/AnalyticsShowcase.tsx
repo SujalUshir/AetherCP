@@ -1,11 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { BarChart3, CheckCircle2 } from "lucide-react";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Container } from "@/components/shared/Container";
 import { BrowserFrame } from "@/components/shared/BrowserFrame";
+import analyticScreenshot from "../../../public/screenshots/analytic.png";
+import historyScreenshot from "../../../public/screenshots/problem_history.png";
 
 const BULLETS = [
   <>GitHub-style <span className="text-accent-amber font-semibold">contribution heatmap</span> for the full year</>,
@@ -84,8 +87,8 @@ export function AnalyticsShowcase() {
             />
             
             <BrowserFrame url="codeforces.com/problemset" size="sm" className="w-full">
-              <img
-                src="/screenshots/analytic.png"
+              <Image
+                src={analyticScreenshot}
                 alt="AetherCP Analytics Screenshot"
                 className="w-full h-auto select-none pointer-events-none rounded-lg"
               />
@@ -93,8 +96,8 @@ export function AnalyticsShowcase() {
 
             <div className="relative sm:absolute sm:-bottom-12 sm:-left-8 sm:w-[85%] transition-all duration-300 hover:scale-[1.02] hover:z-20 z-10">
               <BrowserFrame url="leetcode.com/problems/two-sum" size="sm">
-                <img
-                  src="/screenshots/problem_history.png"
+                <Image
+                  src={historyScreenshot}
                   alt="AetherCP History Screenshot"
                   className="w-full h-auto select-none pointer-events-none rounded-lg"
                 />

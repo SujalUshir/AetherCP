@@ -1,10 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import { BrowserFrame } from "@/components/shared/BrowserFrame";
 import { Container } from "@/components/shared/Container";
 import { FadeUp } from "@/components/motion";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+
+import popupScreenshot from "../../../public/screenshots/popup.png";
+import analyticScreenshot from "../../../public/screenshots/analytic.png";
+import competitiveScreenshot from "../../../public/screenshots/competitive.png";
+import vscodeScreenshot from "../../../public/screenshots/vscode.png";
+import historyScreenshot from "../../../public/screenshots/problem_history.png";
 
 const SCREENSHOT_SECTIONS = [
   {
@@ -18,7 +25,7 @@ const SCREENSHOT_SECTIONS = [
       </>
     ),
     url: "codeforces.com/contest/2239/problem/A",
-    src: "/screenshots/popup.png",
+    src: popupScreenshot,
     maxWidthClass: "max-w-[280px]",
   },
   {
@@ -32,7 +39,7 @@ const SCREENSHOT_SECTIONS = [
       </>
     ),
     url: "codeforces.com/problemset",
-    src: "/screenshots/analytic.png",
+    src: analyticScreenshot,
     maxWidthClass: "max-w-[640px]",
   },
   {
@@ -45,7 +52,7 @@ const SCREENSHOT_SECTIONS = [
       </>
     ),
     url: "codeforces.com/profile/tourist",
-    src: "/screenshots/competitive.png",
+    src: competitiveScreenshot,
     maxWidthClass: "max-w-[640px]",
   },
   {
@@ -58,7 +65,7 @@ const SCREENSHOT_SECTIONS = [
       </>
     ),
     url: "codeforces.com/contest/2100/problem/E",
-    src: "/screenshots/vscode.png",
+    src: vscodeScreenshot,
     maxWidthClass: "max-w-full",
   },
   {
@@ -71,7 +78,7 @@ const SCREENSHOT_SECTIONS = [
       </>
     ),
     url: "leetcode.com/problems/two-sum",
-    src: "/screenshots/problem_history.png",
+    src: historyScreenshot,
     maxWidthClass: "max-w-[640px]",
   },
 ];
@@ -109,10 +116,10 @@ function ScreenshotItem({ item, index }: { item: typeof SCREENSHOT_SECTIONS[0]; 
       >
         <BrowserFrame url={item.url} size="lg">
           <div className="flex justify-center w-full py-4">
-            <img
+            <Image
               src={item.src}
               alt={item.title}
-              className={`${item.maxWidthClass} w-full rounded-xl shadow-xl border border-white/5 select-none pointer-events-none transition-transform duration-300 hover:scale-[1.01]`}
+              className={`${item.maxWidthClass} w-full h-auto rounded-xl shadow-xl border border-white/5 select-none pointer-events-none transition-transform duration-300 hover:scale-[1.01]`}
             />
           </div>
         </BrowserFrame>

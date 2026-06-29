@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Github } from "lucide-react";
 import { Container } from "@/components/shared/Container";
@@ -22,9 +23,11 @@ export function Footer() {
           {/* Brand column */}
           <div className="col-span-2 flex flex-col gap-4 md:col-span-1">
             <Link href="/" className="group flex items-center gap-2.5">
-              <img
+              <Image
                 src="/icons/icon128.png"
                 alt="AetherCP Logo"
+                width={32}
+                height={32}
                 className="h-8 w-8 object-contain transition-transform duration-200 group-hover:scale-105"
               />
               <span className="text-lg font-bold tracking-tight">

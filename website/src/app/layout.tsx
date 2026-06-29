@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
@@ -13,6 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aethercp.dev"),
   title: {
     default: "AetherCP — Privacy-First Competitive Programming Companion",
     template: "%s | AetherCP",
@@ -31,6 +32,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Sujal Ushir" }],
   creator: "Sujal Ushir",
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -39,6 +41,14 @@ export const metadata: Metadata = {
     description:
       "Track your practice. Analyze your progress. Open problems instantly in VS Code.",
     siteName: "AetherCP",
+    images: [
+      {
+        url: "/screenshots/analytic.png",
+        width: 1200,
+        height: 630,
+        alt: "AetherCP Analytics Dashboard",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -46,6 +56,7 @@ export const metadata: Metadata = {
     description:
       "Track your practice. Analyze your progress. Open problems instantly in VS Code.",
     creator: "@sujalushir",
+    images: ["/screenshots/analytic.png"],
   },
   robots: {
     index: true,
@@ -72,6 +83,7 @@ export default function RootLayout({
     </html>
   );
 }
-export const viewport = {
+
+export const viewport: Viewport = {
   themeColor: "#0a0d1a",
 };

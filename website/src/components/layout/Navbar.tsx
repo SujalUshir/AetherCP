@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -55,9 +56,11 @@ export function Navbar() {
             className="group flex items-center gap-2.5 shrink-0 focus-visible:outline-none"
             aria-label="AetherCP Home"
           >
-            <img
+            <Image
               src="/icons/icon128.png"
               alt="AetherCP Logo"
+              width={32}
+              height={32}
               className="h-8 w-8 object-contain transition-transform duration-200 group-hover:scale-105"
             />
             <span className="text-lg font-bold tracking-tight">

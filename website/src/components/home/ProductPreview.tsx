@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { BrowserFrame } from "@/components/shared/BrowserFrame";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Container } from "@/components/shared/Container";
+import popupScreenshot from "../../../public/screenshots/popup.png";
 
 export function ProductPreview() {
   const ref = useRef<HTMLDivElement>(null);
@@ -39,10 +41,10 @@ export function ProductPreview() {
           />
           <BrowserFrame url="codeforces.com/contest/2239/problem/A">
             <div className="flex justify-center w-full py-4">
-              <img
-                src="/screenshots/popup.png"
+              <Image
+                src={popupScreenshot}
                 alt="AetherCP Extension Popup"
-                className="max-w-[280px] w-full rounded-2xl shadow-xl border border-white/10 select-none pointer-events-none transition-transform duration-300 hover:scale-[1.02]"
+                className="max-w-[280px] w-full h-auto rounded-2xl shadow-xl border border-white/10 select-none pointer-events-none transition-transform duration-300 hover:scale-[1.02]"
               />
             </div>
           </BrowserFrame>
