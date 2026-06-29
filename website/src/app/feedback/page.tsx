@@ -48,7 +48,7 @@ const CONTACT_CARDS = [
     ),
     icon: Mail,
     buttonText: "Send Email",
-    href: "mailto:ushirthbsujal@gmail.com",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=ushirthbsujal@gmail.com",
     accent: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
   },
 ];
