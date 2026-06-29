@@ -64,17 +64,18 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled
-          ? "border-b border-border/60 bg-background/90 shadow-lg shadow-black/20 backdrop-blur-xl"
-          : "bg-transparent"
-      )}
-    >
+    <>
+      <motion.header
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          scrolled
+            ? "border-b border-border/60 bg-background/90 shadow-lg shadow-black/20 backdrop-blur-xl"
+            : "bg-transparent"
+        )}
+      >
       <Container>
         <nav className="flex h-16 items-center justify-between gap-4">
           {/* Mobile hamburger menu toggle */}
@@ -153,105 +154,106 @@ export function Navbar() {
           </div>
         </nav>
       </Container>
-
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {open && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm md:hidden"
-              onClick={() => setOpen(false)}
-            />
-            {/* Drawer */}
-            <motion.div
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "tween", duration: 0.25, ease: "easeOut" }}
-              className="fixed inset-y-0 left-0 z-[101] w-72 max-w-[80vw] bg-background border-r border-border/60 rounded-r-2xl shadow-2xl flex flex-col p-6 md:hidden"
-            >
-              {/* Logo and Close Button */}
-              <div className="flex items-center justify-between pb-4 border-b border-border/40">
-                <Link
-                  href="/"
-                  className="flex items-center gap-2.5 focus-visible:outline-none"
-                  onClick={() => setOpen(false)}
-                >
-                  <Image
-                    src="/icons/icon128.png"
-                    alt="AetherCP Logo"
-                    width={28}
-                    height={28}
-                    className="h-7 w-7 object-contain"
-                  />
-                  <span className="text-base font-bold tracking-tight">
-                    Aether<span className="text-primary">CP</span>
-                  </span>
-                </Link>
-                <button
-                  className="p-1 rounded-md text-muted-foreground hover:text-foreground focus-visible:outline-none"
-                  onClick={() => setOpen(false)}
-                  aria-label="Close menu"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-
-              {/* Navigation Links */}
-              <nav className="flex flex-col gap-1.5 py-6 flex-1 overflow-y-auto">
-                {NAV_LINKS.map(({ href, label }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    onClick={() => setOpen(false)}
-                    className={cn(
-                      "rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
-                      pathname === href
-                        ? "bg-secondary text-foreground"
-                        : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
-                    )}
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </nav>
-
-              {/* Download and Social buttons near bottom */}
-              <div className="mt-auto pt-4 border-t border-border/60 flex flex-col gap-2">
-                <Button variant="outline" size="sm" asChild className="w-full">
-                  <a
-                    href={GITHUB_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2"
-                    onClick={() => setOpen(false)}
-                  >
-                    <Github className="h-4 w-4" />
-                    GitHub
-                  </a>
-                </Button>
-                <Button size="sm" asChild className="w-full">
-                  <a
-                    href={DOWNLOAD_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2"
-                    onClick={() => setOpen(false)}
-                  >
-                    <Download className="h-4 w-4" />
-                    Download
-                  </a>
-                </Button>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </motion.header>
+
+    {/* Mobile drawer */}
+    <AnimatePresence>
+      {open && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 h-[100dvh] w-screen z-[100] bg-black/60 backdrop-blur-sm md:hidden"
+            onClick={() => setOpen(false)}
+          />
+          {/* Drawer */}
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "tween", duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-y-0 left-0 h-[100dvh] z-[101] w-72 max-w-[80vw] bg-background border-r border-border/60 rounded-r-2xl shadow-2xl flex flex-col p-6 md:hidden"
+          >
+            {/* Logo and Close Button */}
+            <div className="flex items-center justify-between pb-4 border-b border-border/40">
+              <Link
+                href="/"
+                className="flex items-center gap-2.5 focus-visible:outline-none"
+                onClick={() => setOpen(false)}
+              >
+                <Image
+                  src="/icons/icon128.png"
+                  alt="AetherCP Logo"
+                  width={28}
+                  height={28}
+                  className="h-7 w-7 object-contain"
+                />
+                <span className="text-base font-bold tracking-tight">
+                  Aether<span className="text-primary">CP</span>
+                </span>
+              </Link>
+              <button
+                className="p-1 rounded-md text-muted-foreground hover:text-foreground focus-visible:outline-none"
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <nav className="flex flex-col gap-1.5 py-6 flex-1 overflow-y-auto">
+              {NAV_LINKS.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
+                    pathname === href
+                      ? "bg-secondary text-foreground"
+                      : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                  )}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Download and Social buttons near bottom */}
+            <div className="mt-auto pt-4 border-t border-border/60 flex flex-col gap-2">
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                  onClick={() => setOpen(false)}
+                >
+                  <Github className="h-4 w-4" />
+                  GitHub
+                </a>
+              </Button>
+              <Button size="sm" asChild className="w-full">
+                <a
+                  href={DOWNLOAD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                  onClick={() => setOpen(false)}
+                >
+                  <Download className="h-4 w-4" />
+                  Download
+                </a>
+              </Button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  </>
   );
 }
