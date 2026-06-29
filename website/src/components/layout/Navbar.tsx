@@ -77,6 +77,17 @@ export function Navbar() {
     >
       <Container>
         <nav className="flex h-16 items-center justify-between gap-4">
+          {/* Mobile hamburger menu toggle */}
+          <button
+            id="mobile-menu-toggle"
+            className="flex items-center justify-center rounded-md p-2 text-muted-foreground hover:text-foreground md:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+
           {/* Logo */}
           <Link
             href="/"
@@ -136,18 +147,9 @@ export function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile hamburger & Search dialog trigger */}
+          {/* Mobile Search dialog trigger */}
           <div className="flex items-center gap-2 md:hidden ml-auto">
             <SearchDialog />
-            <button
-              id="mobile-menu-toggle"
-              className="flex items-center justify-center rounded-md p-2 text-muted-foreground hover:text-foreground"
-              aria-label={open ? "Close menu" : "Open menu"}
-              aria-expanded={open}
-              onClick={() => setOpen((v) => !v)}
-            >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
           </div>
         </nav>
       </Container>
