@@ -13,7 +13,7 @@
 //   - codeforces.com/problemset/problem/*
 //   - codeforces.com/contest/*/problem/*
 //   - codeforces.com/gym/*/problem/*
-//   - leetcode.com/problems/*
+// LeetCode support is intentionally inactive for this release.
 //
 // Pages like /friends, /profile, /settings, /ratings
 // get no observers, no messaging, no idle listeners.
@@ -185,17 +185,6 @@ function getCodeforcesRatingFromDOM() {
 
 
 /**
- * Returns true if the current URL is a LeetCode problem page.
- *
- * Supported patterns:
- *   /problems/<slug>/
- *   /problems/<slug>/description/
- */
-function isLeetCodeProblemPage() {
-  return /^\/problems\/[^/]+/.test(window.location.pathname);
-}
-
-/**
  * Returns true if tracking (problem detection + idle watching)
  * should initialize on this page.
  */
@@ -203,7 +192,6 @@ function isSupportedTrackingPage() {
   const hostname = window.location.hostname;
 
   if (hostname.includes("codeforces.com")) return isCodeforcesProblemPage();
-  if (hostname.includes("leetcode.com"))   return isLeetCodeProblemPage();
 
   return false;
 }
@@ -216,7 +204,6 @@ function getPlatform() {
   const hostname = window.location.hostname;
 
   if (hostname.includes("codeforces.com")) return PLATFORMS.CODEFORCES;
-  if (hostname.includes("leetcode.com"))   return PLATFORMS.LEETCODE;
 
   return "";
 }
@@ -226,18 +213,8 @@ function getCodeforcesProblemName() {
   return title ? title.textContent.trim() : "";
 }
 
-function getLeetCodeProblemName() {
-  const title =
-    document.querySelector('div[class*="text-title"]') ||
-    document.querySelector('[data-cy="question-title"]')  ||
-    document.querySelector("title");
-
-  return title ? title.textContent.trim() : "";
-}
-
 function getProblemName(platform) {
   if (platform === "Codeforces") return getCodeforcesProblemName();
-  if (platform === "LeetCode")   return getLeetCodeProblemName();
   return "";
 }
 
@@ -353,57 +330,6 @@ function getCodeforcesMemoryLimit() {
 }
 
 // ──────────────────────────────────────────────
-// Sample test case extraction — LeetCode
-//
-// LeetCode embeds examples in the problem statement as plain
-// text inside the description container. The structure looks like:
-//
-//   Example 1:
-//   Input: nums = [2,7,11,15], target = 9
-//   Output: [0,1]
-//
-// We parse all "Input: ... Output: ..." blocks from the
-// description text. This is a best-effort extraction — LeetCode's
-// DOM varies across problem types (interactive, design, etc.).
-// Falls back to [] if extraction is unreliable.
-// ──────────────────────────────────────────────
-
-function getLeetCodeTests() {
-  try {
-    // Try to find the problem description container
-    const descContainer =
-      document.querySelector('[data-track-load="description_content"]') ||
-      document.querySelector(".question-content__JfgR")                 ||
-      document.querySelector('[class*="description"]');
-
-    if (!descContainer) return [];
-
-    const text = descContainer.innerText || descContainer.textContent || "";
-    const tests = [];
-
-    // Match blocks: Input: ... Output: ... (up to next Example or end)
-    // This regex is intentionally greedy between Input and Output
-    const exampleRegex = /Input:\s*([\s\S]*?)\n\s*Output:\s*([\s\S]*?)(?=\n\s*(?:Example|\*\*Example|Input:|Constraints:|$))/gi;
-
-    let match;
-    while ((match = exampleRegex.exec(text)) !== null) {
-      const input  = match[1].trim() + "\n";
-      const output = match[2].trim() + "\n";
-
-      if (input.length > 1 && output.length > 1) {
-        tests.push({ input, output });
-      }
-    }
-
-    logContent("LeetCode sample extraction", { count: tests.length });
-    return tests;
-  } catch (err) {
-    logContent("LeetCode sample extraction failed", { error: err.message });
-    return [];
-  }
-}
-
-// ──────────────────────────────────────────────
 // Unified problem info — now includes CPH fields
 // ──────────────────────────────────────────────
 
@@ -432,11 +358,6 @@ function getProblemInfo() {
       index     = params.index;
     }
     rating = getCodeforcesRatingFromDOM();
-  } else if (platform === PLATFORMS.LEETCODE) {
-    tests = getLeetCodeTests();
-    // LeetCode does not reliably expose time/memory limits in DOM
-    timeLimit   = 0;
-    memoryLimit = 256;
   }
 
   return {
@@ -507,8 +428,6 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       tests       = getCodeforcesTests();
       timeLimit   = getCodeforcesTimeLimit();
       memoryLimit = getCodeforcesMemoryLimit();
-    } else if (platform === PLATFORMS.LEETCODE) {
-      tests = getLeetCodeTests();
     }
   } catch (err) {
     logContent("[AetherCP CPH] Sample extraction failed", { error: err.message });
@@ -601,11 +520,14 @@ function resetIdleTimer() {
 }
 
 function handleUserActivity() {
-  lastActivityAt = Date.now();
+  const now = Date.now();
+  const exceededIdleTimeout = now - lastActivityAt > IDLE_TIMEOUT_MS;
 
-  if (isIdle) {
+  lastActivityAt = now;
+
+  if (isIdle || exceededIdleTimeout) {
     isIdle = false;
-    logIdle("Activity detected — resuming from idle");
+    logIdle("Activity detected — resuming from idle", { exceededIdleTimeout });
     sendActiveMessage(true);
     lastActivityNotificationTime = lastActivityAt;
   } else {
@@ -638,9 +560,15 @@ function handleVisibilityChange() {
 }
 
 function watchForUserActivity() {
-  window.addEventListener("keydown", handleUserActivity, { passive: true });
-  window.addEventListener("click",   handleUserActivity, { passive: true });
-  window.addEventListener("focus",   handleWindowFocus);
+  window.addEventListener("mousemove", handleUserActivity, { passive: true });
+  window.addEventListener("mousedown", handleUserActivity, { passive: true });
+  window.addEventListener("click",     handleUserActivity, { passive: true });
+  window.addEventListener("keydown",   handleUserActivity, { passive: true });
+  window.addEventListener("input",     handleUserActivity, { passive: true });
+  window.addEventListener("scroll",    handleUserActivity, { passive: true });
+  window.addEventListener("touchstart", handleUserActivity, { passive: true });
+  window.addEventListener("focus",     handleWindowFocus);
+  document.addEventListener("focusin", handleUserActivity, { passive: true });
   document.addEventListener("visibilitychange", handleVisibilityChange);
 
   logIdle("Activity watchers registered", { IDLE_TIMEOUT_MS });
@@ -684,9 +612,15 @@ function cleanupContentScript() {
   }
 
   // 4. Remove activity event listeners
-  window.removeEventListener("keydown", handleUserActivity);
-  window.removeEventListener("click",   handleUserActivity);
-  window.removeEventListener("focus",   handleWindowFocus);
+  window.removeEventListener("mousemove", handleUserActivity);
+  window.removeEventListener("mousedown", handleUserActivity);
+  window.removeEventListener("click",     handleUserActivity);
+  window.removeEventListener("keydown",   handleUserActivity);
+  window.removeEventListener("input",     handleUserActivity);
+  window.removeEventListener("scroll",    handleUserActivity);
+  window.removeEventListener("touchstart", handleUserActivity);
+  window.removeEventListener("focus",     handleWindowFocus);
+  document.removeEventListener("focusin", handleUserActivity);
   document.removeEventListener("visibilitychange", handleVisibilityChange);
   logCleanup("Activity listeners removed");
 

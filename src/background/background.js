@@ -68,8 +68,11 @@ function isProblemUrl(url) {
     return /codeforces\.com\/(problemset\/problem|contest\/\d+\/problem|gym\/\d+\/problem)\//.test(url);
   }
 
-  // LeetCode
-  return url.includes("leetcode.com/problems/");
+  return false;
+}
+
+function isCodeforcesProblem(problem) {
+  return problem?.platform === AETHERCP_CONSTANTS.PLATFORMS.CODEFORCES;
 }
 
 async function resolveCodeforcesRating(contestId, index) {
@@ -117,6 +120,7 @@ async function resolveCodeforcesRating(contestId, index) {
 
 async function handleProblemDetected(tabId, problem) {
   if (!problem || !problem.problemName || !problem.platform) return;
+  if (!isCodeforcesProblem(problem)) return;
 
   const state = await getState();
   checkAndApplyIdle(state);
@@ -299,6 +303,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return;
       }
 
+      if (!isCodeforcesProblem(problem)) {
+        console.warn("[AetherCP CPH] Non-Codeforces problem ignored");
+        sendResponse({ ok: false, reason: "no_problem", message: "No active Codeforces problem" });
+        return;
+      }
+
       console.log("[AetherCP CPH] Problem send requested", {
         name:     problem.problemName,
         platform: problem.platform,
@@ -388,7 +398,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return false;
 });
 
-// ── Context menu — right-click on CF / LC problem pages ─────────────
+// ── Context menu — right-click on Codeforces problem pages ─────────────
 //
 // Created once on install. Shows only on supported problem URLs via
 // documentUrlPatterns, mirroring the manifest content_scripts matches.
@@ -401,8 +411,7 @@ chrome.runtime.onInstalled.addListener(() => {
     documentUrlPatterns:  [
       "https://codeforces.com/problemset/problem/*/*",
       "https://codeforces.com/contest/*/problem/*",
-      "https://codeforces.com/gym/*/problem/*",
-      "https://leetcode.com/problems/*"
+      "https://codeforces.com/gym/*/problem/*"
     ]
   });
 
@@ -419,6 +428,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
     if (!problem || !problem.problemName) {
       console.warn("[AetherCP CPH] Context menu: no problem detected for tab", tab.id);
+      return;
+    }
+
+    if (!isCodeforcesProblem(problem)) {
+      console.warn("[AetherCP CPH] Context menu: non-Codeforces problem ignored");
       return;
     }
 

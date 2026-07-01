@@ -12,7 +12,7 @@
 //   name         — problem display name
 //   group        — platform + contest identifier
 //   url          — problem URL
-//   interactive  — always false for CF/LC
+//   interactive  — always false for Codeforces
 //   memoryLimit  — MB (integer)
 //   timeLimit    — ms (integer)
 //   tests        — array of { input, output } strings
@@ -60,15 +60,6 @@ function buildCodeforcesGroup(url) {
 }
 
 /**
- * Constructs the group name for LeetCode problems.
- *
- * @returns {string} The LeetCode group name.
- */
-function buildLeetCodeGroup() {
-  return "LeetCode";
-}
-
-/**
  * Converts a problem name into a valid Java class name.
  * "1234A - Sum of Two Numbers" → "Task1234ASumOfTwoNumbers"
  *
@@ -104,7 +95,6 @@ function toTaskClassName(name) {
  */
 function buildCphPayload(problem) {
   const platform    = problem.platform || "";
-  const isLeetCode  = platform === AETHERCP_CONSTANTS.PLATFORMS.LEETCODE;
   const isCodeforces = platform === AETHERCP_CONSTANTS.PLATFORMS.CODEFORCES;
 
   // ── Tests ────────────────────────────────
@@ -124,7 +114,6 @@ function buildCphPayload(problem) {
   // ── Group ────────────────────────────────
   let group = platform || "Unknown";
   if (isCodeforces) group = buildCodeforcesGroup(problem.url || "");
-  if (isLeetCode)   group = buildLeetCodeGroup();
 
   // ── Payload ──────────────────────────────
   const payload = {
@@ -161,4 +150,3 @@ function buildCphPayload(problem) {
 
   return payload;
 }
-

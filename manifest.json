@@ -2,11 +2,10 @@
   "manifest_version": 3,
   "name": "AetherCP",
   "version": "1.2.0",
-  "description": "Track your competitive programming sessions on Codeforces and LeetCode. View analytics, heatmaps, and problem history directly on your Codeforces profile.",
+  "description": "Track your Codeforces problem-solving sessions. View analytics, heatmaps, and problem history directly on your Codeforces profile.",
   "permissions": ["storage", "tabs", "contextMenus"],
   "host_permissions": [
     "https://codeforces.com/*",
-    "https://leetcode.com/*",
     "http://localhost:27121/*",
     "http://127.0.0.1:27121/*"
   ],
@@ -31,8 +30,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://codeforces.com/*",
-        "https://leetcode.com/*"
+        "https://codeforces.com/*"
       ],
       "exclude_matches": [
         "https://codeforces.com/profile/*"
