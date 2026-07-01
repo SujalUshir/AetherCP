@@ -220,3 +220,23 @@ h2{
     margin-top: 2px;
     display: inline-block;
 }
+
+.statusRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.syncStatus {
+    font-size: 11px;
+    font-weight: 600;
+    color: #188038;
+}
+
+.lastBackup {
+    display: block;
+    font-size: 10px;
+    color: #80868b;
+    margin-top: 2px;
+}

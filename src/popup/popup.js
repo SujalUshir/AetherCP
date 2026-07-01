@@ -117,6 +117,7 @@ function updatePopup() {
       renderSnapshot(snapshot);
     }
   );
+  updateLastBackupUI();
 }
 
 // ──────────────────────────────────────────────
@@ -224,6 +225,78 @@ const userNameSpan     = document.getElementById("userName");
 const userEmailSpan    = document.getElementById("userEmail");
 const googleSignInBtn  = document.getElementById("googleSignInBtn");
 const signOutBtn       = document.getElementById("signOutBtn");
+const syncStatusSpan   = document.getElementById("syncStatus");
+const lastBackupSpan   = document.getElementById("lastBackup");
+
+let lastBackupTimestamp = null;
+let currentSyncStatus = "Synced";
+
+function updateSyncStatusUI(status) {
+  if (!syncStatusSpan) return;
+  currentSyncStatus = status;
+
+  // Offline status overrides others if offline
+  const displayStatus = !navigator.onLine ? "Offline" : status;
+
+  if (displayStatus === "Synced") {
+    syncStatusSpan.innerText = "☁ Synced";
+    syncStatusSpan.style.color = "#188038";
+  } else if (displayStatus === "Uploading") {
+    syncStatusSpan.innerText = "Uploading...";
+    syncStatusSpan.style.color = "#f29900";
+  } else if (displayStatus === "Pending Sync") {
+    syncStatusSpan.innerText = "Pending Sync";
+    syncStatusSpan.style.color = "#f29900";
+  } else if (displayStatus === "Offline") {
+    syncStatusSpan.innerText = "Offline";
+    syncStatusSpan.style.color = "#d93025";
+  } else {
+    syncStatusSpan.innerText = "☁ Synced";
+    syncStatusSpan.style.color = "#188038";
+  }
+}
+
+function getRelativeTime(timestamp) {
+  if (!timestamp) return "Never";
+  const diffMs = Date.now() - timestamp;
+  const diffSec = Math.floor(diffMs / 1000);
+  if (diffSec < 5) return "Just now";
+  if (diffSec < 60) return `${diffSec} seconds ago`;
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60) return `${diffMin} minute${diffMin > 1 ? 's' : ''} ago`;
+  const diffHours = Math.floor(diffMin / 60);
+  if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+  const diffDays = Math.floor(diffHours / 24);
+  return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+}
+
+function updateLastBackupUI() {
+  if (!lastBackupSpan) return;
+  lastBackupSpan.innerText = `Last Backup: ${getRelativeTime(lastBackupTimestamp)}`;
+}
+
+function loadSyncState() {
+  chrome.storage.local.get(["aethercp_sync_status", "aethercp_last_backup_time"], (result) => {
+    const status = result["aethercp_sync_status"] || "Synced";
+    lastBackupTimestamp = result["aethercp_last_backup_time"] || null;
+    updateSyncStatusUI(status);
+    updateLastBackupUI();
+  });
+}
+
+// Watch for sync state updates broadcasted from background script
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.type === "SYNC_STATUS_CHANGED") {
+    updateSyncStatusUI(message.status);
+  } else if (message.type === "SYNC_TIMESTAMP_CHANGED") {
+    lastBackupTimestamp = message.timestamp;
+    updateLastBackupUI();
+  }
+});
+
+// Update offline state display dynamically if connectivity drops/restores
+window.addEventListener("online", () => updateSyncStatusUI(currentSyncStatus));
+window.addEventListener("offline", () => updateSyncStatusUI(currentSyncStatus));
 
 function setAuthLoading(isLoading) {
   authLoadingDiv.style.display = isLoading ? "block" : "none";
@@ -320,3 +393,6 @@ checkCphStatus();
 
 // Check auth status once when popup opens
 checkAuthStatus();
+
+// Load backup status once when popup opens
+loadSyncState();

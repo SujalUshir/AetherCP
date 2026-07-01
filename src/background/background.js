@@ -2,6 +2,7 @@ importScripts(
   "../shared/constants.js",
   "../vendor/supabase.js",
   "../services/authService.js",
+  "../services/syncService.js",
   "../utils/timezone.js",
   "../utils/time.js",
   "../modules/problem-tracking/problemKeys.js",
@@ -44,10 +45,11 @@ const EMPTY_STATE = {
   dailyTotals: {}
 };
 
+let lastActiveSessionState = null;
+
 async function getState() {
   const data = await chrome.storage.local.get(STORAGE_KEY);
-
-  return {
+  const state = {
     ...EMPTY_STATE,
     ...(data[STORAGE_KEY] || {}),
     tabProblems: {
@@ -63,12 +65,32 @@ async function getState() {
       ...(data[STORAGE_KEY]?.dailyTotals || {})
     }
   };
+
+  // Sync session tracking in memory
+  lastActiveSessionState = state.activeSession;
+
+  return state;
 }
 
 async function saveState(state) {
+  state.updated_at = new Date().toISOString();
+
+  const wasTicking = lastActiveSessionState !== null;
+  const isTicking = state.activeSession !== null;
+
+  lastActiveSessionState = state.activeSession;
+
   await chrome.storage.local.set({
     [STORAGE_KEY]: state
   });
+
+  if (wasTicking && !isTicking) {
+    // Coding session completed! Schedule deferred upload.
+    scheduleDeferredUpload();
+  } else if (!isTicking) {
+    // Other settings/problem history changes while idle: set dirty flag
+    setSyncDirty(true).catch(() => {});
+  }
 }
 
 function isProblemUrl(url) {
@@ -468,7 +490,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // ── Authentication ────────────────────────────────────────────────
   if (message.type === MESSAGE_TYPES.SIGN_IN_GOOGLE) {
     signInWithGoogle()
-      .then((user) => sendResponse({ ok: true, user }))
+      .then(async (user) => {
+        try {
+          // Trigger cloud sync/restore on login
+          await syncOnLogin();
+        } catch (syncErr) {
+          console.error("[AetherCP Sync] Post-login sync failed:", syncErr);
+        }
+        sendResponse({ ok: true, user });
+      })
       .catch((err) => {
         logAuthError("Background sign-in handler failed.", err, {
           messageType: message.type
@@ -634,4 +664,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 chrome.tabs.onRemoved.addListener((tabId) => {
   handleTabRemoved(tabId);
+});
+
+// Trigger cloud sync check on extension/service worker startup
+syncOnStartup().catch((err) => {
+  console.error("[AetherCP Sync] Startup sync execution failed:", err);
 });
