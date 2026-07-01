@@ -75,6 +75,33 @@ function isCodeforcesProblem(problem) {
   return problem?.platform === AETHERCP_CONSTANTS.PLATFORMS.CODEFORCES;
 }
 
+function getCodeforcesTabProblem(state, tabId, tab) {
+  const problem = state.tabProblems[String(tabId)];
+
+  if (!problem || !isCodeforcesProblem(problem)) return null;
+  if (!tab?.url || !isProblemUrl(tab.url)) return null;
+
+  return problem;
+}
+
+function activateTrackedProblemTab(state, tabId, problem) {
+  if (!problem || !isCodeforcesProblem(problem)) return false;
+
+  const problemRecord = ensureProblemRecord(state, problem);
+  const sameIdleProblem =
+    state.idleState &&
+    state.idleState.tabId === tabId &&
+    state.idleState.problemKey === problemRecord.problemKey;
+
+  if (sameIdleProblem) {
+    resumeFromIdle(state, tabId);
+  } else {
+    switchSession(state, tabId, problem);
+  }
+
+  return true;
+}
+
 async function resolveCodeforcesRating(contestId, index) {
   if (!contestId || !index) return null;
 
@@ -138,7 +165,7 @@ async function handleProblemDetected(tabId, problem) {
   });
 
   if (activeTab && activeTab.id === tabId) {
-    switchSession(state, tabId, problemWithUrl);
+    activateTrackedProblemTab(state, tabId, problemWithUrl);
   }
 
   await saveState(state);
@@ -173,16 +200,40 @@ async function handleProblemDetected(tabId, problem) {
 async function handleActiveTabChanged(tabId) {
   const state = await getState();
   checkAndApplyIdle(state);
-  const tabProblem = state.tabProblems[String(tabId)];
+  let tab = null;
+
+  try {
+    tab = await chrome.tabs.get(tabId);
+  } catch (err) {
+    console.warn("[AetherCP Background] Could not read activated tab", {
+      tabId,
+      error: err.message
+    });
+  }
+
+  const tabProblem = getCodeforcesTabProblem(state, tabId, tab);
 
   if (tabProblem) {
-    switchSession(state, tabId, tabProblem);
+    activateTrackedProblemTab(state, tabId, tabProblem);
   } else {
     stopSession(state);
     state.idleState = null;
   }
 
   await saveState(state);
+}
+
+async function handleWindowFocusChanged(windowId) {
+  if (windowId === chrome.windows.WINDOW_ID_NONE) return;
+
+  const [activeTab] = await chrome.tabs.query({
+    active: true,
+    windowId
+  });
+
+  if (!activeTab?.id) return;
+
+  await handleActiveTabChanged(activeTab.id);
 }
 
 async function handleTabUpdated(tabId, changeInfo, tab) {
@@ -503,6 +554,10 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 chrome.tabs.onActivated.addListener((activeInfo) => {
   handleActiveTabChanged(activeInfo.tabId);
+});
+
+chrome.windows.onFocusChanged.addListener((windowId) => {
+  handleWindowFocusChanged(windowId);
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
