@@ -6,6 +6,7 @@
   "permissions": ["storage", "tabs", "contextMenus", "identity"],
   "host_permissions": [
     "https://codeforces.com/*",
+    "https://*.supabase.co/*",
     "http://localhost:27121/*",
     "http://127.0.0.1:27121/*"
   ],

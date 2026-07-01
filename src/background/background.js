@@ -18,6 +18,23 @@ importScripts(
 const STORAGE_KEY = AETHERCP_CONSTANTS.STORAGE_KEY;
 const MESSAGE_TYPES = AETHERCP_CONSTANTS.MESSAGE_TYPES;
 
+function getFriendlyAuthError(error, fallback) {
+  if (!error) return fallback;
+
+  const message = error.message || String(error);
+  if (message.includes("Supabase authentication is not configured")) {
+    return "Google Sign-In is not configured for this build.";
+  }
+  if (message.includes("cancelled")) {
+    return "Google Sign-In was cancelled.";
+  }
+  if (message.includes("redirect")) {
+    return "Google Sign-In redirect is not configured correctly.";
+  }
+
+  return fallback;
+}
+
 const EMPTY_STATE = {
   version: 1,
   activeSession: null,
@@ -453,8 +470,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     signInWithGoogle()
       .then((user) => sendResponse({ ok: true, user }))
       .catch((err) => {
-        console.error("[AetherCP Auth] Sign in failed:", err);
-        sendResponse({ ok: false, error: err.message || "Failed to sign in with Google" });
+        logAuthError("Background sign-in handler failed.", err, {
+          messageType: message.type
+        });
+        sendResponse({
+          ok: false,
+          error: getFriendlyAuthError(err, "Google Sign-In failed."),
+          debugError: serializeError(err)
+        });
       });
     return true;
   }
@@ -463,8 +486,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     signOut()
       .then(() => sendResponse({ ok: true }))
       .catch((err) => {
-        console.error("[AetherCP Auth] Sign out failed:", err);
-        sendResponse({ ok: false, error: err.message || "Failed to sign out" });
+        logAuthError("Background sign-out handler failed.", err, {
+          messageType: message.type
+        });
+        sendResponse({
+          ok: false,
+          error: getFriendlyAuthError(err, "Sign-Out failed."),
+          debugError: serializeError(err)
+        });
       });
     return true;
   }
@@ -473,8 +502,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     getCurrentUser()
       .then((user) => sendResponse({ ok: true, user }))
       .catch((err) => {
-        console.error("[AetherCP Auth] Get current user failed:", err);
-        sendResponse({ ok: false, error: err.message || "Failed to get user" });
+        logAuthError("Background current-user handler failed.", err, {
+          messageType: message.type
+        });
+        sendResponse({
+          ok: false,
+          error: getFriendlyAuthError(err, "Failed to get user."),
+          debugError: serializeError(err)
+        });
       });
     return true;
   }

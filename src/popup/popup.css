@@ -153,16 +153,43 @@ h2{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 8px;
+}
+
+.userAvatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: #f1f3f4;
+}
+
+.userAvatar:not([src]) {
+    display: none;
+}
+
+.userDetails {
+    min-width: 0;
+    flex: 1;
+}
+
+.userName,
+.userEmail {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.userName {
+    font-size: 12px;
+    font-weight: 600;
+    color: #202124;
 }
 
 .userEmail {
     font-size: 12px;
     color: #3c4043;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 170px;
 }
 
 .signOutBtn {
@@ -186,3 +213,10 @@ h2{
     padding: 4px 0;
 }
 
+.authStatus {
+    font-size: 11px;
+    font-weight: 600;
+    color: #188038;
+    margin-top: 2px;
+    display: inline-block;
+}

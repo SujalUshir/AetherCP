@@ -219,50 +219,92 @@ cphSendBtn.addEventListener("click", () => {
 const authLoadingDiv   = document.getElementById("authLoading");
 const authLoggedOutDiv = document.getElementById("authLoggedOut");
 const authLoggedInDiv  = document.getElementById("authLoggedIn");
+const userAvatarImg    = document.getElementById("userAvatar");
+const userNameSpan     = document.getElementById("userName");
 const userEmailSpan    = document.getElementById("userEmail");
 const googleSignInBtn  = document.getElementById("googleSignInBtn");
 const signOutBtn       = document.getElementById("signOutBtn");
 
+function setAuthLoading(isLoading) {
+  authLoadingDiv.style.display = isLoading ? "block" : "none";
+  googleSignInBtn.disabled = isLoading;
+  signOutBtn.disabled = isLoading;
+}
+
+function renderLoggedOut() {
+  setAuthLoading(false);
+  authLoggedOutDiv.style.display = "block";
+  authLoggedInDiv.style.display = "none";
+  userAvatarImg.removeAttribute("src");
+  userNameSpan.innerText = "";
+  userEmailSpan.innerText = "";
+}
+
+function renderLoggedIn(user) {
+  setAuthLoading(false);
+  authLoggedOutDiv.style.display = "none";
+  authLoggedInDiv.style.display = "block";
+  if (user.avatarUrl) {
+    userAvatarImg.src = user.avatarUrl;
+  } else {
+    userAvatarImg.removeAttribute("src");
+  }
+  userNameSpan.innerText = user.name || user.email || "Google user";
+  userEmailSpan.innerText = user.email || "";
+}
+
+function logPopupAuthError(context, response) {
+  const runtimeError = chrome.runtime.lastError;
+  console.error(`[AetherCP Auth Popup] ${context}`, {
+    runtimeError: runtimeError ? runtimeError.message : null,
+    response
+  });
+}
+
 function checkAuthStatus() {
   chrome.runtime.sendMessage({ type: MESSAGE_TYPES.GET_CURRENT_USER }, (response) => {
-    authLoadingDiv.style.display = "none";
     if (chrome.runtime.lastError || !response || !response.ok || !response.user) {
-      authLoggedOutDiv.style.display = "block";
-      authLoggedInDiv.style.display = "none";
-      userEmailSpan.innerText = "";
+      if (chrome.runtime.lastError || response?.debugError) {
+        logPopupAuthError("Current user check failed.", response);
+      }
+      renderLoggedOut();
     } else {
-      authLoggedOutDiv.style.display = "none";
-      authLoggedInDiv.style.display = "block";
-      userEmailSpan.innerText = response.user.email;
+      renderLoggedIn(response.user);
     }
   });
 }
 
 googleSignInBtn.addEventListener("click", () => {
-  authLoadingDiv.style.display = "block";
+  setAuthLoading(true);
   authLoggedOutDiv.style.display = "none";
   authLoggedInDiv.style.display = "none";
 
   chrome.runtime.sendMessage({ type: MESSAGE_TYPES.SIGN_IN_GOOGLE }, (response) => {
     if (chrome.runtime.lastError || !response || !response.ok) {
+      logPopupAuthError("Google sign-in failed.", response);
       const errorMsg = response?.error || "Google Sign-In failed";
       alert(errorMsg);
+      renderLoggedOut();
+      return;
     }
-    checkAuthStatus();
+    renderLoggedIn(response.user);
   });
 });
 
 signOutBtn.addEventListener("click", () => {
-  authLoadingDiv.style.display = "block";
+  setAuthLoading(true);
   authLoggedOutDiv.style.display = "none";
   authLoggedInDiv.style.display = "none";
 
   chrome.runtime.sendMessage({ type: MESSAGE_TYPES.SIGN_OUT }, (response) => {
     if (chrome.runtime.lastError || !response || !response.ok) {
+      logPopupAuthError("Sign-out failed.", response);
       const errorMsg = response?.error || "Sign-Out failed";
       alert(errorMsg);
+      checkAuthStatus();
+      return;
     }
-    checkAuthStatus();
+    renderLoggedOut();
   });
 });
 
@@ -278,4 +320,3 @@ checkCphStatus();
 
 // Check auth status once when popup opens
 checkAuthStatus();
-
