@@ -1,4 +1,5 @@
 -- schema.sql
+-- AetherCP Supabase cloud backup table schema
 -- Run this in your Supabase SQL Editor to initialize the database table and RLS policies.
 
 CREATE TABLE IF NOT EXISTS public.user_data (
