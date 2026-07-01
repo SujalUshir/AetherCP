@@ -213,6 +213,60 @@ cphSendBtn.addEventListener("click", () => {
 });
 
 // ──────────────────────────────────────────────
+// Authentication Flow
+// ──────────────────────────────────────────────
+
+const authLoadingDiv   = document.getElementById("authLoading");
+const authLoggedOutDiv = document.getElementById("authLoggedOut");
+const authLoggedInDiv  = document.getElementById("authLoggedIn");
+const userEmailSpan    = document.getElementById("userEmail");
+const googleSignInBtn  = document.getElementById("googleSignInBtn");
+const signOutBtn       = document.getElementById("signOutBtn");
+
+function checkAuthStatus() {
+  chrome.runtime.sendMessage({ type: MESSAGE_TYPES.GET_CURRENT_USER }, (response) => {
+    authLoadingDiv.style.display = "none";
+    if (chrome.runtime.lastError || !response || !response.ok || !response.user) {
+      authLoggedOutDiv.style.display = "block";
+      authLoggedInDiv.style.display = "none";
+      userEmailSpan.innerText = "";
+    } else {
+      authLoggedOutDiv.style.display = "none";
+      authLoggedInDiv.style.display = "block";
+      userEmailSpan.innerText = response.user.email;
+    }
+  });
+}
+
+googleSignInBtn.addEventListener("click", () => {
+  authLoadingDiv.style.display = "block";
+  authLoggedOutDiv.style.display = "none";
+  authLoggedInDiv.style.display = "none";
+
+  chrome.runtime.sendMessage({ type: MESSAGE_TYPES.SIGN_IN_GOOGLE }, (response) => {
+    if (chrome.runtime.lastError || !response || !response.ok) {
+      const errorMsg = response?.error || "Google Sign-In failed";
+      alert(errorMsg);
+    }
+    checkAuthStatus();
+  });
+});
+
+signOutBtn.addEventListener("click", () => {
+  authLoadingDiv.style.display = "block";
+  authLoggedOutDiv.style.display = "none";
+  authLoggedInDiv.style.display = "none";
+
+  chrome.runtime.sendMessage({ type: MESSAGE_TYPES.SIGN_OUT }, (response) => {
+    if (chrome.runtime.lastError || !response || !response.ok) {
+      const errorMsg = response?.error || "Sign-Out failed";
+      alert(errorMsg);
+    }
+    checkAuthStatus();
+  });
+});
+
+// ──────────────────────────────────────────────
 // Startup
 // ──────────────────────────────────────────────
 
@@ -221,4 +275,7 @@ setInterval(updatePopup, 1000);
 
 // Check CPH status once when popup opens
 checkCphStatus();
+
+// Check auth status once when popup opens
+checkAuthStatus();
 

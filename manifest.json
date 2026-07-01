@@ -3,7 +3,7 @@
   "name": "AetherCP",
   "version": "1.2.0",
   "description": "Track your Codeforces problem-solving sessions. View analytics, heatmaps, and problem history directly on your Codeforces profile.",
-  "permissions": ["storage", "tabs", "contextMenus"],
+  "permissions": ["storage", "tabs", "contextMenus", "identity"],
   "host_permissions": [
     "https://codeforces.com/*",
     "http://localhost:27121/*",

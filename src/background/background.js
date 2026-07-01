@@ -1,5 +1,7 @@
 importScripts(
   "../shared/constants.js",
+  "../vendor/supabase.js",
+  "../services/authService.js",
   "../utils/timezone.js",
   "../utils/time.js",
   "../modules/problem-tracking/problemKeys.js",
@@ -443,6 +445,37 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     checkCphReceiver().then((status) => {
       sendResponse(status);
     });
+    return true;
+  }
+
+  // ── Authentication ────────────────────────────────────────────────
+  if (message.type === MESSAGE_TYPES.SIGN_IN_GOOGLE) {
+    signInWithGoogle()
+      .then((user) => sendResponse({ ok: true, user }))
+      .catch((err) => {
+        console.error("[AetherCP Auth] Sign in failed:", err);
+        sendResponse({ ok: false, error: err.message || "Failed to sign in with Google" });
+      });
+    return true;
+  }
+
+  if (message.type === MESSAGE_TYPES.SIGN_OUT) {
+    signOut()
+      .then(() => sendResponse({ ok: true }))
+      .catch((err) => {
+        console.error("[AetherCP Auth] Sign out failed:", err);
+        sendResponse({ ok: false, error: err.message || "Failed to sign out" });
+      });
+    return true;
+  }
+
+  if (message.type === MESSAGE_TYPES.GET_CURRENT_USER) {
+    getCurrentUser()
+      .then((user) => sendResponse({ ok: true, user }))
+      .catch((err) => {
+        console.error("[AetherCP Auth] Get current user failed:", err);
+        sendResponse({ ok: false, error: err.message || "Failed to get user" });
+      });
     return true;
   }
 

@@ -116,3 +116,73 @@ h2{
     color:#c5221f;
 }
 
+/* ── Auth Section ────────────────────────────────────────── */
+
+.authButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.googleBtn {
+    background: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+}
+
+.googleBtn:hover {
+    background: #f8f9fa;
+    border-color: #d2e3fc;
+    box-shadow: 0 1px 3px rgba(60,64,67,0.15);
+}
+
+.googleIcon {
+    flex-shrink: 0;
+}
+
+.userContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.userEmail {
+    font-size: 12px;
+    color: #3c4043;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 170px;
+}
+
+.signOutBtn {
+    background: transparent;
+    color: #d93025;
+    border: 1px solid #fad2cf;
+    padding: 4px 10px;
+    width: auto;
+    font-size: 11px;
+}
+
+.signOutBtn:hover {
+    background: #fce8e6;
+    border-color: #f28b82;
+}
+
+#authLoading {
+    font-size: 13px;
+    color: #5f6368;
+    text-align: center;
+    padding: 4px 0;
+}
+
