@@ -61,9 +61,10 @@ Open problems directly in VS Code with one click using Competitive Companion.
 Features:
 
 * 🚀 One-click "Open in VS Code"
-* 📥 Automatically imports sample test cases
 * 💻 Works with the Competitive Programming Helper (CPH) extension
 * ⚡ Faster solve-test-submit workflow
+* 📥 Automatically imports sample test cases
+
 
 ---
 
