@@ -47,7 +47,10 @@ const EMPTY_STATE = {
 
 let lastActiveSessionState = null;
 
-async function getState() {
+async function getState(bypassLock = false) {
+  if (!bypassLock) {
+    await awaitSyncLock();
+  }
   const data = await chrome.storage.local.get(STORAGE_KEY);
   const state = {
     ...EMPTY_STATE,
@@ -72,7 +75,12 @@ async function getState() {
   return state;
 }
 
-async function saveState(state) {
+async function saveState(state, bypassLock = false) {
+  if (!bypassLock) {
+    console.log("[AetherCP Sync] SAVE BLOCKED... waiting for lock resolution inside saveState()");
+    await awaitSyncLock();
+    console.log("[AetherCP Sync] SAVE RESUMED... lock resolved inside saveState()");
+  }
   state.updated_at = new Date().toISOString();
 
   const wasTicking = lastActiveSessionState !== null;
@@ -514,7 +522,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   if (message.type === MESSAGE_TYPES.SIGN_OUT) {
     signOut()
-      .then(() => sendResponse({ ok: true }))
+      .then(async () => {
+        // Clear local storage on sign out for multi-user isolation
+        await chrome.storage.local.remove([
+          STORAGE_KEY,
+          "aethercp_sync_status",
+          "aethercp_sync_dirty",
+          "aethercp_last_backup_time"
+        ]);
+        sendResponse({ ok: true });
+      })
       .catch((err) => {
         logAuthError("Background sign-out handler failed.", err, {
           messageType: message.type

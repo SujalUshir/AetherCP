@@ -3,6 +3,58 @@
  * Coordinates backup and restore operations with Supabase.
  */
 
+const SYNC_STATES = {
+  UNINITIALIZED: "UNINITIALIZED",
+  RESTORING:     "RESTORING",
+  READY:         "READY",
+  SYNCING:       "SYNCING",
+  ERROR:         "ERROR"
+};
+
+let _currentSyncState = SYNC_STATES.UNINITIALIZED;
+let _syncLockPromise = null;
+let _syncLockResolve = null;
+
+function getSyncState() {
+  return _currentSyncState;
+}
+
+function setSyncState(state) {
+  console.log(`[AetherCP Sync] STATE TRANSITION: ${_currentSyncState} -> ${state}`);
+  _currentSyncState = state;
+}
+
+function acquireSyncLock() {
+  if (_syncLockPromise) {
+    console.log("[AetherCP Sync] Lock already held.");
+    return;
+  }
+  console.log("[AetherCP Sync] LOCK ACQUIRED");
+  _syncLockPromise = new Promise((resolve) => {
+    _syncLockResolve = resolve;
+  });
+}
+
+function releaseSyncLock() {
+  if (!_syncLockPromise) {
+    console.log("[AetherCP Sync] Lock is not held.");
+    return;
+  }
+  console.log("[AetherCP Sync] LOCK RELEASED");
+  if (_syncLockResolve) {
+    _syncLockResolve();
+  }
+  _syncLockPromise = null;
+  _syncLockResolve = null;
+}
+
+async function awaitSyncLock() {
+  if (_syncLockPromise) {
+    console.log("[AetherCP Sync] WAITING... for sync lock");
+    await _syncLockPromise;
+  }
+}
+
 // Helper to retrieve sync status
 async function getSyncStatus() {
   const res = await chrome.storage.local.get("aethercp_sync_status");
@@ -50,7 +102,7 @@ async function downloadBackup() {
   const user = await getCurrentUser();
   if (!user) return null;
 
-  console.log("[AetherCP Sync] Download started");
+  console.log("[AetherCP Sync] DOWNLOAD START");
   try {
     const client = getSupabaseClient();
     const { data, error, status } = await client
@@ -63,10 +115,10 @@ async function downloadBackup() {
       throw error;
     }
 
-    console.log("[AetherCP Sync] Download success");
+    console.log("[AetherCP Sync] DOWNLOAD END (Success)");
     return data || null;
   } catch (err) {
-    console.error("[AetherCP Sync] Download failed", err);
+    console.error("[AetherCP Sync] DOWNLOAD END (Failed)", err);
     return null;
   }
 }
@@ -86,7 +138,8 @@ async function uploadBackup(state) {
     return;
   }
 
-  console.log("[AetherCP Sync] Upload started");
+  console.log("[AetherCP Sync] UPLOAD START");
+  setSyncState(SYNC_STATES.SYNCING);
   await setSyncStatus("Uploading");
 
   try {
@@ -103,22 +156,24 @@ async function uploadBackup(state) {
         user_id: user.id,
         data: state,
         updated_at: state.updated_at,
-        version: 1 // version=1 outside the JSON for future migrations
+        version: 1
       }, { onConflict: "user_id" });
 
     if (error) {
       throw error;
     }
 
-    console.log("[AetherCP Sync] Upload success");
+    console.log("[AetherCP Sync] UPLOAD END (Success)");
     await setSyncStatus("Synced");
     await setSyncDirty(false);
     await setLastBackupTime(Date.now());
+    setSyncState(SYNC_STATES.READY);
   } catch (err) {
-    console.error("[AetherCP Sync] Upload failed", err);
+    console.error("[AetherCP Sync] UPLOAD END (Failed)", err);
     console.log("[AetherCP Sync] Pending Sync");
     await setSyncStatus("Pending Sync");
     await setSyncDirty(true);
+    setSyncState(SYNC_STATES.ERROR);
     console.log("[AetherCP Sync] Retry scheduled");
   }
 }
@@ -147,8 +202,17 @@ async function performSync(localState) {
   } else if (cloudTime > localTime) {
     console.log("[AetherCP Sync] Cloud newer");
     const cloudState = cloudBackup.data;
-    // Replace local storage with cloud state
-    await saveState(cloudState);
+    // Replace local storage with cloud state (bypassing the sync lock)
+    await saveState(cloudState, true);
+    
+    // Verify storage write matches cloudState before releasing the lock
+    const verifyData = await chrome.storage.local.get(STORAGE_KEY);
+    const verifyState = verifyData[STORAGE_KEY];
+    if (!verifyState || verifyState.updated_at !== cloudState.updated_at) {
+      throw new Error("[AetherCP Sync] Verification failed: storage write did not match downloaded state!");
+    }
+    console.log("[AetherCP Sync] Verification success: storage matches downloaded cloud backup.");
+
     await setSyncStatus("Synced");
     await setSyncDirty(false);
     // Align last backup timestamp
@@ -167,8 +231,30 @@ async function performSync(localState) {
  * Triggered on successful login.
  */
 async function syncOnLogin() {
-  const localState = await getState();
-  await performSync(localState);
+  setSyncState(SYNC_STATES.RESTORING);
+  acquireSyncLock();
+  try {
+    const localState = await getState(true); // bypass lock
+    await performSync(localState);
+    
+    // Verify restored state if authenticated
+    const user = await getCurrentUser();
+    if (user) {
+      const stored = await chrome.storage.local.get(STORAGE_KEY);
+      if (stored[STORAGE_KEY]) {
+        console.log("[AetherCP Sync] Restored state verification: SUCCESS");
+      } else {
+        console.warn("[AetherCP Sync] Restored state verification: empty state in storage!");
+      }
+    }
+    setSyncState(SYNC_STATES.READY);
+  } catch (err) {
+    console.error("[AetherCP Sync] Post-login sync failed:", err);
+    setSyncState(SYNC_STATES.ERROR);
+    throw err;
+  } finally {
+    releaseSyncLock();
+  }
 }
 
 /**
@@ -176,21 +262,37 @@ async function syncOnLogin() {
  */
 async function syncOnStartup() {
   const user = await getCurrentUser();
-  if (!user) return;
+  if (!user) {
+    setSyncState(SYNC_STATES.READY);
+    return;
+  }
 
-  const state = await getState();
-  if (isTimerTicking(state)) return;
+  setSyncState(SYNC_STATES.RESTORING);
+  acquireSyncLock();
+  try {
+    const state = await getState(true); // bypass lock
+    if (isTimerTicking(state)) {
+      setSyncState(SYNC_STATES.READY);
+      return;
+    }
 
-  const isDirty = await getSyncDirty();
-  const status = await getSyncStatus();
+    const isDirty = await getSyncDirty();
+    const status = await getSyncStatus();
 
-  // If sync is pending, local has updates, or status was offline/pending
-  if (isDirty || status === "Pending Sync" || status === "Offline") {
-    console.log("[AetherCP Sync] Retrying pending backup on startup...");
-    await performSync(state);
-  } else {
-    // Do a general comparison sync
-    await performSync(state);
+    // If sync is pending, local has updates, or status was offline/pending
+    if (isDirty || status === "Pending Sync" || status === "Offline") {
+      console.log("[AetherCP Sync] Retrying pending backup on startup...");
+      await performSync(state);
+    } else {
+      // Do a general comparison sync
+      await performSync(state);
+    }
+    setSyncState(SYNC_STATES.READY);
+  } catch (err) {
+    console.error("[AetherCP Sync] Startup sync execution failed:", err);
+    setSyncState(SYNC_STATES.ERROR);
+  } finally {
+    releaseSyncLock();
   }
 }
 
