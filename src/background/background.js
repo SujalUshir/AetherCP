@@ -47,10 +47,7 @@ const EMPTY_STATE = {
 
 let lastActiveSessionState = null;
 
-async function getState(bypassLock = false) {
-  if (!bypassLock) {
-    await awaitSyncLock();
-  }
+async function getState() {
   const data = await chrome.storage.local.get(STORAGE_KEY);
   const state = {
     ...EMPTY_STATE,
@@ -69,36 +66,19 @@ async function getState(bypassLock = false) {
     }
   };
 
-  // Sync session tracking in memory
   lastActiveSessionState = state.activeSession;
 
   return state;
 }
 
-async function saveState(state, bypassLock = false) {
-  if (!bypassLock) {
-    console.log("[AetherCP Sync] SAVE BLOCKED... waiting for lock resolution inside saveState()");
-    await awaitSyncLock();
-    console.log("[AetherCP Sync] SAVE RESUMED... lock resolved inside saveState()");
-  }
+async function saveState(state) {
   state.updated_at = new Date().toISOString();
-
-  const wasTicking = lastActiveSessionState !== null;
-  const isTicking = state.activeSession !== null;
 
   lastActiveSessionState = state.activeSession;
 
-  await chrome.storage.local.set({
-    [STORAGE_KEY]: state
-  });
+  await chrome.storage.local.set({ [STORAGE_KEY]: state });
 
-  if (wasTicking && !isTicking) {
-    // Coding session completed! Schedule deferred upload.
-    scheduleDeferredUpload();
-  } else if (!isTicking) {
-    // Other settings/problem history changes while idle: set dirty flag
-    setSyncDirty(true).catch(() => {});
-  }
+  markDirty();
 }
 
 function isProblemUrl(url) {
@@ -521,15 +501,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 
   if (message.type === MESSAGE_TYPES.SIGN_OUT) {
-    signOut()
-      .then(async () => {
-        // Clear local storage on sign out for multi-user isolation
-        await chrome.storage.local.remove([
-          STORAGE_KEY,
-          "aethercp_sync_status",
-          "aethercp_sync_dirty",
-          "aethercp_last_backup_time"
-        ]);
+    syncOnLogout()
+      .then(() => {
         sendResponse({ ok: true });
       })
       .catch((err) => {
