@@ -45,7 +45,7 @@ const TECH_STACK = [
 
 export function AboutHero() {
   return (
-    <section className="relative border-b border-border/40 bg-background overflow-hidden">
+    <section className="relative border-b border-white/5 bg-background overflow-hidden">
       {/* --- Desktop / Tablet: Image with overlaid text --- */}
       <div className="hidden sm:block">
         <motion.div
