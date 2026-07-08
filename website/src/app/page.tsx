@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Hero }              from "@/components/home/Hero";
-import { ProductPreview }    from "@/components/home/ProductPreview";
+import { WhyAetherCP }       from "@/components/home/WhyAetherCP";
 import { AnalyticsShowcase } from "@/components/home/AnalyticsShowcase";
 import { CFAnalytics }       from "@/components/home/CFAnalytics";
+import { FeatureTimeline }   from "@/components/home/FeatureTimeline";
 import { FeatureGrid }       from "@/components/home/FeatureGrid";
 import { FinalCTA }          from "@/components/home/FinalCTA";
 
@@ -17,9 +18,10 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ProductPreview />
+      <WhyAetherCP />
       <AnalyticsShowcase />
       <CFAnalytics />
+      <FeatureTimeline />
       <FeatureGrid />
       <FinalCTA />
     </>
