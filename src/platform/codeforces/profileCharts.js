@@ -313,7 +313,7 @@ function renderCFTopicLegend(topics, colors, total) {
     return;
   }
 
-  legend.innerHTML = "";
+  legend.replaceChildren();
 
   if (!topics.length) {
     const item = document.createElement("li");
