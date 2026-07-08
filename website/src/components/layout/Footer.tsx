@@ -9,11 +9,11 @@ import { FadeIn } from "@/components/motion";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border/60 bg-background/80 pt-16 pb-8">
+    <footer className="relative border-t border-white/5 bg-bg-darker/40 pt-20 pb-10">
       {/* Top gradient line */}
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent"
       />
 
       <FadeIn margin="-40px">
@@ -83,7 +83,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-xs text-muted-foreground sm:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-xs text-muted-foreground/60 sm:flex-row">
           <p>
             © {new Date().getFullYear()} AetherCP. Open source under the MIT
             License.
