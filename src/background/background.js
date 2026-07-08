@@ -493,8 +493,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
         sendResponse({
           ok: false,
-          error: getFriendlyAuthError(err, "Google Sign-In failed."),
-          debugError: serializeError(err)
+          error: getFriendlyAuthError(err, "Google Sign-In failed.")
         });
       });
     return true;
@@ -511,8 +510,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
         sendResponse({
           ok: false,
-          error: getFriendlyAuthError(err, "Sign-Out failed."),
-          debugError: serializeError(err)
+          error: getFriendlyAuthError(err, "Sign-Out failed.")
         });
       });
     return true;
@@ -527,8 +525,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
         sendResponse({
           ok: false,
-          error: getFriendlyAuthError(err, "Failed to get user."),
-          debugError: serializeError(err)
+          error: getFriendlyAuthError(err, "Failed to get user.")
         });
       });
     return true;
