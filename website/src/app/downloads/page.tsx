@@ -58,34 +58,32 @@ export default function DownloadsPage() {
             </p>
           </FadeUp>
         </Container>
-      </section>
-
-      {/* Download Options */}
+      </section>      {/* Download Options */}
       <section className="pb-16">
         <Container>
-          <StaggerFadeUp className="grid gap-4 sm:grid-cols-3">
+          <StaggerFadeUp className="grid gap-6 sm:grid-cols-3">
             {/* Chrome Web Store */}
             <StaggerItem>
-              <div className="flex flex-col gap-4 rounded-2xl border border-white/5 bg-bg-dark/50 p-6 h-full">
+              <div className="flex flex-col gap-5 rounded-2xl p-8 h-full card-premium noise-overlay">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-blue/10">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-blue/10 border border-accent-blue/10">
                     <Chrome className="h-5 w-5 text-accent-blue" />
                   </div>
                   <div>
                     <p className="font-semibold text-sm">Chrome Web Store</p>
-                    <p className="text-[10px] text-muted-foreground">One-click install</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">One-click install</p>
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed flex-grow">
                   The recommended installation method. Install directly from the Chrome Web Store without enabling Developer Mode.
                 </p>
-                <div className="rounded-lg border border-accent-orange/20 bg-accent-orange/5 p-3">
-                  <div className="flex items-center gap-2 text-[10px] text-accent-orange">
+                <div className="rounded-xl border border-accent-orange/15 bg-accent-orange/5 p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.01)]">
+                  <div className="flex items-center gap-2 text-[10px] text-accent-orange font-semibold">
                     <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                     Under review — available soon
                   </div>
                 </div>
-                <Button variant="outline" disabled className="w-full" aria-disabled>
+                <Button variant="outline" disabled className="w-full rounded-xl" aria-disabled>
                   <Chrome className="mr-2 h-4 w-4" />
                   Coming Soon
                 </Button>
@@ -94,21 +92,21 @@ export default function DownloadsPage() {
 
             {/* GitHub Releases */}
             <StaggerItem>
-              <div className="flex flex-col gap-4 rounded-2xl border border-accent-blue/20 bg-bg-dark/50 p-6 shadow-lg shadow-accent-blue/5 h-full">
+              <div className="flex flex-col gap-5 rounded-2xl p-8 h-full card-premium noise-overlay border-accent-blue/20 shadow-lg shadow-accent-blue/5">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-blue/10">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-blue/10 border border-accent-blue/10">
                     <FileArchive className="h-5 w-5 text-accent-blue" />
                   </div>
                   <div>
                     <p className="font-semibold text-sm">GitHub Releases</p>
-                    <p className="text-[10px] text-muted-foreground">ZIP — v1.2.0</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">ZIP — v1.2.0</p>
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed flex-grow">
                   Download the latest ZIP from GitHub and load it as an unpacked extension. See installation steps below.
                 </p>
-                <div className="text-[10px] text-muted-foreground">Released June 2026 · MIT License</div>
-                <Button asChild className="w-full" id="download-zip">
+                <div className="text-[10px] text-muted-foreground/60 font-medium">Released June 2026 · MIT License</div>
+                <Button asChild className="w-full rounded-xl" id="download-zip">
                   <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer">
                     <Download className="mr-2 h-4 w-4 btn-icon-download" />
                     Download v1.2.0 ZIP
@@ -119,21 +117,21 @@ export default function DownloadsPage() {
 
             {/* Source */}
             <StaggerItem>
-              <div className="flex flex-col gap-4 rounded-2xl border border-white/5 bg-bg-dark/50 p-6 h-full">
+              <div className="flex flex-col gap-5 rounded-2xl p-8 h-full card-premium noise-overlay">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-emerald/10">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-emerald/10 border border-accent-emerald/10">
                     <Github className="h-5 w-5 text-accent-emerald" />
                   </div>
                   <div>
                     <p className="font-semibold text-sm">Source Code</p>
-                    <p className="text-[10px] text-muted-foreground">Build from source</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Build from source</p>
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed flex-grow">
                   Clone the repository and build from source. Full access to the codebase, tests, and development workflow.
                 </p>
-                <div className="text-[10px] text-muted-foreground">JavaScript · MIT License · Open Source</div>
-                <Button variant="outline" asChild className="w-full" id="download-source">
+                <div className="text-[10px] text-muted-foreground/60 font-medium">JavaScript · MIT License · Open Source</div>
+                <Button variant="outline" asChild className="w-full rounded-xl" id="download-source">
                   <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
                     <Github className="mr-2 h-4 w-4 btn-icon-github" />
                     View on GitHub
@@ -147,14 +145,14 @@ export default function DownloadsPage() {
       </section>
 
       {/* System Requirements */}
-      <section className="py-12 border-t border-border/60">
+      <section className="py-16 border-t border-white/5">
         <Container size="md">
           <FadeUp>
-            <h2 className="mb-6 text-xl font-semibold">System Requirements</h2>
-            <ul className="grid gap-3 sm:grid-cols-2">
+            <h2 className="mb-8 text-2xl font-bold tracking-tight text-center sm:text-left">System Requirements</h2>
+            <ul className="grid gap-4 sm:grid-cols-2">
               {REQUIREMENTS.map((r, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
-                  <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent-blue" />
+                <li key={i} className="flex items-start gap-3.5 text-sm text-muted-foreground" style={{ contentVisibility: 'auto' }}>
+                  <Info className="mt-0.5 h-4.5 w-4.5 shrink-0 text-accent-blue" />
                   <span>{r}</span>
                 </li>
               ))}
@@ -164,21 +162,21 @@ export default function DownloadsPage() {
       </section>
 
       {/* Installation Guide */}
-      <section className="py-12 border-t border-border/60">
+      <section className="py-16 border-t border-white/5 bg-bg-darker/10">
         <Container size="md">
-          <FadeUp className="mb-8">
-            <h2 className="text-xl font-semibold">Manual Installation Guide</h2>
+          <FadeUp className="mb-10 text-center sm:text-left">
+            <h2 className="text-2xl font-bold tracking-tight">Manual Installation Guide</h2>
           </FadeUp>
-          <StaggerFadeUp className="flex flex-col gap-4">
+          <StaggerFadeUp className="flex flex-col gap-5">
             {INSTALL_STEPS.map((s) => (
               <StaggerItem key={s.step}>
-                <div className="flex items-start gap-4 rounded-2xl border border-white/5 bg-bg-dark/50 p-5">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-blue/10 text-sm font-bold text-accent-blue border border-accent-blue/20">
+                <div className="flex items-start gap-5 p-6 card-premium noise-overlay">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-blue/10 text-sm font-bold text-accent-blue border border-accent-blue/20">
                     {s.step}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-sm">{s.title}</h3>
-                    <div className="mt-1 text-sm text-muted-foreground">{s.body}</div>
+                    <h3 className="font-semibold text-base text-foreground">{s.title}</h3>
+                    <div className="mt-1.5 text-sm leading-relaxed text-muted-foreground/80">{s.body}</div>
                   </div>
                 </div>
               </StaggerItem>
@@ -188,17 +186,17 @@ export default function DownloadsPage() {
       </section>
 
       {/* Release Notes */}
-      <section className="py-12 border-t border-border/60">
+      <section className="py-16 border-t border-white/5 bg-bg-darker/5">
         <Container size="md">
-          <FadeUp className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold">Release Notes — v1.2.0</h2>
-            <Link href="/changelog" className="text-sm text-accent-blue hover:underline">Full Changelog →</Link>
+          <FadeUp className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold tracking-tight">Release Notes — v1.2.0</h2>
+            <Link href="/changelog" className="text-sm font-semibold text-accent-blue hover:underline">Full Changelog →</Link>
           </FadeUp>
-          <StaggerFadeUp className="flex flex-col gap-2">
+          <StaggerFadeUp className="flex flex-col gap-3">
             {RELEASE_NOTES.map((note, i) => (
               <StaggerItem key={i}>
-                <div className="flex items-start gap-3 text-sm text-muted-foreground">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent-emerald" />
+                <div className="flex items-start gap-3.5 text-sm text-muted-foreground">
+                  <CheckCircle2 className="mt-0.5 h-4.5 w-4.5 shrink-0 text-accent-emerald" />
                   <span>{note}</span>
                 </div>
               </StaggerItem>
