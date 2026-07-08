@@ -57,7 +57,7 @@ function renderAetherOverview(root, analytics) {
   const overview = root.querySelector("[data-aether-overview]");
   overview.className = "aethercp-overview-grid";
 
-  overview.innerHTML = "";
+  overview.replaceChildren();
 
   const cards = [
     ["Total coding time", formatDurationShort(analytics.totalCodingSeconds)],
@@ -84,7 +84,7 @@ function renderAetherOverview(root, analytics) {
 
 function renderAetherHistory(root, problems) {
   const tbody = root.querySelector("[data-aether-history-body]");
-  tbody.innerHTML = "";
+  tbody.replaceChildren();
 
   const recentProblems = (problems || []).slice(0, 5);
 
@@ -218,11 +218,11 @@ function renderAetherHeatmap(root, analytics, selectedYear) {
 
   grid.style.gridTemplateColumns = gridCols;
   grid.style.gridTemplateRows = "repeat(7, 12px)";
-  grid.innerHTML = "";
+  grid.replaceChildren();
 
   if (monthsContainer) {
     monthsContainer.style.gridTemplateColumns = gridCols;
-    monthsContainer.innerHTML = "";
+    monthsContainer.replaceChildren();
   }
 
   // ── Weekday labels (first column) ───────────────────────────
