@@ -98,23 +98,23 @@ function ScreenshotItem({ item, index }: { item: typeof SCREENSHOT_SECTIONS[0]; 
       className="flex flex-col gap-6"
     >
       {/* Label */}
-      <div className="flex items-start gap-3">
-        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary border border-primary/20">
+      <div className="flex items-start gap-4">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary border border-primary/20 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]">
           {index + 1}
         </span>
         <div>
-          <h2 className="text-lg font-semibold">{item.title}</h2>
-          <div className="text-sm text-muted-foreground">{item.description}</div>
+          <h2 className="text-xl font-bold tracking-tight text-foreground">{item.title}</h2>
+          <div className="text-sm leading-relaxed text-muted-foreground/80 mt-1">{item.description}</div>
         </div>
       </div>
 
       {/* Browser frame with real screenshot */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.97 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 + 0.04 * index }}
       >
-        <BrowserFrame url={item.url} size="lg">
+        <BrowserFrame url={item.url} size="lg" className="card-premium">
           <div className="flex justify-center w-full py-4">
             <Image
               src={item.src}
