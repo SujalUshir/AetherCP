@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -20,20 +20,20 @@
 @layer base {
   :root {
     /* Foundation Colors */
-    --background:         0 0% 24%; /* #3D3D3D (Primary Base) */
-    --foreground:         48 42% 89%; /* #F0EBD8 (Primary Warm Accent) */
+    --background:         240 10% 3.9%; /* #09090b (Rich black base) */
+    --foreground:         48 30% 92%; /* #F5F4EF (Warm Off-white cream) */
 
     /* Layered Backgrounds */
-    --bg-darker:          0 0% 18%; /* #2E2E2E */
-    --bg-dark:            0 0% 21%; /* #353535 */
-    --bg-light:           0 0% 27%; /* #444444 */
-    --bg-lighter:         0 0% 31%; /* #505050 */
+    --bg-darker:          240 10% 2%; /* #050506 */
+    --bg-dark:            240 10% 5.5%; /* #0e0e11 */
+    --bg-light:           240 6% 9%; /* #18181b */
+    --bg-lighter:         240 6% 15%; /* #27272a */
 
     /* Surfaces & Cards */
-    --card:               0 0% 21%; /* #353535 */
-    --card-foreground:    48 42% 89%;
-    --popover:            0 0% 18%;
-    --popover-foreground: 48 42% 89%;
+    --card:               240 10% 5.5%; /* #0e0e11 */
+    --card-foreground:    48 30% 92%;
+    --popover:            240 10% 5.5%;
+    --popover-foreground: 48 30% 92%;
 
     /* Warm Surfaces */
     --surface-warm-100:   48 42% 89%; /* #F0EBD8 */
@@ -42,28 +42,28 @@
 
     /* Core Action Colors */
     --primary:            48 42% 89%; /* #F0EBD8 */
-    --primary-foreground: 0 0% 18%; /* #2E2E2E */
+    --primary-foreground: 240 10% 3.9%; /* #09090b */
     
-    --secondary:          0 0% 27%; /* #444444 */
-    --secondary-foreground: 48 42% 89%;
+    --secondary:          240 6% 9%; /* #18181b */
+    --secondary-foreground: 48 30% 92%;
 
-    --muted:              0 0% 20%;
-    --muted-foreground:   48 12% 70%; /* #BDB9AC */
+    --muted:              240 6% 9%;
+    --muted-foreground:   240 5% 65%; /* Soft gray */
 
     /* Accent Palette (Refined & Muted) */
-    --accent-blue:        207 44% 60%; /* Muted Blue */
-    --accent-amber:       38 65% 58%;  /* Warm Gold / Amber */
-    --accent-emerald:     125 18% 55%; /* Deep Emerald */
-    --accent-purple:      275 22% 64%; /* Dusty Purple */
-    --accent-orange:      14 55% 58%;  /* Soft Orange */
-    --accent-slate:       200 18% 54%; /* Slate Blue */
+    --accent-blue:        207 75% 62%; /* Vibrant Muted Blue */
+    --accent-amber:       38 82% 58%;  /* Vibrant Muted Amber */
+    --accent-emerald:     142 55% 50%; /* Deep Muted Emerald */
+    --accent-purple:      265 70% 66%; /* Vibrant Muted Purple */
+    --accent-orange:      16 85% 58%;  /* Vibrant Muted Orange */
+    --accent-slate:       215 15% 60%; /* Slate Gray */
 
-    --border:             0 0% 32%; /* #525252 */
-    --border-muted:       0 0% 28%;
-    --input:              0 0% 28%;
+    --border:             240 6% 12%; /* #1f1f23 */
+    --border-muted:       240 6% 8.5%;
+    --input:              240 6% 12%;
     --ring:               48 42% 89%;
 
-    --radius: 0.625rem; /* modern slight rounded corner scale */
+    --radius: 1rem; /* modern slightly larger rounded corner scale (16px) */
   }
 }
 
@@ -143,22 +143,22 @@
 
   /* Tangible Premium Card Styles */
   .card-premium {
-    background: linear-gradient(135deg, hsl(var(--bg-light) / 0.6) 0%, hsl(var(--bg-dark) / 0.8) 100%);
-    border: 1px solid rgba(240, 235, 216, 0.07);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 
-      0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 0 rgba(250, 248, 240, 0.05);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      0 4px 30px rgba(0, 0, 0, 0.4),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .card-premium:hover {
-    border-color: rgba(240, 235, 216, 0.15);
+    border-color: rgba(240, 235, 216, 0.2);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
     transform: translateY(-2px);
     box-shadow: 
-      0 12px 20px -8px rgba(0, 0, 0, 0.25),
-      0 4px 12px -2px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 0 rgba(250, 248, 240, 0.08);
+      0 12px 30px rgba(0, 0, 0, 0.55),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
   }
 
   /* Glowing Radial Lighting */
