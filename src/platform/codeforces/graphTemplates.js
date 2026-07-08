@@ -16,7 +16,23 @@
 const AETHER_PROFILE_ROOT_ID = "aethercp-profile-analytics";
 const AETHER_CF_ROOT_ID = "aethercp-cf-analytics";
 
+/**
+ * Escape special HTML characters to prevent XSS when embedding
+ * user-supplied strings (e.g. CF handle from the URL) into innerHTML.
+ * @param {string} str
+ * @returns {string}
+ */
+function htmlEscape(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function getCFAnalyticsTemplate(handle) {
+  const safeHandle = htmlEscape(handle || "Unknown");
   return `
     <section id="${AETHER_CF_ROOT_ID}" class="aethercp-profile-root aethercp-cf-root roundbox">
       <div class="roundbox-lt">&nbsp;</div>
@@ -47,7 +63,7 @@ function getCFAnalyticsTemplate(handle) {
               <h4>Solved Problems by Rating</h4>
               <p>Accepted Codeforces problems grouped by official problem rating.</p>
             </div>
-            <span class="aethercp-cf-handle">${handle || "Unknown"}</span>
+            <span class="aethercp-cf-handle">${safeHandle}</span>
           </div>
           <div class="aethercp-chart-box aethercp-rating-chart-box">
             <canvas id="aetherCFRatingChart"></canvas>
