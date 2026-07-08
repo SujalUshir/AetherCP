@@ -197,8 +197,7 @@ async function signInWithGoogle() {
 
   console.log("[AetherCP Auth] Initializing Google sign-in flow.", {
     supabaseUrl,
-    redirectUrl,
-    extensionId: chrome.runtime.id
+    redirectUrl
   });
 
   const { data, error } = await client.auth.signInWithOAuth({
@@ -274,7 +273,6 @@ async function signInWithGoogle() {
 
     console.log("[AetherCP Auth] Sign-in successful via PKCE.", {
       userId: exchangeData.user.id,
-      email: exchangeData.user.email,
       expiresAt: exchangeData.session.expires_at
     });
     return getAuthUserProfile(exchangeData.user);
@@ -320,7 +318,6 @@ async function signInWithGoogle() {
 
   console.log("[AetherCP Auth] Sign-in successful via implicit token callback.", {
     userId: sessionData.user.id,
-    email: sessionData.user.email,
     expiresAt: sessionData.session.expires_at
   });
   return getAuthUserProfile(sessionData.user);
@@ -342,15 +339,57 @@ async function signOut() {
 }
 
 /**
+ * Helper to detect network connectivity and reachability errors.
+ * Returns true only for genuine connectivity failures.
+ */
+function isNetworkOrUnreachableError(error) {
+  if (!error) {
+    return false;
+  }
+
+  if (typeof navigator !== "undefined" && navigator.onLine === false) {
+    return true;
+  }
+
+  const message = (error.message || String(error)).toLowerCase();
+  const networkMessages = [
+    "failed to fetch",
+    "networkerror",
+    "net::",
+    "dns failures",
+    "connection refused",
+    "timeout",
+    "navigator.online === false",
+    "http status 0"
+  ];
+
+  if (networkMessages.some((msg) => message.includes(msg))) {
+    return true;
+  }
+
+  const status = error.status || error.statusCode || error.code;
+  if (status !== undefined && status !== null) {
+    const numStatus = Number(status);
+    if (numStatus === 0 || (numStatus >= 500 && numStatus < 600)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
  * Returns the current authenticated user.
  * Automatically restores the session and refreshes token if expired.
  */
 async function getCurrentUser() {
   assertSupabaseConfigured();
   const client = getSupabaseClient();
+  let session = null;
   try {
     // getSession() will load from local storage and trigger auto-refresh if expired
-    const { data: { session }, error: sessionError } = await client.auth.getSession();
+    const { data: { session: currentSession }, error: sessionError } = await client.auth.getSession();
+    session = currentSession;
     if (sessionError || !session) {
       if (sessionError) {
         logAuthError("Supabase getSession failed.", sessionError);
@@ -363,6 +402,10 @@ async function getCurrentUser() {
       const { data: refreshData, error: refreshError } = await client.auth.refreshSession();
       if (refreshError) {
         logAuthError("Supabase refreshSession failed.", refreshError);
+        if (isNetworkOrUnreachableError(refreshError)) {
+          console.log("[AetherCP Auth] Network error during session refresh. Falling back to cached session user.");
+          return getAuthUserProfile(session.user);
+        }
         return null;
       }
 
@@ -375,11 +418,19 @@ async function getCurrentUser() {
     const { data: { user }, error: userError } = await client.auth.getUser();
     if (userError) {
       logAuthError("Supabase getUser failed.", userError);
+      if (isNetworkOrUnreachableError(userError)) {
+        console.log("[AetherCP Auth] Network error during getUser. Falling back to cached session user.");
+        return getAuthUserProfile(session.user);
+      }
       return null;
     }
     return getAuthUserProfile(user);
   } catch (err) {
     logAuthError("Error retrieving current user.", err);
+    if (session && isNetworkOrUnreachableError(err)) {
+      console.log("[AetherCP Auth] Exception caught during getUser/refresh. Falling back to cached session user.", err);
+      return getAuthUserProfile(session.user);
+    }
     return null;
   }
 }
