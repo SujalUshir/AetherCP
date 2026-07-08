@@ -59,16 +59,15 @@ export function WhyAetherCP() {
                 key={item.id}
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.1 + i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 0.1 + i * 0.08, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                  "group relative flex flex-col gap-4 rounded-2xl border border-white/5 bg-gradient-to-b from-bg-light/35 to-bg-dark/65 p-7 shadow-sm noise-overlay",
-                  "transition-all duration-300 hover:-translate-y-1 hover:border-white/10 hover:shadow-xl hover:shadow-black/15",
+                  "group relative flex flex-col gap-4 rounded-2xl p-8 card-premium noise-overlay",
                   style.glow
                 )}
               >
                 {/* Icon */}
                 <div className={cn(
-                  "flex h-11 w-11 items-center justify-center rounded-xl border",
+                  "flex h-12 w-12 items-center justify-center rounded-2xl border",
                   style.bg, style.border,
                   "transition-transform duration-300 group-hover:scale-110"
                 )}>
@@ -76,16 +75,16 @@ export function WhyAetherCP() {
                 </div>
 
                 {/* Text */}
-                <div className="flex flex-col gap-1.5">
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+                <div className="flex flex-col gap-2 mt-2">
+                  <h3 className="font-semibold text-lg text-foreground">{item.title}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground/80">{item.body}</p>
                 </div>
 
                 {/* Hover glow overlay */}
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, hsl(48 42% 89% / 0.03), transparent)" }}
+                  style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, hsl(var(--primary) / 0.03), transparent)" }}
                 />
               </motion.div>
             );
