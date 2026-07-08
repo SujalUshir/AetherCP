@@ -38,7 +38,11 @@ function getAetherProfileAnalytics(snapshot) {
     }
   };
 
-  console.log("[AetherCP:profile]", "analytics generated", profileAnalytics);
+  console.log("[AetherCP:profile]", "analytics generated", {
+    totalProblemsWorked: profileAnalytics.totalProblemsWorked,
+    todaySeconds: profileAnalytics.todaySeconds,
+    currentStreak: profileAnalytics.currentStreak
+  });
 
   return profileAnalytics;
 }
