@@ -47,7 +47,7 @@ export function CFAnalytics() {
               style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, hsl(var(--accent-amber)) / 0.25, transparent)", filter: "blur(32px)" }}
             />
             
-            <BrowserFrame url="codeforces.com/profile/tourist" size="lg" className="w-full">
+            <BrowserFrame url="codeforces.com/profile/tourist" size="lg" className="w-full card-premium">
               <Image
                 src={competitiveScreenshot}
                 alt="Codeforces Profile Analytics Screenshot"
@@ -60,7 +60,7 @@ export function CFAnalytics() {
           <motion.div
             initial={{ opacity: 0, x: 32 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col gap-6"
           >
             <SectionHeading
@@ -77,7 +77,7 @@ export function CFAnalytics() {
                   key={i}
                   initial={{ opacity: 0, x: 16 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.1 + i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: 0.1 + i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="flex items-start gap-3 text-sm text-muted-foreground"
                 >
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent-amber" />
@@ -86,10 +86,10 @@ export function CFAnalytics() {
               ))}
             </ul>
 
-            <div className="flex items-start gap-3 rounded-xl border border-accent-amber/20 bg-accent-amber/5 p-4">
-              <Trophy className="mt-0.5 h-4 w-4 shrink-0 text-accent-amber" />
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                The <span className="text-accent-blue font-semibold">analytics panel</span> appears automatically on any <span className="text-accent-orange font-semibold">Codeforces</span> profile page — yours or anyone else&apos;s.
+            <div className="flex items-start gap-4 rounded-2xl border border-accent-amber/10 bg-accent-amber/5 p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]">
+              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-accent-amber" />
+              <p className="text-sm text-muted-foreground/90 leading-relaxed">
+                The <span className="text-accent-blue font-semibold text-foreground">analytics panel</span> appears automatically on any <span className="text-accent-orange font-semibold text-foreground">Codeforces</span> profile page — yours or anyone else&apos;s.
               </p>
             </div>
           </motion.div>
