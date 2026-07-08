@@ -52,35 +52,34 @@ export function FeatureTimeline() {
               const colors = ACCENT_COLORS[step.accent] ?? ACCENT_COLORS.indigo;
 
               return (
-                <motion.div
-                  key={step.id}
-                  initial={{ opacity: 0, x: -24 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: i * 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  className="group relative flex items-start gap-5"
-                >
-                  {/* Step icon */}
-                  <div className={cn(
-                    "relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border",
-                    colors.bg, colors.border,
-                    "transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
-                  )}>
-                    <Icon className={cn("h-5 w-5", colors.text)} />
-                    {/* Step number */}
-                    <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-background text-[8px] font-bold border border-border">
-                      {step.step}
-                    </span>
-                  </div>
+                 <motion.div
+                   key={step.id}
+                   initial={{ opacity: 0, x: -24 }}
+                   animate={isInView ? { opacity: 1, x: 0 } : {}}
+                   transition={{ delay: i * 0.1, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                   className="group relative flex items-start gap-6"
+                 >
+                   {/* Step icon */}
+                   <div className={cn(
+                     "relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border",
+                     colors.bg, colors.border,
+                     "transition-all duration-300 group-hover:scale-110 shadow-lg shadow-black/20"
+                   )}>
+                     <Icon className={cn("h-5 w-5", colors.text)} />
+                     {/* Step number */}
+                     <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-bg-dark text-[9px] font-bold border border-border/80 text-primary">
+                       {step.step}
+                     </span>
+                   </div>
 
-                  {/* Content */}
-                  <div className={cn(
-                    "flex-1 rounded-2xl border border-border/60 bg-card p-5",
-                    "transition-all duration-300 group-hover:border-border group-hover:-translate-y-0.5 group-hover:shadow-lg"
-                  )}>
-                    <h3 className="mb-1.5 font-semibold">{step.title}</h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{step.description}</p>
-                  </div>
-                </motion.div>
+                   {/* Content */}
+                   <div className={cn(
+                     "flex-1 rounded-2xl p-6 card-premium noise-overlay"
+                   )}>
+                     <h3 className="mb-1.5 font-semibold text-lg text-foreground">{step.title}</h3>
+                     <p className="text-sm leading-relaxed text-muted-foreground/80">{step.description}</p>
+                   </div>
+                 </motion.div>
               );
             })}
           </div>
