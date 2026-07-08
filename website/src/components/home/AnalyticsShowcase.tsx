@@ -65,10 +65,10 @@ export function AnalyticsShowcase() {
               ))}
             </ul>
 
-            <div className="flex items-start gap-3 rounded-xl border border-accent-blue/20 bg-accent-blue/5 p-4">
-              <BarChart3 className="mt-0.5 h-4 w-4 shrink-0 text-accent-blue" />
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                All <span className="text-accent-blue font-semibold">analytics</span> are computed entirely in your <span className="text-accent-emerald font-semibold">browser</span>. There is no analytics server, no data pipeline, and no third-party service involved.
+            <div className="flex items-start gap-4 rounded-2xl border border-accent-blue/10 bg-accent-blue/5 p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]">
+              <BarChart3 className="mt-0.5 h-5 w-5 shrink-0 text-accent-blue" />
+              <p className="text-sm text-muted-foreground/90 leading-relaxed">
+                All <span className="text-accent-blue font-semibold text-foreground">analytics</span> are computed entirely in your <span className="text-accent-emerald font-semibold text-foreground">browser</span>. There is no analytics server, no data pipeline, and no third-party service involved.
               </p>
             </div>
           </motion.div>
@@ -77,7 +77,7 @@ export function AnalyticsShowcase() {
           <motion.div
             initial={{ opacity: 0, x: 32 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative flex flex-col gap-6"
           >
             <div
@@ -86,7 +86,7 @@ export function AnalyticsShowcase() {
               style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, hsl(var(--accent-blue)) / 0.15, transparent)", filter: "blur(32px)" }}
             />
             
-            <BrowserFrame url="codeforces.com/problemset" size="sm" className="w-full">
+            <BrowserFrame url="codeforces.com/problemset" size="sm" className="w-full card-premium">
               <Image
                 src={analyticScreenshot}
                 alt="AetherCP Analytics Screenshot"
@@ -95,7 +95,7 @@ export function AnalyticsShowcase() {
             </BrowserFrame>
 
             <div className="relative sm:absolute sm:-bottom-12 sm:-left-8 sm:w-[85%] transition-all duration-300 hover:scale-[1.02] hover:z-20 z-10">
-              <BrowserFrame url="leetcode.com/problems/two-sum" size="sm">
+              <BrowserFrame url="leetcode.com/problems/two-sum" size="sm" className="card-premium">
                 <Image
                   src={historyScreenshot}
                   alt="AetherCP History Screenshot"
