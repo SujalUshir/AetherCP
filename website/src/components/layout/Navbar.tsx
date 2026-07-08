@@ -70,9 +70,9 @@ export function Navbar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          "fixed inset-x-0 top-0 z-50 transition-all duration-350",
           scrolled
-            ? "border-b border-border/60 bg-background/90 shadow-lg shadow-black/20 backdrop-blur-xl"
+            ? "border-b border-white/5 bg-background/60 backdrop-blur-xl shadow-lg shadow-black/40"
             : "bg-transparent"
         )}
       >
