@@ -52,3 +52,6 @@ testing-files.zip
 # Extension release packaging outputs
 extension-release/
 AetherCP-*.zip
+
+
+.cph/
