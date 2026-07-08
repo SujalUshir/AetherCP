@@ -88,22 +88,22 @@ export default function FeedbackPage() {
               return (
                 <div
                   key={card.id}
-                  className="group flex flex-col justify-between rounded-2xl border border-border/60 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-xl"
+                  className="group flex flex-col justify-between rounded-2xl p-7 transition-all duration-350 card-premium noise-overlay hover:border-primary/20"
                 >
                   <div className="flex flex-col gap-4">
-                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl border ${card.accent}`}>
+                    <div className={`flex h-11 w-11 items-center justify-center rounded-xl border ${card.accent}`}>
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="text-base font-semibold">{card.title}</h3>
-                      <div className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
+                      <h3 className="text-base font-bold text-foreground">{card.title}</h3>
+                      <div className="mt-2 text-xs text-muted-foreground/80 leading-relaxed">
                         {card.description}
                       </div>
                     </div>
                   </div>
 
                   <div className="mt-6">
-                    <Button variant="outline" asChild className="w-full">
+                    <Button variant="outline" asChild className="w-full rounded-xl">
                       <a href={card.href} target="_blank" rel="noopener noreferrer">
                         {card.buttonText}
                         <ArrowRight className="ml-2 h-3.5 w-3.5 opacity-60 transition-transform group-hover:translate-x-0.5" />
@@ -118,16 +118,16 @@ export default function FeedbackPage() {
       </section>
 
       {/* Roadmap CTA */}
-      <section className="py-12 border-t border-border/60 bg-white/[0.01]">
+      <section className="py-16 border-t border-white/5 bg-bg-darker/5">
         <Container size="md">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl border border-border/60 bg-card/50 p-6 sm:p-8">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="font-semibold text-base">Check our Future Roadmap</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl p-8 card-premium noise-overlay hover:border-primary/25">
+            <div className="flex flex-col gap-1.5 text-center sm:text-left">
+              <h3 className="font-semibold text-lg text-foreground">Check our Future Roadmap</h3>
+              <p className="text-xs text-muted-foreground/80 leading-relaxed">
                 See what platforms, integrations, and analytical updates we are planning to build next.
               </p>
             </div>
-            <Button asChild className="shrink-0">
+            <Button asChild className="shrink-0 rounded-xl">
               <Link href="/roadmap" className="flex items-center gap-2">
                 View Roadmap
                 <ArrowRight className="h-4 w-4" />
@@ -138,10 +138,10 @@ export default function FeedbackPage() {
       </section>
 
       {/* FAQ shortcut */}
-      <section className="py-16 border-t border-border/60">
+      <section className="py-16 border-t border-white/5 bg-bg-darker/5">
         <Container size="sm">
           <div className="flex flex-col items-center text-center gap-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
               <HelpCircle className="h-5 w-5" />
             </div>
             <h3 className="font-semibold text-lg">Have a quick question?</h3>
