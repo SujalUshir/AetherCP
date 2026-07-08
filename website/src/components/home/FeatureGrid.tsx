@@ -108,8 +108,8 @@ export function FeatureGrid() {
                 id={`feature-${card.id}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: (i % 4) * 0.06 + Math.floor(i / 4) * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative flex flex-col gap-4 rounded-2xl border border-white/5 bg-gradient-to-b from-bg-light/35 to-bg-dark/65 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/10 hover:shadow-md hover:shadow-black/10 noise-overlay"
+                transition={{ delay: (i % 4) * 0.06 + Math.floor(i / 4) * 0.1, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative flex flex-col gap-4 rounded-2xl p-6 card-premium noise-overlay"
               >
                 {/* Badge */}
                 {card.badge && (
