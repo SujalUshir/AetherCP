@@ -24,7 +24,7 @@ function ChangelogEntry({ release, index }: { release: typeof CHANGELOG[0]; inde
       className="relative mb-16 last:mb-0"
     >
       {/* Node Dot */}
-      <span className="absolute -left-[35px] sm:-left-[43px] top-1 flex h-8 w-8 items-center justify-center rounded-full bg-background border border-border/80">
+      <span className="absolute -left-[35px] sm:-left-[43px] top-1 flex h-8 w-8 items-center justify-center rounded-full bg-bg-dark border border-white/5 shadow-md shadow-black/45">
         <GitCommit className="h-4 w-4 text-accent-blue" />
       </span>
 
@@ -55,7 +55,7 @@ function ChangelogEntry({ release, index }: { release: typeof CHANGELOG[0]; inde
         initial={{ opacity: 0, y: 12 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 + 0.05 * Math.min(index, 3) }}
-        className="flex flex-col gap-4 rounded-2xl border border-white/5 bg-bg-dark/50 p-6 noise-overlay"
+        className="flex flex-col gap-4 rounded-2xl p-6 card-premium noise-overlay"
       >
         {release.changes.map((item, ci) => {
           const isAdded = item.type === "added";
@@ -71,7 +71,7 @@ function ChangelogEntry({ release, index }: { release: typeof CHANGELOG[0]; inde
               )}>
                 {item.type}
               </span>
-              <span className="text-sm text-muted-foreground leading-relaxed">
+              <span className="text-sm text-muted-foreground/80 leading-relaxed">
                 {item.text}
               </span>
             </div>
@@ -111,7 +111,7 @@ export default function ChangelogPage() {
       {/* Timeline Section */}
       <section className="pb-24 sm:pb-32">
         <Container size="md">
-          <div className="relative border-l border-border/80 pl-6 sm:pl-8 ml-4">
+          <div className="relative border-l border-white/5 pl-6 sm:pl-8 ml-4">
             {CHANGELOG.map((release, i) => (
               <ChangelogEntry key={release.version} release={release} index={i} />
             ))}
