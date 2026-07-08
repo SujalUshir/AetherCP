@@ -111,35 +111,35 @@ function RoadmapColumn({
               key={item.id}
               variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } }}
               className={cn(
-                "group rounded-2xl border-t-2 border-x border-b bg-card p-5 transition-all duration-300 hover:border-border hover:shadow-lg noise-overlay",
-                conf.border,
+                "group rounded-2xl border-t-2 border-x border-b p-6 transition-all duration-350 card-premium noise-overlay",
+                "border-white/5 hover:border-primary/20",
                 priorityColor
               )}
             >
-              <div className="flex items-start justify-between gap-2 mb-2">
-                <span className="rounded bg-white/5 px-2 py-0.5 text-[9px] font-semibold text-muted-foreground uppercase tracking-wider">
+              <div className="flex items-start justify-between gap-2 mb-3">
+                <span className="rounded bg-white/5 px-2 py-0.5 text-[9px] font-bold text-muted-foreground uppercase tracking-wider">
                   {item.category}
                 </span>
                 {item.priority && (
                   <span className={cn(
-                    "text-[8px] font-bold uppercase tracking-wider",
+                    "text-[9px] font-bold uppercase tracking-wider",
                     priorityText
                   )}>
                     {item.priority}
                   </span>
                 )}
               </div>
-              <h4 className="text-sm font-semibold mb-1 group-hover:text-primary transition-colors">
+              <h4 className="text-sm font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
                 {item.title}
               </h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
+              <p className="text-xs leading-relaxed text-muted-foreground/80">{item.description}</p>
             </motion.div>
           );
         })}
 
         {items.length === 0 && (
-          <div className="rounded-2xl border border-dashed border-border/40 p-6 text-center">
-            <p className="text-xs text-muted-foreground">No items in this column</p>
+          <div className="rounded-2xl border border-dashed border-white/5 p-6 text-center bg-bg-darker/10">
+            <p className="text-xs text-muted-foreground/60">No items in this column</p>
           </div>
         )}
       </motion.div>
