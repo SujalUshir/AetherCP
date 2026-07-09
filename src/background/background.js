@@ -1,4 +1,5 @@
 importScripts(
+  "../shared/buildConfig.js",
   "../shared/constants.js",
   "../vendor/supabase.js",
   "../services/authService.js",
