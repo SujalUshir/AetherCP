@@ -116,6 +116,7 @@ async function uploadBackup() {
 // ─── markDirty ────────────────────────────────────────────────────────────────
 
 function markDirty() {
+  if (!isCloudBuild()) return;
   _dirty = true;
   chrome.storage.local.set({ [SYNC_DIRTY_KEY]: true }).catch(() => {});
   console.log("[Sync] Dirty State Set");
@@ -131,6 +132,7 @@ function markDirty() {
 // ─── Login ────────────────────────────────────────────────────────────────────
 
 async function syncOnLogin() {
+  if (!isCloudBuild()) return;
   console.log("[Sync] Login Sync Started");
 
   const backup = await downloadBackup();
@@ -152,6 +154,7 @@ async function syncOnLogin() {
 // ─── Startup ──────────────────────────────────────────────────────────────────
 
 async function syncOnStartup() {
+  if (!isCloudBuild()) return;
   const user = await getCurrentUser();
   if (!user) return;
 
@@ -171,6 +174,7 @@ async function syncOnStartup() {
 // ─── Logout ───────────────────────────────────────────────────────────────────
 
 async function syncOnLogout() {
+  if (!isCloudBuild()) return;
   await signOut();
 
   if (_uploadTimeoutId) {
@@ -193,6 +197,7 @@ async function syncOnLogout() {
 // and the debounce timeout was lost. On next wake, the persisted flag triggers.
 
 (async function _initPeriodicUpload() {
+  if (!isCloudBuild()) return;
   // Sync memory cache with what was persisted before the last restart
   const result = await chrome.storage.local.get(SYNC_DIRTY_KEY);
   if (result[SYNC_DIRTY_KEY]) {
