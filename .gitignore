@@ -55,3 +55,6 @@ AetherCP-*.zip
 
 
 .cph/
+
+# Ignored generated build settings
+src/shared/buildConfig.js
