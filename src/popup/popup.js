@@ -1,3 +1,8 @@
+const IS_CLOUD_BUILD = (typeof AETHERCP_BUILD_CONFIG !== "undefined" && AETHERCP_BUILD_CONFIG.BUILD_MODE === "cloud");
+function isCloudBuild() {
+  return IS_CLOUD_BUILD;
+}
+
 const problemDiv             = document.getElementById("problemName");
 const timerDiv               = document.getElementById("timer");
 const todayTimeDiv           = document.getElementById("todayTime");
@@ -117,7 +122,9 @@ function updatePopup() {
       renderSnapshot(snapshot);
     }
   );
-  updateLastBackupUI();
+  if (isCloudBuild()) {
+    updateLastBackupUI();
+  }
 }
 
 // ──────────────────────────────────────────────
@@ -391,8 +398,48 @@ setInterval(updatePopup, 1000);
 // Check CPH status once when popup opens
 checkCphStatus();
 
-// Check auth status once when popup opens
-checkAuthStatus();
+function renderCommunityCard() {
+  const authSection = document.getElementById("authSection");
+  if (!authSection) return;
 
-// Load backup status once when popup opens
-loadSyncState();
+  const card = document.createElement("div");
+  card.className = "communityCard";
+
+  const title = document.createElement("div");
+  title.className = "communityTitle";
+  title.textContent = "AetherCP Community Edition";
+
+  const subtitle = document.createElement("div");
+  subtitle.className = "communitySubtitle";
+  subtitle.textContent = "Your coding history is stored locally in this browser.";
+
+  const status = document.createElement("div");
+  status.className = "communityStatus";
+  status.textContent = "Cloud Sync — ";
+
+  const badge = document.createElement("span");
+  badge.className = "comingSoonBadge";
+  badge.textContent = "Unavailable";
+  status.appendChild(badge);
+
+  const note = document.createElement("div");
+  note.className = "communityNote";
+  note.textContent = "Cloud Sync is available in the Chrome Web Store edition.";
+
+  card.appendChild(title);
+  card.appendChild(subtitle);
+  card.appendChild(status);
+  card.appendChild(note);
+
+  authSection.replaceChildren(card);
+}
+
+if (isCloudBuild()) {
+  // Check auth status once when popup opens
+  checkAuthStatus();
+
+  // Load backup status once when popup opens
+  loadSyncState();
+} else {
+  renderCommunityCard();
+}
