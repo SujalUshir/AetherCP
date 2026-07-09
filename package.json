@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "build:community": "node scripts/build-release.mjs --mode=community",
+    "build:cloud": "node scripts/build-release.mjs --mode=cloud"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.0",
     "playwright": "^1.61.1"
