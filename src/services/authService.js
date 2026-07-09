@@ -23,6 +23,7 @@ function serializeError(error) {
 }
 
 function logAuthError(context, error, extra = {}) {
+  if (!isCloudBuild()) return;
   console.error(`[AetherCP Auth] ${context}`, {
     error: serializeError(error),
     extra
@@ -191,6 +192,9 @@ function getSupabaseClient() {
  * Handles Sign-In with Google using chrome.identity.launchWebAuthFlow.
  */
 async function signInWithGoogle() {
+  if (!isCloudBuild()) {
+    return { ok: false, error: "Cloud Sync is only available in the Cloud Edition." };
+  }
   const { url: supabaseUrl } = assertSupabaseConfigured();
   const client = getSupabaseClient();
   const redirectUrl = chrome.identity.getRedirectURL();
@@ -327,6 +331,9 @@ async function signInWithGoogle() {
  * Signs the user out.
  */
 async function signOut() {
+  if (!isCloudBuild()) {
+    return { ok: true };
+  }
   console.log("[AetherCP Auth] Signing user out...");
   assertSupabaseConfigured();
   const client = getSupabaseClient();
@@ -383,6 +390,9 @@ function isNetworkOrUnreachableError(error) {
  * Automatically restores the session and refreshes token if expired.
  */
 async function getCurrentUser() {
+  if (!isCloudBuild()) {
+    return null;
+  }
   assertSupabaseConfigured();
   const client = getSupabaseClient();
   let session = null;
