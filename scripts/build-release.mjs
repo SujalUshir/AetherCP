@@ -10,7 +10,24 @@ const rootDir = path.resolve(__dirname, '..');
 const releaseDir = path.join(rootDir, 'extension-release');
 
 async function main() {
-  console.log('Starting AetherCP Extension Release Packaging...');
+  // Parse build mode argument
+  let mode = 'community'; // default
+  const modeArg = process.argv.find(arg => arg.startsWith('--mode='));
+  if (modeArg) {
+    mode = modeArg.split('=')[1];
+  } else {
+    const modeIdx = process.argv.indexOf('--mode');
+    if (modeIdx !== -1 && modeIdx + 1 < process.argv.length) {
+      mode = process.argv[modeIdx + 1];
+    }
+  }
+  if (mode !== 'community' && mode !== 'cloud') {
+    console.error(`❌ Invalid build mode: "${mode}". Mode must be "community" or "cloud".`);
+    process.exit(1);
+  }
+
+  const modeLabel = mode.charAt(0).toUpperCase() + mode.slice(1);
+  console.log(`Starting AetherCP Extension Release Packaging (${modeLabel} Edition)...`);
   
   // 1. Remove previous release package
   try {
@@ -322,7 +339,23 @@ async function main() {
       relDir = path.dirname(relDir);
     }
     
-    await fs.copyFile(srcPath, destPath);
+    if (relPath === 'manifest.json') {
+      const manifestCopy = { ...manifest };
+      if (mode === 'community') {
+        if (manifestCopy.permissions) {
+          manifestCopy.permissions = manifestCopy.permissions.filter(p => p !== 'identity');
+        }
+        if (manifestCopy.host_permissions) {
+          manifestCopy.host_permissions = manifestCopy.host_permissions.filter(h => !h.includes('supabase.co'));
+        }
+      }
+      await fs.writeFile(destPath, JSON.stringify(manifestCopy, null, 2), 'utf8');
+    } else if (relPath === 'src/shared/buildConfig.js') {
+      const configContent = `var AETHERCP_BUILD_CONFIG = {\n  BUILD_MODE: "${mode}"\n};\n\nfunction isCloudBuild() {\n  return AETHERCP_BUILD_CONFIG?.BUILD_MODE === "cloud";\n}\n`;
+      await fs.writeFile(destPath, configContent, 'utf8');
+    } else {
+      await fs.copyFile(srcPath, destPath);
+    }
     filesCopiedCount++;
   }
 
@@ -387,8 +420,8 @@ The following development-only resources were intentionally excluded to optimize
   await fs.writeFile(releaseContentsPath, mdContent, 'utf8');
   console.log('✓ RELEASE_CONTENTS.md generated');
 
-  // 8. Generate ZIP file in root directory: AetherCP-v<version>.zip
-  const zipName = `AetherCP-v${releaseVersion}.zip`;
+  // 8. Generate ZIP file in root directory: AetherCP-<Mode>-v<version>.zip
+  const zipName = `AetherCP-${modeLabel}-v${releaseVersion}.zip`;
   const zipPath = path.join(rootDir, zipName);
   
   console.log(`Generating ZIP archive ${zipName}...`);
