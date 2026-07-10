@@ -11,12 +11,12 @@ import analyticScreenshot from "../../../public/screenshots/analytic.png";
 import historyScreenshot from "../../../public/screenshots/problem_history.png";
 
 const BULLETS = [
-  <>GitHub-style <span className="text-accent-amber font-semibold">contribution heatmap</span> for the full year</>,
-  <>Daily and weekly <span className="text-accent-amber font-semibold">coding time</span> breakdowns</>,
-  <>Problem-by-problem <span className="text-accent-purple font-semibold">session history</span> with duration</>,
-  <><span className="text-accent-amber font-semibold">Streak counter</span> — consecutive days with at least one session</>,
-  <><span className="text-accent-amber font-semibold">Productivity score</span> calculated from daily consistency</>,
-  <>All data computed <span className="text-accent-emerald font-semibold">locally</span> — zero server calls</>,
+  <>Visualize practice intensity via a 52-week <span className="text-accent-amber font-semibold">Sunday-aligned activity heatmap</span></>,
+  <>Review daily and weekly <span className="text-accent-amber font-semibold">session duration distributions</span></>,
+  <>Inspect problem-by-problem <span className="text-accent-purple font-semibold">historical timing logs</span></>,
+  <>Track practice consistency via local <span className="text-accent-amber font-semibold">streak counter calculations</span></>,
+  <>Determine solving ratios derived from daily <span className="text-accent-amber font-semibold">practice telemetry</span></>,
+  <>Compile and process all metrics <span className="text-accent-emerald font-semibold">locally</span> without network roundtrips</>,
 ];
 
 export function AnalyticsShowcase() {
@@ -44,9 +44,9 @@ export function AnalyticsShowcase() {
           >
             <SectionHeading
               eyebrow="Practice Analytics"
-              title="Track every minute"
-              titleHighlight="of your practice"
-              description="Know exactly how much time you spend on competitive programming — per problem, per day, per week. Build consistent habits with data you actually trust."
+              title="Capture training"
+              titleHighlight="diagnostics locally"
+              description="Log and aggregate active solve times per problem, per day, and per week. Track your preparation routines with data compiled entirely on your local machine."
               align="left"
             />
 
@@ -68,7 +68,7 @@ export function AnalyticsShowcase() {
             <div className="flex items-start gap-4 rounded-2xl border border-accent-blue/10 bg-accent-blue/5 p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]">
               <BarChart3 className="mt-0.5 h-5 w-5 shrink-0 text-accent-blue" />
               <p className="text-sm text-muted-foreground/90 leading-relaxed">
-                All <span className="text-accent-blue font-semibold text-foreground">analytics</span> are computed entirely in your <span className="text-accent-emerald font-semibold text-foreground">browser</span>. There is no analytics server, no data pipeline, and no third-party service involved.
+                All telemetry aggregates reside within your browser&apos;s <span className="text-accent-blue font-semibold text-foreground">sandboxed client storage</span> database, running without external pipelines, server uploads, or third-party connections.
               </p>
             </div>
           </motion.div>
