@@ -43,9 +43,9 @@ export function WhyAetherCP() {
         <div ref={headingRef} className="mb-16 flex justify-center">
           <SectionHeading
             eyebrow="Why AetherCP"
-            title="Built for the modern"
-            titleHighlight="competitive programmer"
-            description="Unlike other extensions that look like legacy utility scripts, AetherCP is crafted with clean code, elegant views, and robust reliability."
+            title="Engineered for"
+            titleHighlight="competitive coders"
+            description="Designed to move beyond legacy browser utility scripts. Built with clean, event-driven background runtimes, canvas-based profile instrumentations, and sandboxed storage."
           />
         </div>
 
