@@ -34,7 +34,7 @@ export function FAQ() {
               eyebrow="FAQ"
               title="Frequently asked"
               titleHighlight="questions"
-              description="Everything you need to know about AetherCP. Can't find an answer? Open a GitHub issue."
+              description="Detailed architectural and capability answers. If you require further technical support, feel free to open a diagnostics ticket on GitHub."
             />
           </motion.div>
 
