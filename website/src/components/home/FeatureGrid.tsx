@@ -88,9 +88,9 @@ export function FeatureGrid() {
         <div className="mb-16 flex justify-center">
           <SectionHeading
             eyebrow="Key Features"
-            title="The tools that"
-            titleHighlight="make it work"
-            description="Eight of the most impactful capabilities built into AetherCP — all running locally, zero cloud required."
+            title="Core"
+            titleHighlight="instrumentation suite"
+            description="Explore the core diagnostics capabilities designed into AetherCP—operating entirely within your browser's sandboxed local runtime."
           />
         </div>
 
