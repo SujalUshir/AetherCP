@@ -26,7 +26,7 @@ export default function AboutPage() {
               About <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">AetherCP</span>
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground/80 leading-relaxed max-w-3xl mx-auto">
-              AetherCP is a premium, lightweight <span className="text-primary font-semibold text-foreground">browser extension</span> designed exclusively for <span className="text-accent-orange font-semibold text-foreground">competitive programmers</span> and active coders. It runs quietly in your browser, automatically tracking solution timers when you solve contest problems on <span className="text-accent-orange font-semibold text-foreground">Codeforces</span> and <span className="text-accent-amber font-semibold text-foreground">LeetCode</span>. By parsing time constraints and editor configurations <span className="text-accent-emerald font-semibold text-foreground">local-first</span>, it helps programmers maintain focus, optimize their training, and configure workspace directories in a single click.
+              AetherCP is a high-performance, local-first browser extension engineered specifically for competitive programmers. Running as an event-driven background service worker, it automates practice tracking on Codeforces and LeetCode. By processing time constraints, parsing sample tests, and coordinating local workspace configurations, it eliminates manual setup, allowing developers to concentrate fully on algorithm design.
             </p>
           </div>
         </Container>
@@ -37,8 +37,8 @@ export default function AboutPage() {
         <Container>
           <div className="flex flex-col gap-12 border-t border-white/5 pt-20">
             <div className="flex flex-col items-center text-center gap-2">
-              <h2 className="text-2xl font-bold tracking-tight">Our Mission</h2>
-              <p className="text-sm text-muted-foreground/80">The principles guiding AetherCP development.</p>
+              <h2 className="text-2xl font-bold tracking-tight">Project Mission</h2>
+              <p className="text-sm text-muted-foreground/80">The engineering principles guiding AetherCP development.</p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-3">
@@ -47,9 +47,9 @@ export default function AboutPage() {
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-blue/10 border border-accent-blue/10 text-accent-blue transition-transform duration-300 hover:scale-110">
                   <Timer className="h-5 w-5" />
                 </div>
-                <h3 className="text-base font-semibold text-foreground">Productivity</h3>
+                <h3 className="text-base font-semibold text-foreground">Developer Productivity</h3>
                 <p className="text-xs leading-relaxed text-muted-foreground/80">
-                  Empowering coders to track practice sessions correctly. Features smart 15-minute idle windows that accommodate offline sketchpad thinking.
+                  Optimizing practice workflows via automated session capture. Features a smart 15-minute idle threshold that preserves metrics during offline paper-drafting phases.
                 </p>
               </div>
 
@@ -58,9 +58,9 @@ export default function AboutPage() {
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-amber/10 border border-accent-amber/10 text-accent-amber transition-transform duration-300 hover:scale-110">
                   <Target className="h-5 w-5" />
                 </div>
-                <h3 className="text-base font-semibold text-foreground">Competitive CP</h3>
+                <h3 className="text-base font-semibold text-foreground">Instrumented Profiling</h3>
                 <p className="text-xs leading-relaxed text-muted-foreground/80">
-                  Injects rating progressions, verdict allocations, and top tag analytics directly inside Codeforces profiles without adding context latency.
+                  Injecting ratings-to-time ratios, verdict spreads, and topic tag distributions directly into competitive pages without adding page latency.
                 </p>
               </div>
 
@@ -69,9 +69,9 @@ export default function AboutPage() {
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-emerald/10 border border-accent-emerald/10 text-accent-emerald transition-transform duration-300 hover:scale-110">
                   <ShieldCheck className="h-5 w-5" />
                 </div>
-                <h3 className="text-base font-semibold text-foreground">Privacy First</h3>
+                <h3 className="text-base font-semibold text-foreground">Sandboxed Privacy</h3>
                 <p className="text-xs leading-relaxed text-muted-foreground/80">
-                  Your code metrics belong to you. All tracking, parser structures, and solved logs are computed 100% locally. Zero telemetry.
+                  Securing user code metrics. All timer tracking, DOM data extraction, and solved analytics calculations run 100% locally. Zero cloud analytics SDKs.
                 </p>
               </div>
             </div>
@@ -83,16 +83,16 @@ export default function AboutPage() {
       <section className="relative">
         <Container size="md">
           <div className="flex flex-col gap-6 text-left border-t border-white/5 pt-20">
-            <h2 className="text-2xl font-bold tracking-tight text-foreground">Why I Built AetherCP</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-foreground">Why I Engineered AetherCP</h2>
             <div className="flex flex-col gap-5 text-sm sm:text-base text-muted-foreground/85 leading-relaxed">
               <p>
-                As a competitive programmer practicing on <span className="text-accent-orange font-semibold text-foreground">Codeforces</span> and <span className="text-accent-amber font-semibold text-foreground">LeetCode</span>, I constantly found myself wanting to monitor my practice efficiency. I wanted answers to simple questions: *How long did I spend on this 1600-rated problem before submitting? What is my daily solving streak? Is my rating graph trending up or plateauing?*
+                As an active participant in competitive programming, I recognized a significant diagnostic gap. Tracking practice efficiency was highly fragmented: developers relied on manual stopwatches or heavy cloud-based platforms requiring external database logins, telemetry tracking, and cookie collections. None of these solutions integrated directly with editor workspaces or respected user data privacy.
               </p>
               <p>
-                Unfortunately, the available options were limited. Most developers relied on generic stopwatch timers or heavy tracking dashboards that required database logins and telemetry uploads. None of them parsed contest requirements and editor boundaries <span className="text-accent-emerald font-semibold text-foreground">locally</span>.
+                I engineered AetherCP to bridge this gap. By building a local-first extension that runs entirely inside the browser&apos;s sandboxed storage runtime, AetherCP automates session logging, performs client-side analytics aggregation, and injects diagnostic dashboards directly into competitive profiles without introducing network roundtrips or context switching.
               </p>
               <p>
-                I built AetherCP to solve this exact problem: a clean, <span className="text-accent-emerald font-semibold text-foreground">local-first</span> browser extension that tracks active coding times automatically, manages workspace configurations in one click, and injects clean rating panels directly on profile feeds.
+                The integration with Visual Studio Code utilizes loopback sockets to instantly deploy sample tests, memory limits, and source templates, accelerating setup times so developers can focus solely on problem-solving.
               </p>
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function AboutPage() {
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-lg text-foreground">Proudly Open Source</h3>
               <p className="text-sm text-muted-foreground/80 max-w-md leading-relaxed">
-                AetherCP is completely open source under the MIT license. We invite competitive coders and developers to audit, inspect, build, and suggest new integrations on GitHub.
+                AetherCP is open-source under the MIT license. We invite the developer community to inspect the code, suggest features, and build platform integrations on GitHub.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mt-2">
@@ -134,10 +134,10 @@ export default function AboutPage() {
           <div className="flex flex-col gap-6 text-left border-t border-white/5 pt-20">
             <div className="flex items-center gap-2 text-primary">
               <Sparkles className="h-5 w-5" />
-              <h2 className="text-lg font-bold tracking-tight text-foreground">Future Vision</h2>
+              <h2 className="text-lg font-bold tracking-tight text-foreground">Technical Direction</h2>
             </div>
             <p className="text-sm sm:text-base text-muted-foreground/85 leading-relaxed">
-              We plan to expand AetherCP beyond its current feature set by introducing deeper productivity metrics, supporting more competitive programming platforms (such as AtCoder and CodeChef), and improving our offline synchronization systems for cross-device backup. Every single roadmap item will continue to adhere strictly to our local-first, privacy-respecting philosophy.
+              Our roadmap focuses on expanding platform compatibility to AtCoder and CodeChef, implementing peer-to-peer data backup options, and expanding local client diagnostics. Every future enhancement will continue to run strictly local-first and respect absolute data privacy.
             </p>
           </div>
         </Container>
