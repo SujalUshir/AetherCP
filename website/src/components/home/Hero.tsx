@@ -88,7 +88,7 @@ export function Hero() {
             <h1 className="text-5xl font-extrabold sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] max-w-3xl">
               Competitive Programming,{" "}
               <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">
-                Refined.
+                Instrumented.
               </span>
             </h1>
           </motion.div>
@@ -96,7 +96,7 @@ export function Hero() {
           {/* Description */}
           <motion.div variants={slideInBottom}>
             <p className="max-w-2xl text-base text-muted-foreground leading-relaxed sm:text-xl">
-              A <span className="text-accent-emerald font-semibold">privacy-first</span> companion that automatically tracks coding sessions, provides clean dashboard <span className="text-accent-blue font-semibold">analytics</span> on your Codeforces profile, and integrates with VS Code.
+              A high-performance, <span className="text-accent-emerald font-semibold">local-first</span> browser extension that automates session timing, injects visual <span className="text-accent-blue font-semibold">execution metrics</span> directly into Codeforces profiles, and establishes instant loopback synchronization with VS Code.
             </p>
           </motion.div>
 
