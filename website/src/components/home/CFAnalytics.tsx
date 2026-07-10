@@ -10,12 +10,12 @@ import { BrowserFrame } from "@/components/shared/BrowserFrame";
 import competitiveScreenshot from "../../../public/screenshots/competitive.png";
 
 const BULLETS = [
-  <><span className="text-accent-amber font-semibold">Rating progression</span> graph across all contests</>,
-  <><span className="text-accent-blue font-semibold">Verdict distribution</span> — AC, WA, TLE, MLE, RE breakdown</>,
-  <>Problem <span className="text-accent-amber font-semibold">difficulty distribution</span> chart</>,
-  <><span className="text-accent-purple font-semibold">Tag-by-tag solved count</span> for identifying weak areas</>,
-  <><span className="text-accent-purple font-semibold">Contest history</span> with delta and absolute rating</>,
-  <>Injected directly into your <span className="text-accent-orange font-semibold">Codeforces</span> profile page</>,
+  <>Plot <span className="text-accent-amber font-semibold">historical contest rating progression</span> lines</>,
+  <>Analyze <span className="text-accent-blue font-semibold">verdict distributions</span> (AC, WA, TLE, MLE, and RE breakdowns)</>,
+  <>Inspect solved problem <span className="text-accent-amber font-semibold">difficulty distributions</span></>,
+  <>Evaluate solved counts on a <span className="text-accent-purple font-semibold">tag-by-tag basis</span> to identify weaknesses</>,
+  <>Audit full <span className="text-accent-purple font-semibold">contest records</span> complete with ratings and deltas</>,
+  <>Instrument analytics widgets directly into your <span className="text-accent-orange font-semibold">Codeforces</span> profile</>,
 ];
 
 export function CFAnalytics() {
@@ -65,9 +65,9 @@ export function CFAnalytics() {
           >
             <SectionHeading
               eyebrow="Codeforces Analytics"
-              title="Know your"
-              titleHighlight="competitive profile"
-              description="AetherCP injects a complete analytics dashboard directly into your Codeforces profile — no separate app, no new tab, no context switching."
+              title="Audit your"
+              titleHighlight="performance profile"
+              description="AetherCP queries and aggregates user status history client-side, instrumenting Codeforces profiles with responsive canvas charts."
               align="left"
             />
 
@@ -89,7 +89,7 @@ export function CFAnalytics() {
             <div className="flex items-start gap-4 rounded-2xl border border-accent-amber/10 bg-accent-amber/5 p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]">
               <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-accent-amber" />
               <p className="text-sm text-muted-foreground/90 leading-relaxed">
-                The <span className="text-accent-blue font-semibold text-foreground">analytics panel</span> appears automatically on any <span className="text-accent-orange font-semibold text-foreground">Codeforces</span> profile page — yours or anyone else&apos;s.
+                The <span className="text-accent-blue font-semibold text-foreground">diagnostics panel</span> initializes automatically upon loading any <span className="text-accent-orange font-semibold text-foreground">Codeforces</span> profile page, querying the public API and rendering metrics client-side.
               </p>
             </div>
           </motion.div>
