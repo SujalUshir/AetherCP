@@ -53,23 +53,22 @@ export default function FeaturesPage() {
             <FadeUp>
               <span className="inline-flex items-center gap-2 rounded-full border border-accent-blue/30 bg-accent-blue/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-accent-blue">
                 <Sparkles className="h-3 w-3" />
-                Vibrant &bull; High Performance &bull; Free
+                Manifest V3 &bull; Local-First &bull; Zero Telemetry
               </span>
             </FadeUp>
 
             <FadeUp delay={0.06}>
               <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-7xl text-foreground leading-[1.08]">
-                Crafted tools for <br />
+                Developer Diagnostics for <br />
                 <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">
-                  Competitive Programmers
+                  Competitive Coders
                 </span>
               </h1>
             </FadeUp>
 
             <FadeUp delay={0.12} className="max-w-2xl">
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                Unlock deeper insights, automate your developer sandbox, and track practice sessions with 
-                <span className="text-accent-amber font-semibold"> zero cloud dependencies</span>. Built by coders, for coders.
+                Automate workspace environments, track coding diagnostics, and visualize performance trends without external database dependencies or usage tracking.
               </p>
             </FadeUp>
 
@@ -77,7 +76,7 @@ export default function FeaturesPage() {
               <Button size="lg" asChild className="rounded-full shadow-md px-8 py-6 text-base">
                 <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   <DownloadIcon className="h-5 w-5 btn-icon-download" />
-                  Get AetherCP Free
+                  Install Extension
                 </a>
               </Button>
               <Button size="lg" variant="glass" asChild className="rounded-full px-8 py-6 text-base">
@@ -110,7 +109,7 @@ export default function FeaturesPage() {
                 </span>
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Say goodbye to manually timing problems or setting up templates. AetherCP works behind the scenes, ensuring your focus remains on solving problems, not editing.
+                AetherCP runs quietly as a background runtime script, automating timing captures and loopback compiler configuration, keeping you in code flow.
               </p>
 
               {/* Feature bullet list with rich highlight text */}
@@ -121,10 +120,10 @@ export default function FeaturesPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground">
-                      Automated <span className="text-accent-amber">Productivity</span> Tracking
+                      Automated Timing Session Tracking
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      Starts the moment you open a Codeforces or LeetCode problem. No manual trigger, just automatic practice logging.
+                      Initializes timing parameters automatically on loading problem page tabs. Operates silently without user triggers.
                     </p>
                   </div>
                 </div>
@@ -135,10 +134,10 @@ export default function FeaturesPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground">
-                      Advanced <span className="text-accent-blue">Idle</span> Detection
+                      Asynchronous Idle Observers
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      Maintains tracking accuracy by waiting exactly 15 minutes before pausing — giving you plenty of time to solve on a physical blackboard.
+                      Maintains timing accuracy via a CP-optimized 15-minute inactivity timeout. Observes focus states and ignores noisy layout mouse actions.
                     </p>
                   </div>
                 </div>
@@ -149,10 +148,10 @@ export default function FeaturesPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground">
-                      VS Code <span className="text-accent-purple">Editor</span> Integration
+                      VS Code Loopback Sync
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      One-click transfer using the CPH receiver protocol. Downloads problem statements, limits, and parsing test cases directly to your active directory.
+                      Syncs parsed sample test inputs, memory limits, and timeouts directly to local CPH receivers using loopback ports.
                     </p>
                   </div>
                 </div>
@@ -201,14 +200,14 @@ export default function FeaturesPage() {
                 </span>
               </div>
               <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-                Native{" "}
+                Instrumented{" "}
                 <span className="bg-gradient-to-r from-accent-orange to-accent-amber bg-clip-text text-transparent">
                   Codeforces
                 </span>{" "}
-                Extension script
+                Dashboards
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Add premium analytical elements directly to the platforms you already compete on. AetherCP injects clean, contextually aware widgets onto profile pages.
+                Instrument your competitive workspace. AetherCP injects canvas visualizations directly into competitive dashboards, displaying submission records and mapping diagnostic trends.
               </p>
 
               {/* Feature bullet list with rich highlights */}
@@ -219,10 +218,10 @@ export default function FeaturesPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground">
-                      Injected <span className="text-accent-orange">Codeforces</span> Dashboard
+                      Injected Profile Telemetry
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      Visualize verdict spreads, difficulty spreads, tag analysis, and performance timelines in real time directly on your profile.
+                      Displays rating distributions, solved tag counts, and verdict breakdowns in real time directly on visited user profiles.
                     </p>
                   </div>
                 </div>
@@ -233,10 +232,10 @@ export default function FeaturesPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground">
-                      Rating Progression <span className="text-accent-emerald">Analytics</span>
+                      Solved Performance Timelines
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      See ratings-to-time distributions to map out preparation efficiency. Identify rating plateaus and track practice spikes.
+                      Maps rating peaks to practice volume. Identifies preparation plateaus and tracks consistency trends.
                     </p>
                   </div>
                 </div>
@@ -247,10 +246,10 @@ export default function FeaturesPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground">
-                      Detailed Problem <span className="text-accent-purple">History</span> Logs
+                      Searchable Local Ledger
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      A local ledger of every solved or unsolved problem, complete with time taken, tag descriptors, and direct navigation links.
+                      Keeps a structured history of timing durations, problem platform metrics, and metadata indexed for rapid lookup.
                     </p>
                   </div>
                 </div>
@@ -343,11 +342,11 @@ export default function FeaturesPage() {
             <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl mt-3">
               100%{" "}
               <span className="bg-gradient-to-r from-accent-emerald to-accent-blue bg-clip-text text-transparent">
-                Local Storage
+                Local-First Architecture
               </span>
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mt-2">
-              No remote database tracking. Zero telemetry scripts. Everything stays inside your own Chromium environment.
+              Eliminate cloud databases. All practice statistics are sandboxed and persisted within your browser&apos;s client-side storage boundaries.
             </p>
           </div>
 
