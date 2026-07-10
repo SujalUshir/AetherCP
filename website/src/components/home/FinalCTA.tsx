@@ -40,13 +40,13 @@ export function FinalCTA() {
         >
           <div className="flex flex-col gap-3">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl leading-tight">
-              Start tracking your{" "}
+              Optimize your{" "}
               <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">
-                practice today.
+                training today.
               </span>
             </h2>
-            <p className="max-w-lg text-base text-muted-foreground sm:text-lg">
-              Free forever. <span className="text-accent-orange font-semibold">Open source</span>. No sign-up. Install and start <span className="text-accent-emerald font-semibold">immediately</span>.
+            <p className="max-w-lg text-base text-muted-foreground sm:text-lg mx-auto">
+              MIT Licensed. Open-source. Zero telemetry configurations. Load unpacked source locally in seconds.
             </p>
           </div>
 
