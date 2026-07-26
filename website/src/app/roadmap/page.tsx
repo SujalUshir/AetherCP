@@ -105,12 +105,12 @@ function RoadmapColumn({
               key={item.id}
               variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } }}
               className={cn(
-                "group rounded-xl border-t-2 border-x border-b p-3.5 transition-all duration-300 card-premium noise-overlay",
-                "border-border hover:border-primary/40",
+                "group rounded-xl border-t-2 border-x border-b p-3 transition-all duration-300 card-premium noise-overlay",
+                "border-border hover:border-primary/40 min-h-[82px] flex flex-col justify-between",
                 priorityColor
               )}
             >
-              <div className="flex items-center justify-between gap-2 mb-1.5">
+              <div className="flex items-center justify-between gap-2">
                 <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors truncate">
                   {item.title}
                 </h4>
@@ -118,7 +118,7 @@ function RoadmapColumn({
                   {item.category}
                 </span>
               </div>
-              <p className="text-[11px] leading-normal text-muted-foreground/90">{item.description}</p>
+              <p className="text-[10.5px] leading-normal text-muted-foreground mt-1.5">{item.description}</p>
             </motion.div>
           );
         })}
