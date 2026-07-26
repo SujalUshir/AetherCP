@@ -151,9 +151,9 @@
   .hero-highlight-span {
     background: none !important;
     background-clip: unset !important;
-    -webkit-text-fill-color: hsl(var(--primary)) !important; /* Force espresso brown on Webkit */
+    -webkit-text-fill-color: hsl(var(--brand-dark)) !important; /* Force deep espresso on Webkit */
     -webkit-background-clip: unset !important;
-    color: hsl(var(--primary)) !important;
+    color: hsl(var(--brand-dark)) !important;
     font-weight: 700 !important;
   }
 
