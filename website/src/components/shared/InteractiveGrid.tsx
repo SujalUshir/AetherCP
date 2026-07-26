@@ -102,8 +102,8 @@ export function InteractiveGrid() {
       // Interpolate radius: 110px when slow -> 150px when fast (subtle variation)
       const hoverRadius = 110 + speedFactor * 40;
       
-      // Interpolate max cell tint opacity: 0.026 when slow -> 0.010 when fast (increased intensity by 30%)
-      const maxCellOpacity = 0.026 - speedFactor * 0.016;
+      // Interpolate max cell tint opacity: 0.034 when slow -> 0.014 when fast (increased cell tint contrast)
+      const maxCellOpacity = 0.034 - speedFactor * 0.020;
 
       // Draw hover cells (warm caramel tint) if active fade multiplier > 0.01
       if (easedFade > 0.01) {
@@ -127,8 +127,8 @@ export function InteractiveGrid() {
               const distanceFactor = 1 - distance / hoverRadius;
               const cellOpacity = Math.pow(distanceFactor, 2) * maxCellOpacity * easedFade;
 
-              // Cell Background fill (caramel tone tint)
-              ctx.fillStyle = `rgba(139, 79, 41, ${cellOpacity})`;
+              // Cell Background fill (espresso brand tint)
+              ctx.fillStyle = `rgba(106, 55, 27, ${cellOpacity})`;
               ctx.fillRect(cellX, cellY, GRID_SIZE, GRID_SIZE);
             }
           }
@@ -149,12 +149,12 @@ export function InteractiveGrid() {
           const dist = Math.abs(x - easedMouse.x);
           if (dist < hoverRadius) {
             const distanceFactor = 1 - dist / hoverRadius;
-            // Warm magnetic darkening of vertical lines near cursor (increased by 50%)
-            alpha = 0.01 + (distanceFactor * 0.018) * easedFade;
+            // Warm magnetic darkening of vertical lines near cursor (increased by 35%+)
+            alpha = 0.01 + (distanceFactor * 0.024) * easedFade;
           }
         }
 
-        ctx.strokeStyle = `rgba(139, 79, 41, ${alpha})`;
+        ctx.strokeStyle = `rgba(106, 55, 27, ${alpha})`;
         ctx.stroke();
       }
 
@@ -169,12 +169,12 @@ export function InteractiveGrid() {
           const dist = Math.abs(y - easedMouse.y);
           if (dist < hoverRadius) {
             const distanceFactor = 1 - dist / hoverRadius;
-            // Warm magnetic darkening of horizontal lines near cursor (increased by 50%)
-            alpha = 0.01 + (distanceFactor * 0.018) * easedFade;
+            // Warm magnetic darkening of horizontal lines near cursor (increased by 35%+)
+            alpha = 0.01 + (distanceFactor * 0.024) * easedFade;
           }
         }
 
-        ctx.strokeStyle = `rgba(139, 79, 41, ${alpha})`;
+        ctx.strokeStyle = `rgba(106, 55, 27, ${alpha})`;
         ctx.stroke();
       }
 
