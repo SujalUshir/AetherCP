@@ -26,7 +26,7 @@ const buttonVariants = cva(
         default: [
           "bg-primary text-primary-foreground shadow-sm",
           // Hover: subtle lift + soft warm shadow
-          "hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(139,79,41,0.22)]",
+          "hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(106,55,27,0.28)]",
           "hover:bg-primary/95",
           // Shimmer overlay via ::before (defined in globals.css)
           "btn-shimmer",
@@ -38,7 +38,7 @@ const buttonVariants = cva(
         outline: [
           "border border-border bg-transparent text-foreground",
           "hover:bg-secondary/40 hover:border-border hover:text-foreground",
-          "hover:-translate-y-[1px] hover:shadow-[0_3px_8px_rgba(139,79,41,0.12)]",
+          "hover:-translate-y-[1px] hover:shadow-[0_3px_8px_rgba(106,55,27,0.18)]",
         ].join(" "),
 
         secondary: [
@@ -57,7 +57,7 @@ const buttonVariants = cva(
         glass: [
           "border border-border bg-background/50 backdrop-blur-md text-foreground",
           "hover:border-primary/20 hover:bg-primary/5",
-          "hover:-translate-y-[1px] hover:shadow-[0_4px_16px_rgba(139,79,41,0.14)]",
+          "hover:-translate-y-[1px] hover:shadow-[0_4px_16px_rgba(106,55,27,0.20)]",
         ].join(" "),
       },
       size: {
