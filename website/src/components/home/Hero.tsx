@@ -156,7 +156,7 @@ export function Hero() {
           variants={imageFadeIn}
           className="w-full max-w-4xl mt-16 relative"
         >
-          <BrowserFrame url="codeforces.com/profile/tourist/analytics" size="sm" className="w-full card-premium overflow-hidden">
+          <BrowserFrame url="codeforces.com/profile/tourist/analytics" size="sm" className="w-full card-premium overflow-hidden shadow-[0_30px_70px_rgba(106,55,27,0.14)]">
             <div 
               onMouseMove={handleMockupMouseMove}
               onMouseLeave={handleMockupMouseLeave}
@@ -186,7 +186,7 @@ export function Hero() {
                   x: { type: "spring", stiffness: 120, damping: 24 },
                   y: { type: "spring", stiffness: 120, damping: 24 }
                 }}
-                className="absolute right-[4%] top-[8%] w-[26%] max-w-[220px] z-10 transition-transform duration-500 hover:scale-[1.03] bg-background/50 backdrop-blur-lg rounded-xl p-0.5 border border-border/70 shadow-[0_24px_60px_rgba(139,79,41,0.28)]"
+                className="absolute right-[4%] top-[8%] w-[26%] max-w-[220px] z-10 transition-transform duration-500 hover:scale-[1.03] bg-background/50 backdrop-blur-lg rounded-xl p-0.5 border border-border/70 shadow-[0_24px_60px_rgba(106,55,27,0.38)]"
               >
                 <Image
                   src={popupScreenshot}
