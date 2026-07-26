@@ -142,6 +142,20 @@
     background: transparent;
   }
 
+  /* Shared Hero Heading & Background Highlights */
+  .hero-glow-bg {
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, hsl(var(--primary) / 0.05), transparent) !important;
+  }
+
+  .hero-highlight-span {
+    background: none !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: initial !important;
+    -webkit-background-clip: unset !important;
+    color: hsl(var(--primary)) !important;
+    font-weight: 700 !important;
+  }
+
   /* Noise Overlay (Removed to keep cards clean) */
   .noise-overlay {
     position: relative;
