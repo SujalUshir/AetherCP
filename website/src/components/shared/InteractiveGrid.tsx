@@ -38,61 +38,82 @@ export function InteractiveGrid() {
     document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
     window.addEventListener("resize", handleResize, { passive: true });
 
-    const GRID_SIZE = 50; // Size of each grid square in pixels
+    const GRID_SIZE = 45; // Size of each grid square in pixels
+    const HOVER_RADIUS = 180; // Distance of influence from the mouse
 
     const draw = () => {
       if (!ctx || !canvas) return;
 
       ctx.clearRect(0, 0, width, height);
 
-      // We draw thin, subtle lines.
-      // Base line opacity: 0.025
-      // Active line opacity near mouse: up to 0.09
-      
-      const drawGridLines = () => {
-        // Draw vertical lines
-        for (let x = 0; x < width; x += GRID_SIZE) {
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, height);
+      // 1. Draw highlighted grid cells under/near the mouse first
+      if (mouse.x > -1000) {
+        const startCol = Math.max(0, Math.floor((mouse.x - HOVER_RADIUS) / GRID_SIZE));
+        const endCol = Math.min(Math.ceil(width / GRID_SIZE), Math.floor((mouse.x + HOVER_RADIUS) / GRID_SIZE));
+        const startRow = Math.max(0, Math.floor((mouse.y - HOVER_RADIUS) / GRID_SIZE));
+        const endRow = Math.min(Math.ceil(height / GRID_SIZE), Math.floor((mouse.y + HOVER_RADIUS) / GRID_SIZE));
 
-          // Calculate distance from mouse to vertical line
+        for (let col = startCol; col <= endCol; col++) {
+          for (let row = startRow; row <= endRow; row++) {
+            const cellX = col * GRID_SIZE;
+            const cellY = row * GRID_SIZE;
+            
+            // Calculate center of cell
+            const centerX = cellX + GRID_SIZE / 2;
+            const centerY = cellY + GRID_SIZE / 2;
+            
+            // Calculate distance to mouse
+            const dx = mouse.x - centerX;
+            const dy = mouse.y - centerY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < HOVER_RADIUS) {
+              const factor = 1 - distance / HOVER_RADIUS;
+              // Subtly darken the cell with warm brand tone
+              ctx.fillStyle = `rgba(194, 159, 118, ${factor * 0.045})`;
+              ctx.fillRect(cellX, cellY, GRID_SIZE, GRID_SIZE);
+            }
+          }
+        }
+      }
+
+      // 2. Draw vertical grid lines
+      for (let x = 0; x <= width; x += GRID_SIZE) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+
+        let alpha = 0.04; // Always visible base lines
+        if (mouse.x > -1000) {
           const dist = Math.abs(x - mouse.x);
-          let alpha = 0.025; // Base subtle opacity
-
-          if (mouse.x > -1000 && dist < 250) {
-            // Stronger gradient closer to mouse client y
-            const factor = 1 - dist / 250;
-            alpha = 0.025 + factor * 0.065;
+          if (dist < HOVER_RADIUS) {
+            alpha = 0.04 + (1 - dist / HOVER_RADIUS) * 0.04;
           }
-
-          ctx.strokeStyle = `rgba(240, 235, 216, ${alpha})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
         }
 
-        // Draw horizontal lines
-        for (let y = 0; y < height; y += GRID_SIZE) {
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(width, y);
+        ctx.strokeStyle = `rgba(194, 159, 118, ${alpha})`;
+        ctx.lineWidth = 0.75;
+        ctx.stroke();
+      }
 
-          // Calculate distance from mouse to horizontal line
+      // 3. Draw horizontal grid lines
+      for (let y = 0; y <= height; y += GRID_SIZE) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+
+        let alpha = 0.04; // Always visible base lines
+        if (mouse.y > -1000) {
           const dist = Math.abs(y - mouse.y);
-          let alpha = 0.025; // Base subtle opacity
-
-          if (mouse.y > -1000 && dist < 250) {
-            const factor = 1 - dist / 250;
-            alpha = 0.025 + factor * 0.065;
+          if (dist < HOVER_RADIUS) {
+            alpha = 0.04 + (1 - dist / HOVER_RADIUS) * 0.04;
           }
-
-          ctx.strokeStyle = `rgba(240, 235, 216, ${alpha})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
         }
-      };
 
-      drawGridLines();
+        ctx.strokeStyle = `rgba(194, 159, 118, ${alpha})`;
+        ctx.lineWidth = 0.75;
+        ctx.stroke();
+      }
 
       animationFrameId = requestAnimationFrame(draw);
     };
@@ -111,7 +132,6 @@ export function InteractiveGrid() {
     <canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0 -z-50 h-full w-full bg-transparent"
-      style={{ mixBlendMode: "screen" }}
     />
   );
 }
