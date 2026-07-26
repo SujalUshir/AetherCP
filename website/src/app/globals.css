@@ -104,7 +104,8 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-    font-weight: 600;
+    font-weight: 700;
+    color: hsl(var(--brand-dark)); /* Rich dark espresso brown for maximum contrast */
   }
 
   ::selection {
@@ -150,7 +151,7 @@
   .hero-highlight-span {
     background: none !important;
     background-clip: unset !important;
-    -webkit-text-fill-color: initial !important;
+    -webkit-text-fill-color: hsl(var(--primary)) !important; /* Force espresso brown on Webkit */
     -webkit-background-clip: unset !important;
     color: hsl(var(--primary)) !important;
     font-weight: 700 !important;
