@@ -34,6 +34,7 @@ export function FAQ() {
               eyebrow="FAQ"
               title="Frequently asked"
               titleHighlight="questions"
+              highlightColor="text-brand-dark"
               description="Detailed architectural and capability answers. If you require further technical support, feel free to open a diagnostics ticket on GitHub."
             />
           </motion.div>
@@ -55,7 +56,7 @@ export function FAQ() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="group flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-indigo-400"
+            className="group flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
           >
             <MessageSquare className="h-4 w-4" />
             Still have questions? Open a GitHub issue

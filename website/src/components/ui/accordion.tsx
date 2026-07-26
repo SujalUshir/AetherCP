@@ -44,13 +44,13 @@ export function Accordion({ items, className, allowMultiple = false }: Accordion
               aria-expanded={isOpen}
               aria-controls={`accordion-panel-${item.id}`}
               onClick={() => toggle(item.id)}
-              className="flex w-full items-center justify-between gap-4 py-5 text-left text-sm font-medium transition-colors hover:text-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="flex w-full items-center justify-between gap-4 py-5 text-left text-sm font-medium transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <span>{item.trigger}</span>
               <ChevronDown
                 className={cn(
                   "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
-                  isOpen && "rotate-180 text-indigo-400"
+                  isOpen && "rotate-180 text-primary"
                 )}
               />
             </button>

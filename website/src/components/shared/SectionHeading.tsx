@@ -8,6 +8,7 @@ interface SectionHeadingProps {
   eyebrow?: string;
   title: string;
   titleHighlight?: string;
+  highlightColor?: string;
   description?: string;
   align?: "left" | "center";
   className?: string;
@@ -17,6 +18,7 @@ export function SectionHeading({
   eyebrow,
   title,
   titleHighlight,
+  highlightColor,
   description,
   align = "center",
   className,
@@ -42,7 +44,7 @@ export function SectionHeading({
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary"
+          className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary shadow-sm"
         >
           {eyebrow}
         </motion.span>
@@ -51,12 +53,12 @@ export function SectionHeading({
         initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.07 }}
-        className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+        className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-foreground"
       >
         {titleHighlight ? (
           <>
             {title}{" "}
-            <span className="gradient-text">{titleHighlight}</span>
+            <span className={cn(highlightColor || "text-primary")}>{titleHighlight}</span>
           </>
         ) : (
           title
