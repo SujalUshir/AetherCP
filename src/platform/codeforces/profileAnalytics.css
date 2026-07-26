@@ -8,6 +8,7 @@
   padding:1.1em;
   color:#222;
   font-family:Verdana, Arial, sans-serif;
+  clear:both; /* prevents conflicts with Codeforces floating sidebar */
 }
 
 .aethercp-profile-root + .aethercp-profile-root{
