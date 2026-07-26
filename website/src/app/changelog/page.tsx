@@ -97,8 +97,8 @@ export default function ChangelogPage() {
               <Sparkles className="h-3 w-3" />
               Product Updates
             </span>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              <span className="hero-highlight-span">Changelog</span>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
+              AetherCP <span className="hero-highlight-span">Changelog</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
               Explore the latest <span className="text-accent-amber font-semibold">features</span>, improvements, and fixes added to <span className="text-primary font-semibold">AetherCP</span>.

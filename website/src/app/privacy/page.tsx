@@ -72,8 +72,8 @@ export default function PrivacyPage() {
               <Lock className="h-3 w-3" />
               Privacy Policy
             </span>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              <span className="hero-highlight-span">Your Data is Yours</span>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
+              Your Data <span className="hero-highlight-span">is Yours</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
               AetherCP was built on a simple premise: a <span className="text-accent-blue font-semibold">developer companion</span> should have access to your data, but its creators <span className="text-accent-orange font-semibold">shouldn&apos;t</span>.

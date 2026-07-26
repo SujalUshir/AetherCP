@@ -191,10 +191,8 @@ export function AboutHero() {
           <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-primary">
             Developer / Creator of AetherCP
           </span>
-          <h1 className="text-3xl font-extrabold tracking-tight leading-tight">
-            <span className="hero-highlight-span">
-              Hi, I&apos;m Sujal Ushir.
-            </span>
+          <h1 className="text-3xl font-extrabold tracking-tight leading-tight text-foreground">
+            Hi, I&apos;m <span className="hero-highlight-span">Sujal Ushir.</span>
           </h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
             CS student, <span className="text-accent-orange font-semibold">competitive programmer</span>, and <span className="text-accent-amber font-semibold">developer</span> building tools for coders who care about <span className="text-accent-amber font-semibold">performance</span> and <span className="text-accent-emerald font-semibold">privacy</span>.
