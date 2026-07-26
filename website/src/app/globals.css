@@ -41,33 +41,33 @@
     --surface-warm-300:   36 20% 75%; /* #C3B9A8 */
 
     /* Brand Accent Colors (Richer Caramel/Walnut brown) */
-    --primary:            28 46% 36%; /* #8B4F29 (Richer Walnut Brown) */
+    --primary:            28 46% 28%; /* #6A371B (Richer Walnut/Espresso Brown) */
     --primary-foreground: 0 0% 100%; /* #FFFFFF */
     
     /* Rich Brown Palette Shades */
-    --brand-dark:         28 46% 22%; /* #4F2B14 (Walnut / Coffee) */
-    --brand-medium:       28 46% 36%; /* #8B4F29 (Caramel) */
-    --brand-light:        30 35% 58%; /* #B78D68 (Tan) */
-    --brand-beige:        32 28% 82%; /* #D9C3AE (Beige) */
+    --brand-dark:         28 46% 15%; /* #391D0E (Deep Walnut / Espresso) */
+    --brand-medium:       28 46% 28%; /* #6A371B (Caramel / Walnut) */
+    --brand-light:        30 35% 44%; /* #A3754E (Tan) */
+    --brand-beige:        32 28% 68%; /* #C9B197 (Beige) */
 
     --secondary:          36 20% 94%; /* #F3EFE7 */
     --secondary-foreground: 240 10% 8%;
 
     --muted:              36 20% 94%;
-    --muted-foreground:   240 5% 32%; /* Soft grey text - darkened for strong contrast */
+    --muted-foreground:   240 5% 24%; /* Darker charcoal text - increased for strong contrast */
 
     /* Accent Palette (Refined & Muted) */
     --accent-blue:        207 75% 45%; /* Vibrant Muted Blue (Semantic Info) */
     --accent-amber:       38 82% 40%;  /* Vibrant Muted Amber */
     --accent-emerald:     142 55% 35%; /* Deep Muted Emerald (Semantic Success) */
-    --accent-purple:      28 46% 36%;  /* Warm Walnut Brown brand accent */
+    --accent-purple:      28 46% 28%;  /* Warm Walnut Brown brand accent */
     --accent-orange:      16 85% 45%;  /* Vibrant Muted Orange */
     --accent-slate:       215 15% 45%; /* Slate Gray */
 
-    --border:             30 15% 85%; /* #E2DDD5 (Subtle Warm Beige Border) */
-    --border-muted:       30 15% 91%;
-    --input:              30 15% 85%;
-    --ring:               28 46% 36%;
+    --border:             30 15% 76%; /* #CCC5B9 (Stronger Warm Beige Border) */
+    --border-muted:       30 15% 84%;
+    --input:              30 15% 76%;
+    --ring:               28 46% 28%;
 
     --radius: 0.75rem; /* modern slightly rounded corner scale (12px) */
   }
@@ -150,20 +150,21 @@
   /* Tangible Premium Card Styles */
   .card-premium {
     background: #ffffff;
-    border: 1px solid rgba(139, 79, 41, 0.1); /* Subtle rich brown border */
+    border: 1px solid rgba(106, 55, 27, 0.18); /* Richer warm border (+20% opacity) */
     box-shadow: 
-      0 4px 16px rgba(139, 79, 41, 0.02),
+      0 4px 16px rgba(106, 55, 27, 0.03),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border-radius: var(--radius);
   }
 
   .card-premium:hover {
-    border-color: rgba(139, 79, 41, 0.32); /* Darkened hover border for contrast */
+    background: #fdfdfb; /* Slightly brighter warm surface background (+2-3%) */
+    border-color: rgba(106, 55, 27, 0.45); /* Darkened hover border for high contrast */
     transform: translateY(-1px);
     box-shadow: 
-      0 6px 20px rgba(139, 79, 41, 0.08), /* Strengthened shadow */
-      0 2px 6px rgba(139, 79, 41, 0.02);
+      0 8px 24px rgba(106, 55, 27, 0.11), /* Slightly deepened hover shadow */
+      0 2px 8px rgba(106, 55, 27, 0.03);
   }
 
   /* Glowing Radial Lighting */
