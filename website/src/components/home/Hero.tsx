@@ -9,6 +9,7 @@ import { Container } from "@/components/shared/Container";
 import { GITHUB_URL, DOWNLOAD_URL } from "@/data/navigation";
 import { cn } from "@/lib/utils";
 import popupScreenshot from "../../../public/screenshots/popup.png";
+import analyticScreenshot from "../../../public/screenshots/analytic.png";
 
 const heroContainer = {
   hidden: { opacity: 0 },
@@ -133,16 +134,25 @@ export function Hero() {
           initial="hidden"
           animate="visible"
           variants={imageFadeIn}
-          className="w-full max-w-4xl mt-20 relative"
+          className="w-full max-w-4xl mt-16 relative"
         >
-          <BrowserFrame url="codeforces.com/contest/2239/problem/A" size="sm" className="w-full card-premium">
-            <div className="flex justify-center w-full py-8 bg-bg-dark/10 rounded-b-2xl">
-              <div className="relative group max-w-[300px] w-full">
+          <BrowserFrame url="codeforces.com/profile/tourist/analytics" size="sm" className="w-full card-premium overflow-hidden">
+            <div className="relative w-full aspect-[16/10] bg-secondary/30">
+              {/* Dashboard background */}
+              <Image
+                src={analyticScreenshot}
+                alt="Codeforces Analytics Dashboard"
+                fill
+                className="object-cover object-top select-none pointer-events-none rounded-b-2xl"
+                priority
+              />
+
+              {/* Floating Extension Popup on the Right Side */}
+              <div className="absolute right-[4%] top-[8%] w-[26%] max-w-[220px] z-10 transition-transform duration-500 hover:scale-[1.03]">
                 <Image
                   src={popupScreenshot}
                   alt="AetherCP Extension Popup Preview"
-                  className="relative max-w-full w-full h-auto rounded-xl border border-border/60 shadow-md transition-all duration-500 hover:scale-[1.01] select-none pointer-events-none"
-                  priority
+                  className="rounded-xl border border-border shadow-xl select-none pointer-events-none w-full h-auto"
                 />
               </div>
             </div>
