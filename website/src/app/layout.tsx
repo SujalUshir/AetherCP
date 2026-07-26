@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/shared/ScrollProgress";
 import { BackToTop } from "@/components/shared/BackToTop";
+import { InteractiveGrid } from "@/components/shared/InteractiveGrid";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +24,6 @@ export const metadata: Metadata = {
   keywords: [
     "competitive programming",
     "codeforces",
-    "leetcode",
     "VS Code",
     "browser extension",
     "practice tracker",
@@ -73,6 +73,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} dark`} suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground antialiased relative overflow-x-hidden w-full">
         <ScrollProgress />
+        <InteractiveGrid />
         <div className="relative flex min-h-screen flex-col overflow-x-hidden w-full">
           <Navbar />
           <main className="flex-1">{children}</main>

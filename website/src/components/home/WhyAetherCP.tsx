@@ -45,7 +45,7 @@ export function WhyAetherCP() {
             eyebrow="Why AetherCP"
             title="Engineered for"
             titleHighlight="competitive coders"
-            description="Designed to move beyond legacy browser utility scripts. Built with clean, event-driven background runtimes, canvas-based profile instrumentations, and sandboxed storage."
+            description="Automatic timing, honest idle detection, and rich profile analytics — built for the way competitive programmers actually work."
           />
         </div>
 

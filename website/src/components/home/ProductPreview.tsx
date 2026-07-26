@@ -60,7 +60,7 @@ export function ProductPreview() {
           {[
             { label: "Chrome Extension", color: "border-accent-emerald/20 text-accent-emerald bg-accent-emerald/5" },
             { label: "Codeforces",        color: "border-accent-orange/20 text-accent-orange bg-accent-orange/5" },
-            { label: "LeetCode",          color: "border-accent-amber/20 text-accent-amber bg-accent-amber/5" },
+            { label: "Offline Mode",      color: "border-accent-amber/20 text-accent-amber bg-accent-amber/5" },
             { label: "VS Code",           color: "border-accent-blue/20 text-accent-blue bg-accent-blue/5" },
           ].map(({ label, color }) => (
             <span key={label} className={`rounded-full border px-3.5 py-1 text-xs font-semibold ${color}`}>

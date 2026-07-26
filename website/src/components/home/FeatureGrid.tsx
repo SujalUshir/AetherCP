@@ -40,7 +40,6 @@ const ACCENT_CLASSES: Record<FeatureAccent, { icon: string; bg: string; badge: s
 function highlightDescription(text: string) {
   const keywords = [
     { word: "Codeforces", class: "text-accent-orange font-semibold" },
-    { word: "LeetCode", class: "text-accent-amber font-semibold" },
     { word: "VS Code", class: "text-accent-purple font-semibold" },
     { word: "local storage", class: "text-accent-emerald font-semibold" },
     { word: "local", class: "text-accent-emerald font-semibold" },
@@ -88,9 +87,9 @@ export function FeatureGrid() {
         <div className="mb-16 flex justify-center">
           <SectionHeading
             eyebrow="Key Features"
-            title="Core"
-            titleHighlight="instrumentation suite"
-            description="Explore the core diagnostics capabilities designed into AetherCP—operating entirely within your browser's sandboxed local runtime."
+            title="Everything you need to"
+            titleHighlight="track your practice"
+            description="All features run entirely inside your browser. No accounts, no cloud, no configuration required."
           />
         </div>
 

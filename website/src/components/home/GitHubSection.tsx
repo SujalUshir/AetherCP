@@ -88,7 +88,7 @@ export function GitHubSection() {
                 <span className="font-mono text-sm text-muted-foreground/80">SujalUshir /</span>
                 <span className="font-mono text-sm font-bold text-primary">AetherCP</span>
               </div>
-              <p className="text-sm text-muted-foreground/90 leading-relaxed">Privacy-first competitive programming companion for Codeforces &amp; LeetCode.</p>
+              <p className="text-sm text-muted-foreground/90 leading-relaxed">Privacy-first competitive programming companion for Codeforces.</p>
               <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground/75 font-medium">
                 <span className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-accent-amber" />

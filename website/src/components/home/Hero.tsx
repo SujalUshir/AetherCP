@@ -86,9 +86,9 @@ export function Hero() {
           {/* Title / Heading */}
           <motion.div variants={slideInBottom}>
             <h1 className="text-5xl font-extrabold sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] max-w-3xl">
-              Competitive Programming,{" "}
+              Your Codeforces Training,{" "}
               <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">
-                Instrumented.
+                Measured Automatically.
               </span>
             </h1>
           </motion.div>
@@ -96,7 +96,7 @@ export function Hero() {
           {/* Description */}
           <motion.div variants={slideInBottom}>
             <p className="max-w-2xl text-base text-muted-foreground leading-relaxed sm:text-xl">
-              A high-performance, <span className="text-accent-emerald font-semibold">local-first</span> browser extension that automates session timing, injects visual <span className="text-accent-blue font-semibold">execution metrics</span> directly into Codeforces profiles, and establishes instant loopback synchronization with VS Code.
+              A <span className="text-accent-emerald font-semibold">local-first</span> browser extension that starts timing the moment you open a problem, pauses automatically after <span className="text-accent-blue font-semibold">5 minutes of inactivity</span>, and injects rich analytics directly into Codeforces profiles — no setup, no accounts required.
             </p>
           </motion.div>
 
@@ -174,16 +174,12 @@ export function Hero() {
           className="w-full max-w-4xl mt-16 pt-10 border-t border-border/40 flex flex-col items-center gap-6"
         >
           <p className="text-xs uppercase tracking-widest text-muted-foreground/60 font-semibold">
-            Optimized for the platforms you use daily
+            Designed for the platforms you compete on
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm text-muted-foreground font-mono">
             <div className="flex items-center gap-2 grayscale opacity-55 hover:grayscale-0 hover:opacity-90 transition-all duration-300 cursor-default">
               <span className="h-2 w-2 rounded-full bg-accent-orange" />
               <span>CODEFORCES</span>
-            </div>
-            <div className="flex items-center gap-2 grayscale opacity-55 hover:grayscale-0 hover:opacity-90 transition-all duration-300 cursor-default">
-              <span className="h-2 w-2 rounded-full bg-accent-amber" />
-              <span>LEETCODE</span>
             </div>
             <div className="flex items-center gap-2 grayscale opacity-55 hover:grayscale-0 hover:opacity-90 transition-all duration-300 cursor-default">
               <span className="h-2 w-2 rounded-full bg-accent-blue" />

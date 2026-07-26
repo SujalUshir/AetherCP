@@ -20,9 +20,9 @@ const PERMISSIONS = [
     name: "tabs",
     description: (
       <>
-        Used to determine if the currently open tab matches a{" "}
-        <span className="text-accent-orange font-semibold">Codeforces</span> or{" "}
-        <span className="text-accent-amber font-semibold">LeetCode</span> problem URL, starting the timer.
+        Used to detect when the active tab is a{" "}
+        <span className="text-accent-orange font-semibold">Codeforces</span>{" "}
+        problem URL, start the session timer, and handle tab switching events.
       </>
     ),
   },
@@ -36,11 +36,22 @@ const PERMISSIONS = [
     ),
   },
   {
-    name: "Host permissions (codeforces.com, leetcode.com, localhost)",
+    name: "identity",
     description: (
       <>
-        Allows AetherCP to run content scripts to parse problem metadata on competitive sites and communicate with the local{" "}
-        <span className="text-accent-blue font-semibold">VS Code receiver</span>.
+        Present in the manifest for a planned future{" "}
+        <span className="text-accent-purple font-semibold">Cloud Sync</span>{" "}
+        feature. <span className="text-accent-orange font-semibold">Not used</span> in the current offline release — no Google login is available yet.
+      </>
+    ),
+  },
+  {
+    name: "Host permissions (codeforces.com, localhost:27121)",
+    description: (
+      <>
+        Allows AetherCP to run content scripts on Codeforces problem and profile pages, and to communicate with the local{" "}
+        <span className="text-accent-blue font-semibold">VS Code receiver</span>{" "}
+        at localhost:27121. No other domains are accessed.
       </>
     ),
   },
@@ -144,7 +155,12 @@ export default function PrivacyPage() {
 
               <h2 className="text-lg font-bold text-foreground">3. Web Request Safety</h2>
               <p>
-                AetherCP content scripts run locally inside problem tabs. When sending a problem to your editor, it makes a local network call to port <code>27121</code> (the standard port used by competitive programming receivers inside <span className="text-accent-purple font-semibold">VS Code</span>). No external network requests are ever triggered to servers other than the platforms you are actively visiting (<span className="text-accent-orange font-semibold">Codeforces</span> or <span className="text-accent-amber font-semibold">LeetCode</span>).
+                AetherCP makes only two types of network requests: (1) read-only API calls to{" "}
+                <span className="text-accent-orange font-semibold">codeforces.com/api</span>{" "}
+                to fetch public submission history for profile analytics, and (2) local loopback requests to{" "}
+                <code>localhost:27121</code>{" "}
+                when sending a problem to the{" "}
+                <span className="text-accent-purple font-semibold">VS Code CPH extension</span>. No other external network requests are ever made.
               </p>
 
               <h2 className="text-lg font-bold text-foreground">4. Fully Auditable &amp; Open Source</h2>

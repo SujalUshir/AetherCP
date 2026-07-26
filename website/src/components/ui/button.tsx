@@ -25,39 +25,39 @@ const buttonVariants = cva(
       variant: {
         default: [
           "bg-primary text-primary-foreground shadow-sm",
-          // Hover: lift + glow
-          "hover:-translate-y-[2px] hover:shadow-[0_4px_16px_-4px_hsl(var(--primary)/0.35),0_2px_8px_-2px_hsl(var(--primary)/0.2)]",
+          // Hover: subtle lift + soft warm shadow + slight scale
+          "hover:-translate-y-[1px] hover:scale-[1.01] hover:shadow-[0_4px_12px_rgba(240,235,216,0.12)]",
           "hover:bg-primary/95",
           // Shimmer overlay via ::before (defined in globals.css)
           "btn-shimmer",
         ].join(" "),
 
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:-translate-y-[2px] hover:shadow-md",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:-translate-y-[1px] hover:shadow-md",
 
         outline: [
           "border border-border bg-transparent text-foreground",
-          "hover:bg-white/5 hover:border-white/20 hover:text-foreground",
-          "hover:-translate-y-[2px] hover:shadow-[0_2px_12px_-4px_rgba(0,0,0,0.3)]",
+          "hover:bg-white/[0.02] hover:border-white/15 hover:text-foreground",
+          "hover:-translate-y-[1px] hover:scale-[1.01] hover:shadow-[0_2px_8px_rgba(0,0,0,0.2)]",
         ].join(" "),
 
         secondary: [
           "bg-secondary text-secondary-foreground",
-          "hover:bg-secondary/80 hover:-translate-y-[2px] hover:shadow-sm",
+          "hover:bg-secondary/80 hover:-translate-y-[1px]",
         ].join(" "),
 
         ghost: [
-          "hover:bg-white/5 hover:text-foreground",
-          "hover:-translate-y-[1px]",
+          "hover:bg-white/[0.03] hover:text-foreground",
+          "hover:-translate-y-[0.5px]",
         ].join(" "),
 
         link: "text-primary underline-offset-4 hover:underline",
 
         // Premium glass CTA
         glass: [
-          "glass-card text-foreground",
-          "hover:border-primary/40 hover:bg-primary/5",
-          "hover:-translate-y-[2px] hover:shadow-[0_4px_20px_-6px_hsl(var(--primary)/0.2)]",
+          "border border-white/5 bg-white/[0.02] backdrop-blur-md text-foreground",
+          "hover:border-primary/25 hover:bg-primary/[0.03]",
+          "hover:-translate-y-[1px] hover:scale-[1.01] hover:shadow-[0_4px_16px_rgba(0,0,0,0.3)]",
         ].join(" "),
       },
       size: {

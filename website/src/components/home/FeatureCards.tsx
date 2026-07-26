@@ -44,12 +44,12 @@ const FEATURES: Feature[] = [
     icon: Trophy,
     title: "Competitive Analytics",
     description:
-      "Deep insights into your Codeforces profile — difficulty distribution, verdict breakdown, and rating trends.",
+      "Rating distribution chart and topic pie chart injected into any Codeforces profile page — sourced from the public API.",
     bullets: [
-      "Rating progression chart",
-      "Verdict distribution (AC / WA / TLE)",
-      "Problem difficulty heatmap",
-      "Language usage breakdown",
+      "Rating distribution bar chart (800–3500)",
+      "Problem topic pie chart (top 10 tags)",
+      "Deduplicated solved count badge",
+      "Works on any Codeforces profile",
     ],
     accent: "text-violet-400",
     glow: "group-hover:shadow-violet-500/20",

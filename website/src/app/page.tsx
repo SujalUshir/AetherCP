@@ -10,7 +10,7 @@ import { FinalCTA }          from "@/components/home/FinalCTA";
 export const metadata: Metadata = {
   title: "AetherCP — Privacy-First Competitive Programming Companion",
   description:
-    "Track your practice, analyze your progress, and open problems instantly in VS Code. 100% local, no backend, no tracking. Free Chrome extension for Codeforces and LeetCode.",
+    "Track your practice, analyze your progress, and open problems instantly in VS Code. 100% local, no backend, no tracking. Free Chrome extension for Codeforces.",
   alternates: { canonical: "https://aethercp.dev" },
 };
 

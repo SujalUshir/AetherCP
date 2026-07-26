@@ -11,12 +11,12 @@ import analyticScreenshot from "../../../public/screenshots/analytic.png";
 import historyScreenshot from "../../../public/screenshots/problem_history.png";
 
 const BULLETS = [
-  <>Visualize practice intensity via a 52-week <span className="text-accent-amber font-semibold">Sunday-aligned activity heatmap</span></>,
-  <>Review daily and weekly <span className="text-accent-amber font-semibold">session duration distributions</span></>,
-  <>Inspect problem-by-problem <span className="text-accent-purple font-semibold">historical timing logs</span></>,
-  <>Track practice consistency via local <span className="text-accent-amber font-semibold">streak counter calculations</span></>,
-  <>Determine solving ratios derived from daily <span className="text-accent-amber font-semibold">practice telemetry</span></>,
-  <>Compile and process all metrics <span className="text-accent-emerald font-semibold">locally</span> without network roundtrips</>,
+  <>View a <span className="text-accent-amber font-semibold">full-year coding heatmap</span> with 5 intensity levels and hover tooltips on your own profile</>,
+  <>Track daily and weekly practice with a <span className="text-accent-amber font-semibold">7-day bar chart</span> showing minutes per day</>,
+  <>See <span className="text-accent-purple font-semibold">all-time problem history</span> with per-problem time, rating, and last-seen date</>,
+  <>Monitor your <span className="text-accent-amber font-semibold">current practice streak</span> — consecutive days with any tracked coding time</>,
+  <>View <span className="text-accent-emerald font-semibold">overview cards</span> for total coding time, today&apos;s time, problems worked, and most-worked problem</>,
+  <>All metrics compiled and rendered <span className="text-accent-emerald font-semibold">locally</span> — no network roundtrips, no uploads</>,
 ];
 
 export function AnalyticsShowcase() {
@@ -68,7 +68,7 @@ export function AnalyticsShowcase() {
             <div className="flex items-start gap-4 rounded-2xl border border-accent-blue/10 bg-accent-blue/5 p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]">
               <BarChart3 className="mt-0.5 h-5 w-5 shrink-0 text-accent-blue" />
               <p className="text-sm text-muted-foreground/90 leading-relaxed">
-                All telemetry aggregates reside within your browser&apos;s <span className="text-accent-blue font-semibold text-foreground">sandboxed client storage</span> database, running without external pipelines, server uploads, or third-party connections.
+                Personal practice analytics appear exclusively on <span className="text-accent-blue font-semibold text-foreground">your own Codeforces profile</span> — refreshing every 10 seconds with live session data from your <span className="text-accent-blue font-semibold text-foreground">local storage</span>.
               </p>
             </div>
           </motion.div>
@@ -95,7 +95,7 @@ export function AnalyticsShowcase() {
             </BrowserFrame>
 
             <div className="relative sm:absolute sm:-bottom-12 sm:-left-8 sm:w-[85%] transition-all duration-300 hover:scale-[1.02] hover:z-20 z-10">
-              <BrowserFrame url="leetcode.com/problems/two-sum" size="sm" className="card-premium">
+              <BrowserFrame url="codeforces.com/profile/tourist" size="sm" className="card-premium">
                 <Image
                   src={historyScreenshot}
                   alt="AetherCP History Screenshot"

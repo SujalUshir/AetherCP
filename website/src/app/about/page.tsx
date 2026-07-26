@@ -26,7 +26,7 @@ export default function AboutPage() {
               About <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">AetherCP</span>
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground/80 leading-relaxed max-w-3xl mx-auto">
-              AetherCP is a high-performance, local-first browser extension engineered specifically for competitive programmers. Running as an event-driven background service worker, it automates practice tracking on Codeforces and LeetCode. By processing time constraints, parsing sample tests, and coordinating local workspace configurations, it eliminates manual setup, allowing developers to concentrate fully on algorithm design.
+              AetherCP is a local-first browser extension for competitive programmers. It runs as a background service worker, automatically tracking the time you spend on Codeforces problems, injecting rich analytics into Codeforces profile pages, and sending problems to VS Code with one click — without any configuration, accounts, or data leaving your browser.
             </p>
           </div>
         </Container>
@@ -49,7 +49,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-base font-semibold text-foreground">Developer Productivity</h3>
                 <p className="text-xs leading-relaxed text-muted-foreground/80">
-                  Optimizing practice workflows via automated session capture. Features a smart 15-minute idle threshold that preserves metrics during offline paper-drafting phases.
+                  Automatic session tracking on Codeforces problem pages. The timer starts on page load, pauses after <strong>5 minutes</strong> of inactivity, and resumes on the next keypress or click — keeping your metrics honest.
                 </p>
               </div>
 
@@ -86,13 +86,13 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold tracking-tight text-foreground">Why I Engineered AetherCP</h2>
             <div className="flex flex-col gap-5 text-sm sm:text-base text-muted-foreground/85 leading-relaxed">
               <p>
-                As an active participant in competitive programming, I recognized a significant diagnostic gap. Tracking practice efficiency was highly fragmented: developers relied on manual stopwatches or heavy cloud-based platforms requiring external database logins, telemetry tracking, and cookie collections. None of these solutions integrated directly with editor workspaces or respected user data privacy.
+                As an active competitive programmer, I felt the gap clearly. Tracking actual practice time was manual, fragmented, and invisible. Stopwatches don&apos;t account for thinking time. Cloud platforms require logins and collect data. Nothing integrated with VS Code automatically.
               </p>
               <p>
-                I engineered AetherCP to bridge this gap. By building a local-first extension that runs entirely inside the browser&apos;s sandboxed storage runtime, AetherCP automates session logging, performs client-side analytics aggregation, and injects diagnostic dashboards directly into competitive profiles without introducing network roundtrips or context switching.
+                I built AetherCP to fix this. A local-first extension that measures only your genuine focused time, stores everything in your browser, and makes your Codeforces profile show real practice data — with no setup and no accounts.
               </p>
               <p>
-                The integration with Visual Studio Code utilizes loopback sockets to instantly deploy sample tests, memory limits, and source templates, accelerating setup times so developers can focus solely on problem-solving.
+                The VS Code integration came next: one click to send any Codeforces problem — complete with sample tests, time limits, and memory limits — directly to the CPH extension, eliminating the manual setup that interrupts flow state.
               </p>
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function AboutPage() {
               <h2 className="text-lg font-bold tracking-tight text-foreground">Technical Direction</h2>
             </div>
             <p className="text-sm sm:text-base text-muted-foreground/85 leading-relaxed">
-              Our roadmap focuses on expanding platform compatibility to AtCoder and CodeChef, implementing peer-to-peer data backup options, and expanding local client diagnostics. Every future enhancement will continue to run strictly local-first and respect absolute data privacy.
+              The roadmap focuses on three areas: expanding platform support (LeetCode re-enablement, AtCoder, CodeChef), adding an optional Cloud Sync layer (Google OAuth + Supabase) for cross-device continuity, and providing a data export mechanism. Every future enhancement will remain strictly local-first by default — cloud features will always be opt-in.
             </p>
           </div>
         </Container>

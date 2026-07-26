@@ -10,12 +10,12 @@ import { BrowserFrame } from "@/components/shared/BrowserFrame";
 import competitiveScreenshot from "../../../public/screenshots/competitive.png";
 
 const BULLETS = [
-  <>Plot <span className="text-accent-amber font-semibold">historical contest rating progression</span> lines</>,
-  <>Analyze <span className="text-accent-blue font-semibold">verdict distributions</span> (AC, WA, TLE, MLE, and RE breakdowns)</>,
-  <>Inspect solved problem <span className="text-accent-amber font-semibold">difficulty distributions</span></>,
-  <>Evaluate solved counts on a <span className="text-accent-purple font-semibold">tag-by-tag basis</span> to identify weaknesses</>,
-  <>Audit full <span className="text-accent-purple font-semibold">contest records</span> complete with ratings and deltas</>,
-  <>Instrument analytics widgets directly into your <span className="text-accent-orange font-semibold">Codeforces</span> profile</>,
+  <><span className="text-accent-amber font-semibold">Rating distribution bar chart</span> — color-coded by Codeforces difficulty tier (800 through 3500)</>,
+  <><span className="text-accent-purple font-semibold">Topic pie chart</span> — top 10 problem tags from all solved submissions, with counts and percentages</>,
+  <><span className="text-accent-blue font-semibold">Solved count badge</span> — deduplicated total of unique accepted problems</>,
+  <>Works on <span className="text-accent-orange font-semibold">any Codeforces profile</span> — not just your own</>,
+  <>Fetches up to <span className="text-accent-amber font-semibold">200,000 submissions</span> from the public Codeforces API</>,
+  <>Renders entirely <span className="text-accent-emerald font-semibold">client-side</span> — no external servers, no data uploaded</>,
 ];
 
 export function CFAnalytics() {
@@ -65,9 +65,9 @@ export function CFAnalytics() {
           >
             <SectionHeading
               eyebrow="Codeforces Analytics"
-              title="Audit your"
-              titleHighlight="performance profile"
-              description="AetherCP queries and aggregates user status history client-side, instrumenting Codeforces profiles with responsive canvas charts."
+              title="Profile analytics on"
+              titleHighlight="any Codeforces profile"
+              description="AetherCP injects a rating distribution chart and topic breakdown directly into any Codeforces profile page — sourced from the public API, rendered client-side."
               align="left"
             />
 
@@ -89,7 +89,7 @@ export function CFAnalytics() {
             <div className="flex items-start gap-4 rounded-2xl border border-accent-amber/10 bg-accent-amber/5 p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]">
               <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-accent-amber" />
               <p className="text-sm text-muted-foreground/90 leading-relaxed">
-                The <span className="text-accent-blue font-semibold text-foreground">diagnostics panel</span> initializes automatically upon loading any <span className="text-accent-orange font-semibold text-foreground">Codeforces</span> profile page, querying the public API and rendering metrics client-side.
+                Analytics appear automatically on <span className="text-accent-orange font-semibold text-foreground">any visited Codeforces profile</span> — no configuration needed. Data is fetched read-only from the <span className="text-accent-blue font-semibold text-foreground">public Codeforces API</span> and never uploaded anywhere.
               </p>
             </div>
           </motion.div>

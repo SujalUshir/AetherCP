@@ -50,11 +50,11 @@
     --muted:              240 6% 9%;
     --muted-foreground:   240 5% 65%; /* Soft gray */
 
-    /* Accent Palette (Refined & Muted) */
-    --accent-blue:        207 75% 62%; /* Vibrant Muted Blue */
+    /* Accent Palette (Refined & Muted) - Mapped to warm brand tone */
+    --accent-blue:        207 75% 62%; /* Vibrant Muted Blue (Semantic Info) */
     --accent-amber:       38 82% 58%;  /* Vibrant Muted Amber */
-    --accent-emerald:     142 55% 50%; /* Deep Muted Emerald */
-    --accent-purple:      265 70% 66%; /* Vibrant Muted Purple */
+    --accent-emerald:     142 55% 50%; /* Deep Muted Emerald (Semantic Success) */
+    --accent-purple:      45 30% 80%;  /* Warm Beige/Brown brand accent */
     --accent-orange:      16 85% 58%;  /* Vibrant Muted Orange */
     --accent-slate:       215 15% 60%; /* Slate Gray */
 
@@ -122,8 +122,8 @@
   .grid-bg-subtle {
     background-size: 40px 40px;
     background-image: 
-      linear-gradient(to right, rgba(240, 235, 216, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(240, 235, 216, 0.03) 1px, transparent 1px);
+      linear-gradient(to right, rgba(240, 235, 216, 0.015) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(240, 235, 216, 0.015) 1px, transparent 1px);
   }
 
   /* Noise Overlay */
@@ -135,7 +135,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
     pointer-events: none;
     border-radius: inherit;
     z-index: 10;
@@ -143,22 +143,22 @@
 
   /* Tangible Premium Card Styles */
   .card-premium {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0%, rgba(255, 255, 255, 0.005) 100%);
+    border: 1px solid rgba(240, 235, 216, 0.04);
     box-shadow: 
-      0 4px 30px rgba(0, 0, 0, 0.4),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+      0 4px 20px rgba(0, 0, 0, 0.25),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(12px);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .card-premium:hover {
-    border-color: rgba(240, 235, 216, 0.2);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    transform: translateY(-2px);
+    border-color: rgba(240, 235, 216, 0.1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0.01) 100%);
+    transform: translateY(-1px);
     box-shadow: 
-      0 12px 30px rgba(0, 0, 0, 0.55),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+      0 8px 24px rgba(0, 0, 0, 0.35),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.04);
   }
 
   /* Glowing Radial Lighting */

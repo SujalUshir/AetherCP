@@ -73,11 +73,11 @@ const SCREENSHOT_SECTIONS = [
     title: "Problem History",
     description: (
       <>
-        A complete log of all solved and unsolved problem sessions in{" "}
+        A complete log of recent problem sessions in{" "}
         <span className="text-accent-emerald font-semibold">local storage</span>, detailed with duration, difficulty rating, and timestamps.
       </>
     ),
-    url: "leetcode.com/problems/two-sum",
+    url: "codeforces.com/profile",
     src: historyScreenshot,
     maxWidthClass: "max-w-[640px]",
   },

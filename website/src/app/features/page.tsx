@@ -134,10 +134,10 @@ export default function FeaturesPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground">
-                      Asynchronous Idle Observers
+                      5-Minute Idle Detection
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      Maintains timing accuracy via a CP-optimized 15-minute inactivity timeout. Observes focus states and ignores noisy layout mouse actions.
+                      Pauses the timer after 5 minutes of inactivity. The session end time is retroactively corrected to when you actually stopped — not when the check fired.
                     </p>
                   </div>
                 </div>
@@ -148,10 +148,10 @@ export default function FeaturesPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground">
-                      VS Code Loopback Sync
+                      VS Code Integration (CPH)
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      Syncs parsed sample test inputs, memory limits, and timeouts directly to local CPH receivers using loopback ports.
+                      Sends the problem name, URL, all sample test cases, time limit, and memory limit to VS Code via the Competitive Companion protocol on localhost:27121.
                     </p>
                   </div>
                 </div>
@@ -289,7 +289,7 @@ export default function FeaturesPage() {
                     Today&apos;s <span className="text-accent-blue">Analytics</span>
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed mt-2">
-                    Popup window displays total practice duration, solved count, active streak count, and most-worked tag of the day.
+                    Popup shows total practice time, problems worked today, and most-worked problem. Updates every second from local storage.
                   </p>
                 </div>
               </div>
@@ -323,7 +323,7 @@ export default function FeaturesPage() {
                     Streak <span className="text-accent-orange">Tracking</span>
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed mt-2">
-                    Stay motivated. Calculates active daily solved streaks and helps you build structured practice schedules.
+                    Counts consecutive days with any tracked practice time, using the IST timezone boundary. Shown on your own Codeforces profile.
                   </p>
                 </div>
               </div>
@@ -445,8 +445,8 @@ export default function FeaturesPage() {
 
             {/* Screenshot 2 */}
             <SlideRight className="flex flex-col gap-4">
-              <span className="text-xs font-semibold text-accent-purple">Popup Widget</span>
-              <BrowserFrame url="leetcode.com/problems/two-sum" size="lg" className="w-full shadow-2xl">
+              <span className="text-xs font-semibold text-accent-purple">Extension Popup</span>
+              <BrowserFrame url="codeforces.com/contest/2100/problem/A" size="lg" className="w-full shadow-2xl">
                 <div className="flex justify-center w-full py-4 px-2">
                   <Image
                     src={popupScreenshot}
