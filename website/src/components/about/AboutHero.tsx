@@ -52,7 +52,7 @@ export function AboutHero() {
           initial="hidden"
           animate="visible"
           variants={fadeScale}
-          className="relative w-full max-w-5xl mx-auto"
+          className="relative w-full max-w-5xl mx-auto transform-gpu"
         >
           {/* The portrait image */}
           <Image
@@ -91,7 +91,7 @@ export function AboutHero() {
               variants={slideLeft}
               className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.08] mb-4"
             >
-              <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">
+              <span className="text-white">
                 Hi, I&apos;m<br />Sujal Ushir.
               </span>
             </motion.h1>
@@ -192,7 +192,7 @@ export function AboutHero() {
             Developer / Creator of AetherCP
           </span>
           <h1 className="text-3xl font-extrabold tracking-tight leading-tight">
-            <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">
+            <span className="hero-highlight-span">
               Hi, I&apos;m Sujal Ushir.
             </span>
           </h1>
