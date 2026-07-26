@@ -147,14 +147,19 @@ export function Hero() {
                 priority
               />
 
-              {/* Floating Extension Popup on the Right Side */}
-              <div className="absolute right-[4%] top-[8%] w-[26%] max-w-[220px] z-10 transition-transform duration-500 hover:scale-[1.03]">
+              {/* Floating Extension Popup on the Right Side (Entrance Parallax) */}
+              <motion.div
+                initial={{ opacity: 0, y: 35, x: 15, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.65 }}
+                className="absolute right-[4%] top-[8%] w-[26%] max-w-[220px] z-10 transition-transform duration-500 hover:scale-[1.03]"
+              >
                 <Image
                   src={popupScreenshot}
                   alt="AetherCP Extension Popup Preview"
                   className="rounded-xl border border-border shadow-xl select-none pointer-events-none w-full h-auto"
                 />
-              </div>
+              </motion.div>
             </div>
           </BrowserFrame>
         </motion.div>
