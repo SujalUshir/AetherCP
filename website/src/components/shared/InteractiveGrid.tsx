@@ -16,29 +16,53 @@ export function InteractiveGrid() {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Track coordinates with Target and Eased values for smooth lerp
+    // Mouse coordinates (Target & Eased for smooth lerping)
     const targetMouse = { x: -1000, y: -1000 };
     const easedMouse = { x: -1000, y: -1000 };
-    
-    // Smoothly transition the hover radius for organic fade-in/out
-    let targetRadius = 0;
-    let easedRadius = 0;
+
+    // Velocity Tracking variables
+    let lastMoveTime = Date.now();
+    const lastMouse = { x: 0, y: 0 };
+    let velocity = 0; // Current velocity
+    let easedVelocity = 0; // Lerped velocity
+
+    // Active state indicators (Smooth decay fade on mouseleave)
+    let targetFade = 0;
+    let easedFade = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
-      // If first entry, snap eased mouse to avoid sliding from screen corners
+      // If mouse is just entering, snap eased position to mouse coordinates to prevent sliding lines
       if (targetMouse.x < -500) {
         easedMouse.x = e.clientX;
         easedMouse.y = e.clientY;
+        lastMouse.x = e.clientX;
+        lastMouse.y = e.clientY;
       }
       targetMouse.x = e.clientX;
       targetMouse.y = e.clientY;
-      targetRadius = 140; // Max influence radius
+      targetFade = 1.0;
+
+      // Track velocity
+      const now = Date.now();
+      const dt = now - lastMoveTime;
+      if (dt > 0) {
+        const dx = e.clientX - lastMouse.x;
+        const dy = e.clientY - lastMouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        
+        // Instantaneous speed (pixels per millisecond)
+        const instantVelocity = dist / dt;
+        velocity += (instantVelocity - velocity) * 0.15;
+      }
+      lastMoveTime = now;
+      lastMouse.x = e.clientX;
+      lastMouse.y = e.clientY;
     };
 
     const handleMouseLeave = () => {
       targetMouse.x = -1000;
       targetMouse.y = -1000;
-      targetRadius = 0; // Decay radius to 0 for natural fade-back
+      targetFade = 0.0; // Decay to 0 over 300-500ms
     };
 
     const handleResize = () => {
@@ -50,53 +74,68 @@ export function InteractiveGrid() {
     document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
     window.addEventListener("resize", handleResize, { passive: true });
 
-    const GRID_SIZE = 14; // Refined smaller cell grid size
+    const GRID_SIZE = 14; // Tight square cells
 
     const draw = () => {
       if (!ctx || !canvas) return;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Smoothly update eased coordinates (lerp)
+      // Lerp mouse coordinates
       if (targetMouse.x > -500) {
         easedMouse.x += (targetMouse.x - easedMouse.x) * 0.08;
         easedMouse.y += (targetMouse.y - easedMouse.y) * 0.08;
       }
-      easedRadius += (targetRadius - easedRadius) * 0.06;
+      
+      // Lerp active fade multiplier (provides 300-500ms smooth fade-out: 1.0 -> 0.7 -> 0.4 -> 0.15 -> 0.0)
+      easedFade += (targetFade - easedFade) * 0.09;
+      
+      // Decelerate velocity gradually if mouse is stationary
+      velocity *= 0.95;
+      easedVelocity += (velocity - easedVelocity) * 0.08;
 
-      // Draw active hover cell highlights (magnetic field)
-      if (easedRadius > 1) {
-        const startCol = Math.max(0, Math.floor((easedMouse.x - easedRadius) / GRID_SIZE));
-        const endCol = Math.min(Math.ceil(width / GRID_SIZE), Math.floor((easedMouse.x + easedRadius) / GRID_SIZE));
-        const startRow = Math.max(0, Math.floor((easedMouse.y - easedRadius) / GRID_SIZE));
-        const endRow = Math.min(Math.ceil(height / GRID_SIZE), Math.floor((easedMouse.y + easedRadius) / GRID_SIZE));
+      // Dynamic influence parameters based on velocity
+      // Moving quickly -> wider influence radius, softer intensity
+      // Moving slowly -> tighter focus radius, darker intensity
+      const speedFactor = Math.min(1.0, easedVelocity * 0.6); // cap at 1.0
+      
+      // Interpolate radius: 105px when slow -> 165px when fast
+      const hoverRadius = 105 + speedFactor * 60;
+      
+      // Interpolate max cell tint opacity: 0.02 when slow -> 0.007 when fast
+      const maxCellOpacity = 0.02 - speedFactor * 0.013;
+
+      // Draw hover cells (warm caramel tint) if active fade multiplier > 0.01
+      if (easedFade > 0.01) {
+        const startCol = Math.max(0, Math.floor((easedMouse.x - hoverRadius) / GRID_SIZE));
+        const endCol = Math.min(Math.ceil(width / GRID_SIZE), Math.floor((easedMouse.x + hoverRadius) / GRID_SIZE));
+        const startRow = Math.max(0, Math.floor((easedMouse.y - hoverRadius) / GRID_SIZE));
+        const endRow = Math.min(Math.ceil(height / GRID_SIZE), Math.floor((easedMouse.y + hoverRadius) / GRID_SIZE));
 
         for (let col = startCol; col <= endCol; col++) {
           for (let row = startRow; row <= endRow; row++) {
             const cellX = col * GRID_SIZE;
             const cellY = row * GRID_SIZE;
 
-            // Distance from eased cursor to center of cell
             const centerX = cellX + GRID_SIZE / 2;
             const centerY = cellY + GRID_SIZE / 2;
             const dx = easedMouse.x - centerX;
             const dy = easedMouse.y - centerY;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < easedRadius) {
-              const baseFactor = 1 - distance / easedRadius;
-              // Clean, flat distance-based quadratic falloff
-              const intensity = Math.pow(baseFactor, 2);
+            if (distance < hoverRadius) {
+              const distanceFactor = 1 - distance / hoverRadius;
+              const cellOpacity = Math.pow(distanceFactor, 2) * maxCellOpacity * easedFade;
 
-              // Cell Background fill (caramel tone)
-              ctx.fillStyle = `rgba(139, 79, 41, ${intensity * 0.015})`;
+              // Cell Background fill (caramel tone tint)
+              ctx.fillStyle = `rgba(139, 79, 41, ${cellOpacity})`;
               ctx.fillRect(cellX, cellY, GRID_SIZE, GRID_SIZE);
             }
           }
         }
       }
 
-      // Draw Grid Lines (extremely low opacity, 0.35px thickness)
+      // Draw Grid Lines (0.35px thickness)
       ctx.lineWidth = 0.35;
       
       // Vertical Grid Lines
@@ -105,11 +144,13 @@ export function InteractiveGrid() {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, height);
         
-        let alpha = 0.01; // Extremely low base line opacity
-        if (easedRadius > 1) {
+        let alpha = 0.01; // Base grid opacity (subtle texture background)
+        if (easedFade > 0.01) {
           const dist = Math.abs(x - easedMouse.x);
-          if (dist < easedRadius) {
-            alpha = 0.01 + (1 - dist / easedRadius) * 0.012;
+          if (dist < hoverRadius) {
+            const distanceFactor = 1 - dist / hoverRadius;
+            // Warm magnetic darkening of vertical lines near cursor
+            alpha = 0.01 + (distanceFactor * 0.012) * easedFade;
           }
         }
 
@@ -123,11 +164,13 @@ export function InteractiveGrid() {
         ctx.moveTo(0, y);
         ctx.lineTo(width, y);
 
-        let alpha = 0.01; // Extremely low base line opacity
-        if (easedRadius > 1) {
+        let alpha = 0.01; // Base grid opacity (subtle texture background)
+        if (easedFade > 0.01) {
           const dist = Math.abs(y - easedMouse.y);
-          if (dist < easedRadius) {
-            alpha = 0.01 + (1 - dist / easedRadius) * 0.012;
+          if (dist < hoverRadius) {
+            const distanceFactor = 1 - dist / hoverRadius;
+            // Warm magnetic darkening of horizontal lines near cursor
+            alpha = 0.01 + (distanceFactor * 0.012) * easedFade;
           }
         }
 
