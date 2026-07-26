@@ -98,48 +98,34 @@ function RoadmapColumn({
             ? "border-t-accent-orange"
             : item.priority === "medium"
             ? "border-t-accent-amber"
-            : "border-t-accent-blue";
-
-          const priorityText = item.priority === "high"
-            ? "text-accent-orange"
-            : item.priority === "medium"
-            ? "text-accent-amber"
-            : "text-accent-blue";
+            : "border-t-primary";
 
           return (
             <motion.div
               key={item.id}
-              variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } }}
+              variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } }}
               className={cn(
-                "group rounded-2xl border-t-2 border-x border-b p-6 transition-all duration-350 card-premium noise-overlay",
-                "border-white/5 hover:border-primary/20",
+                "group rounded-xl border-t-2 border-x border-b p-3.5 transition-all duration-300 card-premium noise-overlay",
+                "border-border hover:border-primary/40",
                 priorityColor
               )}
             >
-              <div className="flex items-start justify-between gap-2 mb-3">
-                <span className="rounded bg-white/5 px-2 py-0.5 text-[9px] font-bold text-muted-foreground uppercase tracking-wider">
+              <div className="flex items-center justify-between gap-2 mb-1.5">
+                <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors truncate">
+                  {item.title}
+                </h4>
+                <span className="rounded bg-secondary px-1.5 py-0.5 text-[8px] font-bold text-muted-foreground uppercase tracking-wider shrink-0">
                   {item.category}
                 </span>
-                {item.priority && (
-                  <span className={cn(
-                    "text-[9px] font-bold uppercase tracking-wider",
-                    priorityText
-                  )}>
-                    {item.priority}
-                  </span>
-                )}
               </div>
-              <h4 className="text-sm font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
-                {item.title}
-              </h4>
-              <p className="text-xs leading-relaxed text-muted-foreground/80">{item.description}</p>
+              <p className="text-[11px] leading-normal text-muted-foreground/90">{item.description}</p>
             </motion.div>
           );
         })}
 
         {items.length === 0 && (
-          <div className="rounded-2xl border border-dashed border-white/5 p-6 text-center bg-bg-darker/10">
-            <p className="text-xs text-muted-foreground/60">No items in this column</p>
+          <div className="rounded-xl border border-dashed border-border p-4 text-center bg-secondary/20">
+            <p className="text-[11px] text-muted-foreground/60">No items in this column</p>
           </div>
         )}
       </motion.div>
@@ -172,20 +158,20 @@ export default function RoadmapPage() {
       <section className="relative py-16 sm:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-15"
-          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(48 42% 89% / 0.3), transparent)" }}
+          className="pointer-events-none absolute inset-x-0 -top-16 h-[300px] opacity-[0.04]"
+          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(var(--primary)), transparent)" }}
         />
         <Container>
           <FadeUp className="flex flex-col items-center gap-4 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
               <Trophy className="h-3 w-3" />
               Development Cycle
             </span>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Product <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">Roadmap</span>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
+              Product <span className="text-primary font-extrabold">Roadmap</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
-              Follow our plan for future <span className="text-accent-blue font-semibold">integrations</span>, client <span className="text-accent-blue font-semibold">analytics</span>, achievements, and cross-device local <span className="text-accent-emerald font-semibold">synchronization</span>.
+              Follow our plan for future <span className="text-primary font-semibold">integrations</span>, client <span className="text-primary font-semibold">analytics</span>, achievements, and cross-device local <span className="text-primary font-semibold">synchronization</span>.
             </p>
           </FadeUp>
         </Container>
