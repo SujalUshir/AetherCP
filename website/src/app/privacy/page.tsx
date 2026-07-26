@@ -64,8 +64,7 @@ export default function PrivacyPage() {
       <section className="relative py-16 sm:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-20"
-          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(238 84% 67%), transparent)" }}
+          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-20 hero-glow-bg"
         />
         <Container>
           <FadeUp className="flex flex-col items-center gap-4 text-center">
@@ -74,7 +73,7 @@ export default function PrivacyPage() {
               Privacy Policy
             </span>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">Your Data is Yours</span>
+              <span className="hero-highlight-span">Your Data is Yours</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
               AetherCP was built on a simple premise: a <span className="text-accent-blue font-semibold">developer companion</span> should have access to your data, but its creators <span className="text-accent-orange font-semibold">shouldn&apos;t</span>.

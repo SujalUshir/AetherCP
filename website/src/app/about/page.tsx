@@ -23,7 +23,7 @@ export default function AboutPage() {
         <Container size="md">
           <div className="flex flex-col gap-6 text-center border-t border-white/5 pt-20">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              About <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">AetherCP</span>
+              About <span className="hero-highlight-span">AetherCP</span>
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground/80 leading-relaxed max-w-3xl mx-auto">
               AetherCP is a local-first browser extension for competitive programmers. It runs as a background service worker, automatically tracking the time you spend on Codeforces problems, injecting rich analytics into Codeforces profile pages, and sending problems to VS Code with one click — without any configuration, accounts, or data leaving your browser.

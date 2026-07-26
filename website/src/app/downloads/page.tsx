@@ -41,8 +41,7 @@ export default function DownloadsPage() {
       <section className="relative py-16 sm:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-20"
-          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(238 84% 67%), transparent)" }}
+          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-20 hero-glow-bg"
         />
         <Container>
           <FadeUp className="flex flex-col items-center gap-4 text-center">
@@ -51,7 +50,7 @@ export default function DownloadsPage() {
               Latest Release — v1.2.0
             </span>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Download <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">AetherCP</span>
+              Download <span className="hero-highlight-span">AetherCP</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
               Free to use, forever. No account required. <span className="text-accent-emerald font-semibold">Install</span> in under 60 seconds.

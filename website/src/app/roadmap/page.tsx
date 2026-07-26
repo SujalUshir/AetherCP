@@ -158,8 +158,7 @@ export default function RoadmapPage() {
       <section className="relative py-16 sm:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-16 h-[300px] opacity-[0.04]"
-          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(var(--primary)), transparent)" }}
+          className="pointer-events-none absolute inset-x-0 -top-16 h-[300px] opacity-20 hero-glow-bg"
         />
         <Container>
           <FadeUp className="flex flex-col items-center gap-4 text-center">
@@ -168,7 +167,7 @@ export default function RoadmapPage() {
               Development Cycle
             </span>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
-              Product <span className="text-primary font-extrabold">Roadmap</span>
+              Product <span className="hero-highlight-span">Roadmap</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
               Follow our plan for future <span className="text-primary font-semibold">integrations</span>, client <span className="text-primary font-semibold">analytics</span>, achievements, and cross-device local <span className="text-primary font-semibold">synchronization</span>.

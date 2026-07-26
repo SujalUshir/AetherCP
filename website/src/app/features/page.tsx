@@ -43,10 +43,7 @@ export default function FeaturesPage() {
       <section className="relative py-20 sm:py-32 overflow-hidden border-b border-border/20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-16 h-[500px] opacity-20"
-          style={{
-            background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(48 42% 89% / 0.3), transparent)"
-          }}
+          className="pointer-events-none absolute inset-x-0 -top-16 h-[500px] opacity-20 hero-glow-bg"
         />
         <Container>
           <div className="flex flex-col items-center gap-6 text-center max-w-4xl mx-auto">
@@ -60,7 +57,7 @@ export default function FeaturesPage() {
             <FadeUp delay={0.06}>
               <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-7xl text-foreground leading-[1.08]">
                 Developer Diagnostics for <br />
-                <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">
+                <span className="hero-highlight-span">
                   Competitive Coders
                 </span>
               </h1>

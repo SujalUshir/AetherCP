@@ -89,8 +89,7 @@ export default function ChangelogPage() {
       <section className="relative py-16 sm:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-20"
-          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(238 84% 67%), transparent)" }}
+          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-20 hero-glow-bg"
         />
         <Container>
           <FadeUp className="flex flex-col items-center gap-4 text-center">
@@ -99,7 +98,7 @@ export default function ChangelogPage() {
               Product Updates
             </span>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">Changelog</span>
+              <span className="hero-highlight-span">Changelog</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
               Explore the latest <span className="text-accent-amber font-semibold">features</span>, improvements, and fixes added to <span className="text-primary font-semibold">AetherCP</span>.

@@ -135,8 +135,7 @@ export default function ScreenshotsPage() {
       <section className="relative py-16 sm:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-20"
-          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(48 42% 89% / 0.3), transparent)" }}
+          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-20 hero-glow-bg"
         />
         <Container>
           <FadeUp className="flex flex-col items-center gap-4 text-center">
@@ -144,7 +143,7 @@ export default function ScreenshotsPage() {
               Screenshots
             </span>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Actual product <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">screenshots</span>
+              Actual product <span className="hero-highlight-span">screenshots</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
               Explore the real interface and <span className="text-accent-blue font-semibold">analytics</span> injected by the AetherCP <span className="text-primary font-semibold">Chrome extension</span>.

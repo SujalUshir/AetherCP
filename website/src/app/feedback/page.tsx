@@ -60,8 +60,7 @@ export default function FeedbackPage() {
       <section className="relative py-16 sm:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-16 h-[300px] opacity-[0.04]"
-          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(var(--primary)), transparent)" }}
+          className="pointer-events-none absolute inset-x-0 -top-16 h-[300px] opacity-20 hero-glow-bg"
         />
         <Container>
           <div className="flex flex-col items-center gap-4 text-center">
@@ -70,7 +69,7 @@ export default function FeedbackPage() {
               Get In Touch
             </span>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl leading-tight text-foreground">
-              Help us improve <span className="text-primary">AetherCP</span>
+              Help us improve <span className="hero-highlight-span">AetherCP</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
               AetherCP is completely <span className="text-brand-medium font-semibold">open source</span> and built for the community. Your <span className="text-brand-dark font-semibold">feedback</span> determines what we build next.
