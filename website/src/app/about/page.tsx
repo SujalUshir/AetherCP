@@ -22,7 +22,7 @@ export default function AboutPage() {
       <section className="relative">
         <Container size="md">
           <div className="flex flex-col gap-6 text-center border-t border-white/5 pt-20">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
               About <span className="hero-highlight-span">AetherCP</span>
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground/80 leading-relaxed max-w-3xl mx-auto">

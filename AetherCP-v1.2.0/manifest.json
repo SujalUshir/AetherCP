@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "name": "AetherCP",
+  "version": "1.2.0",
+  "description": "Track your Codeforces problem-solving sessions. View analytics, heatmaps, and problem history directly on your Codeforces profile.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://codeforces.com/*",
+    "http://localhost:27121/*",
+    "http://127.0.0.1:27121/*"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://codeforces.com/*"
+      ],
+      "exclude_matches": [
+        "https://codeforces.com/profile/*"
+      ],
+      "js": [
+        "src/shared/constants.js",
+        "src/content/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://codeforces.com/profile/*"
+      ],
+      "js": [
+        "src/vendor/chart.umd.min.js",
+        "src/shared/constants.js",
+        "src/utils/timezone.js",
+        "src/utils/time.js",
+        "src/platform/codeforces/profileIdentity.js",
+        "src/platform/codeforces/cfApi.js",
+        "src/platform/codeforces/solvedProblemAnalytics.js",
+        "src/platform/codeforces/graphTemplates.js",
+        "src/platform/codeforces/profileAnalytics.js",
+        "src/platform/codeforces/profileSections.js",
+        "src/platform/codeforces/profileCharts.js",
+        "src/platform/codeforces/profileInjector.js"
+      ],
+      "css": [
+        "src/platform/codeforces/profileAnalytics.css"
+      ]
+    }
+  ]
+}

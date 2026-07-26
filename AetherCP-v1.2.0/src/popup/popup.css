@@ -1,0 +1,296 @@
+body{
+    width:300px;
+    padding:15px;
+    font-family:Arial, sans-serif;
+    color:#202124;
+}
+
+h1{
+    font-size:22px;
+    margin:0 0 12px;
+}
+
+h2{
+    font-size:14px;
+    margin:0 0 8px;
+}
+
+#timer{
+    font-size:28px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+#problemName{
+    font-size:14px;
+    line-height:1.4;
+}
+
+#todayTime{
+    margin-top:6px;
+    color:#5f6368;
+}
+
+.popupSection{
+    border-top:1px solid #e5e7eb;
+    margin-top:14px;
+    padding-top:12px;
+}
+
+.statRow,
+.problemRow{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:flex-start;
+    font-size:13px;
+    margin-top:7px;
+}
+
+.statRow span,
+.emptyText{
+    color:#5f6368;
+}
+
+.statRow strong,
+.problemRow strong{
+    text-align:right;
+}
+
+.problemTitle{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.emptyText{
+    font-size:13px;
+}
+
+/* ── CPH / VS Code section ─────────────────────────────── */
+
+.cphButton{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:7px 0;
+    background:#1a73e8;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:background 0.15s ease;
+}
+
+.cphButton:hover:not(:disabled){
+    background:#1558b0;
+}
+
+.cphButton:disabled{
+    background:#bdc1c6;
+    cursor:not-allowed;
+}
+
+.cphButton.cphSending{
+    background:#f29900;
+}
+
+/* Status badge colours */
+
+.cphStatus{
+    font-size:12px;
+    font-weight:600;
+}
+
+.cphStatusChecking{
+    color:#5f6368;
+}
+
+.cphStatusConnected{
+    color:#188038;
+}
+
+.cphStatusDisconnected{
+    color:#c5221f;
+}
+
+/* ── Auth Section ────────────────────────────────────────── */
+
+.authButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.googleBtn {
+    background: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+}
+
+.googleBtn:hover {
+    background: #f8f9fa;
+    border-color: #d2e3fc;
+    box-shadow: 0 1px 3px rgba(60,64,67,0.15);
+}
+
+.googleIcon {
+    flex-shrink: 0;
+}
+
+.userContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.userAvatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: #f1f3f4;
+}
+
+.userAvatar:not([src]) {
+    display: none;
+}
+
+.userDetails {
+    min-width: 0;
+    flex: 1;
+}
+
+.userName,
+.userEmail {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.userName {
+    font-size: 12px;
+    font-weight: 600;
+    color: #202124;
+}
+
+.userEmail {
+    font-size: 12px;
+    color: #3c4043;
+}
+
+.signOutBtn {
+    background: transparent;
+    color: #d93025;
+    border: 1px solid #fad2cf;
+    padding: 4px 10px;
+    width: auto;
+    font-size: 11px;
+}
+
+.signOutBtn:hover {
+    background: #fce8e6;
+    border-color: #f28b82;
+}
+
+#authLoading {
+    font-size: 13px;
+    color: #5f6368;
+    text-align: center;
+    padding: 4px 0;
+}
+
+.authStatus {
+    font-size: 11px;
+    font-weight: 600;
+    color: #188038;
+    margin-top: 2px;
+    display: inline-block;
+}
+
+.statusRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.syncStatus {
+    font-size: 11px;
+    font-weight: 600;
+    color: #188038;
+}
+
+.lastBackup {
+    display: block;
+    font-size: 10px;
+    color: #80868b;
+    margin-top: 2px;
+}
+
+/* ── Community Edition Card ──────────────────────────────── */
+.communityCard {
+    background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(60,64,67,0.1);
+}
+
+.communityTitle {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a73e8;
+    margin-bottom: 4px;
+}
+
+.communitySubtitle {
+    font-size: 11px;
+    color: #5f6368;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.communityStatus {
+    font-size: 11px;
+    font-weight: 600;
+    color: #3c4043;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.comingSoonBadge {
+    background: #e8f0fe;
+    color: #1a73e8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.communityNote {
+    font-size: 10px;
+    color: #80868b;
+    margin-top: 8px;
+    line-height: 1.3;
+}
+

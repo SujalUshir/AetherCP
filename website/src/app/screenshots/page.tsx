@@ -142,7 +142,7 @@ export default function ScreenshotsPage() {
             <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-primary">
               Screenshots
             </span>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
               Actual product <span className="hero-highlight-span">screenshots</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">

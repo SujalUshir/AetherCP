@@ -49,7 +49,7 @@ export default function DownloadsPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald animate-pulse" />
               Latest Release — v1.2.0
             </span>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
               Download <span className="hero-highlight-span">AetherCP</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
