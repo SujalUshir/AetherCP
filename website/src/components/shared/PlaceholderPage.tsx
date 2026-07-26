@@ -26,7 +26,7 @@ export function PlaceholderPage({
         className="pointer-events-none absolute inset-0 opacity-20"
         style={{
           background:
-            "radial-gradient(ellipse 60% 40% at 50% 40%, hsl(238 84% 67% / 0.5), transparent)",
+            "radial-gradient(ellipse 60% 40% at 50% 40%, hsl(var(--primary) / 0.05), transparent)",
         }}
       />
 
