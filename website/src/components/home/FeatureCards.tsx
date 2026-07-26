@@ -36,8 +36,8 @@ const FEATURES: Feature[] = [
       "Idle detection — only counts real work",
       "Persistent history across sessions",
     ],
-    accent: "text-indigo-400",
-    glow: "group-hover:shadow-indigo-500/20",
+    accent: "text-primary",
+    glow: "hover:shadow-primary/5",
   },
   {
     id: "competitive-analytics",
@@ -51,8 +51,8 @@ const FEATURES: Feature[] = [
       "Deduplicated solved count badge",
       "Works on any Codeforces profile",
     ],
-    accent: "text-violet-400",
-    glow: "group-hover:shadow-violet-500/20",
+    accent: "text-primary",
+    glow: "hover:shadow-primary/5",
   },
   {
     id: "vscode-integration",
@@ -66,8 +66,8 @@ const FEATURES: Feature[] = [
       "Compatible with competitive-companion",
       "Right-click context menu support",
     ],
-    accent: "text-blue-400",
-    glow: "group-hover:shadow-blue-500/20",
+    accent: "text-accent-blue",
+    glow: "hover:shadow-accent-blue/5",
   },
   {
     id: "privacy-first",
@@ -81,8 +81,8 @@ const FEATURES: Feature[] = [
       "No analytics or tracking",
       "Fully open source on GitHub",
     ],
-    accent: "text-emerald-400",
-    glow: "group-hover:shadow-emerald-500/20",
+    accent: "text-accent-emerald",
+    glow: "hover:shadow-accent-emerald/5",
   },
 ];
 
@@ -103,16 +103,15 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
       }}
       id={feature.id}
       className={cn(
-        "group relative flex flex-col gap-5 rounded-2xl border border-border/60 bg-card p-7",
+        "group relative flex flex-col gap-5 rounded-2xl border border-border/80 bg-card p-7 card-premium",
         "transition-all duration-300",
-        "hover:border-border hover:-translate-y-1",
-        `hover:shadow-xl ${feature.glow}`
+        feature.glow
       )}
     >
       {/* Icon */}
       <div
         className={cn(
-          "flex h-12 w-12 items-center justify-center rounded-xl border border-white/5 bg-white/5",
+          "flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-secondary",
           "transition-transform duration-300 group-hover:scale-110"
         )}
       >
@@ -155,6 +154,7 @@ export function FeatureCards() {
             eyebrow="Features"
             title="Built for"
             titleHighlight="competitive programmers"
+            highlightColor="text-brand-dark"
             description="Everything you need to track, analyze, and improve your CP practice — without compromising your privacy."
           />
         </div>

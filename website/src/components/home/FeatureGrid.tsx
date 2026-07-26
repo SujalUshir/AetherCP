@@ -89,6 +89,7 @@ export function FeatureGrid() {
             eyebrow="Key Features"
             title="Everything you need to"
             titleHighlight="track your practice"
+            highlightColor="text-brand-medium"
             description="All features run entirely inside your browser. No accounts, no cloud, no configuration required."
           />
         </div>

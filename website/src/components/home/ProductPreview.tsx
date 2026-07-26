@@ -14,7 +14,7 @@ export function ProductPreview() {
 
   return (
     <section className="relative py-24 sm:py-32">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
 
       <Container>
         <div className="mb-12 flex justify-center">
@@ -22,6 +22,7 @@ export function ProductPreview() {
             eyebrow="Product Preview"
             title="Everything you need,"
             titleHighlight="right in your browser"
+            highlightColor="text-brand-medium"
             description="AetherCP lives as a lightweight popup — instant access to your session timer, analytics, and VS Code integration. Click the tabs to explore."
           />
         </div>

@@ -61,6 +61,7 @@ export function CFAnalytics() {
               eyebrow="Codeforces Analytics"
               title="Profile analytics on"
               titleHighlight="any Codeforces profile"
+              highlightColor="text-brand-medium"
               description="AetherCP injects a rating distribution chart and topic breakdown directly into any Codeforces profile page — sourced from the public API, rendered client-side."
               align="left"
             />

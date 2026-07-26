@@ -46,6 +46,7 @@ export function AnalyticsShowcase() {
               eyebrow="Practice Analytics"
               title="Capture training"
               titleHighlight="diagnostics locally"
+              highlightColor="text-brand-dark"
               description="Log and aggregate active solve times per problem, per day, and per week. Track your preparation routines with data compiled entirely on your local machine."
               align="left"
             />

@@ -38,6 +38,7 @@ export function FeatureTimeline() {
             eyebrow="How It Works"
             title="From install to"
             titleHighlight="insight in minutes"
+            highlightColor="text-brand-medium"
             description="AetherCP requires zero configuration. Install, open a problem, and everything else happens automatically."
           />
         </div>

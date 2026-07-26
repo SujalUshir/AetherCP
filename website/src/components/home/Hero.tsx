@@ -77,18 +77,17 @@ export function Hero() {
 
           {/* Title / Heading */}
           <motion.div variants={slideInBottom}>
-            <h1 className="text-5xl font-extrabold sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] max-w-3xl text-foreground">
+            <h1 className="text-5xl font-extrabold sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] max-w-4xl text-foreground">
               Your Codeforces Training,{" "}
-              <span className="bg-gradient-to-r from-[#3e2723] via-[#4e3629] to-[#1c1917] bg-clip-text text-transparent">
-                Measured Automatically.
-              </span>
+              <span className="text-brand-medium">Measured</span>{" "}
+              <span className="text-brand-dark">Automatically.</span>
             </h1>
           </motion.div>
 
           {/* Description */}
           <motion.div variants={slideInBottom}>
             <p className="max-w-2xl text-base text-muted-foreground leading-relaxed sm:text-xl">
-              A <span className="text-primary font-semibold">local-first</span> browser extension that starts timing the moment you open a problem, pauses automatically after <span className="text-primary font-semibold">5 minutes of inactivity</span>, and injects rich analytics directly into Codeforces profiles — no setup, no accounts required.
+              A <span className="text-brand-medium font-semibold">local-first</span> browser extension that starts timing the moment you open a problem, pauses automatically after <span className="text-brand-dark font-semibold">5 minutes of inactivity</span>, and injects rich analytics directly into Codeforces profiles — no setup, no accounts required.
             </p>
           </motion.div>
 

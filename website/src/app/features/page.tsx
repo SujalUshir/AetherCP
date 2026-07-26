@@ -268,19 +268,17 @@ export default function FeaturesPage() {
             </span>
             <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl mt-3">
               Practice dashboards with{" "}
-              <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
+              <span className="text-primary">
                 Personality
               </span>
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mt-2">
               Clean visual components that give your competitive programming habit a satisfying visual representation.
             </p>
-          </div>
-
-          <StaggerFadeUp className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          </div>          <StaggerFadeUp className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {/* Card 1: Blue accent */}
             <StaggerItem>
-              <div className="flex flex-col gap-4 rounded-2xl border border-accent-blue/15 bg-gradient-to-b from-bg-light/35 to-bg-dark/65 p-6 h-full transition-all duration-300 hover:border-accent-blue/30 hover:shadow-lg hover:shadow-accent-blue/5 noise-overlay">
+              <div className="flex flex-col gap-4 p-6 h-full card-premium noise-overlay">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-blue/10 text-accent-blue">
                   <BarChart3 className="h-5 w-5" />
                 </div>
@@ -297,7 +295,7 @@ export default function FeaturesPage() {
 
             {/* Card 2: Green/Emerald accent */}
             <StaggerItem>
-              <div className="flex flex-col gap-4 rounded-2xl border border-accent-emerald/15 bg-gradient-to-b from-bg-light/35 to-bg-dark/65 p-6 h-full transition-all duration-300 hover:border-accent-emerald/30 hover:shadow-lg hover:shadow-accent-emerald/5 noise-overlay">
+              <div className="flex flex-col gap-4 p-6 h-full card-premium noise-overlay">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-emerald/10 text-accent-emerald">
                   <LayoutGrid className="h-5 w-5" />
                 </div>
@@ -314,7 +312,7 @@ export default function FeaturesPage() {
 
             {/* Card 3: Orange accent */}
             <StaggerItem>
-              <div className="flex flex-col gap-4 rounded-2xl border border-accent-orange/15 bg-gradient-to-b from-bg-light/35 to-bg-dark/65 p-6 h-full transition-all duration-300 hover:border-accent-orange/30 hover:shadow-lg hover:shadow-accent-orange/5 noise-overlay">
+              <div className="flex flex-col gap-4 p-6 h-full card-premium noise-overlay">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-orange/10 text-accent-orange">
                   <Flame className="h-5 w-5" />
                 </div>
@@ -330,18 +328,16 @@ export default function FeaturesPage() {
             </StaggerItem>
           </StaggerFadeUp>
         </Container>
-      </section>
-
-      {/* --- Category 4: Privacy & Performance (Cards Grid) --- */}
-      <section className="py-20 sm:py-28 border-b border-border/20 bg-bg-dark/10">
+      </section>      {/* --- Category 4: Privacy & Performance (Cards Grid) --- */}
+      <section className="py-20 sm:py-28 border-b border-border/20 bg-secondary/20">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent-emerald/20 bg-accent-emerald/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-emerald">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent-emerald/20 bg-accent-emerald/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-emerald shadow-sm">
               Category 04 &bull; Security &amp; Offline
             </span>
             <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl mt-3">
               100%{" "}
-              <span className="bg-gradient-to-r from-accent-emerald to-accent-blue bg-clip-text text-transparent">
+              <span className="text-primary">
                 Local-First Architecture
               </span>
             </h2>
@@ -352,7 +348,7 @@ export default function FeaturesPage() {
 
           <StaggerFadeUp className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <StaggerItem>
-              <div className="flex flex-col gap-3 rounded-2xl border border-accent-emerald/15 bg-gradient-to-b from-bg-light/35 to-bg-dark/65 p-6 h-full noise-overlay transition-all duration-300 hover:border-accent-emerald/35">
+              <div className="flex flex-col gap-3 p-6 h-full card-premium noise-overlay">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-emerald/10 text-accent-emerald mb-2">
                   <ShieldCheck className="h-5 w-5" />
                 </div>
@@ -366,7 +362,7 @@ export default function FeaturesPage() {
             </StaggerItem>
 
             <StaggerItem>
-              <div className="flex flex-col gap-3 rounded-2xl border border-accent-blue/15 bg-gradient-to-b from-bg-light/35 to-bg-dark/65 p-6 h-full noise-overlay transition-all duration-300 hover:border-accent-blue/35">
+              <div className="flex flex-col gap-3 p-6 h-full card-premium noise-overlay">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-blue/10 text-accent-blue mb-2">
                   <HardDrive className="h-5 w-5" />
                 </div>
@@ -380,12 +376,12 @@ export default function FeaturesPage() {
             </StaggerItem>
 
             <StaggerItem>
-              <div className="flex flex-col gap-3 rounded-2xl border border-accent-purple/15 bg-gradient-to-b from-bg-light/35 to-bg-dark/65 p-6 h-full noise-overlay transition-all duration-300 hover:border-accent-purple/35">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-purple/10 text-accent-purple mb-2">
+              <div className="flex flex-col gap-3 p-6 h-full card-premium noise-overlay">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary mb-2">
                   <EyeOff className="h-5 w-5" />
                 </div>
                 <h3 className="font-bold text-foreground text-sm">
-                  No Third Party <span className="text-accent-purple">Access</span>
+                  No Third Party <span className="text-primary">Access</span>
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Your coding logs, rating progress, and solved logs are never synced or uploaded.
@@ -394,7 +390,7 @@ export default function FeaturesPage() {
             </StaggerItem>
 
             <StaggerItem>
-              <div className="flex flex-col gap-3 rounded-2xl border border-accent-orange/15 bg-gradient-to-b from-bg-light/35 to-bg-dark/65 p-6 h-full noise-overlay transition-all duration-300 hover:border-accent-orange/35">
+              <div className="flex flex-col gap-3 p-6 h-full card-premium noise-overlay">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-orange/10 text-accent-orange mb-2">
                   <ServerOff className="h-5 w-5" />
                 </div>
@@ -419,7 +415,7 @@ export default function FeaturesPage() {
             </span>
             <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl mt-3">
               Explore the{" "}
-              <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
+              <span className="text-brand-dark">
                 User Interface
               </span>
             </h2>

@@ -54,6 +54,7 @@ export function GitHubSection() {
               eyebrow="Open Source"
               title="Built in the open,"
               titleHighlight="for the community"
+              highlightColor="text-brand-dark"
               description="AetherCP is fully open source. The code that runs in your browser is the code you can read on GitHub."
             />
           </motion.div>

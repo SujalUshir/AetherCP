@@ -45,6 +45,7 @@ export function WhyAetherCP() {
             eyebrow="Why AetherCP"
             title="Engineered for"
             titleHighlight="competitive coders"
+            highlightColor="text-brand-dark"
             description="Automatic timing, honest idle detection, and rich profile analytics — built for the way competitive programmers actually work."
           />
         </div>

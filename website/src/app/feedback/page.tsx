@@ -23,33 +23,33 @@ const CONTACT_CARDS = [
     icon: Bug,
     buttonText: "Open Bug Report",
     href: `${GITHUB_ISSUES_URL}/new?assignees=&labels=bug&projects=&template=bug_report.md&title=%5BBUG%5D+`,
-    accent: "text-rose-400 bg-rose-500/10 border-rose-500/20",
+    accent: "text-accent-orange bg-accent-orange/5 border-accent-orange/20",
   },
   {
     id: "feature-request",
     title: "Request a Feature",
     description: (
       <>
-        Have ideas for a new chart, <span className="text-accent-orange font-semibold">platform support</span> (e.g. AtCoder), or setting? We&apos;d love to hear your suggestions.
+        Have ideas for a new chart, <span className="text-brand-medium font-semibold">platform support</span> (e.g. AtCoder), or setting? We&apos;d love to hear your suggestions.
       </>
     ),
     icon: Sparkles,
     buttonText: "Suggest Feature",
     href: `${GITHUB_ISSUES_URL}/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title=%5BFEATURE%5D+`,
-    accent: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
+    accent: "text-primary bg-primary/5 border-primary/20",
   },
   {
     id: "general-inquiry",
     title: "General & Support",
     description: (
       <>
-        Want to ask a question, discuss contributions, or reach the <span className="text-accent-amber font-semibold">developers</span> directly? Drop us an email.
+        Want to ask a question, discuss contributions, or reach the <span className="text-brand-dark font-semibold">developers</span> directly? Drop us an email.
       </>
     ),
     icon: Mail,
     buttonText: "Send Email",
     href: "https://mail.google.com/mail/?view=cm&fs=1&to=ushirthbsujal@gmail.com",
-    accent: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+    accent: "text-accent-emerald bg-accent-emerald/5 border-accent-emerald/20",
   },
 ];
 
@@ -60,20 +60,20 @@ export default function FeedbackPage() {
       <section className="relative py-16 sm:py-20">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-16 h-[400px] opacity-20"
-          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(238 84% 67%), transparent)" }}
+          className="pointer-events-none absolute inset-x-0 -top-16 h-[300px] opacity-[0.04]"
+          style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(var(--primary)), transparent)" }}
         />
         <Container>
           <div className="flex flex-col items-center gap-4 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-accent-blue">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary shadow-sm">
               <MessageSquare className="h-3 w-3" />
               Get In Touch
             </span>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl leading-tight">
-              Help us improve <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">AetherCP</span>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl leading-tight text-foreground">
+              Help us improve <span className="text-primary">AetherCP</span>
             </h1>
             <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
-              AetherCP is completely <span className="text-accent-orange font-semibold">open source</span> and built for the community. Your <span className="text-accent-amber font-semibold">feedback</span> determines what we build next.
+              AetherCP is completely <span className="text-brand-medium font-semibold">open source</span> and built for the community. Your <span className="text-brand-dark font-semibold">feedback</span> determines what we build next.
             </p>
           </div>
         </Container>
@@ -118,7 +118,7 @@ export default function FeedbackPage() {
       </section>
 
       {/* Roadmap CTA */}
-      <section className="py-16 border-t border-white/5 bg-bg-darker/5">
+      <section className="py-16 border-t border-border bg-secondary/20">
         <Container size="md">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl p-8 card-premium noise-overlay hover:border-primary/25">
             <div className="flex flex-col gap-1.5 text-center sm:text-left">
@@ -138,10 +138,10 @@ export default function FeedbackPage() {
       </section>
 
       {/* FAQ shortcut */}
-      <section className="py-16 border-t border-white/5 bg-bg-darker/5">
+      <section className="py-16 border-t border-border bg-secondary/20">
         <Container size="sm">
           <div className="flex flex-col items-center text-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/5 border border-primary/20 text-primary">
               <HelpCircle className="h-5 w-5" />
             </div>
             <h3 className="font-semibold text-lg">Have a quick question?</h3>
