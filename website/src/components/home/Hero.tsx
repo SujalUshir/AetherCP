@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Download, Github, ArrowRight, ShieldCheck, HardDrive, Code2, Heart } from "lucide-react";
@@ -49,6 +50,25 @@ const CHIPS = [
 ];
 
 export function Hero() {
+  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+
+  const handleMockupMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    // Map to max ±4px horizontally, ±3px vertically
+    const targetX = (x / rect.width) * 8;
+    const targetY = (y / rect.height) * 6;
+    setMouseOffset({
+      x: Math.max(-4, Math.min(4, targetX)),
+      y: Math.max(-3, Math.min(3, targetY)),
+    });
+  };
+
+  const handleMockupMouseLeave = () => {
+    setMouseOffset({ x: 0, y: 0 });
+  };
+
   return (
     <section className="relative min-h-screen bg-background flex flex-col items-center justify-center pt-32 pb-24 overflow-hidden">
       {/* Background depth glows (Subtle light warmth) */}
@@ -137,27 +157,41 @@ export function Hero() {
           className="w-full max-w-4xl mt-16 relative"
         >
           <BrowserFrame url="codeforces.com/profile/tourist/analytics" size="sm" className="w-full card-premium overflow-hidden">
-            <div className="relative w-full aspect-[16/10] bg-secondary/30">
+            <div 
+              onMouseMove={handleMockupMouseMove}
+              onMouseLeave={handleMockupMouseLeave}
+              className="relative w-full aspect-[16/10] bg-secondary/30"
+            >
               {/* Dashboard background */}
               <Image
                 src={analyticScreenshot}
                 alt="Codeforces Analytics Dashboard"
                 fill
-                className="object-cover object-top select-none pointer-events-none rounded-b-2xl"
+                className="object-cover object-top select-none pointer-events-none rounded-b-2xl img-fade-in"
                 priority
               />
 
-              {/* Floating Extension Popup on the Right Side (Entrance Parallax) */}
+              {/* Floating Extension Popup on the Right Side (Entrance Parallax + Cursor Follow) */}
               <motion.div
                 initial={{ opacity: 0, y: 35, x: 15, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-                transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.65 }}
-                className="absolute right-[4%] top-[8%] w-[26%] max-w-[220px] z-10 transition-transform duration-500 hover:scale-[1.03] bg-background/50 backdrop-blur-md rounded-xl p-0.5 border border-border/70 shadow-[0_20px_50px_rgba(139,79,41,0.22)]"
+                animate={{ 
+                  opacity: 1, 
+                  y: mouseOffset.y, 
+                  x: mouseOffset.x,
+                  scale: 1 
+                }}
+                transition={{ 
+                  opacity: { duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.65 },
+                  scale: { duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.65 },
+                  x: { type: "spring", stiffness: 120, damping: 24 },
+                  y: { type: "spring", stiffness: 120, damping: 24 }
+                }}
+                className="absolute right-[4%] top-[8%] w-[26%] max-w-[220px] z-10 transition-transform duration-500 hover:scale-[1.03] bg-background/50 backdrop-blur-lg rounded-xl p-0.5 border border-border/70 shadow-[0_24px_60px_rgba(139,79,41,0.28)]"
               >
                 <Image
                   src={popupScreenshot}
                   alt="AetherCP Extension Popup Preview"
-                  className="rounded-lg select-none pointer-events-none w-full h-auto"
+                  className="rounded-lg select-none pointer-events-none w-full h-auto img-fade-in"
                 />
               </motion.div>
             </div>
