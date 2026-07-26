@@ -21,7 +21,7 @@
   :root {
     /* Foundation Colors */
     --background:         36 25% 97.5%; /* #FAF8F5 (Clean Warm Off-white) */
-    --foreground:         240 10% 12%; /* #1c1917 (Rich Dark Charcoal) */
+    --foreground:         240 10% 8%; /* #121214 (Rich Dark Charcoal for strong contrast) */
 
     /* Layered Backgrounds */
     --bg-darker:          36 20% 93%; /* #F1EDE4 */
@@ -31,37 +31,43 @@
 
     /* Surfaces & Cards */
     --card:               0 0% 100%; /* #FFFFFF (Clean White Cards) */
-    --card-foreground:    240 10% 12%;
+    --card-foreground:    240 10% 8%;
     --popover:            0 0% 100%;
-    --popover-foreground: 240 10% 12%;
+    --popover-foreground: 240 10% 8%;
 
     /* Warm Surfaces */
     --surface-warm-100:   36 30% 92%; /* #EFEAE0 */
     --surface-warm-200:   36 25% 85%; /* #DDD4C4 */
     --surface-warm-300:   36 20% 75%; /* #C3B9A8 */
 
-    /* Core Action Colors */
-    --primary:            33 39% 50%; /* #B59572 (Warm Beige Brand Accent) */
-    --primary-foreground: 0 0% 100%; /* #FFFFFF (White text on brand accent buttons) */
+    /* Brand Accent Colors (Richer Caramel/Walnut brown) */
+    --primary:            28 46% 36%; /* #8B4F29 (Richer Walnut Brown) */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
     
+    /* Rich Brown Palette Shades */
+    --brand-dark:         28 46% 22%; /* #4F2B14 (Walnut / Coffee) */
+    --brand-medium:       28 46% 36%; /* #8B4F29 (Caramel) */
+    --brand-light:        30 35% 58%; /* #B78D68 (Tan) */
+    --brand-beige:        32 28% 82%; /* #D9C3AE (Beige) */
+
     --secondary:          36 20% 94%; /* #F3EFE7 */
-    --secondary-foreground: 240 10% 12%;
+    --secondary-foreground: 240 10% 8%;
 
     --muted:              36 20% 94%;
-    --muted-foreground:   240 5% 42%; /* Soft grey text */
+    --muted-foreground:   240 5% 32%; /* Soft grey text - darkened for strong contrast */
 
-    /* Accent Palette (Refined & Muted) - Mapped to warm brand tone */
+    /* Accent Palette (Refined & Muted) */
     --accent-blue:        207 75% 45%; /* Vibrant Muted Blue (Semantic Info) */
     --accent-amber:       38 82% 40%;  /* Vibrant Muted Amber */
     --accent-emerald:     142 55% 35%; /* Deep Muted Emerald (Semantic Success) */
-    --accent-purple:      33 39% 50%;  /* Warm Beige/Brown brand accent */
+    --accent-purple:      28 46% 36%;  /* Warm Walnut Brown brand accent */
     --accent-orange:      16 85% 45%;  /* Vibrant Muted Orange */
     --accent-slate:       215 15% 45%; /* Slate Gray */
 
-    --border:             33 15% 88%; /* #E2DDD5 (Subtle Warm Beige Border) */
-    --border-muted:       33 15% 93%;
-    --input:              33 15% 88%;
-    --ring:               33 39% 50%;
+    --border:             30 15% 85%; /* #E2DDD5 (Subtle Warm Beige Border) */
+    --border-muted:       30 15% 91%;
+    --input:              30 15% 85%;
+    --ring:               28 46% 36%;
 
     --radius: 0.75rem; /* modern slightly rounded corner scale (12px) */
   }
@@ -141,20 +147,20 @@
   /* Tangible Premium Card Styles */
   .card-premium {
     background: #ffffff;
-    border: 1px solid rgba(194, 159, 118, 0.12); /* Subtle warm beige border */
+    border: 1px solid rgba(139, 79, 41, 0.1); /* Subtle rich brown border */
     box-shadow: 
-      0 4px 20px rgba(0, 0, 0, 0.02),
+      0 4px 16px rgba(139, 79, 41, 0.02),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border-radius: var(--radius);
   }
 
   .card-premium:hover {
-    border-color: rgba(194, 159, 118, 0.22);
+    border-color: rgba(139, 79, 41, 0.22);
     transform: translateY(-1px);
     box-shadow: 
-      0 8px 24px rgba(194, 159, 118, 0.05),
-      0 2px 8px rgba(0, 0, 0, 0.015);
+      0 6px 20px rgba(139, 79, 41, 0.05),
+      0 2px 6px rgba(0, 0, 0, 0.015);
   }
 
   /* Glowing Radial Lighting */
