@@ -137,15 +137,6 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
         ))}
       </ul>
 
-      {/* Subtle glow overlay on hover */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(238 84% 67% / 0.06), transparent)",
-        }}
-      />
     </motion.div>
   );
 }

@@ -23,10 +23,10 @@ export function FinalCTA() {
       {/* Glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-30"
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
           background:
-            "radial-gradient(ellipse 60% 40% at 50% 50%, hsl(238 84% 67% / 0.3), transparent)",
+            "radial-gradient(ellipse 60% 40% at 50% 50%, hsl(var(--primary)), transparent)",
         }}
       />
 
@@ -36,12 +36,12 @@ export function FinalCTA() {
           initial={{ opacity: 0, y: 32 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex flex-col items-center gap-8 rounded-3xl border border-indigo-500/20 bg-gradient-to-b from-indigo-500/5 to-transparent p-12 text-center"
+          className="relative flex flex-col items-center gap-8 rounded-3xl border border-primary/20 bg-gradient-to-b from-primary/5 to-transparent p-12 text-center shadow-sm"
         >
           <div className="flex flex-col gap-3">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl leading-tight">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl leading-tight text-foreground">
               Optimize your{" "}
-              <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#3e2723] to-[#1c1917] bg-clip-text text-transparent">
                 training today.
               </span>
             </h2>
@@ -51,14 +51,14 @@ export function FinalCTA() {
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button size="xl" asChild id="final-cta-download">
+            <Button size="xl" asChild id="final-cta-download" className="shadow-sm">
               <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                 <Download className="h-5 w-5 btn-icon-download" />
                 Download Extension
                 <ArrowRight className="h-4 w-4 opacity-70 btn-icon-arrow" />
               </a>
             </Button>
-            <Button size="xl" variant="glass" asChild id="final-cta-github">
+            <Button size="xl" variant="outline" asChild id="final-cta-github">
               <a
                 href={GITHUB_URL}
                 target="_blank"

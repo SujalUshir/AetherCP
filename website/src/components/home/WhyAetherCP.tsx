@@ -79,13 +79,6 @@ export function WhyAetherCP() {
                   <h3 className="font-semibold text-lg text-foreground">{item.title}</h3>
                   <p className="text-sm leading-relaxed text-muted-foreground/80">{item.body}</p>
                 </div>
-
-                {/* Hover glow overlay */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, hsl(var(--primary) / 0.03), transparent)" }}
-                />
               </motion.div>
             );
           })}

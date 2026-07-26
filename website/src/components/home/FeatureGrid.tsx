@@ -134,13 +134,6 @@ export function FeatureGrid() {
                   <h3 className="text-sm font-semibold">{card.title}</h3>
                   <div className="text-xs leading-relaxed text-muted-foreground">{highlightDescription(card.description)}</div>
                 </div>
-
-                {/* Hover glow */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{ background: "radial-gradient(ellipse 60% 50% at 20% 10%, hsl(238 84% 67% / 0.05), transparent)" }}
-                />
               </motion.div>
             );
           })}

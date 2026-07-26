@@ -28,10 +28,10 @@ export function CFAnalytics() {
 
       <div
         aria-hidden
-        className="pointer-events-none absolute left-0 top-1/2 h-[600px] w-[600px] -translate-y-1/2 opacity-10"
+        className="pointer-events-none absolute left-0 top-1/2 h-[600px] w-[600px] -translate-y-1/2 opacity-[0.02]"
         style={{ background: "radial-gradient(circle, hsl(var(--accent-amber)) / 0.15, transparent 70%)" }}
       />
-
+ 
       <Container>
         <div ref={ref} className="grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-20">
           {/* Left — CF dashboard screenshot */}
@@ -41,12 +41,6 @@ export function CFAnalytics() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative order-last lg:order-first"
           >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -inset-px rounded-3xl opacity-20"
-              style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, hsl(var(--accent-amber)) / 0.25, transparent)", filter: "blur(32px)" }}
-            />
-            
             <BrowserFrame url="codeforces.com/profile/tourist" size="lg" className="w-full card-premium">
               <Image
                 src={competitiveScreenshot}

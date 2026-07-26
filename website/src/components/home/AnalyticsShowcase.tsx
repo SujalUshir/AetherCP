@@ -29,7 +29,7 @@ export function AnalyticsShowcase() {
 
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 opacity-15"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 opacity-[0.02]"
         style={{ background: "radial-gradient(circle, hsl(48 42% 89% / 0.25), transparent 70%)", filter: "blur(60px)" }}
       />
 
@@ -65,7 +65,7 @@ export function AnalyticsShowcase() {
               ))}
             </ul>
 
-            <div className="flex items-start gap-4 rounded-2xl border border-accent-blue/10 bg-accent-blue/5 p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]">
+            <div className="flex items-start gap-4 rounded-2xl border border-accent-blue/10 bg-accent-blue/5 p-5 shadow-sm">
               <BarChart3 className="mt-0.5 h-5 w-5 shrink-0 text-accent-blue" />
               <p className="text-sm text-muted-foreground/90 leading-relaxed">
                 Personal practice analytics appear exclusively on <span className="text-accent-blue font-semibold text-foreground">your own Codeforces profile</span> — refreshing every 10 seconds with live session data from your <span className="text-accent-blue font-semibold text-foreground">local storage</span>.
@@ -80,12 +80,6 @@ export function AnalyticsShowcase() {
             transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative flex flex-col gap-6"
           >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -inset-px rounded-3xl opacity-20"
-              style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, hsl(var(--accent-blue)) / 0.15, transparent)", filter: "blur(32px)" }}
-            />
-            
             <BrowserFrame url="codeforces.com/problemset" size="sm" className="w-full card-premium">
               <Image
                 src={analyticScreenshot}

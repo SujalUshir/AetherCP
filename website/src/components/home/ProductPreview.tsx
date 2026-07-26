@@ -33,12 +33,6 @@ export function ProductPreview() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="relative"
         >
-          {/* Outer glow */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -inset-px rounded-3xl opacity-25"
-            style={{ background: "radial-gradient(ellipse 60% 40% at 50% 50%, hsl(238 84% 67% / 0.5), transparent)", filter: "blur(48px)" }}
-          />
           <BrowserFrame url="codeforces.com/contest/2239/problem/A">
             <div className="flex justify-center w-full py-4">
               <Image

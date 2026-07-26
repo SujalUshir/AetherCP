@@ -72,7 +72,7 @@ export function Navbar() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-350",
           scrolled
-            ? "border-b border-white/5 bg-background/60 backdrop-blur-xl shadow-lg shadow-black/40"
+            ? "border-b border-border bg-background/70 backdrop-blur-md shadow-sm"
             : "bg-transparent"
         )}
       >
@@ -88,7 +88,7 @@ export function Navbar() {
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
-
+ 
           {/* Logo */}
           <Link
             href="/"
@@ -106,7 +106,7 @@ export function Navbar() {
               Aether<span className="text-primary">CP</span>
             </span>
           </Link>
-
+ 
           {/* Desktop links */}
           <ul className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map(({ href, label }) => (
@@ -116,7 +116,7 @@ export function Navbar() {
                   className={cn(
                     "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150",
                     pathname === href
-                      ? "text-foreground"
+                      ? "text-primary font-semibold"
                       : "text-muted-foreground hover:text-foreground"
                   )}
                 >

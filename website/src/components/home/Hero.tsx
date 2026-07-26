@@ -49,22 +49,14 @@ const CHIPS = [
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen bg-background grid-bg-subtle flex flex-col items-center justify-center pt-32 pb-24 overflow-hidden">
-      {/* Background depth glows */}
+    <section className="relative min-h-screen bg-background flex flex-col items-center justify-center pt-32 pb-24 overflow-hidden">
+      {/* Background depth glows (Subtle light warmth) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[1000px] -translate-x-1/2 opacity-25"
+        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 opacity-[0.06]"
         style={{
-          background: "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(var(--primary) / 0.35) 0%, transparent 70%)",
-          filter: "blur(60px)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/3 h-[400px] w-[800px] -translate-x-1/2 opacity-10"
-        style={{
-          background: "radial-gradient(circle, hsl(var(--accent-blue) / 0.2) 0%, transparent 60%)",
-          filter: "blur(50px)",
+          background: "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(var(--primary)) 0%, transparent 70%)",
+          filter: "blur(80px)",
         }}
       />
 
@@ -77,7 +69,7 @@ export function Hero() {
         >
           {/* Tagline Badge */}
           <motion.div variants={slideInBottom}>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/10 bg-primary/5 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary shadow-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald animate-pulse" />
               Chrome Extension · v1.2.0
             </span>
@@ -85,9 +77,9 @@ export function Hero() {
 
           {/* Title / Heading */}
           <motion.div variants={slideInBottom}>
-            <h1 className="text-5xl font-extrabold sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] max-w-3xl">
+            <h1 className="text-5xl font-extrabold sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] max-w-3xl text-foreground">
               Your Codeforces Training,{" "}
-              <span className="bg-gradient-to-r from-[#F0EBD8] via-[#E8DFC7] to-[#DDD3BA] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#3e2723] via-[#4e3629] to-[#1c1917] bg-clip-text text-transparent">
                 Measured Automatically.
               </span>
             </h1>
@@ -96,20 +88,20 @@ export function Hero() {
           {/* Description */}
           <motion.div variants={slideInBottom}>
             <p className="max-w-2xl text-base text-muted-foreground leading-relaxed sm:text-xl">
-              A <span className="text-accent-emerald font-semibold">local-first</span> browser extension that starts timing the moment you open a problem, pauses automatically after <span className="text-accent-blue font-semibold">5 minutes of inactivity</span>, and injects rich analytics directly into Codeforces profiles — no setup, no accounts required.
+              A <span className="text-primary font-semibold">local-first</span> browser extension that starts timing the moment you open a problem, pauses automatically after <span className="text-primary font-semibold">5 minutes of inactivity</span>, and injects rich analytics directly into Codeforces profiles — no setup, no accounts required.
             </p>
           </motion.div>
 
           {/* Action Buttons */}
           <motion.div variants={slideInBottom} className="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto">
-            <Button size="xl" asChild id="hero-download-cta" className="rounded-xl px-10 py-7 text-base font-semibold shadow-2xl">
+            <Button size="xl" asChild id="hero-download-cta" className="rounded-xl px-10 py-7 text-base font-semibold shadow-sm">
               <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                 <Download className="h-5 w-5 btn-icon-download" />
                 Download Latest Release
                 <ArrowRight className="h-4 w-4 opacity-70 btn-icon-arrow" />
               </a>
             </Button>
-            <Button size="xl" variant="glass" asChild id="hero-github-cta" className="rounded-xl px-10 py-7 text-base font-semibold">
+            <Button size="xl" variant="outline" asChild id="hero-github-cta" className="rounded-xl px-10 py-7 text-base font-semibold">
               <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                 <Github className="h-5 w-5 btn-icon-github" />
                 View on GitHub
@@ -126,7 +118,7 @@ export function Hero() {
               <span
                 key={label}
                 className={cn(
-                  "inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-xs font-medium transition-all duration-300 hover:border-white/10 hover:text-foreground",
+                  "inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-xs font-medium transition-all duration-300 hover:border-primary/20",
                   colorClass
                 )}
               >
@@ -144,21 +136,13 @@ export function Hero() {
           variants={imageFadeIn}
           className="w-full max-w-4xl mt-20 relative"
         >
-          {/* Subtle glow behind preview */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -inset-10 rounded-[2.5rem] opacity-35 bg-gradient-radial from-accent-blue/10 via-transparent to-transparent blur-3xl"
-          />
-
           <BrowserFrame url="codeforces.com/contest/2239/problem/A" size="sm" className="w-full card-premium">
-            <div className="flex justify-center w-full py-8 bg-bg-darker/20 rounded-b-2xl">
+            <div className="flex justify-center w-full py-8 bg-bg-dark/10 rounded-b-2xl">
               <div className="relative group max-w-[300px] w-full">
-                {/* Glow ring around popup screenshot */}
-                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent-blue/10 to-accent-purple/10 opacity-75 blur-xl group-hover:opacity-100 transition-opacity duration-500" />
                 <Image
                   src={popupScreenshot}
                   alt="AetherCP Extension Popup Preview"
-                  className="relative max-w-full w-full h-auto rounded-xl border border-white/10 shadow-2xl transition-all duration-500 hover:scale-[1.01] hover:border-white/20 select-none pointer-events-none"
+                  className="relative max-w-full w-full h-auto rounded-xl border border-border/60 shadow-md transition-all duration-500 hover:scale-[1.01] select-none pointer-events-none"
                   priority
                 />
               </div>
