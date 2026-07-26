@@ -152,12 +152,12 @@ export function Hero() {
                 initial={{ opacity: 0, y: 35, x: 15, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
                 transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.65 }}
-                className="absolute right-[4%] top-[8%] w-[26%] max-w-[220px] z-10 transition-transform duration-500 hover:scale-[1.03]"
+                className="absolute right-[4%] top-[8%] w-[26%] max-w-[220px] z-10 transition-transform duration-500 hover:scale-[1.03] bg-background/50 backdrop-blur-md rounded-xl p-0.5 border border-border/70 shadow-[0_20px_50px_rgba(139,79,41,0.22)]"
               >
                 <Image
                   src={popupScreenshot}
                   alt="AetherCP Extension Popup Preview"
-                  className="rounded-xl border border-border shadow-xl select-none pointer-events-none w-full h-auto"
+                  className="rounded-lg select-none pointer-events-none w-full h-auto"
                 />
               </motion.div>
             </div>
