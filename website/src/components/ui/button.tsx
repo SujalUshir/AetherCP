@@ -25,8 +25,8 @@ const buttonVariants = cva(
       variant: {
         default: [
           "bg-primary text-primary-foreground shadow-sm",
-          // Hover: subtle lift + soft warm shadow + slight scale
-          "hover:-translate-y-[1px] hover:scale-[1.01] hover:shadow-[0_4px_12px_rgba(240,235,216,0.12)]",
+          // Hover: subtle lift + soft warm shadow
+          "hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(139,79,41,0.15)]",
           "hover:bg-primary/95",
           // Shimmer overlay via ::before (defined in globals.css)
           "btn-shimmer",
@@ -37,8 +37,8 @@ const buttonVariants = cva(
 
         outline: [
           "border border-border bg-transparent text-foreground",
-          "hover:bg-white/[0.02] hover:border-white/15 hover:text-foreground",
-          "hover:-translate-y-[1px] hover:scale-[1.01] hover:shadow-[0_2px_8px_rgba(0,0,0,0.2)]",
+          "hover:bg-secondary/40 hover:border-border hover:text-foreground",
+          "hover:-translate-y-[1px] hover:shadow-[0_3px_8px_rgba(139,79,41,0.06)]",
         ].join(" "),
 
         secondary: [
@@ -47,7 +47,7 @@ const buttonVariants = cva(
         ].join(" "),
 
         ghost: [
-          "hover:bg-white/[0.03] hover:text-foreground",
+          "hover:bg-secondary/60 hover:text-foreground",
           "hover:-translate-y-[0.5px]",
         ].join(" "),
 
@@ -55,9 +55,9 @@ const buttonVariants = cva(
 
         // Premium glass CTA
         glass: [
-          "border border-white/5 bg-white/[0.02] backdrop-blur-md text-foreground",
-          "hover:border-primary/25 hover:bg-primary/[0.03]",
-          "hover:-translate-y-[1px] hover:scale-[1.01] hover:shadow-[0_4px_16px_rgba(0,0,0,0.3)]",
+          "border border-border bg-background/50 backdrop-blur-md text-foreground",
+          "hover:border-primary/20 hover:bg-primary/5",
+          "hover:-translate-y-[1px] hover:shadow-[0_4px_16px_rgba(139,79,41,0.08)]",
         ].join(" "),
       },
       size: {
