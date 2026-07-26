@@ -97,13 +97,13 @@ export function InteractiveGrid() {
       // Dynamic influence parameters based on velocity
       // Moving quickly -> wider influence radius, softer intensity
       // Moving slowly -> tighter focus radius, darker intensity
-      const speedFactor = Math.min(1.0, easedVelocity * 0.6); // cap at 1.0
+      const speedFactor = Math.min(1.0, easedVelocity * 0.4); // reduced velocity range mapping
       
-      // Interpolate radius: 105px when slow -> 165px when fast
-      const hoverRadius = 105 + speedFactor * 60;
+      // Interpolate radius: 110px when slow -> 150px when fast (subtle variation)
+      const hoverRadius = 110 + speedFactor * 40;
       
-      // Interpolate max cell tint opacity: 0.02 when slow -> 0.007 when fast
-      const maxCellOpacity = 0.02 - speedFactor * 0.013;
+      // Interpolate max cell tint opacity: 0.026 when slow -> 0.010 when fast (increased intensity by 30%)
+      const maxCellOpacity = 0.026 - speedFactor * 0.016;
 
       // Draw hover cells (warm caramel tint) if active fade multiplier > 0.01
       if (easedFade > 0.01) {
@@ -149,8 +149,8 @@ export function InteractiveGrid() {
           const dist = Math.abs(x - easedMouse.x);
           if (dist < hoverRadius) {
             const distanceFactor = 1 - dist / hoverRadius;
-            // Warm magnetic darkening of vertical lines near cursor
-            alpha = 0.01 + (distanceFactor * 0.012) * easedFade;
+            // Warm magnetic darkening of vertical lines near cursor (increased by 50%)
+            alpha = 0.01 + (distanceFactor * 0.018) * easedFade;
           }
         }
 
@@ -169,8 +169,8 @@ export function InteractiveGrid() {
           const dist = Math.abs(y - easedMouse.y);
           if (dist < hoverRadius) {
             const distanceFactor = 1 - dist / hoverRadius;
-            // Warm magnetic darkening of horizontal lines near cursor
-            alpha = 0.01 + (distanceFactor * 0.012) * easedFade;
+            // Warm magnetic darkening of horizontal lines near cursor (increased by 50%)
+            alpha = 0.01 + (distanceFactor * 0.018) * easedFade;
           }
         }
 
