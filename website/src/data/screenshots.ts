@@ -33,7 +33,7 @@ export const SCREENSHOTS: ScreenshotItem[] = [
     id: "history",
     title: "Problem History",
     description: "Complete problem-by-problem history with session duration, platform, timestamp, and difficulty rating — sorted by most recent.",
-    url: "leetcode.com/problems/two-sum",
+    url: "codeforces.com/profile",
     category: "History",
   },
 ];
