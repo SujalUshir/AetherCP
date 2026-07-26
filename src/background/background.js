@@ -175,7 +175,7 @@ async function resolveCodeforcesRating(contestId, index) {
   return null;
 }
 
-async function handleProblemDetected(tabId, problem) {
+async function handleProblemDetected(tabId, problem, senderTab = null) {
   if (!problem || !problem.problemName || !problem.platform) return;
   if (!isCodeforcesProblem(problem)) return;
 
@@ -189,12 +189,21 @@ async function handleProblemDetected(tabId, problem) {
 
   state.tabProblems[String(tabId)] = problemWithUrl;
 
-  const [activeTab] = await chrome.tabs.query({
-    active: true,
-    currentWindow: true
-  });
+  let isTabActive = senderTab && senderTab.active;
 
-  if (activeTab && activeTab.id === tabId) {
+  if (!isTabActive) {
+    try {
+      const [activeTab] = await chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true
+      });
+      if (activeTab && activeTab.id === tabId) {
+        isTabActive = true;
+      }
+    } catch (_) {}
+  }
+
+  if (isTabActive) {
     activateTrackedProblemTab(state, tabId, problemWithUrl);
   }
 
@@ -328,7 +337,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const tabId = requireSenderTab(sender, sendResponse);
     if (tabId === null) return false;
 
-    handleProblemDetected(tabId, message.problem).then(() => {
+    handleProblemDetected(tabId, message.problem, sender.tab).then(() => {
       sendResponse({ ok: true });
     });
     return true;
@@ -655,6 +664,8 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 });
 
 // Trigger cloud sync check on extension/service worker startup
-syncOnStartup().catch((err) => {
-  console.error("[AetherCP Sync] Startup sync execution failed:", err);
-});
+if (typeof isCloudBuild === "function" && isCloudBuild()) {
+  syncOnStartup().catch((err) => {
+    console.error("[AetherCP Sync] Startup sync execution failed:", err);
+  });
+}

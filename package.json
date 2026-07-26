@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "build:community": "node scripts/build-release.mjs --mode=community",
-    "build:cloud": "node scripts/build-release.mjs --mode=cloud"
+    "build": "node scripts/build-release.mjs",
+    "build:community": "node scripts/build-release.mjs",
+    "build:cloud": "node scripts/build-release.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.0",

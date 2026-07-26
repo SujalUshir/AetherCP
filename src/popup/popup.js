@@ -1,6 +1,5 @@
-const IS_CLOUD_BUILD = (typeof AETHERCP_BUILD_CONFIG !== "undefined" && AETHERCP_BUILD_CONFIG.BUILD_MODE === "cloud");
 function isCloudBuild() {
-  return IS_CLOUD_BUILD;
+  return typeof AETHERCP_BUILD_CONFIG !== "undefined" && AETHERCP_BUILD_CONFIG.BUILD_MODE === "cloud";
 }
 
 const problemDiv             = document.getElementById("problemName");
@@ -291,19 +290,21 @@ function loadSyncState() {
   });
 }
 
-// Watch for sync state updates broadcasted from background script
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.type === "SYNC_STATUS_CHANGED") {
-    updateSyncStatusUI(message.status);
-  } else if (message.type === "SYNC_TIMESTAMP_CHANGED") {
-    lastBackupTimestamp = message.timestamp;
-    updateLastBackupUI();
-  }
-});
+if (isCloudBuild()) {
+  // Watch for sync state updates broadcasted from background script
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.type === "SYNC_STATUS_CHANGED") {
+      updateSyncStatusUI(message.status);
+    } else if (message.type === "SYNC_TIMESTAMP_CHANGED") {
+      lastBackupTimestamp = message.timestamp;
+      updateLastBackupUI();
+    }
+  });
 
-// Update offline state display dynamically if connectivity drops/restores
-window.addEventListener("online", () => updateSyncStatusUI(currentSyncStatus));
-window.addEventListener("offline", () => updateSyncStatusUI(currentSyncStatus));
+  // Update offline state display dynamically if connectivity drops/restores
+  window.addEventListener("online", () => updateSyncStatusUI(currentSyncStatus));
+  window.addEventListener("offline", () => updateSyncStatusUI(currentSyncStatus));
+}
 
 function setAuthLoading(isLoading) {
   authLoadingDiv.style.display = isLoading ? "block" : "none";
@@ -435,11 +436,18 @@ function renderCommunityCard() {
 }
 
 if (isCloudBuild()) {
+  const authSection = document.getElementById("authSection");
+  if (authSection) {
+    authSection.style.display = "block";
+  }
   // Check auth status once when popup opens
   checkAuthStatus();
 
   // Load backup status once when popup opens
   loadSyncState();
 } else {
-  renderCommunityCard();
+  const authSection = document.getElementById("authSection");
+  if (authSection) {
+    authSection.style.display = "none";
+  }
 }
