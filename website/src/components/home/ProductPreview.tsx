@@ -39,7 +39,7 @@ export function ProductPreview() {
               <Image
                 src={popupScreenshot}
                 alt="AetherCP Extension Popup"
-                className="max-w-[280px] w-full h-auto rounded-2xl shadow-xl border border-white/10 select-none pointer-events-none transition-transform duration-300 hover:scale-[1.02]"
+                className="max-w-[280px] w-full h-auto rounded-2xl shadow-xl border border-white/10 select-none pointer-events-none transition-transform duration-300 hover:scale-[1.02] img-fade-in"
               />
             </div>
           </BrowserFrame>

@@ -88,7 +88,7 @@ export default function FeedbackPage() {
               return (
                 <div
                   key={card.id}
-                  className="group flex flex-col justify-between rounded-2xl p-7 transition-all duration-350 card-premium noise-overlay hover:border-primary/20"
+                  className="group flex flex-col justify-between rounded-2xl p-7 transition-all duration-350 card-premium noise-overlay hover:border-primary/35"
                 >
                   <div className="flex flex-col gap-4">
                     <div className={`flex h-11 w-11 items-center justify-center rounded-xl border ${card.accent}`}>
@@ -120,7 +120,7 @@ export default function FeedbackPage() {
       {/* Roadmap CTA */}
       <section className="py-16 border-t border-border bg-secondary/20">
         <Container size="md">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl p-8 card-premium noise-overlay hover:border-primary/25">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl p-8 card-premium noise-overlay hover:border-primary/35">
             <div className="flex flex-col gap-1.5 text-center sm:text-left">
               <h3 className="font-semibold text-lg text-foreground">Check our Future Roadmap</h3>
               <p className="text-xs text-muted-foreground/80 leading-relaxed">

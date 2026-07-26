@@ -82,7 +82,7 @@ export function GitHubSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.25, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="group flex w-full max-w-2xl items-center justify-between rounded-2xl p-8 card-premium noise-overlay hover:border-primary/20"
+            className="group flex w-full max-w-2xl items-center justify-between rounded-2xl p-8 card-premium noise-overlay hover:border-primary/35"
           >
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">

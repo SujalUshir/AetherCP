@@ -433,7 +433,7 @@ export default function FeaturesPage() {
                   <Image
                     src={analyticScreenshot}
                     alt="Analytics Dashboard"
-                    className="w-full max-w-[500px] h-auto object-contain rounded-lg border border-white/5"
+                    className="w-full max-w-[500px] h-auto object-contain rounded-lg border border-white/5 img-fade-in"
                   />
                 </div>
               </BrowserFrame>
@@ -447,7 +447,7 @@ export default function FeaturesPage() {
                   <Image
                     src={popupScreenshot}
                     alt="Extension Popup View"
-                    className="w-full max-w-[280px] h-auto object-contain rounded-lg border border-white/5"
+                    className="w-full max-w-[280px] h-auto object-contain rounded-lg border border-white/5 img-fade-in"
                   />
                 </div>
               </BrowserFrame>

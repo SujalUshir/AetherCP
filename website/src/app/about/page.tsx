@@ -102,7 +102,7 @@ export default function AboutPage() {
       {/* 5. Open Source */}
       <section className="relative">
         <Container size="md">
-          <div className="flex flex-col items-center text-center gap-6 rounded-2xl p-8 card-premium noise-overlay hover:border-primary/20">
+          <div className="flex flex-col items-center text-center gap-6 rounded-2xl p-8 card-premium noise-overlay hover:border-primary/35">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 border border-primary/10 text-primary">
               <Heart className="h-5 w-5" />
             </div>

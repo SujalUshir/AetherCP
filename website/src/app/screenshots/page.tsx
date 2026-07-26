@@ -119,7 +119,7 @@ function ScreenshotItem({ item, index }: { item: typeof SCREENSHOT_SECTIONS[0]; 
             <Image
               src={item.src}
               alt={item.title}
-              className={`${item.maxWidthClass} w-full h-auto rounded-xl shadow-xl border border-white/5 select-none pointer-events-none transition-transform duration-300 hover:scale-[1.01]`}
+              className={`${item.maxWidthClass} w-full h-auto rounded-xl shadow-xl border border-white/5 select-none pointer-events-none transition-transform duration-300 hover:scale-[1.01] img-fade-in`}
             />
           </div>
         </BrowserFrame>
