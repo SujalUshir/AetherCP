@@ -51,13 +51,11 @@ export function InteractiveGrid() {
     window.addEventListener("resize", handleResize, { passive: true });
 
     const GRID_SIZE = 14; // Refined smaller cell grid size
-    let time = 0;
 
     const draw = () => {
       if (!ctx || !canvas) return;
 
       ctx.clearRect(0, 0, width, height);
-      time += 0.04;
 
       // Smoothly update eased coordinates (lerp)
       if (targetMouse.x > -500) {
@@ -66,7 +64,7 @@ export function InteractiveGrid() {
       }
       easedRadius += (targetRadius - easedRadius) * 0.06;
 
-      // Draw active hover cell ripples & intersection points if active
+      // Draw active hover cell highlights (magnetic field)
       if (easedRadius > 1) {
         const startCol = Math.max(0, Math.floor((easedMouse.x - easedRadius) / GRID_SIZE));
         const endCol = Math.min(Math.ceil(width / GRID_SIZE), Math.floor((easedMouse.x + easedRadius) / GRID_SIZE));
@@ -87,25 +85,12 @@ export function InteractiveGrid() {
 
             if (distance < easedRadius) {
               const baseFactor = 1 - distance / easedRadius;
-              // Soft periodic ripple wave propagating outwards
-              const rippleFactor = Math.sin(distance * 0.08 - time * 1.5) * 0.3 + 0.7;
-              const intensity = Math.pow(baseFactor, 2) * rippleFactor;
+              // Clean, flat distance-based quadratic falloff
+              const intensity = Math.pow(baseFactor, 2);
 
               // Cell Background fill (caramel tone)
-              ctx.fillStyle = `rgba(139, 79, 41, ${intensity * 0.016})`;
+              ctx.fillStyle = `rgba(139, 79, 41, ${intensity * 0.015})`;
               ctx.fillRect(cellX, cellY, GRID_SIZE, GRID_SIZE);
-
-              // Intersection Dot at cell top-left intersection
-              const dotDistX = easedMouse.x - cellX;
-              const dotDistY = easedMouse.y - cellY;
-              const dotDistance = Math.sqrt(dotDistX * dotDistX + dotDistY * dotDistY);
-              if (dotDistance < easedRadius) {
-                const dotFactor = Math.pow(1 - dotDistance / easedRadius, 3);
-                ctx.beginPath();
-                ctx.arc(cellX, cellY, 1.25, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(139, 79, 41, ${dotFactor * 0.08})`;
-                ctx.fill();
-              }
             }
           }
         }
@@ -120,11 +105,11 @@ export function InteractiveGrid() {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, height);
         
-        let alpha = 0.012; // Extremely low base line opacity
+        let alpha = 0.01; // Extremely low base line opacity
         if (easedRadius > 1) {
           const dist = Math.abs(x - easedMouse.x);
           if (dist < easedRadius) {
-            alpha = 0.012 + (1 - dist / easedRadius) * 0.015;
+            alpha = 0.01 + (1 - dist / easedRadius) * 0.012;
           }
         }
 
@@ -138,11 +123,11 @@ export function InteractiveGrid() {
         ctx.moveTo(0, y);
         ctx.lineTo(width, y);
 
-        let alpha = 0.012; // Extremely low base line opacity
+        let alpha = 0.01; // Extremely low base line opacity
         if (easedRadius > 1) {
           const dist = Math.abs(y - easedMouse.y);
           if (dist < easedRadius) {
-            alpha = 0.012 + (1 - dist / easedRadius) * 0.015;
+            alpha = 0.01 + (1 - dist / easedRadius) * 0.012;
           }
         }
 
