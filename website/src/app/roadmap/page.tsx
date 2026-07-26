@@ -106,7 +106,7 @@ function RoadmapColumn({
               variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } }}
               className={cn(
                 "group rounded-xl border-t-2 border-x border-b p-3 transition-all duration-300 card-premium noise-overlay",
-                "border-border hover:border-primary/40 min-h-[82px] flex flex-col justify-between",
+                "border-border hover:border-primary/40",
                 priorityColor
               )}
             >
