@@ -109,21 +109,31 @@ export function Navbar() {
  
           {/* Desktop links */}
           <ul className="hidden items-center gap-1 lg:flex">
-            {NAV_LINKS.map(({ href, label }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={cn(
-                    "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150",
-                    pathname === href
-                      ? "text-primary font-semibold"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+            {NAV_LINKS.map(({ href, label }) => {
+              const isActive = pathname === href;
+              return (
+                <li key={href} className="relative">
+                  <Link
+                    href={href}
+                    className={cn(
+                      "relative rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150",
+                      isActive
+                        ? "text-primary font-semibold"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="desktopNavActive"
+                        className="absolute bottom-[-16px] inset-x-3 h-0.5 bg-primary rounded-full"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Search Dialog & Desktop CTAs */}
