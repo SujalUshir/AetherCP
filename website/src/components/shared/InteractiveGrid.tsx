@@ -38,8 +38,8 @@ export function InteractiveGrid() {
     document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
     window.addEventListener("resize", handleResize, { passive: true });
 
-    const GRID_SIZE = 45; // Size of each grid square in pixels
-    const HOVER_RADIUS = 180; // Distance of influence from the mouse
+    const GRID_SIZE = 12; // Size of each grid square in pixels (4x smaller for refined look)
+    const HOVER_RADIUS = 120; // Distance of influence from the mouse
 
     const draw = () => {
       if (!ctx || !canvas) return;
@@ -69,8 +69,8 @@ export function InteractiveGrid() {
 
             if (distance < HOVER_RADIUS) {
               const factor = 1 - distance / HOVER_RADIUS;
-              // Subtly darken the cell with warm brand tone
-              ctx.fillStyle = `rgba(194, 159, 118, ${factor * 0.045})`;
+              // Subtly darken the cell with warm richer brand tone
+              ctx.fillStyle = `rgba(139, 79, 41, ${factor * 0.018})`;
               ctx.fillRect(cellX, cellY, GRID_SIZE, GRID_SIZE);
             }
           }
@@ -83,16 +83,16 @@ export function InteractiveGrid() {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, height);
 
-        let alpha = 0.04; // Always visible base lines
+        let alpha = 0.015; // Subtle base lines
         if (mouse.x > -1000) {
           const dist = Math.abs(x - mouse.x);
           if (dist < HOVER_RADIUS) {
-            alpha = 0.04 + (1 - dist / HOVER_RADIUS) * 0.04;
+            alpha = 0.015 + (1 - dist / HOVER_RADIUS) * 0.015;
           }
         }
 
-        ctx.strokeStyle = `rgba(194, 159, 118, ${alpha})`;
-        ctx.lineWidth = 0.75;
+        ctx.strokeStyle = `rgba(139, 79, 41, ${alpha})`;
+        ctx.lineWidth = 0.5;
         ctx.stroke();
       }
 
@@ -102,16 +102,16 @@ export function InteractiveGrid() {
         ctx.moveTo(0, y);
         ctx.lineTo(width, y);
 
-        let alpha = 0.04; // Always visible base lines
+        let alpha = 0.015; // Subtle base lines
         if (mouse.y > -1000) {
           const dist = Math.abs(y - mouse.y);
           if (dist < HOVER_RADIUS) {
-            alpha = 0.04 + (1 - dist / HOVER_RADIUS) * 0.04;
+            alpha = 0.015 + (1 - dist / HOVER_RADIUS) * 0.015;
           }
         }
 
-        ctx.strokeStyle = `rgba(194, 159, 118, ${alpha})`;
-        ctx.lineWidth = 0.75;
+        ctx.strokeStyle = `rgba(139, 79, 41, ${alpha})`;
+        ctx.lineWidth = 0.5;
         ctx.stroke();
       }
 
