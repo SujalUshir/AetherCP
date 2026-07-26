@@ -116,18 +116,18 @@ export function Navbar() {
                   <Link
                     href={href}
                     className={cn(
-                      "relative rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150",
+                      "relative rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200",
                       isActive
-                        ? "text-primary font-semibold"
-                        : "text-muted-foreground hover:text-foreground"
+                        ? "text-brand-dark font-medium"
+                        : "text-muted-foreground hover:text-primary"
                     )}
                   >
                     {label}
                     {isActive && (
                       <motion.div
                         layoutId="desktopNavActive"
-                        className="absolute bottom-[-16px] inset-x-3 h-0.5 bg-primary rounded-full"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        className="absolute bottom-[-16px] inset-x-3 h-0.5 bg-brand-dark rounded-full"
+                        transition={{ type: "spring", stiffness: 300, damping: 32 }}
                       />
                     )}
                   </Link>
