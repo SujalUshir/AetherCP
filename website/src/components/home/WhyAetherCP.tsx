@@ -17,18 +17,18 @@ const ICON_MAP: Record<string, LucideIcon> = {
 };
 
 const ACCENT_STYLES: Record<FeatureAccent, { icon: string; bg: string; border: string; glow: string }> = {
-  indigo:  { icon: "text-accent-purple",  bg: "bg-accent-purple/10",  border: "border-accent-purple/20",  glow: "group-hover:shadow-accent-purple/5"  },
-  violet:  { icon: "text-accent-purple",  bg: "bg-accent-purple/10",  border: "border-accent-purple/20",  glow: "group-hover:shadow-accent-purple/5"  },
-  blue:    { icon: "text-accent-blue",    bg: "bg-accent-blue/10",    border: "border-accent-blue/20",    glow: "group-hover:shadow-accent-blue/5"    },
-  emerald: { icon: "text-accent-emerald", bg: "bg-accent-emerald/10", border: "border-accent-emerald/20", glow: "group-hover:shadow-accent-emerald/5" },
-  orange:  { icon: "text-accent-orange",  bg: "bg-accent-orange/10",  border: "border-accent-orange/20",  glow: "group-hover:shadow-accent-orange/5"  },
-  rose:    { icon: "text-accent-orange",  bg: "bg-accent-orange/10",  border: "border-accent-orange/20",  glow: "group-hover:shadow-accent-orange/5"  },
-  yellow:  { icon: "text-accent-amber",   bg: "bg-accent-amber/10",   border: "border-accent-amber/20",   glow: "group-hover:shadow-accent-amber/5"   },
-  cyan:    { icon: "text-accent-blue",    bg: "bg-accent-blue/10",    border: "border-accent-blue/20",    glow: "group-hover:shadow-accent-blue/5"    },
-  fuchsia: { icon: "text-accent-purple",  bg: "bg-accent-purple/10",  border: "border-accent-purple/20",  glow: "group-hover:shadow-accent-purple/5"  },
-  sky:     { icon: "text-accent-blue",    bg: "bg-accent-blue/10",    border: "border-accent-blue/20",    glow: "group-hover:shadow-accent-blue/5"    },
-  teal:    { icon: "text-accent-emerald", bg: "bg-accent-emerald/10", border: "border-accent-emerald/20", glow: "group-hover:shadow-accent-emerald/5" },
-  amber:   { icon: "text-accent-amber",   bg: "bg-accent-amber/10",   border: "border-accent-amber/20",   glow: "group-hover:shadow-accent-amber/5"   },
+  indigo:  { icon: "text-primary",  bg: "bg-primary/5",  border: "border-primary/20",  glow: "group-hover:shadow-primary/5"  },
+  violet:  { icon: "text-primary",  bg: "bg-primary/5",  border: "border-primary/20",  glow: "group-hover:shadow-primary/5"  },
+  blue:    { icon: "text-accent-blue",    bg: "bg-accent-blue/5",    border: "border-accent-blue/20",    glow: "group-hover:shadow-accent-blue/5"    },
+  emerald: { icon: "text-accent-emerald", bg: "bg-accent-emerald/5", border: "border-accent-emerald/20", glow: "group-hover:shadow-accent-emerald/5" },
+  orange:  { icon: "text-accent-orange",  bg: "bg-accent-orange/5",  border: "border-accent-orange/20",  glow: "group-hover:shadow-accent-orange/5"  },
+  rose:    { icon: "text-accent-orange",  bg: "bg-accent-orange/5",  border: "border-accent-orange/20",  glow: "group-hover:shadow-accent-orange/5"  },
+  yellow:  { icon: "text-accent-amber",   bg: "bg-accent-amber/5",   border: "border-accent-amber/20",   glow: "group-hover:shadow-accent-amber/5"   },
+  cyan:    { icon: "text-accent-blue",    bg: "bg-accent-blue/5",    border: "border-accent-blue/20",    glow: "group-hover:shadow-accent-blue/5"    },
+  fuchsia: { icon: "text-primary",  bg: "bg-primary/5",  border: "border-primary/20",  glow: "group-hover:shadow-primary/5"  },
+  sky:     { icon: "text-accent-blue",    bg: "bg-accent-blue/5",    border: "border-accent-blue/20",    glow: "group-hover:shadow-accent-blue/5"    },
+  teal:    { icon: "text-accent-emerald", bg: "bg-accent-emerald/5", border: "border-accent-emerald/20", glow: "group-hover:shadow-accent-emerald/5" },
+  amber:   { icon: "text-accent-amber",   bg: "bg-accent-amber/5",   border: "border-accent-amber/20",   glow: "group-hover:shadow-accent-amber/5"   },
 };
 
 export function WhyAetherCP() {

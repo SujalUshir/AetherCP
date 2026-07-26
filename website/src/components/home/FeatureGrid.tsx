@@ -23,24 +23,24 @@ const ICON_MAP: Record<string, LucideIcon> = {
 };
 
 const ACCENT_CLASSES: Record<FeatureAccent, { icon: string; bg: string; badge: string }> = {
-  indigo:  { icon: "text-accent-purple font-medium", bg: "bg-accent-purple/10", badge: "bg-accent-purple/10 text-accent-purple border-accent-purple/20" },
-  violet:  { icon: "text-accent-purple font-medium", bg: "bg-accent-purple/10", badge: "bg-accent-purple/10 text-accent-purple border-accent-purple/20" },
-  blue:    { icon: "text-accent-blue font-medium",    bg: "bg-accent-blue/10",    badge: "bg-accent-blue/10 text-accent-blue border-accent-blue/20" },
-  emerald: { icon: "text-accent-emerald font-medium font-semibold", bg: "bg-accent-emerald/10", badge: "bg-accent-emerald/10 text-accent-emerald border-accent-emerald/20" },
-  orange:  { icon: "text-accent-orange font-medium",  bg: "bg-accent-orange/10",  badge: "bg-accent-orange/10 text-accent-orange border-accent-orange/20" },
-  rose:    { icon: "text-accent-orange font-medium",  bg: "bg-accent-orange/10",  badge: "bg-accent-orange/10 text-accent-orange border-accent-orange/20" },
-  yellow:  { icon: "text-accent-amber font-medium",   bg: "bg-accent-amber/10",   badge: "bg-accent-amber/10 text-accent-amber border-accent-amber/20" },
-  cyan:    { icon: "text-accent-blue font-medium",    bg: "bg-accent-blue/10",    badge: "bg-accent-blue/10 text-accent-blue border-accent-blue/20" },
-  fuchsia: { icon: "text-accent-purple font-medium",  bg: "bg-accent-purple/10",  badge: "bg-accent-purple/10 text-accent-purple border-accent-purple/20" },
-  sky:     { icon: "text-accent-blue font-medium",    bg: "bg-accent-blue/10",    badge: "bg-accent-blue/10 text-accent-blue border-accent-blue/20" },
-  teal:    { icon: "text-accent-emerald font-medium", bg: "bg-accent-emerald/10", badge: "bg-accent-emerald/10 text-accent-emerald border-accent-emerald/20" },
-  amber:   { icon: "text-accent-amber font-medium",   bg: "bg-accent-amber/10",   badge: "bg-accent-amber/10 text-accent-amber border-accent-amber/20" },
+  indigo:  { icon: "text-primary font-medium", bg: "bg-primary/5", badge: "bg-primary/5 text-primary border-primary/20" },
+  violet:  { icon: "text-primary font-medium", bg: "bg-primary/5", badge: "bg-primary/5 text-primary border-primary/20" },
+  blue:    { icon: "text-accent-blue font-medium",    bg: "bg-accent-blue/5",    badge: "bg-accent-blue/5 text-accent-blue border-accent-blue/20" },
+  emerald: { icon: "text-accent-emerald font-medium font-semibold", bg: "bg-accent-emerald/5", badge: "bg-accent-emerald/5 text-accent-emerald border-accent-emerald/20" },
+  orange:  { icon: "text-accent-orange font-medium",  bg: "bg-accent-orange/5",  badge: "bg-accent-orange/5 text-accent-orange border-accent-orange/20" },
+  rose:    { icon: "text-accent-orange font-medium",  bg: "bg-accent-orange/5",  badge: "bg-accent-orange/5 text-accent-orange border-accent-orange/20" },
+  yellow:  { icon: "text-accent-amber font-medium",   bg: "bg-accent-amber/5",   badge: "bg-accent-amber/5 text-accent-amber border-accent-amber/20" },
+  cyan:    { icon: "text-accent-blue font-medium",    bg: "bg-accent-blue/5",    badge: "bg-accent-blue/5 text-accent-blue border-accent-blue/20" },
+  fuchsia: { icon: "text-primary font-medium",  bg: "bg-primary/5",  badge: "bg-primary/5 text-primary border-primary/20" },
+  sky:     { icon: "text-accent-blue font-medium",    bg: "bg-accent-blue/5",    badge: "bg-accent-blue/5 text-accent-blue border-accent-blue/20" },
+  teal:    { icon: "text-accent-emerald font-medium", bg: "bg-accent-emerald/5", badge: "bg-accent-emerald/5 text-accent-emerald border-accent-emerald/20" },
+  amber:   { icon: "text-accent-amber font-medium",   bg: "bg-accent-amber/5",   badge: "bg-accent-amber/5 text-accent-amber border-accent-amber/20" },
 };
 
 function highlightDescription(text: string) {
   const keywords = [
     { word: "Codeforces", class: "text-accent-orange font-semibold" },
-    { word: "VS Code", class: "text-accent-purple font-semibold" },
+    { word: "VS Code", class: "text-brand-medium font-semibold" },
     { word: "local storage", class: "text-accent-emerald font-semibold" },
     { word: "local", class: "text-accent-emerald font-semibold" },
     { word: "privacy", class: "text-accent-emerald font-semibold" },
