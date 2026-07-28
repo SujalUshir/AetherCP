@@ -4,14 +4,16 @@
    ============================================================ */
 
 .aethercp-profile-root{
-  margin-top:1em;
-  padding:1.1em;
+  display:flow-root;
+  margin-top:0.75em;
+  padding:0.95em 1em;
   color:#222;
   font-family:Verdana, Arial, sans-serif;
+  box-sizing:border-box;
 }
 
 .aethercp-profile-root + .aethercp-profile-root{
-  margin-top:1em;
+  margin-top:0.75em;
 }
 
 .aethercp-header{
@@ -245,7 +247,7 @@
 /* Practice analytics */
 
 .aethercp-productivity-block{
-  margin-top:0.85em;
+  margin-top:0.75em;
 }
 
 .aethercp-overview-grid{
