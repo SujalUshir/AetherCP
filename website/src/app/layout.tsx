@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/shared/ScrollProgress";
 import { BackToTop } from "@/components/shared/BackToTop";
 import { InteractiveGrid } from "@/components/shared/InteractiveGrid";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -80,6 +81,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <BackToTop />
+        <Analytics />
       </body>
     </html>
   );
