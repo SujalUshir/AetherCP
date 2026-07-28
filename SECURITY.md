@@ -145,8 +145,8 @@ This project is developed following these practices:
 
 If you discover a **security vulnerability** in AetherCP:
 
-- **For general bugs**, open a [GitHub Issue](../../issues).
-- **For security vulnerabilities**, please use [GitHub Security Advisories](../../security/advisories/new) to report privately. This avoids public disclosure before a fix is available.
+- **For general bugs**, open a [GitHub Issue](https://github.com/SujalUshir/AetherCP/issues).
+- **For security vulnerabilities**, please use [GitHub Security Advisories](https://github.com/SujalUshir/AetherCP/security/advisories/new) to report privately. This avoids public disclosure before a fix is available.
 
 Please provide:
 - A clear description of the vulnerability

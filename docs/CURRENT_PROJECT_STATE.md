@@ -1,6 +1,6 @@
 # AetherCP — Current Project State
 
-> Last updated: 2026-06-25
+> Last updated: 2026-07-28
 > Version: 1.2.0 (Manifest V3)
 > This document reflects ONLY the current implementation. No planned features. No future architecture.
 
@@ -450,4 +450,4 @@ AetherCP logs a comparison summary in the console for debugging.
 
 ---
 
-*End of document. This reflects the live codebase as of 2026-06-10.*
+*End of document. This reflects the live codebase as of 2026-07-28.*
