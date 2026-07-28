@@ -140,6 +140,20 @@ const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const WEEKDAY_LABELS = ["", "Mon", "", "Wed", "", "Fri", ""];
 
+// ── Shared fixed-position tooltip (portal) ──────────────────
+// One singleton <div> appended to <body> so it escapes any
+// overflow:hidden / overflow-x:auto ancestor and is never clipped.
+let _aetherTooltipEl = null;
+function getAetherTooltip() {
+  if (!_aetherTooltipEl) {
+    _aetherTooltipEl = document.createElement("div");
+    _aetherTooltipEl.id = "aethercp-heatmap-tooltip";
+    _aetherTooltipEl.className = "aethercp-heatmap-tooltip-portal";
+    document.body.appendChild(_aetherTooltipEl);
+  }
+  return _aetherTooltipEl;
+}
+
 /**
  * Render or update the full-year coding activity heatmap.
  *
@@ -276,6 +290,25 @@ function renderAetherHeatmap(root, analytics, selectedYear) {
 
       cell.setAttribute("data-tooltip", tooltipText);
 
+      // JS-portal tooltip: position:fixed relative to viewport so it
+      // escapes overflow:hidden and overflow-x:auto ancestor containers.
+      cell.addEventListener("mouseenter", (e) => {
+        const tip = getAetherTooltip();
+        tip.textContent = tooltipText;
+        tip.style.display = "block";
+        const rect = cell.getBoundingClientRect();
+        // Place above cell, centred horizontally
+        tip.style.left = `${rect.left + rect.width / 2}px`;
+        tip.style.top  = `${rect.top - 8}px`;
+        tip.style.transform = "translate(-50%, -100%) scale(1)";
+        tip.style.opacity   = "1";
+      });
+      cell.addEventListener("mouseleave", () => {
+        const tip = getAetherTooltip();
+        tip.style.opacity = "0";
+        tip.style.display = "none";
+      });
+
       if (minutes > 0) cellsWithActivity++;
     }
 
@@ -299,8 +332,13 @@ function renderAetherHeatmap(root, analytics, selectedYear) {
       const currentMonth = weekColumnMonths[c];
       const prevMonth    = c > 0 ? weekColumnMonths[c - 1] : -1;
 
-      // Only draw label at start of a new month
-      if (c === 0 || currentMonth !== prevMonth) {
+      // Only draw label at start of a new month.
+      // Fix: when c === 0, the first grid column may be the partial
+      // prior-year week (e.g. Dec 28-31 before Jan 1). Skip that
+      // label so the first visible month label is always "Jan".
+      const isFirstCol = c === 0;
+      const isNewMonth = currentMonth !== prevMonth;
+      if ((isFirstCol && currentMonth === 0) || (!isFirstCol && isNewMonth)) {
         const monthLabel = document.createElement("span");
         monthLabel.className = "aethercp-heatmap-months-label";
         monthLabel.textContent = MONTH_NAMES[currentMonth];
