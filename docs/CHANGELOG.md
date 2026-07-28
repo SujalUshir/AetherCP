@@ -2,14 +2,21 @@
 
 All notable changes to AetherCP should be recorded here.
 
-## [Unreleased]
+## [1.2.0] - 2026-07-28
+
+### Added
+
+- **VS Code CPH Integration**: One-click and context menu problem statement and sample test case export to Competitive Programming Helper (`localhost:27121`) implementing the Competitive Companion protocol (`src/modules/cph/`).
+- **Full-Year Activity Heatmap**: Sunday-aligned full-year coding activity graph with year navigation, 5 color intensity levels, and IST date keying (`profileSections.js`).
+- **JS Tooltip Portal**: Viewport-anchored `position: fixed` tooltip portal appended directly to `document.body` to escape `overflow: hidden` and `overflow-x: auto` containers (`profileAnalytics.css`).
+- **January Month Label Guard**: Month label rendering logic to ensure the first visible label is always "Jan" at grid column 2 without prior-year December text overlap.
 
 ### Changed
 
-- Refined Codeforces profile injection order to show the native profile, competitive analytics, heatmap, practice analytics, and recent history in that order.
-- Polished the Codeforces rating and topics distribution charts with consistent cards, cleaner spacing, improved tooltips, and Codeforces-inspired colors.
-- Simplified profile practice UI to remove platform/problem pie and doughnut charts, platform counters, solved stat cards, and visibility toggles while retaining the Codeforces topics pie chart.
-- Reduced Recent Problem History on the Codeforces profile to the last 5 tracked rows with problem name, rating, time spent, and date solved columns.
+- Refined Codeforces profile injection order: Native profile card → Competitive Analytics → Coding Activity Heatmap → Practice Analytics → Recent Problem History.
+- Polished Codeforces rating and topics distribution charts with consistent card borders, flexbox centering, and responsive legend heights.
+- Simplified practice analytics section to focus on core productivity metrics: 5 stat cards, 7-day bar chart, full-year heatmap, and last 5 recent problems table.
+- Replaced `clear: both` on root containers with `display: flow-root` to resolve vertical layout spacing issues caused by Codeforces sidebar floats.
 
 ## [1.1.0] - 2026-06-10
 
