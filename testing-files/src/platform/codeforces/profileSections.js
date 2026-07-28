@@ -328,23 +328,24 @@ function renderAetherHeatmap(root, analytics, selectedYear) {
     const spacer = document.createElement("span");
     monthsContainer.appendChild(spacer);
 
+    let lastDrawnMonth = -1;
     for (let c = 0; c < weekColumnMonths.length; c++) {
-      const currentMonth = weekColumnMonths[c];
-      const prevMonth    = c > 0 ? weekColumnMonths[c - 1] : -1;
+      let currentMonth = weekColumnMonths[c];
 
-      // Only draw label at start of a new month.
-      // Fix: when c === 0, the first grid column may be the partial
-      // prior-year week (e.g. Dec 28-31 before Jan 1). Skip that
-      // label so the first visible month label is always "Jan".
-      const isFirstCol = c === 0;
-      const isNewMonth = currentMonth !== prevMonth;
-      if ((isFirstCol && currentMonth === 0) || (!isFirstCol && isNewMonth)) {
+      // If the first week column starts in December of prior year,
+      // map it to January (0) so the first visible label at grid column 2 is always "Jan".
+      if (c === 0 && currentMonth === 11) {
+        currentMonth = 0;
+      }
+
+      if (currentMonth !== lastDrawnMonth) {
         const monthLabel = document.createElement("span");
         monthLabel.className = "aethercp-heatmap-months-label";
         monthLabel.textContent = MONTH_NAMES[currentMonth];
         // grid-column is 1-indexed, +2 because: index 0 = col 2 (after spacer)
         monthLabel.style.gridColumn = `${c + 2}`;
         monthsContainer.appendChild(monthLabel);
+        lastDrawnMonth = currentMonth;
       }
     }
   }
