@@ -166,16 +166,16 @@ Logs: `[AetherCP TIME]` for IST day key, `[AetherCP HEATMAP]` for cell generatio
 
 `src/modules/cph/` — three isolated modules loaded via `importScripts` in `background.js`.
 
-### cphClient.js
+### [cphClient.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphClient.js)
 Sends a Competitive Companion–compatible JSON payload via `POST http://localhost:27121`.
 Uses `AbortController` for a 3-second timeout. All errors returned as structured objects —
 never throws.
 
-### cphPayloadBuilder.js
+### [cphPayloadBuilder.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphPayloadBuilder.js)
 Builds the Competitive Companion JSON payload from a problem record.
 Handles platform-specific `group` strings and Java `taskClass` generation.
 
-### cphStatus.js
+### [cphStatus.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphStatus.js)
 10-second TTL health check. Sends a minimal POST to port 27121 to detect whether the
 CPH receiver is listening. Any HTTP response = reachable. Connection refused or timeout = offline.
 
