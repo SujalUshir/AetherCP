@@ -107,12 +107,12 @@ Source: `https://codeforces.com/api/user.status?handle=<handle>`
 Injected on: every profile page visited, regardless of login state.
 
 Files:
-- `cfApi.js` — fetch and validate Codeforces API responses.
-- `solvedProblemAnalytics.js` — deduplicate and build rating/topic distributions.
-- `profileIdentity.js` — detect viewed handle (URL) and logged-in handle (DOM).
-- `graphTemplates.js` — `getCFAnalyticsTemplate()`.
-- `profileCharts.js` — `renderCFRatingChart()` and `renderCFTopicChart()`.
-- `profileInjector.js` — `injectCFAnalytics()`.
+- [cfApi.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/cfApi.js) — fetch and validate Codeforces API responses.
+- [solvedProblemAnalytics.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/solvedProblemAnalytics.js) — deduplicate and build rating/topic distributions.
+- [profileIdentity.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileIdentity.js) — detect viewed handle (URL) and logged-in handle (DOM).
+- [graphTemplates.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/graphTemplates.js) — `getCFAnalyticsTemplate()`.
+- [profileCharts.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileCharts.js) — `renderCFRatingChart()` and `renderCFTopicChart()`.
+- [profileInjector.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileInjector.js) — `injectCFAnalytics()`.
 
 ### System 2: Practice Analytics (Timer State)
 
@@ -127,11 +127,11 @@ Contains:
 - Recent problem history table.
 
 Files:
-- `profileAnalytics.js` — extract analytics from snapshot (includes `dailyTotals`).
-- `profileSections.js` — render stat cards, heatmap, history table.
-- `graphTemplates.js` — `getAetherGraphTemplate()` (includes heatmap placeholder).
-- `profileCharts.js` — `renderAetherProfileCharts()`.
-- `profileInjector.js` — `injectAetherProfileAnalytics()`.
+- [profileAnalytics.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileAnalytics.js) — extract analytics from snapshot (includes `dailyTotals`).
+- [profileSections.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileSections.js) — render stat cards, heatmap, history table.
+- [graphTemplates.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/graphTemplates.js) — `getAetherGraphTemplate()` (includes heatmap placeholder).
+- [profileCharts.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileCharts.js) — `renderAetherProfileCharts()`.
+- [profileInjector.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileInjector.js) — `injectAetherProfileAnalytics()`.
 
 ### Heatmap Rendering Flow
 
