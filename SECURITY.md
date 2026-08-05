@@ -19,7 +19,7 @@ AetherCP follows these principles:
 
 ## Data Storage
 
-All data is stored exclusively in [`chrome.storage.local`](https://developer.chrome.com/docs/extensions/reference/storage/), which:
+All data is stored exclusively in [`chrome.storage.local`](https://developer.chrome.com/docs/extensions/reference/storage/) (see [STORAGE_SCHEMA.md](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/docs/STORAGE_SCHEMA.md) for data layout), which:
 
 - Resides on the user's local machine
 - Is sandboxed to this extension only
