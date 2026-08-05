@@ -60,7 +60,7 @@ Refreshing the same problem should not reset total time. The content script rede
 
 The content script listens for keyboard input, click events, window focus, and document visibility changes.
 
-If no activity happens for 15 minutes:
+If no activity happens for 5 minutes:
 
 - content sends `USER_IDLE`
 - background finalizes the session up to the idle threshold
