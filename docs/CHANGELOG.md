@@ -61,9 +61,9 @@ All notable changes to AetherCP should be recorded here.
 - **Idle activity events reduced to `keydown` + `click`** — `mousemove` and `scroll` removed
   to avoid false "active" signals during reading/thinking.
 - **Tab visibility awareness added** — hiding a tab triggers early idle; showing it resumes.
-- **`profileAnalytics.js`** now exposes `dailyTotals` in the analytics object for heatmap.
-- `time.js` now delegates all date/day operations to `timezone.js` IST helpers.
-- `background.js` `importScripts` now loads `timezone.js` before `time.js`.
+- **[profileAnalytics.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileAnalytics.js)** now exposes `dailyTotals` in the analytics object for heatmap.
+- [time.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/utils/time.js) now delegates all date/day operations to [timezone.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/utils/timezone.js) IST helpers.
+- [background.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/background/background.js) `importScripts` now loads [timezone.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/utils/timezone.js) before [time.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/utils/time.js).
 
 ## [1.0.0] - Initial
 
