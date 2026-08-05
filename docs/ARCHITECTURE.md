@@ -26,7 +26,7 @@ This prevents timer logic from being scattered across files.
 
 All date/day operations in AetherCP use **IST (Asia/Kolkata, UTC+5:30)** as the canonical timezone.
 
-**File:** `src/utils/timezone.js`
+**File:** [timezone.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/utils/timezone.js)
 
 Exports:
 - `getISTDate(timestamp?)` — Date object shifted to IST wall clock
@@ -35,7 +35,7 @@ Exports:
 - `getISTStartOfDay(timestamp?)` — UTC timestamp of IST midnight
 - `getISTNextDayStart(timestamp)` — UTC timestamp of next IST midnight
 
-**File:** `src/utils/time.js`
+**File:** [time.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/utils/time.js)
 
 All functions (`getDateKey`, `getTodayKey`, `getStartOfToday`, `getNextDayStart`) delegate to `timezone.js`. `timezone.js` MUST load before `time.js`.
 
@@ -43,7 +43,7 @@ All functions (`getDateKey`, `getTodayKey`, `getStartOfToday`, `getNextDayStart`
 
 ## Idle Detection
 
-**File:** `src/content/content.js`
+**File:** [content.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/content/content.js)
 
 CP-friendly idle threshold: **5 minutes** (`IDLE_TIMEOUT_MS = 300000`).
 
