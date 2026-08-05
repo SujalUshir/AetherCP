@@ -64,7 +64,7 @@ aethercp
 
 ## Idle State
 
-`idleState` is set when the active content script reports 15 minutes of inactivity.
+`idleState` is set when the active content script reports 5 minutes of inactivity.
 
 When idle starts:
 
