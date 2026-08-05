@@ -85,3 +85,11 @@ When schema changes:
 2. Add a migration function.
 3. Document the change in this file.
 4. Add a changelog entry.
+
+## Management
+
+The storage schema fields are operated by the following feature modules:
+- `activeSession` and `problems` are managed by [sessionManager.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/timer/sessionManager.js).
+- `idleState` is managed by [idleManager.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/timer/idleManager.js).
+- Daily aggregation (`dailyTotals`) is performed by [dailyAnalytics.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/analytics/dailyAnalytics.js).
+- Structured snapshots for display are formatted by [timerSnapshot.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/timer/timerSnapshot.js).
