@@ -100,7 +100,7 @@ A table below the productivity section showing the last 5 tracked problems:
 On the user's own profile, the productivity analytics section refreshes every **10 seconds** via `setInterval`. Each refresh:
 
 1. Sends `GET_TIMER_SNAPSHOT` to background via `safeRuntimeMessage()`
-2. Extracts analytics from the snapshot
+2. Extracts analytics from the snapshot (implemented in [profileAnalytics.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileAnalytics.js))
 3. Updates all stat card values in-place
 4. Re-renders the daily Chart.js chart
 
