@@ -10,7 +10,8 @@ This document lists confirmed quirks, edge cases, and platform limitations in th
 
 **Impact:** Any subsequent `chrome.runtime.sendMessage()` calls from those orphaned scripts throw an `Extension context invalidated` error.
 
-**Handling:** All runtime calls in content scripts and profile injectors go through `safeSendMessage()` / `safeRuntimeMessage()`. These wrappers detect the invalidation message and silently stop any active polling intervals or timers. A single console warning may still appear during reloads — this is expected.
+> [!NOTE]
+> All runtime calls in content scripts and profile injectors go through [safeSendMessage()](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/content/content.js#L74) / [safeRuntimeMessage()](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileInjector.js#L105). These wrappers detect the invalidation message and silently stop any active polling intervals or timers. A single console warning may still appear during reloads — this is expected.
 
 ---
 
@@ -28,7 +29,8 @@ This document lists confirmed quirks, edge cases, and platform limitations in th
 
 **Quirk:** All daily resets, date key generation, and heatmap rendering use IST (Indian Standard Time, UTC+5:30) regardless of the user's local system timezone.
 
-**Impact:** Users outside India will see their daily rollover at an unexpected local time (e.g. a UTC user's "day" ends at 6:30 PM local time instead of midnight). Heatmap dates are labeled in IST dates.
+> [!IMPORTANT]
+> **Impact:** Users outside India will see their daily rollover at an unexpected local time (e.g. a UTC user's "day" ends at 6:30 PM local time instead of midnight). Heatmap dates are labeled in IST dates.
 
 **No workaround currently available.**
 
