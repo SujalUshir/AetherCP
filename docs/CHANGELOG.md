@@ -53,10 +53,10 @@ All notable changes to AetherCP should be recorded here.
 ### Changed
  
 - Manifest paths now point to [src/background](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/background), [src/content](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/content), and [src/popup](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/popup).
-- `profileInjector.js` orchestrates two independent injection flows.
-- `graphTemplates.js` contains both `getCFAnalyticsTemplate()` and `getAetherGraphTemplate()`.
-- `profileCharts.js` contains both CF chart functions and existing productivity chart functions.
-- `profileAnalytics.css` extended with CF analytics, state, and heatmap styles.
+- [profileInjector.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileInjector.js) orchestrates two independent injection flows.
+- [graphTemplates.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/graphTemplates.js) contains both `getCFAnalyticsTemplate()` and `getAetherGraphTemplate()`.
+- [profileCharts.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileCharts.js) contains both CF chart functions and existing productivity chart functions.
+- [profileAnalytics.css](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileAnalytics.css) extended with CF analytics, state, and heatmap styles.
 - **`IDLE_TIMEOUT_MS` raised from 60 s to 300 s (5 min)** — accommodates CP thinking time.
 - **Idle activity events reduced to `keydown` + `click`** — `mousemove` and `scroll` removed
   to avoid false "active" signals during reading/thinking.
