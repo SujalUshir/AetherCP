@@ -30,7 +30,7 @@ Unlike traditional coding trackers that rely on telemetry, centralized databases
 ### 1. Asynchronous Session Tracking
 
 - **Automatic Detection**: Automatically initializes timer instances upon loading supported problem URLs on Codeforces and LeetCode.
-- **Smart Idle Observer**: Features a custom-built 15-minute idle detection threshold (observing keydown/click actions, while deliberately ignoring noisy mousemove and scroll events) to accurately protect practice telemetry during offline thinking and paper-sketching sessions.
+- **Smart Idle Observer**: Features a custom-built 5-minute idle detection threshold (observing keydown/click actions, while deliberately ignoring noisy mousemove and scroll events) to accurately protect practice telemetry during offline thinking and paper-sketching sessions.
 - **Midnight Partitioning**: Automatically partitions active sessions crossing the IST midnight boundary (GMT+5:30) to preserve date-key data consistency.
 
 ### 2. Dual-System Profile Analytics
@@ -162,7 +162,7 @@ The AetherCP extension icon will now appear in your browser toolbar, ready for u
   - Implement JSON and CSV telemetry export configurations.
   - Implement client-side configuration import pipelines.
 - **Phase 3: Deep Customization**
-  - Add configurable user idle timeout limits (currently fixed at 15 minutes).
+  - Add configurable user idle timeout limits (currently fixed at 5 minutes).
   - Instate native light and dark styling variants.
 
 ---
@@ -175,7 +175,7 @@ It isn't. AetherCP does not execute any remote telemetry or tracking scripts. Al
 
 #### How does the idle timer accommodate pauses?
 
-Competitive programming requires thinking, whiteboard work, and reading. To prevent skewing your session metrics, our content scripts observe page interactions (`keydown` and `click`). If no event fires for 15 minutes, state is retroactively paused back to the 15-minute point. Once a keypress or click occurs, tracking resumes instantly.
+Competitive programming requires thinking, whiteboard work, and reading. To prevent skewing your session metrics, our content scripts observe page interactions (`keydown` and `click`). If no event fires for 5 minutes, state is retroactively paused back to the 5-minute point. Once a keypress or click occurs, tracking resumes instantly.
 
 #### What permissions are required?
 
