@@ -111,8 +111,7 @@ Memory limit is read from `.memory-limit` (e.g. "256 megabytes" → 256 MB).
 
 ### LeetCode — Best-Effort (text parsing)
 
-LeetCode does not use a structured sample DOM. Examples are embedded as plain
-text in the problem description. AetherCP uses a regex to match:
+LeetCode does not use a structured sample DOM. Examples are embedded as plain text in the problem description (parsed by [content.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/content/content.js)). AetherCP uses a regex to match:
 
 ```
 Input: <text>
