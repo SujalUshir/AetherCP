@@ -10,10 +10,10 @@
 
 ## Where To Look
 
-- Problem name wrong: check `src/content/`.
-- Timer wrong: check `src/background/`.
-- Popup display wrong: check `src/popup/`.
-- Stored data wrong: check `docs/STORAGE_SCHEMA.md` and storage writes.
+- Problem name wrong: check [src/content/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/content/).
+- Timer wrong: check [src/background/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/background/).
+- Popup display wrong: check [src/popup/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/popup/).
+- Stored data wrong: check [STORAGE_SCHEMA.md](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/docs/STORAGE_SCHEMA.md) and storage writes.
 - Codeforces profile charts missing: open the page console and filter for `[AetherCP:profile]` or `[AetherCP:profile-injector]`.
 
 ## Console Logging Strategy
