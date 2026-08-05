@@ -25,16 +25,16 @@ content.js
  └─ Sends PROBLEM_DETECTED with full payload     (extended)
     │
     ▼
-background.js
+[background.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/background/background.js)
  ├─ Stores extended problem record in tabProblems
  ├─ SEND_TO_CPH  → buildCphPayload() → sendToCph()
  └─ GET_CPH_STATUS → checkCphReceiver()
     │
     ▼
-src/modules/cph/
- ├─ cphPayloadBuilder.js  — Competitive Companion JSON
- ├─ cphClient.js          — HTTP POST to localhost:27121
- └─ cphStatus.js          — 10-second cached health check
+ [src/modules/cph/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/)
+ ├─ [cphPayloadBuilder.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphPayloadBuilder.js)  — Competitive Companion JSON
+ ├─ [cphClient.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphClient.js)          — HTTP POST to localhost:27121
+ └─ [cphStatus.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphStatus.js)          — 10-second cached health check
     │
     ▼
 CPH Receiver (localhost:27121)
