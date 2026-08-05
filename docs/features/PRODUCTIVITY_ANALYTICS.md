@@ -16,9 +16,9 @@ This system is **only visible on the user's own profile** (`loggedInHandle === v
 - Time is stored as a `startedAt` timestamp; elapsed time is calculated on demand
 
 **Idle pause:**
-- After 15 minutes of no `keydown` or `click` activity, the session pauses
+- After 5 minutes of no `keydown` or `click` activity, the session pauses
 - Resuming activity starts a new session from the resume time
-- The 15-minute threshold is CP-friendly — it accommodates thinking, paper solving, and external editor use
+- The 5-minute threshold is CP-friendly — it accommodates thinking, paper solving, and external editor use
 
 **Data source:** `chrome.storage.local` — keyed under `"aethercp"`
 
