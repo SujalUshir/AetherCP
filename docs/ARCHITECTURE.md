@@ -45,7 +45,7 @@ All functions (`getDateKey`, `getTodayKey`, `getStartOfToday`, `getNextDayStart`
 
 **File:** `src/content/content.js`
 
-CP-friendly idle threshold: **15 minutes** (`IDLE_TIMEOUT_MS = 900000`).
+CP-friendly idle threshold: **5 minutes** (`IDLE_TIMEOUT_MS = 300000`).
 
 Activity events registered:
 - `keydown` — actual keyboard use
