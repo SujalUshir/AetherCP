@@ -23,7 +23,7 @@ Shows recently worked problems in the popup, sorted by latest activity.
 
 Status: active
 
-CP-friendly idle detection. Pauses session accumulation after **15 minutes** of no meaningful
+CP-friendly idle detection. Pauses session accumulation after **5 minutes** of no meaningful
 keyboard or click activity. This accommodates thinking time, paper solving, and external editor use.
 
 Activity sources:
