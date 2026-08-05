@@ -4,7 +4,7 @@ A privacy-first, local-first browser extension for competitive programmers that 
 
 [![Manifest V3](https://img.shields.io/badge/Extension%20Platform-Manifest%20V3-blue.svg?style=flat-square)](https://developer.chrome.com/docs/extensions/mv3/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
-[![Commits](https://img.shields.io/badge/Commits-130-blueviolet.svg?style=flat-square)](https://github.com/SujalUshir/AetherCP/commits/main)
+[![Commits](https://img.shields.io/badge/Commits-167-blueviolet.svg?style=flat-square)](https://github.com/SujalUshir/AetherCP/commits/main)
 [![Contributors](https://img.shields.io/badge/Contributors-1-orange.svg?style=flat-square)](https://github.com/SujalUshir/AetherCP/graphs/contributors)
 
 ---
