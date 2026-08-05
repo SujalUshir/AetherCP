@@ -2,7 +2,7 @@
 
 ## Overview
 
-AetherCP v1.2 adds full **Competitive Companion protocol compatibility**.
+AetherCP v1.2 adds full **Competitive Companion protocol compatibility** (coordinated by [cphClient.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/cphClient.js)).
 When you are on a supported problem page, AetherCP can send the problem directly
 to the [CPH (Competitive Programming Helper)](https://github.com/agrawal-d/cph)
 extension running inside VS Code — without installing any additional extension.
