@@ -144,7 +144,7 @@ src/popup/popup.js
 - Pages like `/profile`, `/friends`, `/settings` receive no tracking.
 
 ### Idle Detection
-- Threshold: **15 minutes** (CP-friendly — accommodates thinking, paper solving, external editors)
+- Threshold: **5 minutes** (CP-friendly — accommodates thinking, paper solving, external editors)
 - Activity events tracked: `keydown`, `click`, `window:focus`, `document:visibilitychange`
 - Events deliberately excluded: `mousemove`, `scroll` (too noisy for CP workflow)
 - Tab hidden: idle timer continues running in background
@@ -234,7 +234,7 @@ stopSession():
 
 ### Idle flow
 ```
-content.js: No keydown/click for 15 min
+content.js: No keydown/click for 5 min
   → sendIdleMessage() → USER_IDLE { idleStartedAt }
   → background: pauseForIdle()
     → finalizeSession(startedAt → idleStartedAt)
@@ -296,7 +296,7 @@ MV3 service workers can sleep. A `setInterval` in background is unreliable. Inst
 `finalizeSession()` iterates from `startedAt` to `endedAt`, calling `getNextDayStart()` to split time across IST midnight boundaries. Each day's slice is credited to the correct `dailyTotals` entry.
 
 ### Retroactive idle detection
-On every `getState()` → action cycle, `checkAndApplyIdle()` is called. If the active session's `lastActivityAt` is more than 15 minutes in the past (e.g. background woke up late), the session is retroactively finalized to `lastActivityAt + 15min`.
+On every `getState()` → action cycle, `checkAndApplyIdle()` is called. If the active session's `lastActivityAt` is more than 5 minutes in the past (e.g. background woke up late), the session is retroactively finalized to `lastActivityAt + 5min`.
 
 ### Deduplication of problem records
 `switchSession()` checks if `activeSession.problemKey === newProblemKey && activeSession.tabId === tabId` before switching. Refreshing the same problem page does not reset the timer.
