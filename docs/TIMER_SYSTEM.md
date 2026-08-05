@@ -18,11 +18,11 @@ It stores:
 
 Timer behavior is split into focused modules:
 
-- `src/modules/timer/sessionManager.js` starts, stops, switches, and finalizes sessions.
-- `src/modules/timer/idleManager.js` pauses and resumes sessions around idle state.
-- `src/modules/timer/timerSnapshot.js` builds popup and Codeforces profile analytics snapshots.
+- [sessionManager.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/timer/sessionManager.js) starts, stops, switches, and finalizes sessions.
+- [idleManager.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/timer/idleManager.js) pauses and resumes sessions around idle state.
+- [timerSnapshot.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/timer/timerSnapshot.js) builds popup and Codeforces profile analytics snapshots.
 
-`src/background/background.js` only routes messages, listens for tab events, reads/writes storage, and calls these modules.
+[background.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/background/background.js) only routes messages, listens for tab events, reads/writes storage, and calls these modules.
 
 ## Why No Background Interval?
 
