@@ -6,9 +6,9 @@ All notable changes to AetherCP should be recorded here.
 
 ### Added
 
-- **VS Code CPH Integration**: One-click and context menu problem statement and sample test case export to Competitive Programming Helper (`localhost:27121`) implementing the Competitive Companion protocol (`src/modules/cph/`).
-- **Full-Year Activity Heatmap**: Sunday-aligned full-year coding activity graph with year navigation, 5 color intensity levels, and IST date keying (`profileSections.js`).
-- **JS Tooltip Portal**: Viewport-anchored `position: fixed` tooltip portal appended directly to `document.body` to escape `overflow: hidden` and `overflow-x: auto` containers (`profileAnalytics.css`).
+- **VS Code CPH Integration**: One-click and context menu problem statement and sample test case export to Competitive Programming Helper (`localhost:27121`) implementing the Competitive Companion protocol ([src/modules/cph/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/cph/)).
+- **Full-Year Activity Heatmap**: Sunday-aligned full-year coding activity graph with year navigation, 5 color intensity levels, and IST date keying ([profileSections.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileSections.js)).
+- **JS Tooltip Portal**: Viewport-anchored `position: fixed` tooltip portal appended directly to `document.body` to escape `overflow: hidden` and `overflow-x: auto` containers ([profileAnalytics.css](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileAnalytics.css)).
 - **January Month Label Guard**: Month label rendering logic to ensure the first visible label is always "Jan" at grid column 2 without prior-year December text overlap.
 
 ### Changed
