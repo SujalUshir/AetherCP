@@ -12,15 +12,15 @@ This prevents timer logic from being scattered across files.
 
 ## Source Layout
 
-- `src/background/` - Extension service worker entrypoint.
-- `src/content/` - Platform page detection and idle tracking scripts.
-- `src/popup/` - Popup HTML, CSS, and display logic.
-- `src/modules/` - Feature-specific logic (timer, analytics, problem tracking).
-- `src/services/` - Cross-feature services.
-- `src/storage/` - Storage schema and helpers.
-- `src/platform/` - Platform-specific selectors and injectors.
-- `src/utils/` - Small reusable helpers (`time.js`, `timezone.js`).
-- `src/debug/` - Debug helpers.
+- [src/background/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/background/) - Extension service worker entrypoint.
+- [src/content/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/content/) - Platform page detection and idle tracking scripts.
+- [src/popup/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/popup/) - Popup HTML, CSS, and display logic.
+- [src/modules/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/modules/) - Feature-specific logic (timer, analytics, problem tracking).
+- [src/services/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/services/) - Cross-feature services.
+- [src/storage/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/storage/) - Storage schema and helpers.
+- [src/platform/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/) - Platform-specific selectors and injectors.
+- [src/utils/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/utils/) - Small reusable helpers ([time.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/utils/time.js), [timezone.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/utils/timezone.js)).
+- [src/debug/](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/debug/) - Debug helpers.
 
 ## Timezone Layer
 
