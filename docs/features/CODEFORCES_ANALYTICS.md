@@ -6,7 +6,7 @@ AetherCP injects a competitive analytics panel into every Codeforces profile pag
 
 ## 1. Injection and Layout Order
 
-AetherCP dynamically injects into the Codeforces profile DOM in this order:
+AetherCP dynamically injects into the Codeforces profile DOM (orchestrated by [profileInjector.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileInjector.js)) in this order:
 
 1. **Native Codeforces profile** (unchanged)
 2. **CF Competitive Analytics section** — inserted `afterend` of the native `.roundbox` (profile card)
