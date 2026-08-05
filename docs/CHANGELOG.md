@@ -57,7 +57,7 @@ All notable changes to AetherCP should be recorded here.
 - `graphTemplates.js` contains both `getCFAnalyticsTemplate()` and `getAetherGraphTemplate()`.
 - `profileCharts.js` contains both CF chart functions and existing productivity chart functions.
 - `profileAnalytics.css` extended with CF analytics, state, and heatmap styles.
-- **`IDLE_TIMEOUT_MS` raised from 60 s to 900 s (15 min)** — accommodates CP thinking time.
+- **`IDLE_TIMEOUT_MS` raised from 60 s to 300 s (5 min)** — accommodates CP thinking time.
 - **Idle activity events reduced to `keydown` + `click`** — `mousemove` and `scroll` removed
   to avoid false "active" signals during reading/thinking.
 - **Tab visibility awareness added** — hiding a tab triggers early idle; showing it resumes.
