@@ -123,7 +123,7 @@ AetherCP explicitly does **not**:
 |---|---|---|---|
 | [Chart.js](https://www.chartjs.org/) | v4.4.7 | MIT | Chart rendering in the Codeforces profile analytics panel |
 
-Chart.js is **bundled locally** as `src/vendor/chart.umd.min.js`. No CDN is used. No external scripts are loaded at runtime.
+Chart.js is **bundled locally** as [chart.umd.min.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/vendor/chart.umd.min.js). No CDN is used. No external scripts are loaded at runtime.
 
 ---
 
