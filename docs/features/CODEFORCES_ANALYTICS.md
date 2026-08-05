@@ -81,11 +81,11 @@ The browser console uses these prefixes during CF analytics processing:
 
 | Prefix | Source |
 |---|---|
-| `[AetherCP API]` | `cfApi.js` — fetch lifecycle |
-| `[AetherCP CF][analytics]` | `solvedProblemAnalytics.js` — processing |
-| `[AetherCP SOLVED]` | `solvedProblemAnalytics.js` — full audit trail |
-| `[AetherCP CF][injector]` | `profileInjector.js` — DOM injection |
-| `[AetherCP DOM]` | `profileInjector.js` — DOM insertion points |
+| `[AetherCP API]` | [cfApi.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/cfApi.js) — fetch lifecycle |
+| `[AetherCP CF][analytics]` | [solvedProblemAnalytics.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/solvedProblemAnalytics.js) — processing |
+| `[AetherCP SOLVED]` | [solvedProblemAnalytics.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/solvedProblemAnalytics.js) — full audit trail |
+| `[AetherCP CF][injector]` | [profileInjector.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileInjector.js) — DOM injection |
+| `[AetherCP DOM]` | [profileInjector.js](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/src/platform/codeforces/profileInjector.js) — DOM insertion points |
 
 A comparison between AetherCP's solved count and Codeforces' officially displayed count is logged under `[AetherCP SOLVED] COMPARISON SUMMARY` for debugging discrepancies.
 
