@@ -155,4 +155,4 @@ Does not spam localhost on every 1-second popup refresh.
 **Error handling:** Covers offline receiver, timeout (3s), connection refused, no active problem.
 Never crashes the extension.
 
-See `docs/features/CPH_INTEGRATION.md` for full details.
+See [CPH_INTEGRATION.md](file:///c:/Users/ushir/OneDrive/Desktop/AetherCP/docs/features/CPH_INTEGRATION.md) for full details.
